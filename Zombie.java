@@ -1,12 +1,14 @@
 public class Zombie extends Entity {
     private int walkSpeed;
     private int damage;
+    private static int zombieCount = 0;
 
-    public Zombie(int ws, int d) {
+    public Zombie() {
         super();
         setHealth(70);
-        walkSpeed = ws;
-        damage = d;
+        zombieCount++;
+        /**walkSpeed = ws;
+        damage = d;*/
     }
 
     public void attack(Plant p) {
