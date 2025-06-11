@@ -9,7 +9,8 @@ public class Peashooter extends Plant {
         super();
         setHealth(300);
         setCost(100);
-        setPlantCd(7.5);
+        setPlantCd(7);
+        setPlantType("Peashooter");
         /*attackSpeed = aS;
         projectileDamage = pD;
         directDamage = dD;*/

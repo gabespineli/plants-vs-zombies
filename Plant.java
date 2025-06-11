@@ -1,6 +1,7 @@
 public class Plant extends Entity {
     private int cost;
-    private double plantCd;
+    private int plantCd;
+    private String plantType;
     private static int plantCount = 0;
 
     public Plant() {
@@ -13,6 +14,9 @@ public class Plant extends Entity {
     public int getCost() { return cost; }
     public void setCost(int cost) { this.cost = cost; }
 
-    public double getPlantCd() { return plantCd; }
-    public void setPlantCd(double plantCd) { this.plantCd = plantCd;}
+    public int getPlantCd() { return plantCd; }
+    public void setPlantCd(int plantCd) { this.plantCd = plantCd;}
+
+    public String getPlantType() { return plantType; }
+    public void setPlantType(String plantType) { this.plantType = plantType; }
 }
