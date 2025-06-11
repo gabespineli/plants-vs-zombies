@@ -1,8 +1,9 @@
 public class Sunflower extends Plant {
-
-    public Sunflower(int c, int h, int x, int y) {
-        super(c, h, x, y);
+    public Sunflower() {
+        super();
+        setHealth(300);
+        setCost(50);
+        setPlantCd(7.5);
     }
 
-    pro
 }

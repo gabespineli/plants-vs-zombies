@@ -2,8 +2,9 @@ public class Zombie extends Entity {
     private int walkSpeed;
     private int damage;
 
-    public Zombie(int ws, int d, int h, int x, int y) {
-        super(h, x, y);
+    public Zombie(int ws, int d) {
+        super();
+        setHealth(70);
         walkSpeed = ws;
         damage = d;
     }

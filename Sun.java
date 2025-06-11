@@ -15,10 +15,10 @@ public class Sun {
         return sunCount;
     }
 
-    public buyPlant(Plant p){
+    public static boolean buyPlant(Plant p){
         if (sunCount > p.getCost()){
             sunCount -= p.getCost();
-        }
-
+            return true;
+        } else { return false; }
     }
 }

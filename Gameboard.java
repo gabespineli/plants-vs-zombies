@@ -18,15 +18,25 @@ public class Gameboard {
 
 
 
-        aliveZombies.add(zombie);
+        //aliveZombies.add(zombie);
         System.out.println("Zombie added to the board.");
     }
 
     public void addPlant(String name, int row, int column) {
-        Sun.buyPlant()
+        Plant tempPlant = switch(name.toLowerCase()) {
+            case "sunflower" -> new Sunflower();
+            case "peashooter" -> new Peashooter();
+            default -> throw new IllegalStateException("Unexpected value: " + name.toLowerCase());
+        };
 
-
-        alivePlants.add(plant);
-        System.out.println("Plant added to the board.");
+        if (Sun.buyPlant(tempPlant)) {
+            tempPlant.setRowPos(row);
+            tempPlant.setColumnPos(column);
+            alivePlants.add(tempPlant);
+            plantBoard[row][column] = tempPlant;
+            System.out.println("Plant added to the board.");
+        } else {
+            System.out.println("Insufficient funds.");
+        }
     }
 }
