@@ -1,8 +1,8 @@
 public class Plant extends Entity {
     private int cost;
     private int plantCD;
-    private int lastPlacedTick;
     private String plantType;
+    private static int lastPlacedTick = -9999;
     private static int plantCount = 0;
 
     public Plant() {
@@ -22,8 +22,8 @@ public class Plant extends Entity {
     public int getPlantCD() { return plantCD; }
     public void setPlantCD(int plantCD) { this.plantCD = plantCD;}
 
-    public int getLastPlacedTick() { return lastPlacedTick; }
-    public void setLastPlacedTick(int lastPlacedTick) { this.lastPlacedTick = lastPlacedTick;}
+    public static int getLastPlacedTick() { return lastPlacedTick; }
+    public static void setLastPlacedTick(int tick) { lastPlacedTick = tick;}
 
     public String getPlantType() { return plantType; }
     public void setPlantType(String plantType) { this.plantType = plantType; }
