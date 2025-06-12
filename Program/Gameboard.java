@@ -34,7 +34,7 @@ public class Gameboard {
 
         // Rows
         for (int row = 0; row < 5; row++) {
-            System.out.print((row + 1) + "  |");
+            System.out.print(row + "  |");
 
             for (int col = 0; col < 9; col++) {
                 // Check plant
@@ -93,7 +93,7 @@ public class Gameboard {
         p.setColumnPos(column);
         alivePlants.add(p);
         plantBoard[row][column] = p;
-        System.out.println(name.substring(0, 1).toUpperCase() + name.substring(1); + " planted at inputted position.");
+        System.out.println(name.substring(0, 1).toUpperCase() + name.substring(1) + " planted at inputted position.");
     }
 
     public void updateGame(int currentTick, Player player) {
@@ -101,10 +101,10 @@ public class Gameboard {
             if (p instanceof Sunflower sf) { sf.produce(currentTick, player); }
             // else if (p instanceof Peashooter ps) { ps.update(currentTick, player); }
         }
-        generateZombie(currentTick);
         for (Zombie z : aliveZombies) {
             z.move(currentTick);
         }
+        generateZombie(currentTick);
     }
 
     public boolean isValidPosition(int row, int column){

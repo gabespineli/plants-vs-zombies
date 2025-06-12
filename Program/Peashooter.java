@@ -9,10 +9,10 @@ public class Peashooter extends Plant {
         super();
         setHealth(200);
         setCost(100);
-        setPlantCd(7);
+        setPlantCD(7);
         setLastPlacedTick(-9999);
         setPlantType("Peashooter");
-        attackSpeedInerval = 2;
+        attackSpeedInterval = 2;
         projectileDamage = 7;
     }
 

@@ -11,7 +11,7 @@ public class Plant extends Entity {
     }
 
     public void takeDamage(int damage) {
-        setHealth(getHealth - damage);
+        setHealth(getHealth() - damage);
     }
 
     public static int getPlantCount() { return plantCount; }
@@ -20,7 +20,7 @@ public class Plant extends Entity {
     public void setCost(int cost) { this.cost = cost; }
 
     public int getPlantCD() { return plantCD; }
-    public void setPlantCD(int plantCD) { this.plantCd = plantCD;}
+    public void setPlantCD(int plantCD) { this.plantCD = plantCD;}
 
     public int getLastPlacedTick() { return lastPlacedTick; }
     public void setLastPlacedTick(int lastPlacedTick) { this.lastPlacedTick = lastPlacedTick;}

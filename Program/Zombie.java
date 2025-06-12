@@ -19,7 +19,7 @@ public class Zombie extends Entity {
     }
 
     public void takeDamage(int damage) {
-        setHealth(getHealth - damage);
+        setHealth(getHealth() - damage);
     }
 
     public void move(int currentTick) {
