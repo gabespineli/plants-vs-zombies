@@ -73,7 +73,7 @@ public class Gameboard {
 
 
 
-    public void addPlant(String name, int row, int column, Player player) {
+    public void addPlant(String name, int row, int column, Player player, int currentTick) {
         if (!isValidPosition(row, column)) {
             System.out.println("Invalid position.");
             return;
@@ -85,8 +85,7 @@ public class Gameboard {
             default -> throw new IllegalArgumentException("Invalid plant.");
         };
 
-        if (!player.buyPlant(p)) {
-            System.out.println("Not enough sun.");
+        if (!player.buyPlant(p, currentTick)) {
             return;
         }
 
@@ -94,7 +93,7 @@ public class Gameboard {
         p.setColumnPos(column);
         alivePlants.add(p);
         plantBoard[row][column] = p;
-        System.out.println(name + " planted at inputted position.");
+        System.out.println(name.substring(0, 1).toUpperCase() + name.substring(1); + " planted at inputted position.");
     }
 
     public void updateGame(int currentTick, Player player) {
@@ -103,6 +102,9 @@ public class Gameboard {
             // else if (p instanceof Peashooter ps) { ps.update(currentTick, player); }
         }
         generateZombie(currentTick);
+        for (Zombie z : aliveZombies) {
+            z.move(currentTick);
+        }
     }
 
     public boolean isValidPosition(int row, int column){

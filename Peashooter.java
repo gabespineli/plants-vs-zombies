@@ -10,6 +10,7 @@ public class Peashooter extends Plant {
         setHealth(300);
         setCost(100);
         setPlantCd(7);
+        setLastPlacedTick(7);
         setPlantType("Peashooter");
         /*attackSpeed = aS;
         projectileDamage = pD;

@@ -26,7 +26,7 @@ public class DriverPVZ {
                     try {
                         int row = Integer.parseInt(parts[1]);
                         int col = Integer.parseInt(parts[2]);
-                        board.addPlant(plant, row, col, player);
+                        board.addPlant(plant, row, col, player, currentTick);
                     } catch (NumberFormatException e) {
                         System.out.println("Invalid coordinates. Use numbers for row and column.");
                     }
