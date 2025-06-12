@@ -4,10 +4,10 @@ public class Sunflower extends Plant {
 
     public Sunflower() {
         super();
-        setHealth(300);
+        setHealth(200);
         setCost(50);
         setPlantCd(7);
-        setLastPlacedTick(7);
+        setLastPlacedTick(-9999);
         setPlantType("Sunflower");
     }
 

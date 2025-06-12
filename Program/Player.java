@@ -16,15 +16,20 @@ public class Player {
     }
 
     public boolean buyPlant(Plant p, int currentTick) {
-        // check if max plantCount
-        // in progress: plant in CD
+        if (Plant.plantCount >= 45) {
+            System.out.println("You have reached the maximum placement of plants!");
+            return false;
+        }
+
         if (currentTick - p.lastPlacedTick < p.plantCD) {
-            System.out.println("Plant still in cooldown for placement.");
+            int remaining = p.plantCD - (currentTick - p.lastPlacedTick);
+            System.out.println("Plant still in cooldown for placement. Wait for " + remaining + " turns.");
             return false;
         }
 
         if (sunPoints >= p.getCost()) {
             sunPoints -= p.getCost();
+            p.setLastPlacedTick(currentTick);
             System.out.println("Bought " + p.getPlantType() + " for " + p.getCost() + " sun.");
             return true;
         } else {
@@ -33,6 +38,7 @@ public class Player {
         }
     }
 
+// 0 - 7 < 7
     public int getSunPoints() {
         return sunPoints;
     }

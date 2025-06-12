@@ -18,6 +18,10 @@ public class Zombie extends Entity {
         }
     }
 
+    public void takeDamage(int damage) {
+        setHealth(getHealth - damage);
+    }
+
     public void move(int currentTick) {
         if (currentTick - lastMovementTick >= walkInterval) {
             lastMovementTick = currentTick;

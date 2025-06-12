@@ -10,6 +10,10 @@ public class Plant extends Entity {
         plantCount++;
     }
 
+    public void takeDamage(int damage) {
+        setHealth(getHealth - damage);
+    }
+
     public static int getPlantCount() { return plantCount; }
 
     public int getCost() { return cost; }
