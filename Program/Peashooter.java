@@ -15,7 +15,9 @@ public class Peashooter extends Plant {
         projectileDamage = 7;
     }
 
-    public void attack(Zombie z) {
+    public void shoot(Zombie z) {
+        // attack interval
+        
         if (z.getHealth() > 0){
             if (z.getRowPos() - getRowPos() >= 4) {
                 z.takeDamage(projectileDamage);

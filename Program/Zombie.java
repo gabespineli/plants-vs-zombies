@@ -12,7 +12,7 @@ public class Zombie extends Entity {
         damage = 10;
     }
 
-    public void attack(Plant p) {
+    public void eat(Plant p) {
         if (p.getHealth() > 0){
             p.takeDamage(damage);
         }

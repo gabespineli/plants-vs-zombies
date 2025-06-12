@@ -6,6 +6,7 @@ public class Gameboard {
     private final int COLUMNS = 9;
     private Plant[][] plantBoard;
     private ArrayList<Zombie> aliveZombies;
+    private ArrayList<Zombie> nearestZombies;
     private int lastZombieGeneratedTick = 0;
     private ArrayList<Plant> alivePlants;
 
@@ -71,8 +72,6 @@ public class Gameboard {
         }
     }
 
-
-
     public void addPlant(String name, int row, int column, Player player, int currentTick) {
         if (!isValidPosition(row, column)) {
             System.out.println("Invalid position.");
@@ -99,7 +98,7 @@ public class Gameboard {
     public void updateGame(int currentTick, Player player) {
         for (Plant p : alivePlants) {
             if (p instanceof Sunflower sf) { sf.produce(currentTick, player); }
-            // else if (p instanceof Peashooter ps) { ps.update(currentTick, player); }
+            //else if (p instanceof Peashooter ps) { ps.shoot(z); }
         }
         for (Zombie z : aliveZombies) {
             z.move(currentTick);
@@ -112,17 +111,6 @@ public class Gameboard {
             return plantBoard[row][column] == null;
         }
         return false;
-    }
-
-    public String plantAt(int row, int column) {
-        if (row >= 0 && row < 5 && column >= 0 && column < 9){
-            Plant p = plantBoard[row][column];
-            if (p != null){
-                if (p instanceof Peashooter) { return "Peashooter"; }
-                else if (p instanceof Sunflower) { return "Sunflower"; }
-            }
-        }
-        return "No plant at specified entry.";
     }
 
     public void generateZombie(int currentTick) {
@@ -151,7 +139,7 @@ public class Gameboard {
         }
     }
 
-    public Plant[][] getPlantBoard() { return plantBoard; };
+    public Plant[][] getPlantBoard() { return plantBoard; }
     public ArrayList<Zombie> getAliveZombies() { return aliveZombies; }
-    public ArrayList<Plant> getAlivePlants(){ return alivePlants;}
+    public ArrayList<Plant> getAlivePlants(){ return alivePlants; }
 }
