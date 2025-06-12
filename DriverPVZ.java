@@ -9,11 +9,13 @@ public class DriverPVZ {
         String input;
 
         System.out.println("Welcome to Plants vs Zombies (Console Edition)!");
-        System.out.println("Commands: [plantname row col], or press Enter to skip turn. type 'end' to end the game.");
+        System.out.println("Commands: [plantname] [row] [col], or press Enter to skip turn. type 'end' to end the game.");
         System.out.println("Example: sunflower 2 3");
 
 
         do {
+            board.displayBoard();
+
             System.out.print("\nTick " + currentTick + " - Sun: " + player.getSunPoints() + " | Command: ");
             input = scanner.nextLine().trim();
 
@@ -30,7 +32,7 @@ public class DriverPVZ {
                     }
                 } else if (parts.length == 1 && input.equalsIgnoreCase("end")) { continue; }
                 else {
-                    System.out.println("Invalid command. Format: plantname row col");
+                    System.out.println("Invalid command. Format: [plantname] [row] [col]");
                 }
             }
 
@@ -39,7 +41,7 @@ public class DriverPVZ {
                 player.addSun(50);
             }
 
-            board.updateSunflowers(currentTick, player);
+            board.updateGame(currentTick, player);
 
             // Other updates (later): move zombies, shoot peas, etc.
 

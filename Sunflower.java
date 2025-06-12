@@ -10,11 +10,11 @@ public class Sunflower extends Plant {
         setPlantType("Sunflower");
     }
 
-    public void update(int currentTick, Player player) {
+    public void produce(int currentTick, Player player) {
         if (currentTick - lastProducedTick >= productionInterval) {
             lastProducedTick = currentTick;
             System.out.println("Sunflower at (" + getRowPos() + "," + getColumnPos() + ") produced 25 sun!");
-            player.addSun(25); // Sunflower produces 25 sun
+            player.addSun(25);
         }
     }
 }

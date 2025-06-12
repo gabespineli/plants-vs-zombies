@@ -5,13 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1564d4ee-b086-4c54-a53a-30a91f4b9f04" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DriverPVZ.java" beforeDir="false" afterPath="$PROJECT_DIR$/DriverPVZ.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gameboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gameboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Peashooter.java" beforeDir="false" afterPath="$PROJECT_DIR$/Peashooter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plant.java" beforeDir="false" afterPath="$PROJECT_DIR$/Plant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sun.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sunflower.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sunflower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/DriverPVZ.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/DriverPVZ.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/Peashooter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/Peashooter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/Plant.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/Plant.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/Sunflower.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/Sunflower.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +42,7 @@
   }
 }</component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
@@ -59,6 +60,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
     "last_opened_file_path": "C:/Users/Gab/Documents/GitHub/plants-vs-zombies",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -87,7 +89,8 @@
       <workItem from="1749618133702" duration="416000" />
       <workItem from="1749642034948" duration="377000" />
       <workItem from="1749646196492" duration="5408000" />
-      <workItem from="1749654432639" duration="4789000" />
+      <workItem from="1749654432639" duration="6726000" />
+      <workItem from="1749691353980" duration="1258000" />
     </task>
     <servers />
   </component>

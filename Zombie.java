@@ -7,8 +7,8 @@ public class Zombie extends Entity {
         super();
         setHealth(70);
         zombieCount++;
-        /**walkSpeed = ws;
-        damage = d;*/
+        walkSpeed = 4;
+        damage = 10;
     }
 
     public void attack(Plant p) {
@@ -17,5 +17,11 @@ public class Zombie extends Entity {
         }
     }
 
+    //create move method
 
+    public int getWalkSpeed() { return walkSpeed; }
+    public void setWalkSpeed(int walkSpeed) { this.walkSpeed = walkSpeed; }
+
+    public int getDamage() { return damage; }
+    public void setDamage(int damage) { this.damage = damage; }
 }

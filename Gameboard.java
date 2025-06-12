@@ -6,6 +6,7 @@ public class Gameboard {
     private final int COLUMNS = 9;
     private Plant[][] plantBoard;
     private ArrayList<Zombie> aliveZombies;
+    private int lastZombieGeneratedTick = 0;
     private ArrayList<Plant> alivePlants;
 
     public Gameboard(){
@@ -14,10 +15,68 @@ public class Gameboard {
         alivePlants = new ArrayList<>();
     }
 
-    public boolean addPlant(String name, int row, int column, Player player) {
+    public void displayBoard() {
+        System.out.println("\nCurrent Board:");
+
+        // Print column headers (0 to 8)
+        System.out.print("    ");
+        for (int col = 0; col <= 8; col++) {
+            System.out.print(" " + col + "  ");
+        }
+        System.out.println();
+
+        // Top border
+        System.out.print("   +");
+        for (int col = 0; col < 9; col++) {
+            System.out.print("---+");
+        }
+        System.out.println();
+
+        // Rows
+        for (int row = 0; row < 5; row++) {
+            System.out.print((row + 1) + "  |");
+
+            for (int col = 0; col < 9; col++) {
+                // Check plant
+                String cell = "   ";
+                Plant plant = plantBoard[row][col];
+                boolean hasZombie = false;
+
+                // Check if any zombie is in this cell
+                for (Zombie z : aliveZombies) {
+                    if (z.getRowPos() == row && z.getColumnPos() == col) {
+                        hasZombie = true;
+                        break;
+                    }
+                }
+
+                if (plant instanceof Sunflower) {
+                    cell = hasZombie ? "SZ " : " S ";
+                } else if (plant instanceof Peashooter) {
+                    cell = hasZombie ? "PZ " : " P ";
+                } else {
+                    cell = hasZombie ? " Z " : "   ";
+                }
+
+                System.out.print(cell + "|");
+            }
+            System.out.println();
+
+            // Separator
+            System.out.print("   +");
+            for (int col = 0; col < 9; col++) {
+                System.out.print("---+");
+            }
+            System.out.println();
+        }
+    }
+
+
+
+    public void addPlant(String name, int row, int column, Player player) {
         if (!isValidPosition(row, column)) {
             System.out.println("Invalid position.");
-            return false;
+            return;
         }
 
         Plant p = switch(name.toLowerCase()) {
@@ -28,7 +87,7 @@ public class Gameboard {
 
         if (!player.buyPlant(p)) {
             System.out.println("Not enough sun.");
-            return false;
+            return;
         }
 
         p.setRowPos(row);
@@ -36,21 +95,19 @@ public class Gameboard {
         alivePlants.add(p);
         plantBoard[row][column] = p;
         System.out.println(name + " planted at inputted position.");
-        return true;
     }
 
-    public void updateSunflowers(int currentTick, Player player) { //eventually updatePlants
+    public void updateGame(int currentTick, Player player) {
         for (Plant p : alivePlants) {
-            if (p instanceof Sunflower sf) { sf.update(currentTick, player); }
+            if (p instanceof Sunflower sf) { sf.produce(currentTick, player); }
             // else if (p instanceof Peashooter ps) { ps.update(currentTick, player); }
         }
+        generateZombie(currentTick);
     }
 
     public boolean isValidPosition(int row, int column){
         if (row >= 0 && row < 5 && column >= 0 && column < 9){
-            if (plantBoard[row][column] == null){
-                return true;
-            }
+            return plantBoard[row][column] == null;
         }
         return false;
     }
@@ -66,14 +123,30 @@ public class Gameboard {
         return "No plant at specified entry.";
     }
 
-    public void addZombie() {
+    public void generateZombie(int currentTick) {
         Random random = new Random();
-        Zombie tempZomb = new Zombie();
+        int generationInterval = 0;
 
-        tempZomb.setRowPos(random.nextInt(5));
-        tempZomb.setColumnPos(8);
-        aliveZombies.add(tempZomb);
-        System.out.println("Zombie added to the board at Row " + tempZomb.getRowPos());
+        if (currentTick <= 29) { return; }
+
+        if (currentTick <= 80) {
+            generationInterval = 10;
+        } else if (currentTick <= 140) {
+            generationInterval = 5;
+        } else if (currentTick <= 170) {
+            generationInterval = 3;
+        } else if (currentTick <= 180) {
+            generationInterval = random.nextInt(2) + 1; // generate from 1-2 ticks
+        }
+
+        if (currentTick - lastZombieGeneratedTick >= generationInterval) {
+            lastZombieGeneratedTick = currentTick;
+            Zombie z = new Zombie();
+            z.setRowPos(random.nextInt(5));
+            z.setColumnPos(8);
+            aliveZombies.add(z);
+            System.out.println("A zombie appeared at (" + z.getRowPos() + "," + z.getColumnPos() + ").");
+        }
     }
 
     public Plant[][] getPlantBoard() { return plantBoard; };
