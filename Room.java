@@ -1,6 +1,4 @@
-
-public class Room
-{
+public class Room {
     public Room(int roomNum, int maxCapacity)
     {
         NUM = roomNum;
@@ -43,16 +41,18 @@ public class Room
     {
         return size;
     }
-    public void removeGuest(int index)
-    {
-        for (int i=index; i < guests.length-1; i++){
-            guests[i] = guests[i+1];
+    public void removeGuest(int index) {
+        if (index >= 0 || index < size) {
+            for (int i=index; i < guests.length-1; i++) {
+                guests[i] = guests[i + 1];
+            }
+            guests[guests.length-1] = null;
+            size--;
         }
-        guests[guests.length-1] = null;
-        size--;
     }
-    private final int MAX; //max number of guests
-    private final int NUM; //room number
-    private Person[] guests; //do not change to ArrayList
-    private int size; //current number of guests in room
+
+    private final int MAX; // max number of guests
+    private final int NUM; // room number
+    private Person[] guests; // do not change to ArrayList
+    private int size; // current number of guests in room a single room
 }
