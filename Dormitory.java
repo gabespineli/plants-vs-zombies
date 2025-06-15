@@ -1,8 +1,8 @@
 public class Dormitory {
     public Dormitory(String n, int r, int m){
         int i;
-        name = n;
-        numOfRooms = r;
+        NAME = n;
+        NUM_OF_ROOMS = r;
         rooms = new Room[r];
         for (i = 0; i < r; i++){
             rooms[i] = new Room(i+1, m);
@@ -14,28 +14,28 @@ public class Dormitory {
     }
 
     public boolean acceptGuests(Person guest, int roomNum){
-        if (roomNum < numOfRooms && roomNum > 0 && !(rooms[roomNum-1].isFull())){
+        if (roomNum < NUM_OF_ROOMS && roomNum > 0 && !(rooms[roomNum-1].isFull())){
             return rooms[roomNum-1].addGuest(guest);
         }
         return false;
     }
 
     public Person[] getGuests(int roomNum){
-        if (roomNum < numOfRooms && roomNum > 0){
+        if (roomNum < NUM_OF_ROOMS && roomNum > 0){
             return rooms[roomNum-1].getGuests();
         }
         return null;
     }
 
     public String getName(){
-        return name;
+        return NAME;
     }
     public Room[] getRooms(){
         return rooms;
     }
-    public int getNumOfRooms(){ return numOfRooms; }
+    public int getNumOfRooms(){ return NUM_OF_ROOMS; }
 
-    private String name;
+    private final String NAME;
     private Room[] rooms;
-    private int numOfRooms;
+    private final int NUM_OF_ROOMS;
 }

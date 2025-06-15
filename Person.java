@@ -1,17 +1,15 @@
 public class Person {
     public Person(String name, String nationality){
-        this.name = name;
-        this.nationality = nationality;
+        this.NAME = name;
+        this.NATIONALITY = nationality;
     }
 
-    public String getName(){ return name; }
-    public String getNationality(){ return nationality; }
+    public String getName(){ return NAME; }
+    public String getNationality(){ return NATIONALITY; }
 
-    public void setName(String name){ this.name = name; }
-    public void setNationality(String nationality){ this.nationality = nationality; }
-
+    @Override
     public String toString(){ return getName() + ", " + getNationality(); }
 
-    private String name;
-    private String nationality;
+    private final String NAME;
+    private final String NATIONALITY;
 }

@@ -50,7 +50,7 @@ public class DormDriver
         dorms[0] = new Dormitory("LS Dorm", 3);
         dorms[1] = new Dormitory("STC Dorm", 5, 4);
 
-        ArrayList<Person> guests = new ArrayList<Person>();
+        ArrayList<Person> guests = new ArrayList<>();
         guests.add(new Person("Andrew", "Filipino"));
         guests.add(new Person("Miguel", "Filipino"));
         guests.add(new Person("Henry", "American"));

@@ -19,7 +19,7 @@ public class Room {
     }
     public boolean isFull()
     {
-        return size == MAX;
+        return size == getMaxCapacity();
     }
     public boolean isEmpty()
     {
