@@ -1,3 +1,5 @@
+package Program;
+
 public class Peashooter extends Plant {
     private int attackSpeedInterval;
     private int lastShotTick;

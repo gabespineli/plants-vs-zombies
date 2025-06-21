@@ -1,3 +1,5 @@
+package Program;
+
 public class Sunflower extends Plant {
     private int lastProducedTick;
     private final int productionInterval = 4;

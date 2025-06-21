@@ -1,3 +1,5 @@
+package Program;
+
 public class Zombie extends Entity {
     private int walkInterval;
     private int damage;

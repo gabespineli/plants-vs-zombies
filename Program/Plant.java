@@ -1,3 +1,5 @@
+package Program;
+
 public class Plant extends Entity {
     private int cost;
     private int plantCD;
