@@ -5,7 +5,8 @@ public class Peashooter extends Plant {
     private int lastShotTick;
     private int projectileDamage;
     private int directDamage;
-    private final int RANGE = 9;
+    private final int RANGE;
+    private static int lastPlacedPeashooter = -9999;
 
     public Peashooter() {
         super();
@@ -15,7 +16,12 @@ public class Peashooter extends Plant {
         setPlantType("Peashooter");
         attackSpeedInterval = 2;
         projectileDamage = 7;
+        directDamage = 2 * projectileDamage;
+        RANGE = 9;
     }
+
+    public static int getLastPlacedPeashooter() { return lastPlacedPeashooter; }
+    public static void setLastPlacedPeashooter(int tick) { lastPlacedPeashooter = tick; }
 
     public void shoot(Zombie z) {
         // attack interval
@@ -24,7 +30,7 @@ public class Peashooter extends Plant {
             if (z.getRowPos() - getRowPos() >= 4) {
                 z.takeDamage(projectileDamage);
             } else {
-                z.takeDamage(projectileDamage * 2);
+                z.takeDamage(directDamage); // directDamage?
             }
         }
     }

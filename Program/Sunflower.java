@@ -2,7 +2,7 @@ package Program;
 
 public class Sunflower extends Plant {
     private int lastProducedTick;
-    private final int productionInterval = 4;
+    private static int lastPlacedSunflower = -9999;
 
     public Sunflower() {
         super();
@@ -12,7 +12,11 @@ public class Sunflower extends Plant {
         setPlantType("Sunflower");
     }
 
+    public static int getLastPlacedSunflower() { return lastPlacedSunflower; }
+    public static void setLastPlacedSunflower(int tick) { lastPlacedSunflower = tick; }
+
     public void produce(int currentTick, Player player) {
+        int productionInterval = 4;
         if (currentTick - lastProducedTick >= productionInterval) {
             lastProducedTick = currentTick;
             System.out.println("Sunflower at (" + getRowPos() + "," + getColumnPos() + ") produced 25 sun!");

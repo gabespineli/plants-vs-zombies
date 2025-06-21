@@ -2,8 +2,9 @@ package Program;
 
 public class Zombie extends Entity {
     private int walkInterval;
-    private int damage;
     private int lastMovementTick;
+    private int damage;
+
     private static int zombieCount = 0;
 
     public Zombie() {
@@ -33,8 +34,8 @@ public class Zombie extends Entity {
         }
     }
 
-    public int getWalkSpeed() { return walkInterval; }
-    public void setWalkSpeed(int walkInterval) { this.walkInterval = walkInterval; }
+    public int getWalkInterval() { return walkInterval; }
+    public void setWalkInterval(int walkInterval) { this.walkInterval = walkInterval; }
 
     public int getDamage() { return damage; }
     public void setDamage(int damage) { this.damage = damage; }

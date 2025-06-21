@@ -12,26 +12,30 @@ public class Player {
         System.out.println("Player collected " + amount + " sun. Total: " + sunPoints);
     }
 
-    //method to display available plants you can buy
-    public void displayShop() {
-
-    }
-
     public boolean buyPlant(Plant p, int currentTick) {
         if (Plant.getPlantCount() >= 45) {
             System.out.println("You have reached the maximum placement of plants!");
             return false;
         }
 
-        if (currentTick - p.getLastPlacedTick() < p.getPlantCD()) {
-            int remaining = p.getPlantCD() - (currentTick - p.getLastPlacedTick());
-            System.out.println("Plant still in cooldown for placement. Wait for " + remaining + " turns.");
-            return false;
+        if (p instanceof Sunflower) {
+            if (currentTick - Sunflower.getLastPlacedSunflower() < p.getPlantCD()) {
+                int remaining = p.getPlantCD() - (currentTick - Sunflower.getLastPlacedSunflower());
+                System.out.println("Sunflower still in cooldown for placement. Wait for " + remaining + " turns.");
+                return false;
+            }
+        } else if (p instanceof Peashooter) {
+            if (currentTick - Peashooter.getLastPlacedPeashooter() < p.getPlantCD()) {
+                int remaining = p.getPlantCD() - (currentTick - Peashooter.getLastPlacedPeashooter());
+                System.out.println("Peashooter still in cooldown for placement. Wait for " + remaining + " turns.");
+                return false;
+            }
         }
 
         if (sunPoints >= p.getCost()) {
             sunPoints -= p.getCost();
-            p.setLastPlacedTick(currentTick);
+            if (p instanceof Sunflower) { Sunflower.setLastPlacedSunflower(currentTick); }
+            else if (p instanceof Peashooter) { Peashooter.setLastPlacedPeashooter(currentTick); }
             System.out.println("Bought " + p.getPlantType() + " for " + p.getCost() + " sun.");
             return true;
         } else {
