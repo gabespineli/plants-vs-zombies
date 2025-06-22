@@ -1,6 +1,6 @@
 package Program;
 
-public class Sunflower extends Plant {
+public class                                                                    Sunflower extends Plant {
     private int lastProducedTick;
     private static int lastPlacedSunflower = -9999;
 
@@ -19,6 +19,15 @@ public class Sunflower extends Plant {
         int productionInterval = 4;
         if (currentTick - lastProducedTick >= productionInterval) {
             lastProducedTick = currentTick;
+            System.out.println("Sunflower at (" + getRowPos() + "," + getColumnPos() + ") produced 25 sun!");
+            player.addSun(25);
+        }
+    }
+
+    public void update(Player player){
+        reduceCD();
+
+        if (checkCD()){
             System.out.println("Sunflower at (" + getRowPos() + "," + getColumnPos() + ") produced 25 sun!");
             player.addSun(25);
         }

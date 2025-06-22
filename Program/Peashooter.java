@@ -1,4 +1,5 @@
 package Program;
+import java.util.ArrayList;
 
 public class Peashooter extends Plant {
     private int attackSpeedInterval;
@@ -23,15 +24,28 @@ public class Peashooter extends Plant {
     public static int getLastPlacedPeashooter() { return lastPlacedPeashooter; }
     public static void setLastPlacedPeashooter(int tick) { lastPlacedPeashooter = tick; }
 
-    public void shoot(Zombie z) {
-        // attack interval
-        
-        if (z.getHealth() > 0){
-            if (z.getRowPos() - getRowPos() >= 4) {
-                z.takeDamage(projectileDamage);
-            } else {
-                z.takeDamage(directDamage); // directDamage?
+    public void updatePea(ArrayList<Zombie> aliveZombies){
+        reduceCD();
+
+        if(checkCD()){
+            for (int i = 0; i < aliveZombies.size(); i++){
+                if (aliveZombies.get(i).getRowPos() == this.getRowPos()){
+                    shoot(aliveZombies.get(i));
+                    resetCD(attackSpeedInterval);
+                    break;
+                }
             }
         }
+    }
+
+    public void shoot(Zombie z) {
+        // attack interval
+
+        if (z.getRowPos() - getRowPos() >= 4) {
+            z.takeDamage(projectileDamage);
+        } else {
+            z.takeDamage(directDamage); // directDamage?
+        }
+        System.out.println("Peashooter at row " + this.getRowPos() + " column " + this.getColumnPos() + " shot zombie at row " + z.getRowPos() + " column " + z.getColumnPos());
     }
 }

@@ -25,4 +25,17 @@ public class Plant extends Entity {
 
     public String getPlantType() { return plantType; }
     public void setPlantType(String plantType) { this.plantType = plantType; }
+
+    public void reduceCD(){
+        if (plantCD > 0)
+            plantCD--;
+    }
+
+    public boolean checkCD(){
+        return plantCD == 0;
+    }
+
+    public void resetCD(int cd){
+        plantCD = cd;
+    }
 }

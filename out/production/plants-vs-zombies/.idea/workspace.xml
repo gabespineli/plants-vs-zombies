@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1564d4ee-b086-4c54-a53a-30a91f4b9f04" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Program/Gameboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/Program/Gameboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Program/Peashooter.java" beforeDir="false" afterPath="$PROJECT_DIR$/Program/Peashooter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Program/Sunflower.java" beforeDir="false" afterPath="$PROJECT_DIR$/Program/Sunflower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Program/Zombie.java" beforeDir="false" afterPath="$PROJECT_DIR$/Program/Zombie.java" afterDir="false" />
+    <list default="true" id="5cd974ec-af9e-4562-8d7c-8ece761f222a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Program/DriverPVZ.class" beforeDir="false" afterPath="$PROJECT_DIR$/Program/DriverPVZ.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Program/Gameboard.class" beforeDir="false" afterPath="$PROJECT_DIR$/Program/Gameboard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Program/Peashooter.class" beforeDir="false" afterPath="$PROJECT_DIR$/Program/Peashooter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Program/Plant.class" beforeDir="false" afterPath="$PROJECT_DIR$/Program/Plant.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pvz-uml.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/pvz-uml.drawio" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,27 +26,24 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
     &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;gabespineli&quot;
+    &quot;assignee&quot;: &quot;Gabiesaur&quot;
   }
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/gabespineli/plants-vs-zombies.git&quot;,
-    &quot;accountId&quot;: &quot;181afe12-e6b4-436b-9cd9-2d1f8f0c4036&quot;
+    &quot;accountId&quot;: &quot;8113789a-777f-4d77-be78-ce0178349159&quot;
   }
 }</component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
-  </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 8
+  &quot;associatedIndex&quot;: 7
 }</component>
-  <component name="ProjectId" id="2yLe9b0JS1nkdbYANFGB6NaxnGw" />
+  <component name="ProjectId" id="2yMP07l7PEgUCvYEYm5Zlpv0Gtx" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -52,50 +52,49 @@
   &quot;keyToString&quot;: {
     &quot;Application.DormDriver.executor&quot;: &quot;Run&quot;,
     &quot;Application.DriverPVZ.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Gab/Documents/GitHub/plants-vs-zombies&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+    &quot;last_opened_file_path&quot;: &quot;D:/Users/GAB/Documents/GitHub/plants-vs-zombies&quot;
   }
 }</component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.23774.435" />
-        <option value="bundled-js-predefined-d6986cc7102b-f27c65a3e318-JavaScript-IU-251.23774.435" />
-      </set>
-    </attachedChunks>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Users\GAB\Documents\GitHub\plants-vs-zombies" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="DriverPVZ" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Program.DriverPVZ" />
+      <module name="plants-vs-zombies" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Program.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="1564d4ee-b086-4c54-a53a-30a91f4b9f04" name="Changes" comment="" />
-      <created>1749618130448</created>
+      <changelist id="5cd974ec-af9e-4562-8d7c-8ece761f222a" name="Changes" comment="" />
+      <created>1749641242768</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1749618130448</updated>
-      <workItem from="1749618133702" duration="416000" />
-      <workItem from="1749642034948" duration="377000" />
-      <workItem from="1749646196492" duration="5408000" />
-      <workItem from="1749654432639" duration="6726000" />
-      <workItem from="1749691353980" duration="6880000" />
-      <workItem from="1749989074930" duration="15272000" />
-      <workItem from="1750414045178" duration="418000" />
-      <workItem from="1750414480966" duration="918000" />
-      <workItem from="1750483617403" duration="1959000" />
+      <updated>1749641242768</updated>
     </task>
     <servers />
   </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="dorms[1].rooms" />
+        <watch expression="dorms[1].rooms[0].guests[0]" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
