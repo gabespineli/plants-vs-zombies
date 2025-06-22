@@ -6,10 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5cd974ec-af9e-4562-8d7c-8ece761f222a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/Program/Gameboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/Program/Gameboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Program/Peashooter.java" beforeDir="false" afterPath="$PROJECT_DIR$/Program/Peashooter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Program/Plant.java" beforeDir="false" afterPath="$PROJECT_DIR$/Program/Plant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Program/Sunflower.java" beforeDir="false" afterPath="$PROJECT_DIR$/Program/Sunflower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Program/Zombie.java" beforeDir="false" afterPath="$PROJECT_DIR$/Program/Zombie.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,6 +87,24 @@
     <servers />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Program/Entity.java</url>
+          <line>16</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/Program/Entity.java</url>
+          <line>12</line>
+          <properties class="Program.Entity" method="takeDamage">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="dorms[1].rooms" />

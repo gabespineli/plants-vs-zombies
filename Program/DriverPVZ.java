@@ -1,5 +1,6 @@
 package Program;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DriverPVZ {
@@ -78,6 +79,20 @@ public class DriverPVZ {
         else System.out.println("Peashooter - 100 [Available]");
     }
 
+    public boolean WinLoseConditions(ArrayList<Zombie> aliveZombies, int currentTick){
+        for (Zombie z : aliveZombies){
+            if (z.getColumnPos()<0){
+               System.out.println("You lost! A zombie reached your home.");
+               return true;
+            }
+        }
+        if (currentTick > 180 && aliveZombies.isEmpty()){
+            System.out.println("You win! All zombies eliminated");
+            return true;
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         DriverPVZ driver = new DriverPVZ();
@@ -125,6 +140,10 @@ public class DriverPVZ {
 
             board.updateGame(currentTick, player);
             currentTick++;
-        } while (!input.equalsIgnoreCase("end") && currentTick <= 180);
+
+            if (driver.WinLoseConditions(board.getAliveZombies(), currentTick)){
+                input = "end";
+            }
+        } while (!input.equalsIgnoreCase("end"));
     }
 }

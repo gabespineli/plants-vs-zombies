@@ -32,7 +32,9 @@ public class Gameboard {
             z.updateZomb(alivePlants);
             alivePlants.removeIf(p -> !p.isAlive());
         }
-        generateZombie(currentTick);
+        if (currentTick <= 180){
+            generateZombie(currentTick);
+        }
     }
 
     public void addPlant(String name, int row, int column, Player player, int currentTick) {
@@ -57,10 +59,6 @@ public class Gameboard {
         plantBoard[row][column] = p;
         Plant.incrementPlantCount();
         System.out.println(name.substring(0, 1).toUpperCase() + name.substring(1) + " planted at inputted position.");
-    }
-
-    public void deletePlant() {
-        alivePlants.removeIf(p -> !p.isAlive());
     }
 
     public boolean isValidPosition(int row, int column){
@@ -94,9 +92,5 @@ public class Gameboard {
             aliveZombies.add(z);
             System.out.println("A zombie appeared at (" + z.getRowPos() + "," + z.getColumnPos() + ").");
         }
-    }
-
-    public void deleteZombie(){
-        aliveZombies.removeIf(z -> !z.isAlive());
     }
 }
