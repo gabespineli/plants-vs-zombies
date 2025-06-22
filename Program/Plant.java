@@ -3,15 +3,12 @@ package Program;
 public class Plant extends Entity {
     private int cost;
     private int plantCD;
+    private int coolDown;
     private String plantType;
     private static int plantCount = 0;
 
     public Plant() {
         super();
-    }
-
-    public void takeDamage(int damage) {
-        setHealth(getHealth() - damage);
     }
 
     public static int getPlantCount() { return plantCount; }
@@ -26,16 +23,19 @@ public class Plant extends Entity {
     public String getPlantType() { return plantType; }
     public void setPlantType(String plantType) { this.plantType = plantType; }
 
+    public int getCoolDown() { return coolDown; }
+    public void setCoolDown(int coolDown) { this.coolDown = coolDown; }
+
     public void reduceCD(){
-        if (plantCD > 0)
-            plantCD--;
+        if (coolDown > 0)
+            coolDown--;
     }
 
     public boolean checkCD(){
-        return plantCD == 0;
+        return coolDown == 0;
     }
 
     public void resetCD(int cd){
-        plantCD = cd;
+        coolDown = cd;
     }
 }

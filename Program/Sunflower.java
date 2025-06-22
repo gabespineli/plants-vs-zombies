@@ -9,6 +9,7 @@ public class                                                                    
         setHealth(200);
         setCost(50);
         setPlantCD(5);
+        setCoolDown(4);
         setPlantType("Sunflower");
     }
 
@@ -30,6 +31,7 @@ public class                                                                    
         if (checkCD()){
             System.out.println("Sunflower at (" + getRowPos() + "," + getColumnPos() + ") produced 25 sun!");
             player.addSun(25);
+            resetCD(getCoolDown());
         }
     }
 }

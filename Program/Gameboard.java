@@ -23,10 +23,14 @@ public class Gameboard {
     public void updateGame(int currentTick, Player player) {
         for (Plant p : alivePlants) {
             if (p instanceof Sunflower sf) { sf.produce(currentTick, player); }
-            //else if (p instanceof Peashooter ps) { ps.shoot(z); }
+            else if (p instanceof Peashooter ps) {
+                ps.updatePea(aliveZombies);
+                aliveZombies.removeIf(z -> !z.isAlive());
+            }
         }
         for (Zombie z : aliveZombies) {
-            z.move(currentTick);
+            z.updateZomb(alivePlants);
+            alivePlants.removeIf(p -> !p.isAlive());
         }
         generateZombie(currentTick);
     }
@@ -55,7 +59,9 @@ public class Gameboard {
         System.out.println(name.substring(0, 1).toUpperCase() + name.substring(1) + " planted at inputted position.");
     }
 
-    // public void deletePlant()
+    public void deletePlant() {
+        alivePlants.removeIf(p -> !p.isAlive());
+    }
 
     public boolean isValidPosition(int row, int column){
         if (row >= 0 && row < 5 && column >= 0 && column < 9){
@@ -90,5 +96,7 @@ public class Gameboard {
         }
     }
 
-    // public void deleteZombie
+    public void deleteZombie(){
+        aliveZombies.removeIf(z -> !z.isAlive());
+    }
 }

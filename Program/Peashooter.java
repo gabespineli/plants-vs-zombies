@@ -14,8 +14,8 @@ public class Peashooter extends Plant {
         setHealth(200);
         setCost(100);
         setPlantCD(3);
+        setCoolDown(2);
         setPlantType("Peashooter");
-        attackSpeedInterval = 2;
         projectileDamage = 7;
         directDamage = 2 * projectileDamage;
         RANGE = 9;
@@ -28,10 +28,10 @@ public class Peashooter extends Plant {
         reduceCD();
 
         if(checkCD()){
-            for (int i = 0; i < aliveZombies.size(); i++){
-                if (aliveZombies.get(i).getRowPos() == this.getRowPos()){
-                    shoot(aliveZombies.get(i));
-                    resetCD(attackSpeedInterval);
+            for (Zombie z : aliveZombies){
+                if (z.getRowPos() == this.getRowPos()){
+                    shoot(z);
+                    resetCD(getCoolDown());
                     break;
                 }
             }
@@ -46,6 +46,6 @@ public class Peashooter extends Plant {
         } else {
             z.takeDamage(directDamage); // directDamage?
         }
-        System.out.println("Peashooter at row " + this.getRowPos() + " column " + this.getColumnPos() + " shot zombie at row " + z.getRowPos() + " column " + z.getColumnPos());
+        System.out.println("Peashooter at row " + this.getRowPos() + " column " + this.getColumnPos() + " shot zombie at row " + z.getRowPos() + " column " + z.getColumnPos() + " (Zombie HP: " + z.getHealth() + ")");
     }
 }

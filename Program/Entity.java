@@ -13,6 +13,7 @@ public class Entity {
     public void takeDamage(int d){
         if (isAlive)
             health -= d;
+
         if (health <= 0) {
             isAlive = false;
             //delete entity
