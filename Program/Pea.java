@@ -17,6 +17,14 @@ public class Pea {
         speed = 1;
     }
 
+    public int getRowPos() {
+        return rowPos;
+    }
+
+    public int getColumnPos() {
+        return columnPos;
+    }
+
     public void move() {
         columnPos += speed;
     }

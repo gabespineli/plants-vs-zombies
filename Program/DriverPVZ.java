@@ -30,6 +30,7 @@ public class DriverPVZ {
                 String cell = "   ";
                 Plant plant = board.getPlantBoard()[row][col];
                 boolean hasZombie = false;
+                boolean hasPea = false;
 
                 // Check if any zombie is in this cell
                 for (Zombie z : board.getAliveZombies()) {
@@ -39,12 +40,49 @@ public class DriverPVZ {
                     }
                 }
 
+                for (Pea pea : board.getActivePeas()) {
+                    if (pea.getRowPos() == row && pea.getColumnPos() == col) {
+                        hasPea = true;
+                        break;
+                    }
+                }
+
                 if (plant instanceof Sunflower) {
-                    cell = hasZombie ? "SZ " : " S ";
+                    if (hasZombie){
+                        cell = "SZ ";
+                    }
+                    else if (hasPea){
+                        cell = "So ";
+                    }
+                    else {
+                        cell = " S ";
+                    }
+                    //cell = hasZombie ? "SZ " : " S ";
                 } else if (plant instanceof Peashooter) {
-                    cell = hasZombie ? "PZ " : " P ";
+                    if (hasZombie){
+                        cell = "PZ ";
+                    }
+                    else if (hasPea){
+                        cell = "Po ";
+                    }
+                    else {
+                        cell = " P ";
+                    }
+                    //cell = hasZombie ? "PZ " : " P ";
                 } else {
-                    cell = hasZombie ? " Z " : "   ";
+                    if (hasZombie && hasPea){
+                        cell = "Zo ";
+                    }
+                    else if (hasZombie){
+                        cell = " Z ";
+                    }
+                    else if (hasPea){
+                        cell = " o ";
+                    }
+                    else {
+                        cell = "   ";
+                    }
+                    //cell = hasZombie ? " Z " : "   ";
                 }
 
                 System.out.print(cell + "|");

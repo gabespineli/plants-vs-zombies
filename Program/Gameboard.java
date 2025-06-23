@@ -34,6 +34,7 @@ public class Gameboard {
         for (Pea pea : activePeas) {
             pea.updatePea(aliveZombies);
         }
+        activePeas.removeIf(p -> p.getColumnPos() > 8);
         activePeas.removeIf(p -> !p.isActive());
         for (Zombie z : aliveZombies) {
             z.updateZombie(alivePlants);
