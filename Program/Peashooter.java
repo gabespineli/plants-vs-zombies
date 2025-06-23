@@ -29,7 +29,7 @@ public class Peashooter extends Plant {
             for (Zombie z : aliveZombies){
                 if (z.getRowPos() == this.getRowPos()){
                     shoot(z);
-                    resetActionCooldown(getActionCooldown());
+                    resetActionCooldown(getActionCooldown()); // this too
                     break;
                 }
             }

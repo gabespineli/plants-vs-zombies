@@ -1,63 +1,60 @@
 package Program;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class Game {
     private Gameboard board;
     private Player player;
     private int currentTick;
+    private int lastSkyDropTick;
     private boolean gameEnded;
 
     public Game() {
         board = new Gameboard();
         player = new Player();
         currentTick = 0;
+        lastSkyDropTick = 0;
         gameEnded = false;
     }
 
-    public void run() throws IOException { // IN PROCESS
+    public void run() {
+        Scanner scanner = new Scanner(System.in);
         DriverPVZ ui = new DriverPVZ();
-        long lastTick = System.currentTimeMillis();
-        final int TICK_INTERVAL = 1000;
-        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 
         while (!gameEnded) {
-            long now = System.currentTimeMillis();
+            System.out.println("\n==============================");
+            System.out.println("Tick: " + currentTick);
 
-            // Tick logic
-            if (now - lastTick >= TICK_INTERVAL) {
-                System.out.println("\n==============================");
-                System.out.println("Tick: " + currentTick);
-                System.out.println("Sun: " + player.getSunPoints());
+            update();
+            ui.displayBoard(board);
+            ui.displayShop(player, currentTick);
 
-                if (currentTick % 5 == 0) {
-                    System.out.println("Sky dropped 50 sun.");
-                    player.addSun(50);
-                }
+            System.out.print("Command (or press Enter to skip): ");
+            long inputStart = System.currentTimeMillis(); // start recording time
+            String input = scanner.nextLine().trim();
+            long inputEnd = System.currentTimeMillis();
 
-                board.updateGame(currentTick, player);
-                ui.displayBoard(board);
-                currentTick++;
-                lastTick += TICK_INTERVAL;
+            // Advance time based on how long user took to respond
+            long secondsPassed = (inputEnd - inputStart) / 1000;
+            if (secondsPassed < 1) secondsPassed = 1;
+            currentTick += (int) secondsPassed;
 
-                if (checkWinLose()) {
+            if (!input.isEmpty()) {
+                if (input.equalsIgnoreCase("end")) {
                     gameEnded = true;
                     break;
                 }
+                processCommand(input);
             }
 
-            // Non-blocking input
-            if (input.ready()) {
-                String command = input.readLine().trim();
-                processCommand(command);
+            if (checkWinLose()) {
+                gameEnded = true;
             }
         }
     }
-    
-    private void processCommand(String input) { // make it into System.millis
+
+
+    private void processCommand(String input) {
         if (input.isEmpty()) return;
 
         String[] parts = input.split(" ");
@@ -76,11 +73,12 @@ public class Game {
     }
 
     private void update() {
-        if (currentTick % 5 == 0) {
+        board.updateGame(currentTick, player);
+        while (currentTick - lastSkyDropTick >= 5) {
+            lastSkyDropTick += 5;
             System.out.println("The sky dropped 50 sun.");
             player.addSun(50);
         }
-        board.updateGame(currentTick, player);
     }
 
     private boolean checkWinLose() {

@@ -5,7 +5,6 @@ public class Zombie extends Entity {
     private int walkInterval;
     private int moveCooldown;
     private int damage;
-
     private static int zombieCount = 0;
 
     public Zombie() {
@@ -25,7 +24,7 @@ public class Zombie extends Entity {
             }
         }
 
-        moveCooldown--;
+        moveCooldown--; //update this
 
         if (moveCooldown == 0){
             move();
