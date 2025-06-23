@@ -12,7 +12,8 @@ public class Peashooter extends Plant {
         setHealth(200);
         setCost(100);
         setPlacementCooldown(3);
-        setActionCooldown(2);
+        setActionCooldown(0);
+        setCooldown(2);
         setPlantType("Peashooter");
         projectileDamage = 7;
         directDamage = 2 * projectileDamage;
@@ -22,14 +23,14 @@ public class Peashooter extends Plant {
     public static int getLastPlacedPeashooter() { return lastPlacedPeashooter; }
     public static void setLastPlacedPeashooter(int tick) { lastPlacedPeashooter = tick; }
 
-    public void updatePea(ArrayList<Zombie> aliveZombies){
+    public void updatePeashooter(ArrayList<Zombie> aliveZombies){
         reduceActionCooldown();
 
         if(checkActionCooldown()){
             for (Zombie z : aliveZombies){
                 if (z.getRowPos() == this.getRowPos()){
                     shoot(z);
-                    resetActionCooldown(getActionCooldown()); // this too
+                    resetActionCooldown(getCooldown()); // this too
                     break;
                 }
             }
@@ -37,8 +38,13 @@ public class Peashooter extends Plant {
     }
 
     public void shoot(Zombie z) {
-        if (z.getRowPos() - getRowPos() >= 4) { z.takeDamage(projectileDamage); }
+        if (z.getColumnPos() - this.getColumnPos() >= 4) { z.takeDamage(projectileDamage); }
         else { z.takeDamage(directDamage); }
-        System.out.println("Peashooter at row " + this.getRowPos() + " column " + this.getColumnPos() + " shot zombie at row " + z.getRowPos() + " column " + z.getColumnPos() + " (Zombie HP: " + z.getHealth() + ")");
+        if (z.isAlive()){
+            System.out.println("Peashooter at row " + this.getRowPos() + " column " + this.getColumnPos() + " shot zombie at row " + z.getRowPos() + " column " + z.getColumnPos() + " (Zombie HP: " + z.getHealth() + ")");
+        }
+        else {
+            System.out.println("Peashooter at row " + this.getRowPos() + " column " + this.getColumnPos() + " has killed zombie at row " + z.getRowPos() + " column " + z.getColumnPos());
+        }
     }
 }

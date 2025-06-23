@@ -1,0 +1,42 @@
+package Program;
+
+import java.util.ArrayList;
+
+public class Pea {
+    private int columnPos;
+    private int rowPos;
+    private boolean isActive;
+    private int damage;
+    private int speed;
+
+    public Pea(int column, int row, int damage){
+        columnPos = column;
+        rowPos = row;
+        isActive = true;
+        this.damage = damage;
+        speed = 1;
+    }
+
+    public void move() {
+        columnPos += speed;
+    }
+
+    public void updatePea(ArrayList<Zombie> aliveZombies){
+        for (Zombie z : aliveZombies){
+            if (z.getRowPos() == rowPos){
+                if (z.getColumnPos() == columnPos){
+                    z.takeDamage(damage);
+                    isActive = false;
+                    break;
+                }
+            }
+        }
+        move();
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+
+}

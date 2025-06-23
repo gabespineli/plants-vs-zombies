@@ -7,6 +7,7 @@ public class Gameboard {
     private Plant[][] plantBoard;
     private ArrayList<Zombie> aliveZombies;
     private ArrayList<Plant> alivePlants;
+    private ArrayList<Pea> activePeas;
     private int lastZombieGeneratedTick;
 
     public Gameboard(){
@@ -22,11 +23,15 @@ public class Gameboard {
 
     public void updateGame(int currentTick, Player player) {
         for (Plant p : alivePlants) {
-            if (p instanceof Sunflower sf) { sf.produce(currentTick, player); }
+            if (p instanceof Sunflower sf) { sf.update(player); }
             else if (p instanceof Peashooter ps) {
-                ps.updatePea(aliveZombies);
+                ps.updatePeashooter(aliveZombies);
                 aliveZombies.removeIf(z -> !z.isAlive());
             }
+        }
+        for (Pea p : activePeas) {
+            p.updatePea(aliveZombies);
+            activePeas.removeIf(p -> !p.isActive());
         }
         for (Zombie z : aliveZombies) {
             z.updateZombie(alivePlants);

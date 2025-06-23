@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="5cd974ec-af9e-4562-8d7c-8ece761f222a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/Program/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/Program/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/Program/Sunflower.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/Program/Sunflower.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/Program/Zombie.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/Program/Zombie.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,24 +90,6 @@
     <servers />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Program/Entity.java</url>
-          <line>16</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/Program/Entity.java</url>
-          <line>12</line>
-          <properties class="Program.Entity" method="takeDamage">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="dorms[1].rooms" />

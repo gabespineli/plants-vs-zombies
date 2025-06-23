@@ -4,6 +4,7 @@ public class Plant extends Entity {
     private int cost;
     private int placementCooldown;
     private int actionCooldown;
+    private int Cooldown;
     private String plantType;
     private static int plantCount = 0;
 
@@ -25,6 +26,9 @@ public class Plant extends Entity {
 
     public int getActionCooldown() { return actionCooldown; }
     public void setActionCooldown(int actionCooldown) { this.actionCooldown = actionCooldown; }
+
+    public int getCooldown() { return Cooldown; }
+    public void setCooldown(int Cooldown) { this.Cooldown = Cooldown; }
 
     public void reduceActionCooldown(){
         if (actionCooldown > 0)

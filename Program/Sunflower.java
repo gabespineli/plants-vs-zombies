@@ -10,20 +10,12 @@ public class Sunflower extends Plant {
         setCost(50);
         setPlacementCooldown(5);
         setActionCooldown(4);
+        setCooldown(4);
         setPlantType("Sunflower");
     }
 
     public static int getLastPlacedSunflower() { return lastPlacedSunflower; }
     public static void setLastPlacedSunflower(int tick) { lastPlacedSunflower = tick; }
-
-    public void produce(int currentTick, Player player) {
-        int productionInterval = 4;
-        if (currentTick - lastProducedTick >= productionInterval) {
-            lastProducedTick = currentTick;
-            System.out.println("Sunflower at (" + getRowPos() + "," + getColumnPos() + ") produced 25 sun!");
-            player.addSun(25);
-        }
-    }
 
     public void update(Player player){
         reduceActionCooldown();
@@ -31,7 +23,7 @@ public class Sunflower extends Plant {
         if (checkActionCooldown()){
             System.out.println("Sunflower at (" + getRowPos() + "," + getColumnPos() + ") produced 25 sun!");
             player.addSun(25);
-            resetActionCooldown(getActionCooldown());
+            resetActionCooldown(getCooldown());
         }
     }
 }

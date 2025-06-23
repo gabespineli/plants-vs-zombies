@@ -34,7 +34,12 @@ public class Zombie extends Entity {
 
     public void attack(Plant p) {
         p.takeDamage(damage);
-        System.out.println("Zombie at row " + this.getRowPos() + " column " + this.getColumnPos() + " attacked " + p.getPlantType() + " at row " + p.getRowPos() + " column " + p.getColumnPos() + " (Plant HP: " + p.getHealth() + ")");
+        if (p.isAlive()) {
+            System.out.println("Zombie at row " + this.getRowPos() + " column " + this.getColumnPos() + " attacked " + p.getPlantType() + " at row " + p.getRowPos() + " column " + p.getColumnPos() + " (Plant HP: " + p.getHealth() + ")");
+        }
+        else {
+            System.out.println("Zombie at row " + this.getRowPos() + " column " + this.getColumnPos() + " has killed " + p.getPlantType() + " at row " + p.getRowPos() + " column " + p.getColumnPos());
+        }
     }
 
     public void move() {
