@@ -1,6 +1,6 @@
 package Program;
 
-public class                                                                    Sunflower extends Plant {
+public class Sunflower extends Plant {
     private int lastProducedTick;
     private static int lastPlacedSunflower = -9999;
 
@@ -8,8 +8,8 @@ public class                                                                    
         super();
         setHealth(200);
         setCost(50);
-        setPlantCD(5);
-        setCoolDown(4);
+        setPlacementCooldown(5);
+        setActionCooldown(4);
         setPlantType("Sunflower");
     }
 
@@ -26,12 +26,12 @@ public class                                                                    
     }
 
     public void update(Player player){
-        reduceCD();
+        reduceActionCooldown();
 
-        if (checkCD()){
+        if (checkActionCooldown()){
             System.out.println("Sunflower at (" + getRowPos() + "," + getColumnPos() + ") produced 25 sun!");
             player.addSun(25);
-            resetCD(getCoolDown());
+            resetActionCooldown(getActionCooldown());
         }
     }
 }
