@@ -18,8 +18,8 @@ public class Sunflower extends Plant {
 
     public void produce(int currentTick, Player player) {
         int productionInterval = 4;
-        while (currentTick - lastProducedTick >= productionInterval) {
-            lastProducedTick += productionInterval;
+        if (currentTick - lastProducedTick >= productionInterval) {
+            lastProducedTick = currentTick;
             System.out.println("Sunflower at (" + getRowPos() + "," + getColumnPos() + ") produced 25 sun!");
             player.addSun(25);
         }
