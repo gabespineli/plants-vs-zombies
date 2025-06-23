@@ -1,5 +1,6 @@
 package Program;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class DriverPVZ {
@@ -70,11 +71,11 @@ public class DriverPVZ {
         System.out.println("\nSun: " + p.getSunPoints());
         System.out.println("\n--- SHOP ---");
         if (sun < sf.getCost()) System.out.println("Sunflower - 50 [Not enough sun]");
-        else if (sunflowerCooldown > 0) System.out.println("Sunflower - 50 [Plant in cooldown]");
+        else if (sunflowerCooldown > 0) System.out.println("Sunflower - 50 [Plant in cooldown. Wait for " + sunflowerCooldown + " turns.]");
         else System.out.println("Sunflower - 50 [Available]");
 
         if (sun < ps.getCost()) System.out.println("Peashooter - 100 [Not enough sun]");
-        else if (peashooterCooldown > 0) System.out.println("Peashooter - 100 [Plant in cooldown]");
+        else if (peashooterCooldown > 0) System.out.println("Peashooter - 100 [Plant in cooldown. Wait for " + peashooterCooldown + " turns.]");
         else System.out.println("Peashooter - 100 [Available]");
     }
 
@@ -83,7 +84,8 @@ public class DriverPVZ {
         Game game = new Game();
 
         System.out.println("Welcome to Plants vs Zombies (Console Edition)!");
-        System.out.println("Commands: [PLANT_NAME] [ROW] [COLUMN], or press Enter to skip turn.");
+        System.out.println("The game runs continuously until you press Enter to input a command.");
+        System.out.println("Commands: [PLANT_NAME] [ROW] [COLUMN], or press Enter to resume the game.");
         System.out.println("Prompt Example: Sunflower 2 3");
         System.out.println("Type 'end' to end the game.");
         System.out.println("Press any key to continue...");

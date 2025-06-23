@@ -1,55 +1,78 @@
 package Program;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Game {
     private Gameboard board;
     private Player player;
     private int currentTick;
-    private int lastSkyDropTick;
     private boolean gameEnded;
 
     public Game() {
         board = new Gameboard();
         player = new Player();
         currentTick = 0;
-        lastSkyDropTick = 0;
         gameEnded = false;
     }
 
-    public void run() {
+    public void run() throws IOException {
         Scanner scanner = new Scanner(System.in);
         DriverPVZ ui = new DriverPVZ();
+        final int TICK_INTERVAL = 1000;
+
+        long lastTick = System.currentTimeMillis();
+        boolean paused = false;
 
         while (!gameEnded) {
-            System.out.println("\n==============================");
-            System.out.println("Tick: " + currentTick);
+            long now = System.currentTimeMillis();
 
-            update();
-            ui.displayBoard(board);
-            ui.displayShop(player, currentTick);
+            if (!paused && now - lastTick >= TICK_INTERVAL) {
+                currentTick++;
+                System.out.println("\n====================================");
+                System.out.println("Tick: " + currentTick + " | Sun: " + player.getSunPoints());
 
-            System.out.print("Command (or press Enter to skip): ");
-            long inputStart = System.currentTimeMillis(); // start recording time
-            String input = scanner.nextLine().trim();
-            long inputEnd = System.currentTimeMillis();
+                update();
+                ui.displayBoard(board);
+                ui.displayShop(player, currentTick);
 
-            // Advance time based on how long user took to respond
-            long secondsPassed = (inputEnd - inputStart) / 1000;
-            if (secondsPassed < 1) secondsPassed = 1;
-            currentTick += (int) secondsPassed;
-
-            if (!input.isEmpty()) {
-                if (input.equalsIgnoreCase("end")) {
+                if (checkWinLose()) {
                     gameEnded = true;
                     break;
                 }
-                processCommand(input);
+
+                lastTick += TICK_INTERVAL;
             }
 
-            if (checkWinLose()) {
-                gameEnded = true;
+            if (System.in.available() > 0) {
+                int key = System.in.read();
+                
+                // Check if it's the Enter key (ASCII 13 for CR or 10 for LF)
+                if (key == 13 || key == 10) {
+                    paused = true;
+                    System.out.print("\n[PAUSED] Enter command (or just press Enter to resume): ");
+                    String input = scanner.nextLine().trim();
+                    
+                    if (input.equalsIgnoreCase("end")) {
+                        gameEnded = true;
+                        break;
+                    }
+
+                    if (!input.isEmpty()) {
+                        processCommand(input);
+                    }
+
+                    paused = false;
+                    lastTick = System.currentTimeMillis();
+                } else {
+                    // Consume any other keypress
+                    while (System.in.available() > 0) {
+                        System.in.read();
+                    }
+                }
             }
+
+            try { Thread.sleep(50); } catch (InterruptedException ignored) {}
         }
     }
 
@@ -73,12 +96,11 @@ public class Game {
     }
 
     private void update() {
-        board.updateGame(currentTick, player);
-        while (currentTick - lastSkyDropTick >= 5) {
-            lastSkyDropTick += 5;
+        if (currentTick % 5 == 0) {
             System.out.println("The sky dropped 50 sun.");
             player.addSun(50);
         }
+        board.updateGame(currentTick, player);
     }
 
     private boolean checkWinLose() {
@@ -97,4 +119,3 @@ public class Game {
         return false;
     }
 }
-
