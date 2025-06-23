@@ -38,13 +38,15 @@ public class Peashooter extends Plant {
     }
 
     public void shoot(Zombie z) {
-        if (z.getColumnPos() - this.getColumnPos() >= 4) { z.takeDamage(projectileDamage); }
-        else { z.takeDamage(directDamage); }
-        if (z.isAlive()){
-            System.out.println("Peashooter at row " + this.getRowPos() + " column " + this.getColumnPos() + " shot zombie at row " + z.getRowPos() + " column " + z.getColumnPos() + " (Zombie HP: " + z.getHealth() + ")");
+        if (z.getColumnPos() - this.getColumnPos() >= 4) {
+            Pea pea = new Pea(getColumnPos(), getRowPos(), projectileDamage);
+            Gameboard.getActivePeas().add(pea);
         }
         else {
-            System.out.println("Peashooter at row " + this.getRowPos() + " column " + this.getColumnPos() + " has killed zombie at row " + z.getRowPos() + " column " + z.getColumnPos());
+            Pea pea = new Pea(getColumnPos(), getRowPos(), projectileDamage);
+            Gameboard.getActivePeas().add(pea);
         }
+
+        System.out.println("Peashooter at row " + this.getRowPos() + " column " + this.getColumnPos() + " shot a pea");
     }
 }

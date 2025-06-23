@@ -7,19 +7,21 @@ public class Gameboard {
     private Plant[][] plantBoard;
     private ArrayList<Zombie> aliveZombies;
     private ArrayList<Plant> alivePlants;
-    private ArrayList<Pea> activePeas;
+    private static ArrayList<Pea> activePeas;
     private int lastZombieGeneratedTick;
 
     public Gameboard(){
         plantBoard = new Plant[5][9];
         aliveZombies = new ArrayList<>();
         alivePlants = new ArrayList<>();
+        activePeas = new ArrayList<>();
         lastZombieGeneratedTick = 0;
     }
 
     public Plant[][] getPlantBoard() { return plantBoard; }
     public ArrayList<Zombie> getAliveZombies() { return aliveZombies; }
     public ArrayList<Plant> getAlivePlants(){ return alivePlants; }
+    public static ArrayList<Pea> getActivePeas() { return activePeas; }
 
     public void updateGame(int currentTick, Player player) {
         for (Plant p : alivePlants) {
@@ -29,10 +31,10 @@ public class Gameboard {
                 aliveZombies.removeIf(z -> !z.isAlive());
             }
         }
-        for (Pea p : activePeas) {
-            p.updatePea(aliveZombies);
-            activePeas.removeIf(p -> !p.isActive());
+        for (Pea pea : activePeas) {
+            pea.updatePea(aliveZombies);
         }
+        activePeas.removeIf(p -> !p.isActive());
         for (Zombie z : aliveZombies) {
             z.updateZombie(alivePlants);
             alivePlants.removeIf(p -> !p.isAlive());
