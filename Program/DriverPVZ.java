@@ -1,6 +1,5 @@
 package Program;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DriverPVZ {
@@ -63,9 +62,9 @@ public class DriverPVZ {
     public void displayShop(Player p, int currentTick) {
         int sun = p.getSunPoints();
         Sunflower sf = new Sunflower();
-        int sunflowerCooldown = sf.getPlantCD() - (currentTick - Sunflower.getLastPlacedSunflower());
+        int sunflowerCooldown = sf.getPlacementCooldown() - (currentTick - Sunflower.getLastPlacedSunflower());
         Peashooter ps = new Peashooter();
-        int peashooterCooldown = ps.getPlantCD() - (currentTick - Peashooter.getLastPlacedPeashooter());
+        int peashooterCooldown = ps.getPlacementCooldown() - (currentTick - Peashooter.getLastPlacedPeashooter());
 
 
         System.out.println("\nSun: " + p.getSunPoints());
@@ -79,28 +78,9 @@ public class DriverPVZ {
         else System.out.println("Peashooter - 100 [Available]");
     }
 
-    public boolean WinLoseConditions(ArrayList<Zombie> aliveZombies, int currentTick){
-        for (Zombie z : aliveZombies){
-            if (z.getColumnPos()<0){
-               System.out.println("You lost! A zombie reached your home.");
-               return true;
-            }
-        }
-        if (currentTick > 180 && aliveZombies.isEmpty()){
-            System.out.println("You win! All zombies eliminated");
-            return true;
-        }
-        return false;
-    }
-
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
-        DriverPVZ driver = new DriverPVZ();
-        Gameboard board = new Gameboard();
-        Player player = new Player();
-
-        int currentTick = 0;
-        String input;
+        Game game = new Game();
 
         System.out.println("Welcome to Plants vs Zombies (Console Edition)!");
         System.out.println("Commands: [PLANT_NAME] [ROW] [COLUMN], or press Enter to skip turn.");
@@ -109,41 +89,6 @@ public class DriverPVZ {
         System.out.println("Press any key to continue...");
         scanner.nextLine();
 
-        do {
-            driver.displayBoard(board);
-            driver.displayShop(player , currentTick);
-
-            System.out.print("\nTick " + currentTick + " | Command: ");
-            input = scanner.nextLine().trim();
-
-            if (!input.isEmpty()) {
-                String[] parts = input.split(" ");
-                if (parts.length == 3) {
-                    String plant = parts[0];
-                    try {
-                        int row = Integer.parseInt(parts[1]);
-                        int col = Integer.parseInt(parts[2]);
-                        board.addPlant(plant, row, col, player, currentTick);
-                    } catch (NumberFormatException e) {
-                        System.out.println("Invalid coordinates. Use numbers for row and column.");
-                    }
-                } else if (parts.length == 1 && input.equalsIgnoreCase("end")) { continue; }
-                else {
-                    System.out.println("Invalid command. Format: [plantname] [row] [col]");
-                }
-            }
-
-            if (currentTick % 5 == 0) {
-                System.out.println("The sky dropped 50 sun.");
-                player.addSun(50);
-            }
-
-            board.updateGame(currentTick, player);
-            currentTick++;
-
-            if (driver.WinLoseConditions(board.getAliveZombies(), currentTick)){
-                input = "end";
-            }
-        } while (!input.equalsIgnoreCase("end"));
+        game.run();
     }
 }

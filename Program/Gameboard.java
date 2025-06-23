@@ -6,14 +6,14 @@ import java.util.Random;
 public class Gameboard {
     private Plant[][] plantBoard;
     private ArrayList<Zombie> aliveZombies;
-    private ArrayList<Zombie> nearestZombies;
-    private int lastZombieGeneratedTick = 0;
     private ArrayList<Plant> alivePlants;
+    private int lastZombieGeneratedTick;
 
     public Gameboard(){
         plantBoard = new Plant[5][9];
         aliveZombies = new ArrayList<>();
         alivePlants = new ArrayList<>();
+        lastZombieGeneratedTick = 0;
     }
 
     public Plant[][] getPlantBoard() { return plantBoard; }
@@ -29,7 +29,7 @@ public class Gameboard {
             }
         }
         for (Zombie z : aliveZombies) {
-            z.updateZomb(alivePlants);
+            z.updateZombie(alivePlants);
             alivePlants.removeIf(p -> !p.isAlive());
         }
         if (currentTick <= 180){
@@ -46,8 +46,14 @@ public class Gameboard {
         Plant p = switch(name.toLowerCase()) {
             case "sunflower" -> new Sunflower();
             case "peashooter" -> new Peashooter();
-            default -> throw new IllegalArgumentException("Invalid plant.");
+            default -> null;
+
         };
+
+        if (p == null) {
+            System.out.println("Invalid plant name.");
+            return;
+        }
 
         if (!player.buyPlant(p, currentTick)) {
             return;

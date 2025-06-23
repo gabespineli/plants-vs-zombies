@@ -19,14 +19,14 @@ public class Player {
         }
 
         if (p instanceof Sunflower) {
-            if (currentTick - Sunflower.getLastPlacedSunflower() < p.getPlantCD()) {
-                int remaining = p.getPlantCD() - (currentTick - Sunflower.getLastPlacedSunflower());
+            if (currentTick - Sunflower.getLastPlacedSunflower() < p.getPlacementCooldown()) {
+                int remaining = p.getPlacementCooldown() - (currentTick - Sunflower.getLastPlacedSunflower());
                 System.out.println("Sunflower still in cooldown for placement. Wait for " + remaining + " turns.");
                 return false;
             }
         } else if (p instanceof Peashooter) {
-            if (currentTick - Peashooter.getLastPlacedPeashooter() < p.getPlantCD()) {
-                int remaining = p.getPlantCD() - (currentTick - Peashooter.getLastPlacedPeashooter());
+            if (currentTick - Peashooter.getLastPlacedPeashooter() < p.getPlacementCooldown()) {
+                int remaining = p.getPlacementCooldown() - (currentTick - Peashooter.getLastPlacedPeashooter());
                 System.out.println("Peashooter still in cooldown for placement. Wait for " + remaining + " turns.");
                 return false;
             }

@@ -2,8 +2,8 @@ package Program;
 
 public class Plant extends Entity {
     private int cost;
-    private int plantCD;
-    private int coolDown;
+    private int placementCooldown;
+    private int actionCooldown;
     private String plantType;
     private static int plantCount = 0;
 
@@ -17,25 +17,25 @@ public class Plant extends Entity {
     public int getCost() { return cost; }
     public void setCost(int cost) { this.cost = cost; }
 
-    public int getPlantCD() { return plantCD; }
-    public void setPlantCD(int plantCD) { this.plantCD = plantCD;}
+    public int getPlacementCooldown() { return placementCooldown; }
+    public void setPlacementCooldown(int placementCooldown) { this.placementCooldown = placementCooldown;}
 
     public String getPlantType() { return plantType; }
     public void setPlantType(String plantType) { this.plantType = plantType; }
 
-    public int getCoolDown() { return coolDown; }
-    public void setCoolDown(int coolDown) { this.coolDown = coolDown; }
+    public int getActionCooldown() { return actionCooldown; }
+    public void setActionCooldown(int actionCooldown) { this.actionCooldown = actionCooldown; }
 
-    public void reduceCD(){
-        if (coolDown > 0)
-            coolDown--;
+    public void reduceActionCooldown(){
+        if (actionCooldown > 0)
+            actionCooldown--;
     }
 
-    public boolean checkCD(){
-        return coolDown == 0;
+    public boolean checkActionCooldown(){
+        return actionCooldown == 0;
     }
 
-    public void resetCD(int cd){
-        coolDown = cd;
+    public void resetActionCooldown(int cd){
+        actionCooldown = cd;
     }
 }
