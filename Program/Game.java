@@ -30,9 +30,9 @@ public class Game {
             if (!paused && now - lastTick >= TICK_INTERVAL) {
                 currentTick++;
                 System.out.println("\n====================================");
-                System.out.println("Tick: " + currentTick + " | Sun: " + player.getSunPoints());
+                System.out.printf("Time: %02d:%02d | Sun: %d\n", currentTick/60, currentTick%60, player.getSunPoints());
 
-                update();
+                board.updateGame(currentTick, player);
                 ui.displayBoard(board);
                 ui.displayShop(player, currentTick);
 
@@ -92,14 +92,6 @@ public class Game {
         } else {
             System.out.println("Invalid command. Format: [PLANT_NAME] [ROW] [COLUMN]");
         }
-    }
-
-    private void update() {
-        if (currentTick % 5 == 0) {
-            System.out.println("The sky dropped 50 sun.");
-            player.addSun(50);
-        }
-        board.updateGame(currentTick, player);
     }
 
     private boolean checkWinLose() {

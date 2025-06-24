@@ -43,9 +43,10 @@ public class Pea {
             if (z.getRowPos() == rowPos && z.getColumnPos() == columnPos){
                 z.takeDamage(damage);
                 if (z.isAlive()){
-                    System.out.println("Zombie at row " + z.getRowPos() + " Column " + z.getColumnPos() + " has been shot! (HP: " + z.getHealth() + ")");
+                    System.out.println("Zombie at (" + z.getRowPos() + ", " + z.getColumnPos() + ") has been shot! (HP: " + z.getHealth() + ")");
                 } else {
-                    System.out.println("Zombie at row " + z.getRowPos() + " Column " + z.getColumnPos() + " has been killed!");
+                    System.out.println("Zombie at (" + z.getRowPos() + ", " + z.getColumnPos() + ") has been killed!");
+                    aliveZombies.remove(z);
                 }
                 isActive = false;
                 break;

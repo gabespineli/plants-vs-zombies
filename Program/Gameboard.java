@@ -8,6 +8,7 @@ public class Gameboard {
     private ArrayList<Zombie> aliveZombies;
     private ArrayList<Plant> alivePlants;
     private ArrayList<Pea> activePeas;
+    private ArrayList<Sun> activeSuns;
     private int lastZombieGeneratedTick;
 
     public Gameboard(){
@@ -15,6 +16,7 @@ public class Gameboard {
         aliveZombies = new ArrayList<>();
         alivePlants = new ArrayList<>();
         activePeas = new ArrayList<>();
+        activeSuns = new ArrayList<>();
         lastZombieGeneratedTick = 0;
     }
 
@@ -27,7 +29,10 @@ public class Gameboard {
         // ACTION PHASE
         for (Plant plant : alivePlants) {
             if (plant instanceof Sunflower sf) {
-                sf.updateSunflower(player);
+                Sun newSun = sf.updateSunflower();
+                if (newSun != null) {
+                    activeSuns.add(newSun);
+                }
             }
             else if (plant instanceof Peashooter ps) {
                 Pea newPea = ps.updatePeashooter(aliveZombies);
@@ -40,12 +45,6 @@ public class Gameboard {
         for (Pea pea : activePeas) { pea.updatePea(aliveZombies); }
 
         // REMOVAL PHASE
-        for (Zombie zombie : aliveZombies) {
-            if (!zombie.isAlive()) {
-                System.out.println("Zombie at row " + zombie.getRowPos() + " Column " + zombie.getColumnPos() + " has been killed!");
-                aliveZombies.remove(zombie);
-            }
-        }
         for (int i = alivePlants.size() - 1; i >= 0; i--) {
             Plant plant = alivePlants.get(i);
             if (!plant.isAlive()) {
@@ -96,6 +95,15 @@ public class Gameboard {
             return plantBoard[row][column] == null;
         }
         return false;
+    }
+
+    public void generateSun(int currentTick) {
+        Random random = new Random();
+        if (currentTick % 10 == 0) {
+            Sun sun = new Sun(random.nextInt(5), random.nextInt(9));
+            activeSuns.add(sun);
+            System.out.println("The sky dropped a sun at (" + sun.getRowPos() + ", " + sun.getColumnPos() + ")");
+        }
     }
 
     public void generateZombie(int currentTick) {

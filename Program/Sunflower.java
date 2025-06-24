@@ -17,13 +17,15 @@ public class Sunflower extends Plant {
     public static int getLastPlacedSunflower() { return lastPlacedSunflower; }
     public static void setLastPlacedSunflower(int tick) { lastPlacedSunflower = tick; }
 
-    public void updateSunflower(Player player){
+    public Sun updateSunflower(){
         reduceActionCooldown();
-
+        Sun sun;
         if (checkActionCooldown()){
-            System.out.println("Sunflower at (" + getRowPos() + "," + getColumnPos() + ") produced 25 sun!");
-            player.addSun(25);
+            System.out.println("Sunflower at (" + getRowPos() + "," + getColumnPos() + ") produced suns!");
+            sun = new Sun(getRowPos(), getColumnPos());
             resetActionCooldown(getCooldown());
+            return sun;
         }
+        return null;
     }
 }
