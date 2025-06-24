@@ -36,7 +36,7 @@ public class Sun {
     public boolean isActive(){ return isActive; }
     public void collected() { isActive = false; }
 
-    public void update(){
+    public void reduceLifespan(){
         if (lifespan > 0){
             lifespan--;
         }
