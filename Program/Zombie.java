@@ -24,7 +24,7 @@ public class Zombie extends Entity {
             }
         }
 
-        moveCooldown--; //update this
+        moveCooldown--;
 
         if (moveCooldown == 0){
             move();

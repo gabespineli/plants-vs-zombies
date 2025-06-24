@@ -20,33 +20,31 @@ public class Peashooter extends Plant {
         RANGE = 9;
     }
 
-    public static int getLastPlacedPeashooter() { return lastPlacedPeashooter; }
-    public static void setLastPlacedPeashooter(int tick) { lastPlacedPeashooter = tick; }
+    public static int getLastPlacedPeashooter() {
+        return lastPlacedPeashooter;
+    }
 
-    public void updatePeashooter(ArrayList<Zombie> aliveZombies){
+    public static void setLastPlacedPeashooter(int tick) {
+        lastPlacedPeashooter = tick;
+    }
+
+    public Pea updatePeashooter(ArrayList<Zombie> aliveZombies) {
         reduceActionCooldown();
+        Pea pea;
 
-        if(checkActionCooldown()){
-            for (Zombie z : aliveZombies){
-                if (z.getRowPos() == this.getRowPos()){
-                    shoot(z);
-                    resetActionCooldown(getCooldown()); // this too
-                    break;
+        if (checkActionCooldown()) {
+            for (Zombie z : aliveZombies) {
+                if (z.getRowPos() == this.getRowPos()) {
+                    if (z.getColumnPos() - this.getColumnPos() >= 4) {
+                        pea = new Pea(getColumnPos(), getRowPos(), projectileDamage);
+                    } else {
+                        pea = new Pea(getColumnPos(), getRowPos(), directDamage);
+                    }
+                    resetActionCooldown(getCooldown());
+                    return pea;
                 }
             }
         }
-    }
-
-    public void shoot(Zombie z) {
-        if (z.getColumnPos() - this.getColumnPos() >= 4) {
-            Pea pea = new Pea(getColumnPos(), getRowPos(), projectileDamage);
-            Gameboard.getActivePeas().add(pea);
-        }
-        else {
-            Pea pea = new Pea(getColumnPos(), getRowPos(), projectileDamage);
-            Gameboard.getActivePeas().add(pea);
-        }
-
-        System.out.println("Peashooter at row " + this.getRowPos() + " column " + this.getColumnPos() + " shot a pea");
+        return null; // no pea created
     }
 }

@@ -30,22 +30,27 @@ public class Pea {
     }
 
     public void updatePea(ArrayList<Zombie> aliveZombies){
+        checkCollision(aliveZombies);
+
+        if (isActive) {
+            move();
+            checkCollision(aliveZombies);
+        }
+    }
+
+    private void checkCollision(ArrayList<Zombie> aliveZombies) {
         for (Zombie z : aliveZombies){
-            if (z.getRowPos() == rowPos){
-                if (z.getColumnPos() == columnPos){
-                    z.takeDamage(damage);
-                    if (z.isAlive()){
-                        System.out.println("Zombie at row " + z.getRowPos() + " Column " + z.getColumnPos() + " has been shot! (HP: " + z.getHealth() + ")");
-                    }
-                    else {
-                        System.out.println("Zombie at row " + z.getRowPos() + " Column " + z.getColumnPos() + " has been killed!");
-                    }
-                    isActive = false;
-                    break;
+            if (z.getRowPos() == rowPos && z.getColumnPos() == columnPos){
+                z.takeDamage(damage);
+                if (z.isAlive()){
+                    System.out.println("Zombie at row " + z.getRowPos() + " Column " + z.getColumnPos() + " has been shot! (HP: " + z.getHealth() + ")");
+                } else {
+                    System.out.println("Zombie at row " + z.getRowPos() + " Column " + z.getColumnPos() + " has been killed!");
                 }
+                isActive = false;
+                break;
             }
         }
-        move();
     }
 
     public boolean isActive() {

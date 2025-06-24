@@ -17,7 +17,7 @@ public class Sunflower extends Plant {
     public static int getLastPlacedSunflower() { return lastPlacedSunflower; }
     public static void setLastPlacedSunflower(int tick) { lastPlacedSunflower = tick; }
 
-    public void update(Player player){
+    public void updateSunflower(Player player){
         reduceActionCooldown();
 
         if (checkActionCooldown()){

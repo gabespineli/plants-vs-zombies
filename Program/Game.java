@@ -76,7 +76,6 @@ public class Game {
         }
     }
 
-
     private void processCommand(String input) {
         if (input.isEmpty()) return;
 

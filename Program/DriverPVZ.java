@@ -26,13 +26,11 @@ public class DriverPVZ {
             System.out.print(row + "  |");
 
             for (int col = 0; col < 9; col++) {
-                // Check plant
                 String cell = "   ";
                 Plant plant = board.getPlantBoard()[row][col];
                 boolean hasZombie = false;
                 boolean hasPea = false;
 
-                // Check if any zombie is in this cell
                 for (Zombie z : board.getAliveZombies()) {
                     if (z.getRowPos() == row && z.getColumnPos() == col) {
                         hasZombie = true;
@@ -70,10 +68,7 @@ public class DriverPVZ {
                     }
                     //cell = hasZombie ? "PZ " : " P ";
                 } else {
-                    if (hasZombie && hasPea){
-                        cell = "Zo ";
-                    }
-                    else if (hasZombie){
+                    if (hasZombie){
                         cell = " Z ";
                     }
                     else if (hasPea){
@@ -89,7 +84,6 @@ public class DriverPVZ {
             }
             System.out.println();
 
-            // Separator
             System.out.print("   +");
             for (int col = 0; col < 9; col++) {
                 System.out.print("---+");

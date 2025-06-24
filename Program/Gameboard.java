@@ -7,7 +7,7 @@ public class Gameboard {
     private Plant[][] plantBoard;
     private ArrayList<Zombie> aliveZombies;
     private ArrayList<Plant> alivePlants;
-    private static ArrayList<Pea> activePeas;
+    private ArrayList<Pea> activePeas;
     private int lastZombieGeneratedTick;
 
     public Gameboard(){
@@ -21,30 +21,46 @@ public class Gameboard {
     public Plant[][] getPlantBoard() { return plantBoard; }
     public ArrayList<Zombie> getAliveZombies() { return aliveZombies; }
     public ArrayList<Plant> getAlivePlants(){ return alivePlants; }
-    public static ArrayList<Pea> getActivePeas() { return activePeas; }
+    public ArrayList<Pea> getActivePeas() { return activePeas; }
 
     public void updateGame(int currentTick, Player player) {
-        for (Plant p : alivePlants) {
-            if (p instanceof Sunflower sf) { sf.update(player); }
-            else if (p instanceof Peashooter ps) {
-                ps.updatePeashooter(aliveZombies);
-                aliveZombies.removeIf(z -> !z.isAlive());
+        // ACTION PHASE
+        for (Plant plant : alivePlants) {
+            if (plant instanceof Sunflower sf) {
+                sf.updateSunflower(player);
+            }
+            else if (plant instanceof Peashooter ps) {
+                Pea newPea = ps.updatePeashooter(aliveZombies);
+                if (newPea != null) {
+                    activePeas.add(newPea);
+                }
             }
         }
-        for (Pea pea : activePeas) {
-            pea.updatePea(aliveZombies);
+        for (Zombie zombie : aliveZombies) { zombie.updateZombie(alivePlants); }
+        for (Pea pea : activePeas) { pea.updatePea(aliveZombies); }
+
+        // REMOVAL PHASE
+        for (Zombie zombie : aliveZombies) {
+            if (!zombie.isAlive()) {
+                System.out.println("Zombie at row " + zombie.getRowPos() + " Column " + zombie.getColumnPos() + " has been killed!");
+                aliveZombies.remove(zombie);
+            }
         }
-        activePeas.removeIf(p -> p.getColumnPos() > 8);
-        activePeas.removeIf(p -> !p.isActive());
-        for (Zombie z : aliveZombies) {
-            z.updateZombie(alivePlants);
-            alivePlants.removeIf(p -> !p.isAlive());
+        for (int i = alivePlants.size() - 1; i >= 0; i--) {
+            Plant plant = alivePlants.get(i);
+            if (!plant.isAlive()) {
+                // Clear from board grid
+                plantBoard[plant.getRowPos()][plant.getColumnPos()] = null;
+                alivePlants.remove(i);
+            }
         }
-        if (currentTick <= 180){
+        activePeas.removeIf(pea -> pea.getColumnPos() > 8 || !pea.isActive());
+
+        // ZOMBIE GENERATION
+        if (currentTick <= 180) {
             generateZombie(currentTick);
         }
     }
-
     public void addPlant(String name, int row, int column, Player player, int currentTick) {
         if (!isValidPosition(row, column)) {
             System.out.println("Invalid position.");
