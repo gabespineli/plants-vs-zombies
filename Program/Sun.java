@@ -3,40 +3,42 @@ package Program;
 public class Sun {
     private int columnPos;
     private int rowPos;
+    private int value;
     private boolean isActive;
-    private int lifeSpan;
+    private int lifespan;
 
     public Sun(){
         isActive = true;
-        lifeSpan = 10;
+        lifespan = 10;
+        value = 50;
     }
 
     public Sun(int rowPos, int columnPos) {
+        this();
         this.rowPos = rowPos;
         this.columnPos = columnPos;
-        isActive = true;
-        lifeSpan = 10;
     }
 
-    public void setRowPos(int rowPos) {
+    public Sun(int rowPos, int columnPos, int value) {
+        this();
         this.rowPos = rowPos;
-    }
-
-    public void setColumnPos(int columnPos){
-        this.columnPos =  columnPos;
+        this.columnPos = columnPos;
+        this.value = value;
     }
 
     public int getColumnPos(){
         return columnPos;
     }
-
     public int getRowPos(){
         return rowPos;
     }
+    public int getValue(){ return value; }
+    public boolean isActive(){ return isActive; }
+    public void collected() { isActive = false; }
 
     public void update(){
-        if (lifeSpan > 0){
-            lifeSpan--;
+        if (lifespan > 0){
+            lifespan--;
         }
         else {
             isActive = false;

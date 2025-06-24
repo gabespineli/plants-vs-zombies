@@ -24,8 +24,9 @@ public class Gameboard {
     public ArrayList<Zombie> getAliveZombies() { return aliveZombies; }
     public ArrayList<Plant> getAlivePlants(){ return alivePlants; }
     public ArrayList<Pea> getActivePeas() { return activePeas; }
+    public ArrayList<Sun> getActiveSuns() { return activeSuns; }
 
-    public void updateGame(int currentTick, Player player) {
+    public void updateGame(int currentTick) {
         // ACTION PHASE
         for (Plant plant : alivePlants) {
             if (plant instanceof Sunflower sf) {
@@ -43,12 +44,13 @@ public class Gameboard {
         }
         for (Zombie zombie : aliveZombies) { zombie.updateZombie(alivePlants); }
         for (Pea pea : activePeas) { pea.updatePea(aliveZombies); }
+        generateSun(currentTick);
 
         // REMOVAL PHASE
         for (int i = alivePlants.size() - 1; i >= 0; i--) {
             Plant plant = alivePlants.get(i);
             if (!plant.isAlive()) {
-                // Clear from board grid
+                // Clear from the board grid
                 plantBoard[plant.getRowPos()][plant.getColumnPos()] = null;
                 alivePlants.remove(i);
             }
@@ -62,7 +64,7 @@ public class Gameboard {
     }
     public void addPlant(String name, int row, int column, Player player, int currentTick) {
         if (!isValidPosition(row, column)) {
-            System.out.println("Invalid position.");
+            System.out.println("Invalid placement position");
             return;
         }
 
@@ -91,10 +93,7 @@ public class Gameboard {
     }
 
     public boolean isValidPosition(int row, int column){
-        if (row >= 0 && row < 5 && column >= 0 && column < 9){
-            return plantBoard[row][column] == null;
-        }
-        return false;
+        return (row >= 0 && row < 5 && column >= 0 && column < 9);
     }
 
     public void generateSun(int currentTick) {
@@ -103,6 +102,31 @@ public class Gameboard {
             Sun sun = new Sun(random.nextInt(5), random.nextInt(9));
             activeSuns.add(sun);
             System.out.println("The sky dropped a sun at (" + sun.getRowPos() + ", " + sun.getColumnPos() + ")");
+        }
+    }
+
+    public void collectSun(int row, int column, Player player) {
+        if (!isValidPosition(row, column)) {
+            System.out.println("Invalid collection position.");
+            return;
+        }
+
+        ArrayList<Sun> sunsToCollect = new ArrayList<>();
+        for (Sun sun: activeSuns) {
+            if (sun.getRowPos() == row && sun.getColumnPos() == column) {
+                sunsToCollect.add(sun);
+            }
+        }
+
+        if (!sunsToCollect.isEmpty()) {
+            int totalSunCollected = 0;
+            for (Sun sun : sunsToCollect) {
+                sun.collected();
+                totalSunCollected += sun.getValue();
+            }
+            activeSuns.removeIf(s -> !s.isActive());
+            System.out.println("Sun collected at (" + row + "," + column + ")!");
+            player.addSun(totalSunCollected);
         }
     }
 

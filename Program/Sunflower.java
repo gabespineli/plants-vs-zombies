@@ -20,10 +20,10 @@ public class Sunflower extends Plant {
     public Sun updateSunflower(){
         reduceActionCooldown();
         Sun sun;
-        if (checkActionCooldown()){
-            System.out.println("Sunflower at (" + getRowPos() + "," + getColumnPos() + ") produced suns!");
-            sun = new Sun(getRowPos(), getColumnPos());
+        if (checkActionCooldown()) {
+            sun = new Sun(getRowPos(), getColumnPos(), 25);
             resetActionCooldown(getCooldown());
+            System.out.println("Sunflower at (" + getRowPos() + "," + getColumnPos() + ") produced " + sun.getValue() + " sun!");
             return sun;
         }
         return null;

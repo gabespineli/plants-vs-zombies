@@ -7,21 +7,18 @@ public class DriverPVZ {
     public void displayBoard(Gameboard board) {
         System.out.println("\nCurrent Board:");
 
-        // Print column headers (0 to 8)
         System.out.print("    ");
         for (int col = 0; col <= 8; col++) {
             System.out.print(" " + col + "  ");
         }
         System.out.println();
 
-        // Top border
         System.out.print("   +");
         for (int col = 0; col < 9; col++) {
             System.out.print("---+");
         }
         System.out.println();
 
-        // Rows
         for (int row = 0; row < 5; row++) {
             System.out.print(row + "  |");
 
@@ -30,6 +27,7 @@ public class DriverPVZ {
                 Plant plant = board.getPlantBoard()[row][col];
                 boolean hasZombie = false;
                 boolean hasPea = false;
+                boolean hasSun = false;
 
                 for (Zombie z : board.getAliveZombies()) {
                     if (z.getRowPos() == row && z.getColumnPos() == col) {
@@ -37,47 +35,40 @@ public class DriverPVZ {
                         break;
                     }
                 }
-
                 for (Pea pea : board.getActivePeas()) {
                     if (pea.getRowPos() == row && pea.getColumnPos() == col) {
                         hasPea = true;
                         break;
                     }
                 }
+                for (Sun sun : board.getActiveSuns()) {
+                    if (sun.getRowPos() == row && sun.getColumnPos() == col) {
+                        hasSun = true;
+                        break;
+                    }
+                }
 
                 if (plant instanceof Sunflower) {
-                    if (hasZombie){
-                        cell = "SZ ";
-                    }
-                    else if (hasPea){
-                        cell = "So ";
-                    }
-                    else {
-                        cell = " S ";
-                    }
-                    //cell = hasZombie ? "SZ " : " S ";
+                    if (hasZombie && hasSun){ cell = "SZ*"; }
+                    else if (hasPea && hasSun){ cell = "So*"; }
+                    else if (hasZombie){ cell = "SZ "; }
+                    else if (hasPea){ cell = "So "; }
+                    else if (hasSun){ cell = "S* "; }
+                    else { cell = " S "; }
                 } else if (plant instanceof Peashooter) {
-                    if (hasZombie){
-                        cell = "PZ ";
-                    }
-                    else if (hasPea){
-                        cell = "Po ";
-                    }
-                    else {
-                        cell = " P ";
-                    }
-                    //cell = hasZombie ? "PZ " : " P ";
+                    if (hasZombie && hasSun){ cell = "PZ*"; }
+                    else if (hasPea && hasSun){ cell = "Po*"; }
+                    else if (hasZombie){ cell = "PZ "; }
+                    else if (hasPea){ cell = "Po "; }
+                    else if (hasSun){ cell = "P* "; }
+                    else { cell = " P "; }
                 } else {
-                    if (hasZombie){
-                        cell = " Z ";
-                    }
-                    else if (hasPea){
-                        cell = " o ";
-                    }
-                    else {
-                        cell = "   ";
-                    }
-                    //cell = hasZombie ? " Z " : "   ";
+                    if (hasZombie && hasSun){ cell = " Z*"; }
+                    else if (hasPea && hasSun){ cell = " o*"; }
+                    else if (hasZombie){ cell = " Z "; }
+                    else if (hasPea){ cell = " o "; }
+                    else if (hasSun){ cell = " * "; }
+                    else { cell = "   "; }
                 }
 
                 System.out.print(cell + "|");
@@ -115,10 +106,15 @@ public class DriverPVZ {
         Scanner scanner = new Scanner(System.in);
         Game game = new Game();
 
-        System.out.println("Welcome to Plants vs Zombies (Console Edition)!");
+        System.out.println("Welcome to Plants vs Zombies (Console Edition)!\n");
         System.out.println("The game runs continuously until you press Enter to input a command.");
-        System.out.println("Commands: [PLANT_NAME] [ROW] [COLUMN], or press Enter to resume the game.");
-        System.out.println("Prompt Example: Sunflower 2 3");
+        System.out.println("COMMANDS (case-insensitive):");
+        System.out.println("\t> [PLANT_NAME] [ROW] [COLUMN], places a plant at the given coordinates.");
+        System.out.println("\t> " +
+                "COLLECT [ROW] [COLUMN], collects sun from the given coordinates.");
+        System.out.println("You can also chain commands so long as it's a valid sequence of commands.\n");
+        System.out.println("Prompt Examples: \n\t> Sunflower 2 3\n\t> Collect 4 4" +
+                                            "\n\t> Peashooter 1 5 Collect 9 9 Sunflower 1 1 Collect 3 2");
         System.out.println("Type 'end' to end the game.");
         System.out.println("Press any key to continue...");
         scanner.nextLine();

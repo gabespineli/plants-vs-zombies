@@ -16,7 +16,6 @@ public class Entity {
 
         if (health <= 0) {
             isAlive = false;
-            //delete entity
         }
     }
 

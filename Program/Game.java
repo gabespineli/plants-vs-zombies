@@ -32,7 +32,7 @@ public class Game {
                 System.out.println("\n====================================");
                 System.out.printf("Time: %02d:%02d | Sun: %d\n", currentTick/60, currentTick%60, player.getSunPoints());
 
-                board.updateGame(currentTick, player);
+                board.updateGame(currentTick);
                 ui.displayBoard(board);
                 ui.displayShop(player, currentTick);
 
@@ -50,7 +50,8 @@ public class Game {
                 // Check if it's the Enter key (ASCII 13 for CR or 10 for LF)
                 if (key == 13 || key == 10) {
                     paused = true;
-                    System.out.print("\n[PAUSED] Enter command (or just press Enter to resume): ");
+                    System.out.println("\n[PAUSED] Enter command (or just press Enter to resume)");
+                    System.out.print("> ");
                     String input = scanner.nextLine().trim();
                     
                     if (input.equalsIgnoreCase("end")) {
@@ -80,17 +81,31 @@ public class Game {
         if (input.isEmpty()) return;
 
         String[] parts = input.split(" ");
-        if (parts.length == 3) {
-            String plant = parts[0];
-            try {
-                int row = Integer.parseInt(parts[1]);
-                int col = Integer.parseInt(parts[2]);
-                board.addPlant(plant, row, col, player, currentTick);
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid coordinates. Use numbers for row and column.");
+        if (parts.length % 3 == 0) {
+            int row, col, i = 0;
+            while (i < parts.length) {
+                String command = parts[i];
+                if (command.equalsIgnoreCase("collect")) {
+                    try {
+                        row = Integer.parseInt(parts[i+1]);
+                        col = Integer.parseInt(parts[i+2]);
+                        board.collectSun(row, col, player);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid coordinates. Use numbers for row and column.");
+                    }
+                } else {
+                    try {
+                        row = Integer.parseInt(parts[i+1]);
+                        col = Integer.parseInt(parts[i+2]);
+                        board.addPlant(command, row, col, player, currentTick);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid coordinates. Use numbers for row and column.");
+                    }
+                }
+                i+=3;
             }
         } else {
-            System.out.println("Invalid command. Format: [PLANT_NAME] [ROW] [COLUMN]");
+            System.out.println("Invalid command. Format: [PLANT_NAME]/COLLECT [ROW] [COLUMN]");
         }
     }
 
