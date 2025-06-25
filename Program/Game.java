@@ -1,7 +1,9 @@
 package Program;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
+import java.io.BufferedReader;
 
 public class Game {
     private Gameboard board;
@@ -18,6 +20,7 @@ public class Game {
 
     public void run() throws IOException {
         Scanner scanner = new Scanner(System.in);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         DriverPVZ ui = new DriverPVZ();
         final int TICK_INTERVAL = 1000;
 
@@ -29,7 +32,7 @@ public class Game {
 
             if (!paused && now - lastTick >= TICK_INTERVAL) {
                 currentTick++;
-                System.out.println("\n====================================");
+                System.out.println("\n=======================================");
                 System.out.printf("Time: %02d:%02d | Sun: %d\n", currentTick/60, currentTick%60, player.getSunPoints());
 
                 board.updateGame(currentTick);
@@ -44,11 +47,11 @@ public class Game {
                 lastTick += TICK_INTERVAL;
             }
 
-            if (System.in.available() > 0) {
-                int key = System.in.read();
+            if (reader.ready()) {
+                int key = reader.read();
                 
-                // Check if it's the Enter key (ASCII 13 for CR or 10 for LF)
-                if (key == 13 || key == 10) {
+                if (key == 13) // Detects if key is \n
+                {
                     paused = true;
                     System.out.println("\n[PAUSED] Enter command (or just press Enter to resume)");
                     System.out.print("> ");
@@ -67,14 +70,15 @@ public class Game {
                     lastTick = System.currentTimeMillis();
                 } else {
                     // Consume any other keypress
-                    while (System.in.available() > 0) {
-                        System.in.read();
+                    while (reader.ready()) {
+                        reader.skip(1);
                     }
                 }
             }
 
-            try { Thread.sleep(50); } catch (InterruptedException ignored) {}
+            try { Thread.sleep(100); } catch (InterruptedException ignored) {}
         }
+        scanner.close();
     }
 
     private void processCommand(String input) {
