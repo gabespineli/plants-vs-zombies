@@ -1,5 +1,3 @@
-package Program;
-
 public class Sunflower extends Plant {
     private int lastProducedTick;
     private static int lastPlacedSunflower = -9999;

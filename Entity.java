@@ -1,5 +1,3 @@
-package Program;
-
 public class Entity {
     private int health;
     private int columnPos;

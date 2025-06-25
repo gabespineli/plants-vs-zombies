@@ -1,5 +1,3 @@
-package Program;
-
 public class Sun {
     private int columnPos;
     private int rowPos;

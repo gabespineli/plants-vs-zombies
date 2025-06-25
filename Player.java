@@ -1,5 +1,3 @@
-package Program;
-
 public class Player {
     private int sunPoints;
 
