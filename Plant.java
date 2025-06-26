@@ -17,13 +17,12 @@ public class Plant extends Entity {
     public void setCost(int cost) { this.cost = cost; }
 
     public int getPlacementCooldown() { return placementCooldown; }
-    public void setPlacementCooldown(int placementCooldown) { this.placementCooldown = placementCooldown;}
+    public void setPlacementCooldown(int cd) { this.placementCooldown = cd;}
 
     public String getPlantType() { return plantType; }
     public void setPlantType(String plantType) { this.plantType = plantType; }
 
-    public int getActionCooldown() { return actionCooldown; }
-    public void setActionCooldown(int actionCooldown) { this.actionCooldown = actionCooldown; }
+    public void setActionCooldown(int cd) { this.actionCooldown = cd; }
 
     public int getCooldown() { return Cooldown; }
     public void setCooldown(int Cooldown) { this.Cooldown = Cooldown; }

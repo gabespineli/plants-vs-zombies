@@ -5,6 +5,10 @@ public class Player {
         this.sunPoints = 100;
     }
 
+    public int getSunPoints() {
+        return sunPoints;
+    }
+
     public void addSun(int amount) {
         sunPoints += amount;
         System.out.println("Player collected " + amount + " sun. Total: " + sunPoints);
@@ -40,9 +44,5 @@ public class Player {
             System.out.println("Not enough sun.");
             return false;
         }
-    }
-
-    public int getSunPoints() {
-        return sunPoints;
     }
 }

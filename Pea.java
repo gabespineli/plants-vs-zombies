@@ -23,6 +23,10 @@ public class Pea {
         return columnPos;
     }
 
+    public boolean isActive() {
+        return isActive;
+    }
+
     public void move() {
         columnPos += speed;
     }
@@ -51,10 +55,4 @@ public class Pea {
             }
         }
     }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-
 }

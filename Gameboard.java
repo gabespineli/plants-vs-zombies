@@ -20,7 +20,6 @@ public class Gameboard {
 
     public Plant[][] getPlantBoard() { return plantBoard; }
     public ArrayList<Zombie> getAliveZombies() { return aliveZombies; }
-    public ArrayList<Plant> getAlivePlants(){ return alivePlants; }
     public ArrayList<Pea> getActivePeas() { return activePeas; }
     public ArrayList<Sun> getActiveSuns() { return activeSuns; }
 
@@ -44,6 +43,8 @@ public class Gameboard {
         for (Pea pea : activePeas) { pea.updatePea(aliveZombies); }
         generateSun(currentTick);
 
+        for (Sun sun : activeSuns) { sun.updateSun(); }
+
         // REMOVAL PHASE
         for (int i = alivePlants.size() - 1; i >= 0; i--) {
             Plant plant = alivePlants.get(i);
@@ -54,6 +55,8 @@ public class Gameboard {
             }
         }
         activePeas.removeIf(pea -> pea.getColumnPos() > 8 || !pea.isActive());
+        activeSuns.removeIf(sun -> !sun.isActive());
+
 
         // ZOMBIE GENERATION
         if (currentTick <= 180) {

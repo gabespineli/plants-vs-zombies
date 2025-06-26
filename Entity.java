@@ -8,15 +8,6 @@ public class Entity {
         isAlive = true;
     }
 
-    public void takeDamage(int d){
-        if (isAlive)
-            health -= d;
-
-        if (health <= 0) {
-            isAlive = false;
-        }
-    }
-
     public int getHealth(){ return health; }
     public void setHealth(int health) { this.health = health; }
 
@@ -27,4 +18,13 @@ public class Entity {
     public void setRowPos(int rowPos) { this.rowPos = rowPos; }
 
     public boolean isAlive() { return isAlive; }
+
+    public void takeDamage(int d){
+        if (isAlive)
+            health -= d;
+
+        if (health <= 0) {
+            isAlive = false;
+        }
+    }
 }

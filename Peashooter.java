@@ -4,7 +4,7 @@ public class Peashooter extends Plant {
     private int projectileDamage;
     private int directDamage;
     private int RANGE;
-    private static int lastPlacedPeashooter = -9999;
+    private static int lastPlacedPeashooter = 0;
 
     public Peashooter() {
         super();
@@ -33,7 +33,7 @@ public class Peashooter extends Plant {
 
         if (checkActionCooldown()) {
             for (Zombie z : aliveZombies) {
-                if (z.getRowPos() == this.getRowPos()) {
+                if (z.getRowPos() == this.getRowPos() && z.getColumnPos() < RANGE) {
                     if (z.getColumnPos() - this.getColumnPos() >= 4) {
                         pea = new Pea(getColumnPos(), getRowPos(), projectileDamage);
                     } else {

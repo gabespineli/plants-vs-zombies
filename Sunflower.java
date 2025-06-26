@@ -1,5 +1,4 @@
 public class Sunflower extends Plant {
-    private int lastProducedTick;
     private static int lastPlacedSunflower = -9999;
 
     public Sunflower() {

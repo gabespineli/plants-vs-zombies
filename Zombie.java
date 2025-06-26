@@ -4,16 +4,20 @@ public class Zombie extends Entity {
     private int walkInterval;
     private int moveCooldown;
     private int damage;
-    private static int zombieCount = 0;
 
     public Zombie() {
         super();
         setHealth(70);
-        zombieCount++;
         walkInterval = 4;
         moveCooldown = 4;
         damage = 10;
     }
+
+    public int getWalkInterval() { return walkInterval; }
+    public void setWalkInterval(int walkInterval) { this.walkInterval = walkInterval; }
+
+    public int getDamage() { return damage; }
+    public void setDamage(int damage) { this.damage = damage; }
 
     public void updateZombie(ArrayList<Plant> alivePlants){
         for (Plant p : alivePlants){
@@ -46,10 +50,4 @@ public class Zombie extends Entity {
         setColumnPos(getColumnPos() - 1);
         System.out.println("now moved to (" + getRowPos() + "," + getColumnPos() + ")");
     }
-
-    public int getWalkInterval() { return walkInterval; }
-    public void setWalkInterval(int walkInterval) { this.walkInterval = walkInterval; }
-
-    public int getDamage() { return damage; }
-    public void setDamage(int damage) { this.damage = damage; }
 }
