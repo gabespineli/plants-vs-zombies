@@ -25,8 +25,10 @@ public class Player {
      * @param amount the amount of sun points to add
      */
     public void addSun(int amount) {
-        sunPoints += amount;
-        System.out.println("Player collected " + amount + " sun. Total: " + sunPoints);
+        if (amount > 0) {
+            sunPoints += amount;
+            System.out.println("Player collected " + amount + " sun. Total: " + sunPoints);
+        }
     }
 
     /**
