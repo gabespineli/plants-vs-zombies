@@ -64,7 +64,7 @@ public class Gameboard {
         }
     }
     public void addPlant(String name, int row, int column, Player player, int currentTick) {
-        if (!isValidPosition(row, column)) {
+        if (!isValidPosition(row, column) && plantBoard[row][column] != null) {
             System.out.println("Invalid placement position");
             return;
         }
