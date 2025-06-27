@@ -13,7 +13,7 @@ public class Player {
     }
 
     /**
-     * Returns the current sun points of this player.
+     * Gets the current sun points of this player.
      * @return the current sun points
      */
     public int getSunPoints() {
