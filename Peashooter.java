@@ -4,7 +4,7 @@ public class Peashooter extends Plant {
     private int projectileDamage;
     private int directDamage;
     private int RANGE;
-    private static int lastPlacedPeashooter = 0;
+    private static int lastPlacedPeashooter = -9999;
 
     public Peashooter() {
         super();
