@@ -10,8 +10,11 @@ public class Player {
     }
 
     public void addSun(int amount) {
-        sunPoints += amount;
-        System.out.println("Player collected " + amount + " sun. Total: " + sunPoints);
+        if (amount > 0)
+        {
+            sunPoints += amount;
+            System.out.println("Player collected " + amount + " sun. Total: " + sunPoints);
+        }
     }
 
     public boolean buyPlant(Plant p, int currentTick) {
