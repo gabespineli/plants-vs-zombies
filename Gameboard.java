@@ -1,6 +1,7 @@
-import java.util.ArrayList;
-import java.util.Random;
-
+/**
+ * Represents the game board for the Plants vs Zombies game.
+ * Manages plants, zombies, projectiles, and sun objects on the game field.
+ */
 public class Gameboard {
     private Plant[][] plantBoard;
     private ArrayList<Zombie> aliveZombies;
@@ -9,6 +10,9 @@ public class Gameboard {
     private ArrayList<Sun> activeSuns;
     private int lastZombieGeneratedTick;
 
+    /**
+     * Constructs a new Gameboard with empty 5x9 grid and initialized collections.
+     */
     public Gameboard(){
         plantBoard = new Plant[5][9];
         aliveZombies = new ArrayList<>();
@@ -18,11 +22,35 @@ public class Gameboard {
         lastZombieGeneratedTick = 0;
     }
 
+    /**
+     * Returns the plant board grid.
+     * @return the 5x9 plant board array
+     */
     public Plant[][] getPlantBoard() { return plantBoard; }
+
+    /**
+     * Returns the list of alive zombies.
+     * @return the list of alive zombies
+     */
     public ArrayList<Zombie> getAliveZombies() { return aliveZombies; }
+
+    /**
+     * Returns the list of active pea projectiles.
+     * @return the list of active peas
+     */
     public ArrayList<Pea> getActivePeas() { return activePeas; }
+
+    /**
+     * Returns the list of active sun objects.
+     * @return the list of active suns
+     */
     public ArrayList<Sun> getActiveSuns() { return activeSuns; }
 
+    /**
+     * Updates the game state for one tick.
+     * Processes plant actions, zombie movement, projectile updates, and object cleanup.
+     * @param currentTick the current game tick
+     */
     public void updateGame(int currentTick) {
         // ACTION PHASE
         for (Plant plant : alivePlants) {
@@ -63,9 +91,18 @@ public class Gameboard {
             generateZombie(currentTick);
         }
     }
+
+    /**
+     * Adds a plant to the game board at the specified position.
+     * @param name the name of the plant type to add
+     * @param row the row position (0-4)
+     * @param column the column position (0-8)
+     * @param player the player attempting to place the plant
+     * @param currentTick the current game tick
+     */
     public void addPlant(String name, int row, int column, Player player, int currentTick) {
         if (!isValidPosition(row, column) || plantBoard[row][column] != null) {
-            System.out.println("Invalid placement position");
+            System.out.println("Invalid placement position.");
             return;
         }
 
@@ -93,10 +130,20 @@ public class Gameboard {
         System.out.println(name.substring(0, 1).toUpperCase() + name.substring(1) + " planted at inputted position.");
     }
 
+    /**
+     * Checks if the specified position is within the valid game board bounds.
+     * @param row the row position to check
+     * @param column the column position to check
+     * @return true if the position is valid, false otherwise
+     */
     public boolean isValidPosition(int row, int column){
         return (row >= 0 && row < 5 && column >= 0 && column < 9);
     }
 
+    /**
+     * Generates sun objects from the sky at regular intervals.
+     * @param currentTick the current game tick
+     */
     public void generateSun(int currentTick) {
         Random random = new Random();
         if (currentTick % 10 == 0) {
@@ -106,6 +153,12 @@ public class Gameboard {
         }
     }
 
+    /**
+     * Collects all sun objects at the specified position and adds their value to the player.
+     * @param row the row position to collect from
+     * @param column the column position to collect from
+     * @param player the player collecting the sun
+     */
     public void collectSun(int row, int column, Player player) {
         if (!isValidPosition(row, column)) {
             System.out.println("Invalid collection position.");
@@ -131,6 +184,10 @@ public class Gameboard {
         }
     }
 
+    /**
+     * Generates zombies at increasing frequency based on the current game tick.
+     * @param currentTick the current game tick
+     */
     public void generateZombie(int currentTick) {
         Random random = new Random();
         int generationInterval = 0;
