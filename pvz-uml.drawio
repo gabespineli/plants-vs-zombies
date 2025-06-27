@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0" version="27.1.6">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Safari/605.1.15" version="27.1.6">
   <diagram name="Page-1" id="AuNc6BZO7mdUp554OBDK">
-    <mxGraphModel dx="2026" dy="2223" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1064" dy="1722" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -23,7 +23,7 @@
           <mxGeometry x="405" y="-184" width="250" height="154" as="geometry" />
         </mxCell>
         <mxCell id="PaJ-chq4a3PZ1kBQDIKv-57" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Gameboard&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;- plantBoard: Plant[][]&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- aliveZombies: ArrayList&amp;lt;Zombie&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- alivePlants: ArrayList&amp;lt;Plant&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- activePeas: ArrayList&amp;lt;Pea&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- activeSuns: ArrayList&amp;lt;Sun&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- lastZombieGeneratedTick: int&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Gameboard()&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getPlantBoard(): Plant[][]&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getAliveZombies(): ArrayList&amp;lt;Zombie&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getActivePeas(): ArrayList&amp;lt;Pea&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getActiveSuns(): ArrayList&amp;lt;Sun&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;white-space-collapse: preserve;&quot;&gt;+ updateGame(currentTick: int)&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;white-space-collapse: preserve;&quot;&gt;+ addPlant(name: String, row: int, column: int, player: Player, currentTick: int): void&lt;/span&gt;&lt;span style=&quot;white-space-collapse: preserve;&quot;&gt;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;span style=&quot;white-space-collapse: preserve;&quot;&gt;+ isValidPosition(row: int, column: int): boolean&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ generateSun(currentTick: int): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ collectSun(row: int, column: int, player: Player): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ generateZombie(currentTick: int): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="330" y="-570" width="450" height="320" as="geometry" />
+          <mxGeometry x="330" y="-574" width="450" height="320" as="geometry" />
         </mxCell>
         <mxCell id="PaJ-chq4a3PZ1kBQDIKv-58" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Sun&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- columnPos: int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- rowPos: int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- value: int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- isActive: Boolean&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- lifespan: int&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Sun()&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Sun(rowPos: int, columnPos: int)&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Sun(&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;rowPos: int, columnPos: int, value: int)&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getColumnPos(): int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getRowPos(): int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getValue(): int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ isActive(): boolean&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ collected(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ updateSun(): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="850" y="-320" width="250" height="280" as="geometry" />
@@ -32,7 +32,7 @@
           <mxGeometry x="397.5" y="-1024" width="315" height="260" as="geometry" />
         </mxCell>
         <mxCell id="PaJ-chq4a3PZ1kBQDIKv-60" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Game&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- board: Gameboard&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- player: Player&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- currentTick: int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- gameEnded: boolean&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ Game()&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ run(): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- processCommand(input: String): void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- checkWinLose(): boolean&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="40" y="-350" width="220" height="175" as="geometry" />
+          <mxGeometry x="40" y="-390" width="220" height="175" as="geometry" />
         </mxCell>
         <mxCell id="PaJ-chq4a3PZ1kBQDIKv-61" value="Extends" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="PaJ-chq4a3PZ1kBQDIKv-52" target="PaJ-chq4a3PZ1kBQDIKv-54" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
@@ -69,7 +69,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="3ZbpVtES7p8YwIf9wHx--6" value="0..*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="PaJ-chq4a3PZ1kBQDIKv-65">
+        <mxCell id="3ZbpVtES7p8YwIf9wHx--6" value="0..*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="PaJ-chq4a3PZ1kBQDIKv-65" vertex="1" connectable="0">
           <mxGeometry x="-0.9626" y="-1" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
@@ -80,7 +80,7 @@
             <mxPoint x="640" y="-180" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="3ZbpVtES7p8YwIf9wHx--7" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="PaJ-chq4a3PZ1kBQDIKv-66">
+        <mxCell id="3ZbpVtES7p8YwIf9wHx--7" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="PaJ-chq4a3PZ1kBQDIKv-66" vertex="1" connectable="0">
           <mxGeometry x="-0.7595" y="-1" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
@@ -91,7 +91,7 @@
             <mxPoint x="250" y="-340" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="3ZbpVtES7p8YwIf9wHx--8" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="PaJ-chq4a3PZ1kBQDIKv-67">
+        <mxCell id="3ZbpVtES7p8YwIf9wHx--8" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="PaJ-chq4a3PZ1kBQDIKv-67" vertex="1" connectable="0">
           <mxGeometry x="-0.7209" y="1" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
@@ -102,7 +102,7 @@
             <mxPoint x="1080" y="-220" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="3ZbpVtES7p8YwIf9wHx--3" value="0..*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="PaJ-chq4a3PZ1kBQDIKv-68">
+        <mxCell id="3ZbpVtES7p8YwIf9wHx--3" value="0..*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="PaJ-chq4a3PZ1kBQDIKv-68" vertex="1" connectable="0">
           <mxGeometry x="-0.6435" y="2" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
@@ -113,12 +113,12 @@
             <mxPoint x="660" y="-640" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="3ZbpVtES7p8YwIf9wHx--2" value="0..*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="PaJ-chq4a3PZ1kBQDIKv-69">
+        <mxCell id="3ZbpVtES7p8YwIf9wHx--2" value="0..*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="PaJ-chq4a3PZ1kBQDIKv-69" vertex="1" connectable="0">
           <mxGeometry x="-0.8" y="1" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="PaJ-chq4a3PZ1kBQDIKv-70" value="" style="endArrow=open;endFill=1;endSize=12;html=1;rounded=0;fontSize=12;curved=1;exitX=0;exitY=0;exitDx=0;exitDy=0;" parent="1" source="PaJ-chq4a3PZ1kBQDIKv-55" edge="1">
+        <mxCell id="PaJ-chq4a3PZ1kBQDIKv-70" value="" style="endArrow=open;endFill=1;endSize=12;html=1;rounded=0;fontSize=12;curved=1;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;" parent="1" source="PaJ-chq4a3PZ1kBQDIKv-55" edge="1" target="PaJ-chq4a3PZ1kBQDIKv-59">
           <mxGeometry width="160" relative="1" as="geometry">
             <mxPoint x="830" y="-650" as="sourcePoint" />
             <mxPoint x="690" y="-750" as="targetPoint" />
@@ -151,15 +151,26 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="3ZbpVtES7p8YwIf9wHx--4" value="" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;rounded=0;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="PaJ-chq4a3PZ1kBQDIKv-52" target="PaJ-chq4a3PZ1kBQDIKv-57">
+        <mxCell id="3ZbpVtES7p8YwIf9wHx--4" value="" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;rounded=0;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="PaJ-chq4a3PZ1kBQDIKv-52" target="PaJ-chq4a3PZ1kBQDIKv-57" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
             <mxPoint x="1000" y="-350" as="sourcePoint" />
             <mxPoint x="930" y="-410" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="3ZbpVtES7p8YwIf9wHx--5" value="0..45" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="3ZbpVtES7p8YwIf9wHx--4">
+        <mxCell id="3ZbpVtES7p8YwIf9wHx--5" value="0..45" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="3ZbpVtES7p8YwIf9wHx--4" vertex="1" connectable="0">
           <mxGeometry x="-0.6435" y="2" relative="1" as="geometry">
             <mxPoint x="48" y="-2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MxXI_P6NZXwSl6D3AWsm-1" value="" style="endArrow=open;endFill=1;endSize=12;html=1;rounded=0;fontSize=12;curved=1;exitX=0.444;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitPerimeter=0;" edge="1" parent="1" source="PaJ-chq4a3PZ1kBQDIKv-57" target="PaJ-chq4a3PZ1kBQDIKv-56">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="637" y="-220" as="sourcePoint" />
+            <mxPoint x="510" y="-344" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MxXI_P6NZXwSl6D3AWsm-2" value="collects Sun" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" vertex="1" connectable="0" parent="MxXI_P6NZXwSl6D3AWsm-1">
+          <mxGeometry x="0.0637" y="4" relative="1" as="geometry">
+            <mxPoint x="-4" y="-5" as="offset" />
           </mxGeometry>
         </mxCell>
       </root>
