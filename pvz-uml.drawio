@@ -184,11 +184,6 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="ZfKq3tj_nBvWxNU4gl4f-4" value="produces" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" vertex="1" connectable="0" parent="ZfKq3tj_nBvWxNU4gl4f-3">
-          <mxGeometry x="0.0066" y="1" relative="1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="ZfKq3tj_nBvWxNU4gl4f-6" value="buys" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" vertex="1" connectable="0" parent="ZfKq3tj_nBvWxNU4gl4f-3">
           <mxGeometry x="-0.9698" y="-1" relative="1" as="geometry">
             <mxPoint as="offset" />
