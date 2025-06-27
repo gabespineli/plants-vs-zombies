@@ -1,14 +1,16 @@
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Scanner;
-import java.io.BufferedReader;
-
+/**
+ * Main game controller for the Plants vs Zombies game.
+ * Manages the game loop, user input, and game state.
+ */
 public class Game {
     private Gameboard board;
     private Player player;
     private int currentTick;
     private boolean gameEnded;
 
+    /**
+     * Constructs a new Game with default initial state.
+     */
     public Game() {
         board = new Gameboard();
         player = new Player();
@@ -16,6 +18,11 @@ public class Game {
         gameEnded = false;
     }
 
+    /**
+     * Starts and runs the main game loop.
+     * Handles game ticks, user input, and game state updates.
+     * @throws IOException if an I/O error occurs during input reading
+     */
     public void run() throws IOException {
         Scanner scanner = new Scanner(System.in);
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -79,6 +86,11 @@ public class Game {
         scanner.close();
     }
 
+    /**
+     * Processes a command string entered by the player.
+     * Supports plant placement and sun collection commands.
+     * @param input the command string to process
+     */
     private void processCommand(String input) {
         if (input.isEmpty()) return;
 
@@ -111,6 +123,10 @@ public class Game {
         }
     }
 
+    /**
+     * Checks if the game has reached a win or lose condition.
+     * @return true if the game should end, false otherwise
+     */
     private boolean checkWinLose() {
         for (Zombie z : board.getAliveZombies()) {
             if (z.getColumnPos() < 0) {
