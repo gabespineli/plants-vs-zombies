@@ -24,16 +24,12 @@ public class Sun {
         this.value = value;
     }
 
-    public int getColumnPos(){
-        return columnPos;
-    }
-    public int getRowPos(){
-        return rowPos;
-    }
+    public int getColumnPos(){ return columnPos; }
+    public int getRowPos(){ return rowPos; }
     public int getValue(){ return value; }
     public boolean isActive(){ return isActive; }
+    
     public void collected() { isActive = false; }
-
     public void updateSun(){
         if (lifespan > 0){
             lifespan--;
