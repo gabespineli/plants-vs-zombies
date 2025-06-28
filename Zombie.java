@@ -1,9 +1,9 @@
+import java.util.ArrayList;
+
 /**
  * Represents a zombie entity that moves toward plants and attacks them.
  * Extends Entity and provides zombie-specific behavior including movement, attack patterns, and interaction with plants.
  */
-import java.util.ArrayList;
-
 public class Zombie extends Entity {
     private int walkInterval;
     private int moveCooldown;
