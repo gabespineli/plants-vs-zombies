@@ -59,20 +59,6 @@ import java.util.ArrayList;
     }
 
     /**
-     * Updates the pea's state by checking for collisions and moving if active.
-     * Checks for collision before and after movement to ensure if there is a zombie in the current and next tile.
-     * @param aliveZombies the list of alive zombies to check for collisions
-     */
-    public void updatePea(ArrayList<Zombie> aliveZombies){
-        checkCollision(aliveZombies);
-
-        if (isActive) {
-            move();
-            checkCollision(aliveZombies);
-        }
-    }
-
-    /**
      * Checks if a zombie and pea is in the same tile.
      * If a collision is detected, damages the zombie and turns isActive to false.
      * Prints a message depending on the life status of a zombie after taking damage.
@@ -91,6 +77,20 @@ import java.util.ArrayList;
                 isActive = false;
                 break;
             }
+        }
+    }
+
+    /**
+     * Updates the pea's state by checking for collisions and moving if active.
+     * Checks for collision before and after movement to ensure if there is a zombie in the current and next tile.
+     * @param aliveZombies the list of alive zombies to check for collisions
+     */
+    public void updatePea(ArrayList<Zombie> aliveZombies){
+        checkCollision(aliveZombies);
+
+        if (isActive) {
+            move();
+            checkCollision(aliveZombies);
         }
     }
 }

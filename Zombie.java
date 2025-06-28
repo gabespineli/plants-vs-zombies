@@ -22,28 +22,6 @@ public class Zombie extends Entity {
     }
 
     /**
-     * Updates the zombie's state by checking for plants to attack or moving.
-     * If a plant is at the same position, attacks it instead of moving.
-     * Otherwise, reduces move cooldown and moves when cooldown reaches 0.
-     * @param alivePlants the list of alive plants to check for attacks
-     */
-    public void updateZombie(ArrayList<Plant> alivePlants){
-        for (Plant p : alivePlants){
-            if (p.getRowPos() == this.getRowPos() && p.getColumnPos() == this.getColumnPos()){
-                attack(p);
-                return;
-            }
-        }
-
-        moveCooldown--;
-
-        if (moveCooldown == 0){
-            move();
-            moveCooldown = walkInterval;
-        }
-    }
-
-    /**
      * Attacks the specified plant, dealing damage to it.
      * Prints appropriate messages based on whether the plant survives or dies.
      * @param p the plant to attack
@@ -66,5 +44,27 @@ public class Zombie extends Entity {
         System.out.print("Zombie previously in (" + getRowPos() + "," + getColumnPos() + "), ");
         setColumnPos(getColumnPos() - 1);
         System.out.println("now moved to (" + getRowPos() + "," + getColumnPos() + ")");
+    }
+
+    /**
+     * Updates the zombie's state by checking for plants to attack or moving.
+     * If a plant is at the same position, attacks it instead of moving.
+     * Otherwise, reduces move cooldown and moves when cooldown reaches 0.
+     * @param alivePlants the list of alive plants to check for attacks
+     */
+    public void updateZombie(ArrayList<Plant> alivePlants){
+        for (Plant p : alivePlants){
+            if (p.getRowPos() == this.getRowPos() && p.getColumnPos() == this.getColumnPos()){
+                attack(p);
+                return;
+            }
+        }
+
+        moveCooldown--;
+
+        if (moveCooldown == 0){
+            move();
+            moveCooldown = walkInterval;
+        }
     }
 }
