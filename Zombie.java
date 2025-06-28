@@ -43,6 +43,11 @@ public class Zombie extends Entity {
         }
     }
 
+    /**
+     * Attacks the specified plant, dealing damage to it.
+     * Prints appropriate messages based on whether the plant survives or dies.
+     * @param p the plant to attack
+     */
     private void attack(Plant p) {
         p.takeDamage(damage);
         if (p.isAlive()) {
@@ -53,6 +58,10 @@ public class Zombie extends Entity {
         }
     }
 
+    /**
+     * Moves the zombie one column to the left (toward the player's base).
+     * Prints the zombie's previous and new positions.
+     */
     private void move() {
         System.out.print("Zombie previously in (" + getRowPos() + "," + getColumnPos() + "), ");
         setColumnPos(getColumnPos() - 1);
