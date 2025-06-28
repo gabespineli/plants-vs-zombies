@@ -1,11 +1,10 @@
-/**
- * Represents the game board for the Plants vs Zombies game.
- * Manages plants, zombies, projectiles, and sun objects on the game field.
- */
-
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Represents the game board for the Plants vs Zombies game.
+ * Manages plants, zombies, projectiles (peas), and sun objects on the game field.
+ */
 public class Gameboard {
     private Plant[][] plantBoard;
     private ArrayList<Zombie> aliveZombies;
