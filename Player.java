@@ -1,6 +1,5 @@
 /**
- * Represents a player in the Plants vs Zombies game.
- * Manages sun points and plant purchasing operations.
+ * Represents a player in the Plants vs Zombies game. Manages sun points and plant purchasing operations.
  */
 public class Player {
     private int sunPoints;
@@ -32,8 +31,7 @@ public class Player {
     }
 
     /**
-     * Attempts to purchase the specified plant for the player.
-     * Checks plant count limits, placement cooldowns, and sufficient sun points.
+     * Attempts to purchase the specified plant for the player. Checks plant count limits, placement cooldowns, and sufficient sun points.
      * @param p the plant to purchase
      * @param currentTick the current game tick
      * @return true if the plant was successfully purchased, false otherwise
