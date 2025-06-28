@@ -4,8 +4,7 @@ import java.util.Scanner;
 import java.io.BufferedReader;
 
 /**
- * Main game controller for the Plants vs Zombies game.
- * Manages the game loop, user input, and game state.
+ * Main game controller for the Plants vs Zombies game. Manages the game loop, user input, and game state.
  */
 public class Game {
     private Gameboard board;
@@ -24,8 +23,7 @@ public class Game {
     }
 
     /**
-     * Starts and runs the main game loop.
-     * Handles game ticks, user input, and game state updates.
+     * Starts and runs the main game loop. Handles game ticks, user input, and game state updates.
      * @throws IOException if an I/O error occurs during input reading
      */
     public void run() throws IOException {
@@ -92,8 +90,7 @@ public class Game {
     }
 
     /**
-     * Processes a command string entered by the player.
-     * Supports plant placement and sun collection commands.
+     * Processes a command string entered by the player. Supports plant placement and sun collection commands.
      * @param input the command string to process
      */
     private void processCommand(String input) {
