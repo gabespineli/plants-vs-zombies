@@ -1,3 +1,7 @@
+/**
+ * Represents a zombie entity that moves toward plants and attacks them.
+ * Extends Entity and provides zombie-specific behavior including movement, attack patterns, and interaction with plants.
+ */
 import java.util.ArrayList;
 
 public class Zombie extends Entity {
@@ -5,6 +9,10 @@ public class Zombie extends Entity {
     private int moveCooldown;
     private int damage;
 
+    /**
+     * Constructs a new Zombie with default stats.
+     * Sets health to 70, walk interval to 4, and damage to 10.
+     */
     public Zombie() {
         super();
         setHealth(70);
@@ -13,12 +21,12 @@ public class Zombie extends Entity {
         damage = 10;
     }
 
-    public int getWalkInterval() { return walkInterval; }
-    public void setWalkInterval(int walkInterval) { this.walkInterval = walkInterval; }
-
-    public int getDamage() { return damage; }
-    public void setDamage(int damage) { this.damage = damage; }
-
+    /**
+     * Updates the zombie's state by checking for plants to attack or moving.
+     * If a plant is at the same position, attacks it instead of moving.
+     * Otherwise, reduces move cooldown and moves when cooldown reaches 0.
+     * @param alivePlants the list of alive plants to check for attacks
+     */
     public void updateZombie(ArrayList<Plant> alivePlants){
         for (Plant p : alivePlants){
             if (p.getRowPos() == this.getRowPos() && p.getColumnPos() == this.getColumnPos()){
@@ -35,7 +43,7 @@ public class Zombie extends Entity {
         }
     }
 
-    public void attack(Plant p) {
+    private void attack(Plant p) {
         p.takeDamage(damage);
         if (p.isAlive()) {
             System.out.println("Zombie at (" + this.getRowPos() + "," + this.getColumnPos() + ") attacked " + p.getPlantType() + " at (" + p.getRowPos() + "," + p.getColumnPos() + ") (Plant HP: " + p.getHealth() + ")");
@@ -45,7 +53,7 @@ public class Zombie extends Entity {
         }
     }
 
-    public void move() {
+    private void move() {
         System.out.print("Zombie previously in (" + getRowPos() + "," + getColumnPos() + "), ");
         setColumnPos(getColumnPos() - 1);
         System.out.println("now moved to (" + getRowPos() + "," + getColumnPos() + ")");

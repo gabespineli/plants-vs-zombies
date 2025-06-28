@@ -54,7 +54,7 @@ import java.util.ArrayList;
      * Moves the pea forward depending on its speed value.
      * Increases the column position by the speed amount.
      */
-    public void move() {
+    private void move() {
         columnPos += speed;
     }
 

@@ -2,6 +2,11 @@
  * Main game controller for the Plants vs Zombies game.
  * Manages the game loop, user input, and game state.
  */
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Scanner;
+import java.io.BufferedReader;
+
 public class Game {
     private Gameboard board;
     private Player player;
