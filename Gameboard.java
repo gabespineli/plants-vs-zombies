@@ -2,8 +2,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Represents the game board for the Plants vs Zombies game.
- * Manages plants, zombies, projectiles (peas), and sun objects on the game field.
+ * Represents the game board for the Plants vs Zombies game. Manages plants, zombies, projectiles (peas), and sun objects on the game field.
  */
 public class Gameboard {
     private Plant[][] plantBoard;
@@ -50,8 +49,7 @@ public class Gameboard {
     public ArrayList<Sun> getActiveSuns() { return activeSuns; }
 
     /**
-     * Updates the game state for one tick.
-     * Processes plant actions, zombie movement, projectile updates, and object cleanup.
+     * Updates the game state for one tick. Processes plant actions, zombie movement, projectile updates, and object cleanup.
      * @param currentTick the current game tick
      */
     public void updateGame(int currentTick) {
