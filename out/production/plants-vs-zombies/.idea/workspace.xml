@@ -5,10 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1564d4ee-b086-4c54-a53a-30a91f4b9f04" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Program/DriverPVZ.java" beforeDir="false" afterPath="$PROJECT_DIR$/Program/DriverPVZ.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Program/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/Program/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Program/Gameboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/Program/Gameboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Program/Sun.java" beforeDir="false" afterPath="$PROJECT_DIR$/Program/Sun.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PvZGUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PvZGUIDriver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/Program/DriverPVZ.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/Program/Entity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/Program/Game.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/Program/Gameboard.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/Program/Pea.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/Program/Peashooter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/Program/Plant.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/Program/Player.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/Program/Sun.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/Program/Sunflower.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/Program/Zombie.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/pvz-uml.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/pvz-uml.drawio" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +50,9 @@
     &quot;accountId&quot;: &quot;181afe12-e6b4-436b-9cd9-2d1f8f0c4036&quot;
   }
 }</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/DriverPVZ.java" root0="SKIP_INSPECTION" />
+  </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -48,27 +64,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.DormDriver.executor&quot;: &quot;Run&quot;,
-    &quot;Application.DriverPVZ.executor&quot;: &quot;Run&quot;,
-    &quot;Application.test.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Gab/Documents/GitHub/plants-vs-zombies&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.DormDriver.executor": "Run",
+    "Application.DriverPVZ.executor": "Run",
+    "Application.PvZGUIDriver.executor": "Run",
+    "Application.test.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "C:/Users/Gab/Documents/GitHub/plants-vs-zombies",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -95,7 +112,10 @@
       <workItem from="1750483617403" duration="1959000" />
       <workItem from="1750498084206" duration="9531000" />
       <workItem from="1750641737845" duration="33183000" />
-      <workItem from="1750755427271" duration="1253000" />
+      <workItem from="1750755427271" duration="10013000" />
+      <workItem from="1751433826663" duration="9000" />
+      <workItem from="1751954659681" duration="2052000" />
+      <workItem from="1751974016851" duration="1400000" />
     </task>
     <servers />
   </component>
