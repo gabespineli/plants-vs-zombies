@@ -1,36 +1,48 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class PvZGUI extends JFrame{
+public class PvZGUI extends JFrame {
     private CardLayout cardLayout;
-    private JPanel mainPanel;
+    private JPanel mainContainer;
+    private StartingScreen startingScreen;
+    private MainMenu mainMenu;
+    private StartingScreenController startingScreenController;
 
     public PvZGUI() {
-        super("Plants vs Zombies");
-        setLayout(new BorderLayout());
-        setSize(670, 503);
-        setVisible(true);
+        initializeFrame();
+        initializeComponents();
+        setupLayout();
+    }
+
+    private void initializeFrame() {
+        setTitle("Plants vs Zombies");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
-        setLocationRelativeTo(null);
-
-        initComponents();
+        setLocation(100,100);
     }
 
-    private void initComponents() {
+    private void initializeComponents() {
         cardLayout = new CardLayout();
-        mainPanel = new JPanel(cardLayout);
+        mainContainer = new JPanel(cardLayout);
 
-        mainPanel.add(new StartingScreen(this), "start");
-        mainPanel.add(new MainMenu(this), "menu");
-        mainPanel.add(new GamePanel(this), "game");
+        startingScreen = new StartingScreen();
+        startingScreenController = new StartingScreenController(startingScreen, this);
 
-        this.add(mainPanel, BorderLayout.CENTER);
+        mainMenu = new MainMenu();
 
-        cardLayout.show(mainPanel, "start");
+        mainContainer.add(startingScreen, "start");
+        mainContainer.add(mainMenu, "menu");
+
+
+        add(mainContainer);
     }
 
-    public void showScreen(String prompt) {
-        cardLayout.show(mainPanel, prompt);
+    private void setupLayout() {
+        pack();
+        cardLayout.show(mainContainer, "start");
+    }
+
+    public void showScreen(String screenName) {
+        cardLayout.show(mainContainer, screenName);
     }
 }

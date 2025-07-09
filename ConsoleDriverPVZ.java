@@ -1,7 +1,7 @@
 import java.io.IOException;
 import java.util.Scanner;
 
-public class DriverPVZ {
+public class ConsoleDriverPVZ {
     public void displayBoard(Gameboard board) {
         System.out.println("\nCurrent Board:");
 

@@ -8,7 +8,7 @@ import java.io.BufferedReader;
  */
 public class Game {
     private Gameboard board;
-    private Player player;
+    private final Player player;
     private int currentTick;
     private boolean gameEnded;
 
@@ -29,7 +29,7 @@ public class Game {
     public void run() throws IOException {
         Scanner scanner = new Scanner(System.in);
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        DriverPVZ ui = new DriverPVZ();
+        ConsoleDriverPVZ ui = new ConsoleDriverPVZ();
         final int TICK_INTERVAL = 1000;
 
         long lastTick = System.currentTimeMillis();

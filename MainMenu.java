@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainMenu extends JPanel {
-    public MainMenu(PvZGUI parent) {
+    public MainMenu() {
         setLayout(new BorderLayout());
 
         //background
