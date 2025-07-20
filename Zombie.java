@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 /**
- * Represents a zombie entity that moves toward plants and attacks them.
+ * Represents a zombie entity that moves toward plants and attacks them. shesh
  * Extends Entity and provides zombie-specific behavior including movement, attack patterns, and interaction with plants.
  */
 public class Zombie extends Entity {
