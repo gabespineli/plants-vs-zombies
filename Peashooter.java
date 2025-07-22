@@ -6,9 +6,9 @@ import java.util.ArrayList;
  * Has different damage values for close-range and long-range attacks.
  */
  public class Peashooter extends Plant {
-    private int projectileDamage;
-    private int directDamage;
-    private int RANGE;
+    protected int projectileDamage;
+    protected int directDamage;
+    protected int RANGE;
     private static int lastPlacedPeashooter = -9999;
 
     /**
@@ -18,13 +18,13 @@ import java.util.ArrayList;
      */
     public Peashooter() {
         super();
-        setHealth(200);
-        setCost(100);
-        setPlacementCooldown(3);
-        setActionCooldown(0);
-        setCooldown(2);
-        setPlantType("Peashooter");
-        projectileDamage = 7;
+        health = 300;
+        cost = 100;
+        placementCooldown = 8;
+        actionCooldown = 0;
+        cooldown = 2;
+        plantType = "Peashooter";
+        projectileDamage = 20;
         directDamage = 2 * projectileDamage;
         RANGE = 9;
     }
@@ -62,11 +62,11 @@ import java.util.ArrayList;
 
         if (checkActionCooldown()) {
             for (Zombie z : aliveZombies) {
-                if (z.getRowPos() == this.getRowPos() && z.getColumnPos() < RANGE) {
-                    if (z.getColumnPos() - this.getColumnPos() >= 4) {
-                        pea = new Pea(getColumnPos(), getRowPos(), projectileDamage);
+                if (z.getRowPos() == rowPos && z.getColumnPos() < RANGE) {
+                    if (z.getColumnPos() - columnPos >= 4) {
+                        pea = new Pea(columnPos, rowPos, projectileDamage);
                     } else {
-                        pea = new Pea(getColumnPos(), getRowPos(), directDamage);
+                        pea = new Pea(columnPos, rowPos, directDamage);
                     }
                     resetActionCooldown(getCooldown());
                     return pea;

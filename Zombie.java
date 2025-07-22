@@ -1,13 +1,16 @@
 import java.util.ArrayList;
 
 /**
- * Represents a zombie entity that moves toward plants and attacks them. shesh
+ * Represents a zombie entity that moves toward plants and attacks them.
  * Extends Entity and provides zombie-specific behavior including movement, attack patterns, and interaction with plants.
  */
 public class Zombie extends Entity {
     private int walkInterval;
     private int moveCooldown;
+    private int attackCooldown;
     private int damage;
+    private boolean isFrozen;
+    private int frozenTime;
 
     /**
      * Constructs a new Zombie with default stats.
@@ -15,10 +18,12 @@ public class Zombie extends Entity {
      */
     public Zombie() {
         super();
-        setHealth(70);
-        walkInterval = 4;
-        moveCooldown = 4;
-        damage = 10;
+        health = 181;
+        walkInterval = 5;
+        moveCooldown = 5;
+        attackCooldown = 1;
+        damage = 100;
+        isFrozen = false;
     }
 
     /**
@@ -53,6 +58,10 @@ public class Zombie extends Entity {
      * @param alivePlants the list of alive plants to check for attacks
      */
     public void updateZombie(ArrayList<Plant> alivePlants){
+        if (frozenTime == 0){
+            walkInterval /= 2;
+            moveCooldown /= 2;
+        }
         for (Plant p : alivePlants){
             if (p.getRowPos() == this.getRowPos() && p.getColumnPos() == this.getColumnPos()){
                 attack(p);
@@ -66,5 +75,14 @@ public class Zombie extends Entity {
             move();
             moveCooldown = walkInterval;
         }
+    }
+
+    public void slowDown() {
+        if (isFrozen = false){
+            walkInterval *= 2;
+            moveCooldown *= 2;
+            isFrozen = true;
+        }
+        frozenTime = 5;
     }
 }

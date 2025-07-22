@@ -3,17 +3,18 @@
  * Extends Entity and provides plant-specific functionality including cost, cooldown management, and plant type identification.
  */
  public class Plant extends Entity {
-    private int cost;
-    private int placementCooldown;
-    private int actionCooldown;
-    private int Cooldown;
-    private String plantType;
-    private static int plantCount = 0;
+    protected int cost;
+    protected int placementCooldown;
+    protected int actionCooldown;
+    protected int cooldown;
+    protected String plantType;
+    protected static int plantCount = 0;
 
     /**
      * Constructs a new Plant.
      * Calls the parent Entity constructor.
      */
+
     public Plant() {
         super();
     }
@@ -75,13 +76,13 @@
      * Gets the base cooldown value for this plant's actions.
      * @return the base cooldown in ticks
      */
-    public int getCooldown() { return Cooldown; }
+    public int getCooldown() { return cooldown; }
 
     /**
      * Sets the base cooldown value for this plant's actions.
      * @param Cooldown the base cooldown in ticks
      */
-    public void setCooldown(int Cooldown) { this.Cooldown = Cooldown; }
+    public void setCooldown(int Cooldown) { this.cooldown = Cooldown; }
 
     /**
      * Reduces the action cooldown by 1 if it's greater than 0.

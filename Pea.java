@@ -5,11 +5,11 @@ import java.util.ArrayList;
  * Handles movement of pea, collision detection, and damage dealing to zombies.
  */
  public class Pea {
-    private int columnPos;
-    private int rowPos;
-    private boolean isActive;
-    private int damage;
-    private int speed;
+    protected int columnPos;
+    protected int rowPos;
+    protected boolean isActive;
+    protected int damage;
+    protected int speed;
 
     /**
      * Constructs a new pea with specified position and damage based on the Peashooter.
@@ -54,7 +54,7 @@ import java.util.ArrayList;
      * Moves the pea forward depending on its speed value.
      * Increases the column position by the speed amount.
      */
-    private void move() {
+    protected void move() {
         columnPos += speed;
     }
 

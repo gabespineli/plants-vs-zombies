@@ -3,10 +3,10 @@
  * Helps manage attributes like health, position, and life state.
  */
 public class Entity {
-    private int health;
-    private int columnPos;
-    private int rowPos;
-    private boolean isAlive;
+    protected int health;
+    protected int columnPos;
+    protected int rowPos;
+    protected boolean isAlive;
 
 
     /**
