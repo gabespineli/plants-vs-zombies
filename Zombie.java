@@ -5,12 +5,12 @@ import java.util.ArrayList;
  * Extends Entity and provides zombie-specific behavior including movement, attack patterns, and interaction with plants.
  */
 public class Zombie extends Entity {
-    private int walkInterval;
-    private int moveCooldown;
-    private int attackCooldown;
-    private int damage;
-    private boolean isFrozen;
-    private int frozenTime;
+    protected double walkInterval;
+    protected double moveCooldown;
+    protected int attackCooldown;
+    protected int damage;
+    protected boolean isFrozen;
+    protected int frozenTime;
 
     /**
      * Constructs a new Zombie with default stats.
@@ -19,8 +19,8 @@ public class Zombie extends Entity {
     public Zombie() {
         super();
         health = 181;
-        walkInterval = 5;
-        moveCooldown = 5;
+        walkInterval = 4.7;
+        moveCooldown = 4.7;
         attackCooldown = 1;
         damage = 100;
         isFrozen = false;
@@ -31,7 +31,7 @@ public class Zombie extends Entity {
      * Prints appropriate messages based on whether the plant survives or dies.
      * @param p the plant to attack
      */
-    private void attack(Plant p) {
+    protected void attack(Plant p) {
         p.takeDamage(damage);
         if (p.isAlive()) {
             System.out.println("Zombie at (" + this.getRowPos() + "," + this.getColumnPos() + ") attacked " + p.getPlantType() + " at (" + p.getRowPos() + "," + p.getColumnPos() + ") (Plant HP: " + p.getHealth() + ")");
@@ -45,9 +45,9 @@ public class Zombie extends Entity {
      * Moves the zombie one column to the left (toward the player's base).
      * Prints the zombie's previous and new positions.
      */
-    private void move() {
+    protected void move() {
         System.out.print("Zombie previously in (" + getRowPos() + "," + getColumnPos() + "), ");
-        setColumnPos(getColumnPos() - 1);
+        columnPos -= 1;
         System.out.println("now moved to (" + getRowPos() + "," + getColumnPos() + ")");
     }
 
@@ -61,6 +61,7 @@ public class Zombie extends Entity {
         if (frozenTime == 0){
             walkInterval /= 2;
             moveCooldown /= 2;
+            attackCooldown /= 2;
         }
         for (Plant p : alivePlants){
             if (p.getRowPos() == this.getRowPos() && p.getColumnPos() == this.getColumnPos()){
@@ -81,6 +82,7 @@ public class Zombie extends Entity {
         if (isFrozen = false){
             walkInterval *= 2;
             moveCooldown *= 2;
+            attackCooldown *= 2;
             isFrozen = true;
         }
         frozenTime = 5;

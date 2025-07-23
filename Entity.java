@@ -4,8 +4,8 @@
  */
 public class Entity {
     protected int health;
-    protected int columnPos;
-    protected int rowPos;
+    protected double columnPos;
+    protected double rowPos;
     protected boolean isAlive;
 
 
@@ -32,7 +32,7 @@ public class Entity {
      * Gets the current column position of the entity.
      * @return the column position
      */
-    public int getColumnPos() { return columnPos; }
+    public double getColumnPos() { return columnPos; }
 
     /**
      * Sets the column position of the entity.
@@ -44,7 +44,7 @@ public class Entity {
      * Gets the current row position of the entity.
      * @return the row position
      */
-    public int getRowPos() { return rowPos; }
+    public double getRowPos() { return rowPos; }
 
     /**
      * Sets the row position of the entity.
