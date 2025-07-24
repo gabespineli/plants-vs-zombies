@@ -9,6 +9,7 @@
     protected int cooldown;
     protected String plantType;
     protected static int plantCount = 0;
+    protected int columnPos;
 
     /**
      * Constructs a new Plant.
@@ -108,5 +109,13 @@
      */
     public void resetActionCooldown(int cd){
         actionCooldown = cd;
+    }
+
+    public int getColumnPos() {
+        return columnPos;
+    }
+
+    public void setColumnPos(int column) {
+       this.columnPos = column;
     }
 }

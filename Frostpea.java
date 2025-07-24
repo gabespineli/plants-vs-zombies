@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Frostpea extends Pea {
 
-    public Frostpea(double column, double row, double damage){
+    public Frostpea(double column, int row, int damage){
         super(column, row, damage);
     }
 

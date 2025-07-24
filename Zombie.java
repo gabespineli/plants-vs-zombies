@@ -87,4 +87,12 @@ public class Zombie extends Entity {
         }
         frozenTime = 5;
     }
+
+    public double getColumnPos() {
+        return columnPos;
+    }
+
+    public void setColumnPos(double column) {
+        this.columnPos = column;
+    }
 }

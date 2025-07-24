@@ -4,7 +4,6 @@
  */
 public class Entity {
     protected int health;
-    protected double columnPos;
     protected int rowPos;
     protected boolean isAlive;
 
@@ -27,19 +26,6 @@ public class Entity {
      * @param health the new health value to set
      */
     public void setHealth(int health) { this.health = health; }
-
-    /**
-     * Gets the current column position of the entity.
-     *
-     * @return the column position
-     */
-    public double getColumnPos() { return columnPos; }
-
-    /**
-     * Sets the column position of the entity.
-     * @param columnPos the new column position
-     */
-    public void setColumnPos(int columnPos) { this.columnPos = columnPos; }
 
     /**
      * Gets the current row position of the entity.

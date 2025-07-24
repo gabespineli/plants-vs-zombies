@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * Handles movement of pea, collision detection, and damage dealing to zombies.
  */
  public class Pea {
-    protected int columnPos;
+    protected double columnPos;
     protected int rowPos;
     protected boolean isActive;
     protected int damage;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
      * @param row the initial row position
      * @param damage the damage this pea will deal on impact
      */
-    public Pea(double column, double row, double damage){
+    public Pea(double column, int row, int damage){
         columnPos = column;
         rowPos = row;
         isActive = true;
@@ -38,7 +38,7 @@ import java.util.ArrayList;
      * Gets the column position of the pea.
      * @return the column position
      */
-    public int getColumnPos() {
+    public double getColumnPos() {
         return columnPos;
     }
 
