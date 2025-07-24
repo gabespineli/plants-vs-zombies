@@ -11,7 +11,7 @@ public class Zombie extends Entity {
     protected int damage;
     protected boolean isFrozen;
     protected int frozenTime;
-
+    protected double columnPos;
     /**
      * Constructs a new Zombie with default stats.
      * Sets health to 70, walk interval to 4, and damage to 10.
@@ -79,7 +79,7 @@ public class Zombie extends Entity {
     }
 
     public void slowDown() {
-        if (isFrozen = false){
+        if (!isFrozen){
             walkInterval *= 2;
             moveCooldown *= 2;
             attackCooldown *= 2;
