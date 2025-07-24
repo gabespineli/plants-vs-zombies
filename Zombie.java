@@ -5,8 +5,7 @@ import java.util.ArrayList;
  * Extends Entity and provides zombie-specific behavior including movement, attack patterns, and interaction with plants.
  */
 public class Zombie extends Entity {
-    protected double walkInterval;
-    protected double moveCooldown;
+    protected double msPerTile;
     protected int attackCooldown;
     protected int damage;
     protected boolean isFrozen;
@@ -19,8 +18,7 @@ public class Zombie extends Entity {
     public Zombie() {
         super();
         health = 181;
-        walkInterval = 4.7;
-        moveCooldown = 4.7;
+        msPerTile = 4700;
         attackCooldown = 1;
         damage = 100;
         isFrozen = false;
@@ -47,7 +45,7 @@ public class Zombie extends Entity {
      */
     protected void move() {
         System.out.print("Zombie previously in (" + getRowPos() + "," + getColumnPos() + "), ");
-        columnPos -= 1;
+        columnPos -= 100/msPerTile;
         System.out.println("now moved to (" + getRowPos() + "," + getColumnPos() + ")");
     }
 
@@ -59,8 +57,7 @@ public class Zombie extends Entity {
      */
     public void updateZombie(ArrayList<Plant> alivePlants){
         if (frozenTime == 0){
-            walkInterval /= 2;
-            moveCooldown /= 2;
+            msPerTile /= 2;
             attackCooldown /= 2;
         }
         for (Plant p : alivePlants){
@@ -70,18 +67,12 @@ public class Zombie extends Entity {
             }
         }
 
-        moveCooldown--;
-
-        if (moveCooldown == 0){
-            move();
-            moveCooldown = walkInterval;
-        }
+        move();
     }
 
     public void slowDown() {
         if (!isFrozen){
-            walkInterval *= 2;
-            moveCooldown *= 2;
+            msPerTile *= 2;
             attackCooldown *= 2;
             isFrozen = true;
         }

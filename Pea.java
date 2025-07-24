@@ -9,7 +9,7 @@ import java.util.ArrayList;
     protected int rowPos;
     protected boolean isActive;
     protected int damage;
-    protected int speed;
+    protected double msPerTile;
 
     /**
      * Constructs a new pea with specified position and damage based on the Peashooter.
@@ -23,7 +23,7 @@ import java.util.ArrayList;
         rowPos = row;
         isActive = true;
         this.damage = damage;
-        speed = 1;
+        msPerTile = 250;
     }
 
     /**
@@ -55,7 +55,7 @@ import java.util.ArrayList;
      * Increases the column position by the speed amount.
      */
     protected void move() {
-        columnPos += speed;
+        columnPos += msPerTile;
     }
 
     /**

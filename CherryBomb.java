@@ -28,31 +28,7 @@ public class CherryBomb extends Plant {
 
         if (checkActionCooldown()) {
             for (Zombie z : aliveZombies) {
-                if (z.getRowPos() == rowPos-1 && z.getColumnPos() == columnPos-1) {
-                    z.takeDamage(damage);
-                }
-                else if (z.getRowPos() == rowPos-1 && z.getColumnPos() == columnPos) {
-                    z.takeDamage(damage);
-                }
-                else if (z.getRowPos() == rowPos-1 && z.getColumnPos() == columnPos+1) {
-                    z.takeDamage(damage);
-                }
-                else if (z.getRowPos() == rowPos && z.getColumnPos() == columnPos-1) {
-                    z.takeDamage(damage);
-                }
-                else if (z.getRowPos() == rowPos && z.getColumnPos() == columnPos) {
-                    z.takeDamage(damage);
-                }
-                else if (z.getRowPos() == rowPos && z.getColumnPos() == columnPos+1) {
-                    z.takeDamage(damage);
-                }
-                else if (z.getRowPos() == rowPos+1 && z.getColumnPos() == columnPos-1) {
-                    z.takeDamage(damage);
-                }
-                else if (z.getRowPos() == rowPos+1 && z.getColumnPos() == columnPos) {
-                    z.takeDamage(damage);
-                }
-                else if (z.getRowPos() == rowPos+1 && z.getColumnPos() == columnPos+1) {
+                if (z.getRowPos() >= rowPos-1 && z.getRowPos() <= rowPos+1 && z.getColumnPos() >= columnPos-1 && z.getColumnPos() <= columnPos+1) {
                     z.takeDamage(damage);
                 }
             }
