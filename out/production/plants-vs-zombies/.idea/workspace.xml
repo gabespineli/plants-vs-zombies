@@ -52,6 +52,7 @@
   &quot;keyToString&quot;: {
     &quot;Application.DormDriver.executor&quot;: &quot;Run&quot;,
     &quot;Application.DriverPVZ.executor&quot;: &quot;Run&quot;,
+    &quot;Application.GUIDriverPVZ.executor&quot;: &quot;Run&quot;,
     &quot;Application.PvZGUIDriver.executor&quot;: &quot;Run&quot;,
     &quot;Application.test.executor&quot;: &quot;Run&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
@@ -100,7 +101,13 @@
       <workItem from="1751433826663" duration="9000" />
       <workItem from="1751954659681" duration="2052000" />
       <workItem from="1751974016851" duration="5320000" />
-      <workItem from="1752028621050" duration="1217000" />
+      <workItem from="1752028621050" duration="22272000" />
+      <workItem from="1752456714035" duration="52000" />
+      <workItem from="1753013279567" duration="1279000" />
+      <workItem from="1753023265776" duration="35000" />
+      <workItem from="1753084123304" duration="3617000" />
+      <workItem from="1753178409579" duration="1215000" />
+      <workItem from="1753278224095" duration="178000" />
     </task>
     <servers />
   </component>

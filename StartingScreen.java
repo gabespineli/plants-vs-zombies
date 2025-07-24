@@ -1,51 +1,33 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.io.IOException;
 
-public class StartingScreen extends JPanel {
+public class StartingScreen extends BackgroundPanel {
     private static final int PROGRESS_BAR_WIDTH = 150;
     private static final int PROGRESS_BAR_HEIGHT = 20;
     private static final int BUTTON_WIDTH = 150;
     private static final int BUTTON_HEIGHT = 40;
     private static final String BACKGROUND_PATH = "assets/background/StartingScreen.png";
+    private static final Dimension PANEL_SIZE = new Dimension(680, 500);
     
     private JButton continueButton;
     private JProgressBar progressBar;
-    private BufferedImage backgroundImage;
 
     public StartingScreen() {
-        setLayout(null);
-        setOpaque(false);
-        loadBackgroundImage();
+        super(BACKGROUND_PATH, PANEL_SIZE);
         initializeComponents();
-    }
-
-    private void loadBackgroundImage() {
-        try {
-            backgroundImage = ImageIO.read(new File(BACKGROUND_PATH));
-        } catch (IOException e) {
-            System.err.println("Failed to load background image: " + e.getMessage());
-        }
     }
 
     private void initializeComponents() {
         initializeProgressBar();
         initializeContinueButton();
-        add(progressBar);
-        add(continueButton);
+        layoutComponents();
     }
 
     private void initializeProgressBar() {
         progressBar = new JProgressBar();
         progressBar.setValue(0);
         progressBar.setStringPainted(true);
-
-        int xPosition = (getPreferredSize().width - PROGRESS_BAR_WIDTH) / 2;
-        progressBar.setBounds(xPosition, 350, PROGRESS_BAR_WIDTH, PROGRESS_BAR_HEIGHT);
     }
 
     private void initializeContinueButton() {
@@ -53,49 +35,31 @@ public class StartingScreen extends JPanel {
         continueButton.setEnabled(false);
         continueButton.setFont(new Font("Arial", Font.BOLD, 16));
         continueButton.setFocusPainted(false);
-
-        int xPosition = (getPreferredSize().width - BUTTON_WIDTH) / 2;
-        continueButton.setBounds(xPosition, 400, BUTTON_WIDTH, BUTTON_HEIGHT);
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        drawBackground(g);
+    private void layoutComponents() {
+        setLayout(null);
+        int xProgressBar = (getPreferredSize().width - PROGRESS_BAR_WIDTH) / 2;
+        int xButton = (getPreferredSize().width - BUTTON_WIDTH) / 2;
+
+        progressBar.setBounds(xProgressBar, 350, PROGRESS_BAR_WIDTH, PROGRESS_BAR_HEIGHT);
+        continueButton.setBounds(xButton, 400, BUTTON_WIDTH, BUTTON_HEIGHT);
+
+        add(progressBar);
+        add(continueButton);
     }
 
-    private void drawBackground(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
-        
-        if (backgroundImage != null) {
-            g2d.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), null);
-        } else {
-            g2d.setColor(Color.BLACK);
-            g2d.fillRect(0, 0, getWidth(), getHeight());
-        }
-    }
-
-    @Override
-    public Dimension getPreferredSize() {
-        return new Dimension(670, 503);
-    }
-
-    public void setActionListener(ActionListener listener) {
+    public void setupButton(ActionListener listener, String actionCommand) {
         continueButton.addActionListener(listener);
+        continueButton.setActionCommand(actionCommand);
     }
 
-    public void setButtonEnabled(boolean enabled) {
+    public void updateButton(boolean enabled, String text) {
         continueButton.setEnabled(enabled);
-    }
-
-    public void setButtonText(String text) {
         continueButton.setText(text);
     }
 
-    public void setProgressValue(int value) {
+    public void updateProgress(int value) {
         progressBar.setValue(value);
-    }
-    public void setButtonActionCommand(String command) {
-        continueButton.setActionCommand(command);
     }
 }
