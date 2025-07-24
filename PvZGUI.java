@@ -44,7 +44,7 @@ public class PvZGUI extends JFrame {
 
     private void setupLayout() {
         pack();
-        cardLayout.show(mainContainer, "start");
+        cardLayout.show(mainContainer, "game");
     }
 
     public void showScreen(String screenName) {
