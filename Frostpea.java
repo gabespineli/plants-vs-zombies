@@ -2,11 +2,12 @@ import java.util.ArrayList;
 
 public class Frostpea extends Pea {
 
-    public Frostpea(int column, int row, int damage){
+    public Frostpea(double column, double row, double damage){
         super(column, row, damage);
     }
 
-    private void checkCollision(ArrayList<Zombie> aliveZombies) {
+    @Override
+    protected void checkCollision(ArrayList<Zombie> aliveZombies) {
         for (Zombie z : aliveZombies){
             if (z.getRowPos() == rowPos && z.getColumnPos() == columnPos){
                 z.takeDamage(damage);
@@ -21,15 +22,6 @@ public class Frostpea extends Pea {
                 isActive = false;
                 break;
             }
-        }
-    }
-
-    public void updateFrostpea(ArrayList<Zombie> aliveZombies){
-        checkCollision(aliveZombies);
-
-        if (isActive) {
-            move();
-            checkCollision(aliveZombies);
         }
     }
 }

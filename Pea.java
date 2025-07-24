@@ -18,7 +18,7 @@ import java.util.ArrayList;
      * @param row the initial row position
      * @param damage the damage this pea will deal on impact
      */
-    public Pea(int column, int row, int damage){
+    public Pea(double column, double row, double damage){
         columnPos = column;
         rowPos = row;
         isActive = true;
@@ -64,7 +64,7 @@ import java.util.ArrayList;
      * Prints a message depending on the life status of a zombie after taking damage.
      * @param aliveZombies the list of alive zombies to check for collisions
      */
-    private void checkCollision(ArrayList<Zombie> aliveZombies) {
+    protected void checkCollision(ArrayList<Zombie> aliveZombies) {
         for (Zombie z : aliveZombies){
             if (z.getRowPos() == rowPos && z.getColumnPos() == columnPos){
                 z.takeDamage(damage);
