@@ -4,29 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1564d4ee-b086-4c54-a53a-30a91f4b9f04" name="Changes" comment="">
+    <list default="true" id="eba511f6-a85a-41c3-bf74-14e9dc6e3eaa" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/GameView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameViewListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/plants/sunflower.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/GamePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gameboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gameboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ImageButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/ImageButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GamePanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PvZGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/PvZGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/packets/CherryBomb.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/packets/cherrybomb.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/packets/Peashooter.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/packets/peashooter.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/packets/PotatoMine.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/packets/potatomine.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/packets/SnowPea.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/packets/snowpea.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/packets/Sunflower.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/packets/sunflower.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/packets/Wallnut.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/packets/wallnut.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/CherryBomb.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/CherryBomb.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/FlagZombie.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/FlagZombie.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plants/peashooter.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/plants/peashooter.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/GameController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/GamePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/GamePanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/Gameboard.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/Gameboard.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/ImageButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/ImageButton.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/Pea.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/Pea.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/Polevault.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/Polevault.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/GamePanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/Player.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/PvZGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/PvZGUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/Zombie.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/Zombie.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/assets/plants/peashooter.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/assets/plants/peashooter.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/pvz-uml.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/pvz-uml.drawio" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,92 +45,62 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/gabespineli/plants-vs-zombies.git&quot;,
-    &quot;accountId&quot;: &quot;181afe12-e6b4-436b-9cd9-2d1f8f0c4036&quot;
+    &quot;accountId&quot;: &quot;48846465-0cf8-4cb4-930a-94b39cf57d2a&quot;
   }
 }</component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/DriverPVZ.java" root0="SKIP_INSPECTION" />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
-  </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 8
+  &quot;associatedIndex&quot;: 5
 }</component>
-  <component name="ProjectId" id="2yLe9b0JS1nkdbYANFGB6NaxnGw" />
+  <component name="ProjectId" id="2ypIbyPMymYQ1QrHzVI7oPKatYa" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.DormDriver.executor&quot;: &quot;Run&quot;,
-    &quot;Application.DriverPVZ.executor&quot;: &quot;Run&quot;,
-    &quot;Application.GUIDriverPVZ.executor&quot;: &quot;Run&quot;,
-    &quot;Application.PvZGUIDriver.executor&quot;: &quot;Run&quot;,
-    &quot;Application.SnapToGridExample.executor&quot;: &quot;Run&quot;,
-    &quot;Application.test.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Gab/Documents/GitHub/plants-vs-zombies&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propCompiler&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.DriverPVZ.executor": "Run",
+    "Application.GUIDriverPVZ.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "/Users/GabEspineli/Documents/GitHub/plants-vs-zombies/assets/plants",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/plants" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Gab\Documents\GitHub\plants-vs-zombies\assets\plants" />
-      <recent name="C:\Users\Gab\Documents\GitHub\plants-vs-zombies\assets\button" />
-      <recent name="C:\Users\Gab\Documents\GitHub\plants-vs-zombies\assets\background" />
+      <recent name="$PROJECT_DIR$/assets/plants" />
     </key>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.23774.435" />
-        <option value="bundled-js-predefined-d6986cc7102b-f27c65a3e318-JavaScript-IU-251.23774.435" />
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.26094.121" />
+        <option value="bundled-js-predefined-d6986cc7102b-b26f3e71634d-JavaScript-IU-251.26094.121" />
       </set>
     </attachedChunks>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="1564d4ee-b086-4c54-a53a-30a91f4b9f04" name="Changes" comment="" />
-      <created>1749618130448</created>
+      <changelist id="eba511f6-a85a-41c3-bf74-14e9dc6e3eaa" name="Changes" comment="" />
+      <created>1750525162947</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1749618130448</updated>
-      <workItem from="1749618133702" duration="416000" />
-      <workItem from="1749642034948" duration="377000" />
-      <workItem from="1749646196492" duration="5408000" />
-      <workItem from="1749654432639" duration="6726000" />
-      <workItem from="1749691353980" duration="6880000" />
-      <workItem from="1749989074930" duration="15272000" />
-      <workItem from="1750414045178" duration="418000" />
-      <workItem from="1750414480966" duration="918000" />
-      <workItem from="1750483617403" duration="1959000" />
-      <workItem from="1750498084206" duration="9531000" />
-      <workItem from="1750641737845" duration="33183000" />
-      <workItem from="1750755427271" duration="10013000" />
-      <workItem from="1751433826663" duration="9000" />
-      <workItem from="1751954659681" duration="2052000" />
-      <workItem from="1751974016851" duration="5320000" />
-      <workItem from="1752028621050" duration="22272000" />
-      <workItem from="1752456714035" duration="52000" />
-      <workItem from="1753013279567" duration="1279000" />
-      <workItem from="1753023265776" duration="35000" />
-      <workItem from="1753084123304" duration="3617000" />
-      <workItem from="1753178409579" duration="1215000" />
-      <workItem from="1753278224095" duration="39063000" />
-      <workItem from="1753421111322" duration="1151000" />
+      <updated>1750525162947</updated>
+      <workItem from="1750525164317" duration="476000" />
+      <workItem from="1750596586782" duration="774000" />
+      <workItem from="1750599063649" duration="1024000" />
+      <workItem from="1750691604912" duration="542000" />
+      <workItem from="1753436275210" duration="6719000" />
     </task>
     <servers />
   </component>

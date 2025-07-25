@@ -6,10 +6,11 @@ public class PvZGUI extends JFrame {
     private JPanel mainContainer;
     private StartingScreen startingScreen;
     private MainMenu mainMenu;
-    private GamePanel gamePanel;
+    private GameView gameView;
     private StartingScreenController startingScreenController;
     private MainMenuController mainMenuController;
     private GameController gameController;
+    private GameViewListener gameViewListener;
 
     public PvZGUI() {
         initializeFrame();
@@ -34,13 +35,13 @@ public class PvZGUI extends JFrame {
         mainMenu = new MainMenu();
         mainMenuController = new MainMenuController(mainMenu, this);
 
-        gamePanel = new GamePanel();
-        gameController = new GameController(gamePanel, this);
-        gamePanel.setController(gameController);
+        gameView = new GameView();
+        gameController = new GameController(gameView, this);
+        gameViewListener = new GameViewListener(gameView, gameController);
 
         mainContainer.add(startingScreen, "start");
         mainContainer.add(mainMenu, "menu");
-        mainContainer.add(gamePanel, "game");
+        mainContainer.add(gameView, "game");
 
         add(mainContainer);
     }
