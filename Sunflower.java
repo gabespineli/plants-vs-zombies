@@ -43,7 +43,7 @@ public class Sunflower extends Plant {
         reduceActionCooldown();
         Sun sun;
         if (checkActionCooldown()) {
-            sun = new Sun(rowPos, columnPos, 25);
+            sun = new Sun(rowPos, columnPos+0.5, 25);
             resetActionCooldown(getCooldown());
             System.out.println("Sunflower at (" + rowPos + "," + columnPos + ") produced " + sun.getValue() + " sun!");
             return sun;

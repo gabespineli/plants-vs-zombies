@@ -119,6 +119,7 @@ public class Gameboard {
         Plant p = switch(name.toLowerCase()) {
             case "sunflower" -> new Sunflower();
             case "peashooter" -> new Peashooter();
+            case "cherrybomb" -> new CherryBomb();
             default -> null;
 
         };
@@ -133,7 +134,7 @@ public class Gameboard {
         }
 
         p.setRowPos(row);
-        p.setColumnPos(column);
+        p.setColumnPos(column+0.5);
         alivePlants.add(p);
         plantBoard[row][column] = p;
         Plant.incrementPlantCount();
