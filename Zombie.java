@@ -10,7 +10,6 @@ public class Zombie extends Entity {
     protected int damage;
     protected boolean isFrozen;
     protected int frozenTime;
-    protected double columnPos;
     /**
      * Constructs a new Zombie with default stats.
      * Sets health to 70, walk interval to 4, and damage to 10.
@@ -32,10 +31,10 @@ public class Zombie extends Entity {
     protected void attack(Plant p) {
         p.takeDamage(damage);
         if (p.isAlive()) {
-            System.out.println("Zombie at (" + this.getRowPos() + "," + this.getColumnPos() + ") attacked " + p.getPlantType() + " at (" + p.getRowPos() + "," + p.getColumnPos() + ") (Plant HP: " + p.getHealth() + ")");
+            System.out.println("Zombie at (" + rowPos + "," + columnPos + ") attacked " + p.getPlantType() + " at (" + p.getRowPos() + "," + p.getColumnPos() + ") (Plant HP: " + p.getHealth() + ")");
         }
         else {
-            System.out.println("Zombie at (" + this.getRowPos() + "," + this.getColumnPos() + ") has killed " + p.getPlantType() + " at (" + p.getRowPos() + "," + p.getColumnPos() + ")");
+            System.out.println("Zombie at (" + rowPos + "," + columnPos + ") has killed " + p.getPlantType() + " at (" + p.getRowPos() + "," + p.getColumnPos() + ")");
         }
     }
 
@@ -61,29 +60,12 @@ public class Zombie extends Entity {
             attackCooldown /= 2;
         }
         for (Plant p : alivePlants){
-            if (p.getRowPos() == this.getRowPos() && p.getColumnPos() == this.getColumnPos()){
+            if (p.getRowPos() == rowPos && p.getColumnPos()-0.3 >= columnPos && p.getColumnPos()+0.3 <= columnPos){
                 attack(p);
                 return;
             }
         }
 
         move();
-    }
-
-    public void slowDown() {
-        if (!isFrozen){
-            msPerTile *= 2;
-            attackCooldown *= 2;
-            isFrozen = true;
-        }
-        frozenTime = 5;
-    }
-
-    public double getColumnPos() {
-        return columnPos;
-    }
-
-    public void setColumnPos(double column) {
-        this.columnPos = column;
     }
 }

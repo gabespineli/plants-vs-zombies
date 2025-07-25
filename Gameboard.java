@@ -67,6 +67,10 @@ public class Gameboard {
                     activePeas.add(newPea);
                 }
             }
+
+            else if (plant instanceof CherryBomb cb) {
+                cb.updateCheery(aliveZombies);
+            }
         }
         for (Zombie zombie : aliveZombies) { zombie.updateZombie(alivePlants); }
         for (Pea pea : activePeas) { pea.updatePea(aliveZombies); }
@@ -79,7 +83,7 @@ public class Gameboard {
             Plant plant = alivePlants.get(i);
             if (!plant.isAlive()) {
                 // Clear from the board grid
-                plantBoard[plant.getRowPos()][plant.getColumnPos()] = null;
+                plantBoard[plant.getRowPos()][(int) plant.getColumnPos()] = null;
                 alivePlants.remove(i);
             }
         }

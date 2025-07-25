@@ -26,7 +26,7 @@ public class CherryBomb extends Plant {
     public void updateCheery(ArrayList<Zombie> aliveZombies) {
         reduceActionCooldown();
 
-        if (checkActionCooldown()) {
+        if (actionCooldown == 0) {
             for (Zombie z : aliveZombies) {
                 if (z.getRowPos() >= rowPos-1 && z.getRowPos() <= rowPos+1 && z.getColumnPos() >= columnPos-1 && z.getColumnPos() <= columnPos+1) {
                     z.takeDamage(damage);
