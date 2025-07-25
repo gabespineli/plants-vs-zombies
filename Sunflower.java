@@ -11,11 +11,11 @@ public class Sunflower extends Plant {
      */
     public Sunflower() {
         super();
-        health = 300;
+        health = 30;
         cost = 50;
-        placementCooldown = 8;
-        actionCooldown = 24;
-        cooldown = 24;
+        placementCooldown = 8000;
+        actionCooldown = 24000;
+        cooldown = 24000;
         plantType = "Sunflower";
     }
 
@@ -42,9 +42,9 @@ public class Sunflower extends Plant {
     public Sun updateSunflower(){
         reduceActionCooldown();
         Sun sun;
-        if (checkActionCooldown()) {
+        if (actionCooldown == 0) {
             sun = new Sun(rowPos, columnPos+0.5, 25);
-            resetActionCooldown(getCooldown());
+            actionCooldown = cooldown;
             System.out.println("Sunflower at (" + rowPos + "," + columnPos + ") produced " + sun.getValue() + " sun!");
             return sun;
         }

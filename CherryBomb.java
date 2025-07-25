@@ -6,13 +6,13 @@ public class CherryBomb extends Plant {
 
     public CherryBomb() {
         super();
-        health = 300;
+        health = 30;
         cost = 150;
         placementCooldown = 50;
-        actionCooldown = 1;
-        cooldown = 1;
+        actionCooldown = 1000;
+        cooldown = 1000;
         plantType = "Cherry Bomb";
-        damage = 1800;
+        damage = 700;
     }
 
     public static int getLastPlacedCherry() {

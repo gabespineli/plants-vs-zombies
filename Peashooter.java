@@ -18,13 +18,13 @@ import java.util.ArrayList;
      */
     public Peashooter() {
         super();
-        health = 300;
+        health = 30;
         cost = 100;
-        placementCooldown = 8;
+        placementCooldown = 7500;
         actionCooldown = 0;
-        cooldown = 2;
+        cooldown = 1425;
         plantType = "Peashooter";
-        projectileDamage = 20;
+        projectileDamage = 7;
         directDamage = 2 * projectileDamage;
         RANGE = 9;
     }
@@ -60,7 +60,7 @@ import java.util.ArrayList;
         reduceActionCooldown();
         Pea pea;
 
-        if (checkActionCooldown()) {
+        if (actionCooldown <= 0) {
             for (Zombie z : aliveZombies) {
                 if (z.getRowPos() == rowPos && z.getColumnPos() < RANGE) {
                     if (z.getColumnPos() - columnPos >= 4) {
@@ -68,7 +68,7 @@ import java.util.ArrayList;
                     } else {
                         pea = new Pea(columnPos, rowPos, directDamage);
                     }
-                    resetActionCooldown(getCooldown());
+                    actionCooldown = cooldown;
                     return pea;
                 }
             }

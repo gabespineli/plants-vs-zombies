@@ -8,7 +8,7 @@
     protected int actionCooldown;
     protected int cooldown;
     protected String plantType;
-    protected static int plantCount = 0;
+    private static int plantCount = 0;
 
     /**
      * Constructs a new Plant.
@@ -38,12 +38,6 @@
     public int getCost() { return cost; }
 
     /**
-     * Sets the cost required to place this plant.
-     * @param cost the cost of the plant
-     */
-    public void setCost(int cost) { this.cost = cost; }
-
-    /**
      * Gets the placement cooldown for this plant type.
      * @return the placement cooldown in ticks
      */
@@ -56,34 +50,11 @@
     public String getPlantType() { return plantType; }
 
     /**
-     * Gets the base cooldown value for this plant's actions.
-     * @return the base cooldown in ticks
-     */
-    public int getCooldown() { return cooldown; }
-
-    /**
      * Reduces the action cooldown by 1 if it's greater than 0.
      * Should be called each game tick to manage cooldowns.
      */
     public void reduceActionCooldown(){
         if (actionCooldown > 0)
-            actionCooldown--;
-    }
-
-    /**
-     * Checks if the plant can perform its action.
-     * @return true if action cooldown is 0, false otherwise
-     */
-    public boolean checkActionCooldown(){
-        return actionCooldown == 0;
-    }
-
-    /**
-     * Resets the action cooldown to the specified value.
-     * Typically called after performing an action.
-     * @param cd the cooldown value to reset to
-     */
-    public void resetActionCooldown(int cd){
-        actionCooldown = cd;
+            actionCooldown -= 100;
     }
 }
