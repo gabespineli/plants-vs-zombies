@@ -6,9 +6,9 @@ import java.util.ArrayList;
  * Has different damage values for close-range and long-range attacks.
  */
  public class Peashooter extends Plant {
-    protected int projectileDamage;
-    protected int directDamage;
-    protected int RANGE;
+    private int projectileDamage;
+    private int directDamage;
+    private final int RANGE;
     private static int lastPlacedPeashooter = -9999;
 
     /**

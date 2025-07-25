@@ -5,10 +5,10 @@ import java.util.ArrayList;
  * Extends Entity and provides zombie-specific behavior including movement, attack patterns, and interaction with plants.
  */
 public class Zombie extends Entity {
-    protected int msPerTile;
-    protected int attackCooldown;
-    protected int damage;
-    protected Armor armor;
+    private int msPerTile;
+    private int attackCooldown;
+    private int damage;
+    private Armor armor;
     /**
      * Constructs a new Zombie with default stats.
      * Sets health to 70, walk interval to 4, and damage to 10.
@@ -52,7 +52,7 @@ public class Zombie extends Entity {
      * Prints appropriate messages based on whether the plant survives or dies.
      * @param p the plant to attack
      */
-    protected void attack(Plant p) {
+    private void attack(Plant p) {
         p.takeDamage(damage);
         if (p.isAlive()) {
             System.out.println("Zombie at (" + rowPos + "," + columnPos + ") attacked " + p.getPlantType() + " at (" + p.getRowPos() + "," + p.getColumnPos() + ") (Plant HP: " + p.getHealth() + ")");
@@ -66,7 +66,7 @@ public class Zombie extends Entity {
      * Moves the zombie one column to the left (toward the player's base).
      * Prints the zombie's previous and new positions.
      */
-    protected void move() {
+    private void move() {
         System.out.print("Zombie previously in (" + getRowPos() + "," + getColumnPos() + "), ");
         columnPos -= 100/msPerTile;
         System.out.println("now moved to (" + getRowPos() + "," + getColumnPos() + ")");
