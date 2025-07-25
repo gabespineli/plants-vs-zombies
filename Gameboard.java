@@ -101,10 +101,15 @@ public class Gameboard {
      * @param player the player attempting to place the plant
      * @param currentTick the current game tick
      */
-    public void addPlant(String name, int row, int column, Player player, int currentTick) {
-        if (!isValidPosition(row, column) || plantBoard[row][column] != null) {
+    public boolean addPlant(String name, int row, int column, Player player, int currentTick) {
+        if (!isValidPosition(row, column)) {
             System.out.println("Invalid placement position.");
-            return;
+            return false;
+        }
+
+        if (isOccupied(row, column)) {
+            System.out.println("Placement is occupied.");
+            return false;
         }
 
         Plant p = switch(name.toLowerCase()) {
@@ -116,11 +121,11 @@ public class Gameboard {
 
         if (p == null) {
             System.out.println("Invalid plant name.");
-            return;
+            return false;
         }
 
         if (!player.buyPlant(p, currentTick)) {
-            return;
+            return false;
         }
 
         p.setRowPos(row);
@@ -128,7 +133,8 @@ public class Gameboard {
         alivePlants.add(p);
         plantBoard[row][column] = p;
         Plant.incrementPlantCount();
-        System.out.println(name.substring(0, 1).toUpperCase() + name.substring(1) + " planted at inputted position.");
+        System.out.println(name.substring(0, 1).toUpperCase() + name.substring(1) + " planted at " + row + "," + column + " position.");
+        return true;
     }
 
     /**
@@ -153,6 +159,8 @@ public class Gameboard {
             System.out.println("The sky dropped a sun at (" + sun.getRowPos() + ", " + sun.getColumnPos() + ")");
         }
     }
+
+    public boolean isOccupied(int row, int column) { return plantBoard[row][column] != null; }
 
     /**
      * Collects all sun objects at the specified position and adds their value to the player.

@@ -36,6 +36,7 @@ public class PvZGUI extends JFrame {
 
         gamePanel = new GamePanel();
         gameController = new GameController(gamePanel, this);
+        gamePanel.setController(gameController);
 
         mainContainer.add(startingScreen, "start");
         mainContainer.add(mainMenu, "menu");

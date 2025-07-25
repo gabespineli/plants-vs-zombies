@@ -4,49 +4,63 @@ import java.awt.event.ActionListener;
 public class GameController implements ActionListener {
     private final GamePanel view;
     private final PvZGUI gui;
-    private Player player;
-
+    private final Gameboard gameboard;
+    private final Player player;
+    private int currentTick = 0;
 
     public GameController(GamePanel view, PvZGUI gui) {
         this.view = view;
         this.gui = gui;
+        gameboard = new Gameboard();
         player = new Player();
-        view.setActionListener(this);
+
         updateSunPointsDisplay();
     }
 
-    private void updateSunPointsDisplay() {
-        view.updateSunPoints(player.getSunPoints());
+    public void placePlantOnBoard(String plantType, int row, int col) {
+        // First check if placement is valid in the model
+        if (gameboard.addPlant(plantType, row, col, player, currentTick)) {
+            // If successful, update the view with the GIF
+            view.placePlant(plantType, row, col);
+            updateSunPointsDisplay();
+        }
     }
 
+    public void updateBoardDisplay() {
+        Plant[][] plantBoard = gameboard.getPlantBoard();
+        view.clearBoard();
+
+        // Update with current state
+        for (int row = 0; row < plantBoard.length; row++) {
+            for (int col = 0; col < plantBoard[row].length; col++) {
+                Plant plant = plantBoard[row][col];
+                if (plant != null) {
+                    String plantType = getPlantType(plant);
+                    view.placePlant(plantType, row, col);
+                }
+            }
+        }
+    }
+
+    private String getPlantType(Plant plant) {
+        if (plant instanceof Sunflower) return "sunflower";
+        if (plant instanceof Peashooter) return "peashooter";
+        // Add other plant types as needed
+        return "";
+    }
+
+
+    private int getCurrentTick() {
+        return currentTick;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
-        switch (command) {
-            case "peashooter" -> {
-                System.out.println(command);
-            }
-            case "sunflower" -> {
-                System.out.println(command);
-            }
-            case "cherrybomb" -> {
-                System.out.println(command);
-            }
-            case "wallnut" -> {
-                System.out.println(command);
-            }
-            case "potatomine" -> {
-                System.out.println(command);
-            }
-            case "snowpea" -> {
-                System.out.println(command);
-            }
-            case "shovel" -> {
-                System.out.println(command);
-            }
-            default -> System.err.println("Invalid command: " + command);
-        }
+        //System.out.println(command);
+    }
 
+    private void updateSunPointsDisplay() {
+        view.updateSunPoints(player.getSunPoints());
     }
 }

@@ -13,12 +13,14 @@ public class ImageButton extends JButton {
     public ImageButton(String imagePath, String actionCommand, int width, int height) {
         this.width = width;
         this.height = height;
-        
-        setContentAreaFilled(false);
+
+        setOpaque(false);
+        setVisible(true);
+        setContentAreaFilled(true);
         setBorderPainted(false);
         setFocusPainted(false);
         setActionCommand(actionCommand);
-        
+
         try {
             buttonImage = ImageIO.read(new File(imagePath));
         } catch (IOException e) {
