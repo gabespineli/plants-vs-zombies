@@ -5,22 +5,46 @@ import java.util.ArrayList;
  * Extends Entity and provides zombie-specific behavior including movement, attack patterns, and interaction with plants.
  */
 public class Zombie extends Entity {
-    protected double msPerTile;
+    protected int msPerTile;
     protected int attackCooldown;
     protected int damage;
-    protected boolean isFrozen;
-    protected int frozenTime;
+    protected Armor armor;
     /**
      * Constructs a new Zombie with default stats.
      * Sets health to 70, walk interval to 4, and damage to 10.
      */
     public Zombie() {
         super();
-        health = 181;
-        msPerTile = 4700;
+        health = 70;
+        msPerTile = 4000;
         attackCooldown = 1;
-        damage = 100;
-        isFrozen = false;
+        damage = 10;
+        armor = null;
+    }
+
+    public Zombie(Armor armor) {
+        super();
+        health = 70;
+        msPerTile = 4000;
+        attackCooldown = 1;
+        damage = 10;
+        this.armor = armor;
+    }
+
+    public void setDamage(int d) {
+        damage = d;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setMsPerTile(int ms) {
+        msPerTile = ms;
+    }
+
+    public int getMsPerTile() {
+        return msPerTile;
     }
 
     /**
@@ -55,17 +79,29 @@ public class Zombie extends Entity {
      * @param alivePlants the list of alive plants to check for attacks
      */
     public void updateZombie(ArrayList<Plant> alivePlants){
-        if (frozenTime == 0){
-            msPerTile /= 2;
-            attackCooldown /= 2;
-        }
         for (Plant p : alivePlants){
             if (p.getRowPos() == rowPos && p.getColumnPos()-0.3 >= columnPos && p.getColumnPos()+0.3 <= columnPos){
                 attack(p);
                 return;
             }
         }
-
         move();
+    }
+
+    @Override
+    public void takeDamage(int d){
+        if (armor.isActive()){
+            armor.takeDamage(d);
+            if (!armor.isActive()) {
+                armor = null;
+            }
+        }
+
+        if (isAlive)
+            health -= d;
+
+        if (health <= 0) {
+            isAlive = false;
+        }
     }
 }
