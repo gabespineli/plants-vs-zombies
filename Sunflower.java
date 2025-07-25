@@ -14,8 +14,8 @@ public class Sunflower extends Plant {
         health = 30;
         cost = 50;
         placementCooldown = 8000;
-        actionCooldown = 24000;
-        cooldown = 24000;
+        actionCooldown = 24250;
+        cooldown = 24250;
         plantType = "Sunflower";
     }
 

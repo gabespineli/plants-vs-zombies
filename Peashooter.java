@@ -22,7 +22,7 @@ import java.util.ArrayList;
         cost = 100;
         placementCooldown = 7500;
         actionCooldown = 0;
-        cooldown = 1425;
+        cooldown = 1500;
         plantType = "Peashooter";
         projectileDamage = 7;
         directDamage = 2 * projectileDamage;
