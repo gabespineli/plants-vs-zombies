@@ -4,7 +4,7 @@
  * Has a limited lifespan and can be collected by the player.
  */
  public class Sun {
-    private int columnPos;
+    private double columnPos;
     private int rowPos;
     private int value;
     private boolean isActive;
@@ -37,7 +37,7 @@
      * @param columnPos the column position where the sun appears
      * @param value the sun value/worth
      */
-    public Sun(int rowPos, int columnPos, int value) {
+    public Sun(int rowPos, double columnPos, int value) {
         this();
         this.rowPos = rowPos;
         this.columnPos = columnPos;
@@ -48,7 +48,7 @@
      * Gets the column position of the sun.
      * @return the column position
      */
-    public int getColumnPos(){ return columnPos; }
+    public double getColumnPos(){ return columnPos; }
 
     /**
      * Gets the row position of the sun.
