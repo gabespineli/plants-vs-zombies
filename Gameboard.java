@@ -142,6 +142,16 @@ public class Gameboard {
         return true;
     }
 
+    public void removePlant(int row, int col) {
+        for (int i = alivePlants.size() - 1; i >= 0; i--) {
+            Plant plant = alivePlants.get(i);
+            if (plant == plantBoard[row][col]){
+                alivePlants.remove(i);
+                plantBoard[row][col] = null;
+            }
+        }
+    }
+
     /**
      * Checks if the specified position is within the valid game board bounds.
      * @param row the row position to check
