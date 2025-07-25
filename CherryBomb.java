@@ -6,13 +6,13 @@ public class CherryBomb extends Plant {
 
     public CherryBomb() {
         super();
-        health = 300;
+        health = 30;
         cost = 150;
         placementCooldown = 50;
-        actionCooldown = 1;
-        cooldown = 1;
+        actionCooldown = 1000;
+        cooldown = 1000;
         plantType = "Cherry Bomb";
-        damage = 1800;
+        damage = 700;
     }
 
     public static int getLastPlacedCherry() {
@@ -26,7 +26,7 @@ public class CherryBomb extends Plant {
     public void updateCheery(ArrayList<Zombie> aliveZombies) {
         reduceActionCooldown();
 
-        if (checkActionCooldown()) {
+        if (actionCooldown == 0) {
             for (Zombie z : aliveZombies) {
                 if (z.getRowPos() >= rowPos-1 && z.getRowPos() <= rowPos+1 && z.getColumnPos() >= columnPos-1 && z.getColumnPos() <= columnPos+1) {
                     z.takeDamage(damage);

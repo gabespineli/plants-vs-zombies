@@ -67,6 +67,10 @@ public class Gameboard {
                     activePeas.add(newPea);
                 }
             }
+
+            else if (plant instanceof CherryBomb cb) {
+                cb.updateCheery(aliveZombies);
+            }
         }
         for (Zombie zombie : aliveZombies) { zombie.updateZombie(alivePlants); }
         for (Pea pea : activePeas) { pea.updatePea(aliveZombies); }
@@ -79,7 +83,7 @@ public class Gameboard {
             Plant plant = alivePlants.get(i);
             if (!plant.isAlive()) {
                 // Clear from the board grid
-                plantBoard[plant.getRowPos()][plant.getColumnPos()] = null;
+                plantBoard[plant.getRowPos()][(int) plant.getColumnPos()] = null;
                 alivePlants.remove(i);
             }
         }
@@ -115,6 +119,7 @@ public class Gameboard {
         Plant p = switch(name.toLowerCase()) {
             case "sunflower" -> new Sunflower();
             case "peashooter" -> new Peashooter();
+            case "cherrybomb" -> new CherryBomb();
             default -> null;
 
         };
@@ -129,12 +134,22 @@ public class Gameboard {
         }
 
         p.setRowPos(row);
-        p.setColumnPos(column);
+        p.setColumnPos(column+0.5);
         alivePlants.add(p);
         plantBoard[row][column] = p;
         Plant.incrementPlantCount();
         System.out.println(name.substring(0, 1).toUpperCase() + name.substring(1) + " planted at " + row + "," + column + " position.");
         return true;
+    }
+
+    public void removePlant(int row, int col) {
+        for (int i = alivePlants.size() - 1; i >= 0; i--) {
+            Plant plant = alivePlants.get(i);
+            if (plant == plantBoard[row][col]){
+                alivePlants.remove(i);
+                plantBoard[row][col] = null;
+            }
+        }
     }
 
     /**

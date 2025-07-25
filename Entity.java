@@ -5,6 +5,7 @@
 public class Entity {
     protected int health;
     protected int rowPos;
+    protected double columnPos;
     protected boolean isAlive;
 
 
@@ -21,11 +22,7 @@ public class Entity {
      */
     public int getHealth(){ return health; }
 
-    /**
-     * Sets the health of the entity.
-     * @param health the new health value to set
-     */
-    public void setHealth(int health) { this.health = health; }
+    public void setHealth(int hp) { health = hp; }
 
     /**
      * Gets the current row position of the entity.
@@ -38,6 +35,14 @@ public class Entity {
      * @param rowPos the new row position
      */
     public void setRowPos(int rowPos) { this.rowPos = rowPos; }
+
+    public double getColumnPos() {
+        return columnPos;
+    }
+
+    public void setColumnPos(double column) {
+        this.columnPos = column;
+    }
 
     /**
      * Used to check the life state of an entity or if it's alive
