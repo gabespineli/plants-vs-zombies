@@ -4,11 +4,14 @@ import java.awt.*;
 public class PvZGUI extends JFrame {
     private CardLayout cardLayout;
     private JPanel mainContainer;
+
     private StartingScreen startingScreen;
-    private MainMenu mainMenu;
-    private GameView gameView;
     private StartingScreenController startingScreenController;
+
+    private MainMenu mainMenu;
     private MainMenuController mainMenuController;
+
+    private GameView gameView;
     private GameController gameController;
     private GameViewListener gameViewListener;
 

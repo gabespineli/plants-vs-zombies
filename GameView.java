@@ -3,6 +3,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.*;
+import javax.swing.border.LineBorder; // DEBUGGER FOR SIZES
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,7 +38,7 @@ public class GameView extends BackgroundPanel {
         initializePanel();
     }
 
-    public void setGamePanelListener(GameViewListener listener) {
+    public void setGameViewListener(GameViewListener listener) {
         this.listener = listener;
         addMouseListener(listener);
         addMouseMotionListener(listener);
@@ -63,12 +64,16 @@ public class GameView extends BackgroundPanel {
         createPlantLabels();
         createShovelLabel();
         createSunPointsDisplay();
+
+        // DEBUGGING
+        // ITEM.setBorder(new LineBorder(Color.RED, 2));
+
     }
 
     private void createSeedSlotContainer() {
         seedSlot = new JPanel(new FlowLayout(FlowLayout.LEFT, 2, 5));
         seedSlot.setOpaque(false);
-        seedSlot.setBounds(77, 5, CONTAINER_SIZE.width, CONTAINER_SIZE.height);
+        seedSlot.setBounds(77, 5, CONTAINER_SIZE.width - 80, CONTAINER_SIZE.height - 15);
     }
 
     private void createPlantLabels() {
@@ -99,11 +104,14 @@ public class GameView extends BackgroundPanel {
 
     private void createShovelLabel() {
         shovelLabel = new JLabel();
+        shovelLabel.setName("shovel");
         try {
-            ImageIcon icon = new ImageIcon(ImageIO.read(new File("assets/button/Shovel.png")));
-            Image scaled = icon.getImage().getScaledInstance(70, 72, Image.SCALE_SMOOTH);
+            ImageIcon icon = new ImageIcon(ImageIO.read(new File("assets/button/shovel.png")));
+            Image scaled = icon.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
             shovelLabel.setIcon(new ImageIcon(scaled));
-            shovelLabel.setBounds(400, 0, 70, 72);
+            shovelLabel.setBounds(400, 0, 70, 70);
+            shovelLabel.setOpaque(true);
+            shovelLabel.setPreferredSize(new Dimension(70, 70));
         } catch (IOException e) {
             System.err.println("Failed to load shovel image: " + e.getMessage());
         }
@@ -111,9 +119,10 @@ public class GameView extends BackgroundPanel {
 
     private void createSunPointsDisplay() {
         sunPointsLabel = new JLabel("0");
-        sunPointsLabel.setFont(new Font("DialogInput", Font.BOLD, 20));
+        sunPointsLabel.setFont(new Font("DialogInput", Font.BOLD, 18));
         sunPointsLabel.setForeground(Color.BLACK);
-        sunPointsLabel.setBounds(26, 50, 150, 30);
+        sunPointsLabel.setBounds(20, 52, 47, 30);
+        sunPointsLabel.setHorizontalAlignment(SwingConstants.RIGHT);
     }
 
     private void layoutComponents() {
@@ -148,9 +157,8 @@ public class GameView extends BackgroundPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-
         drawSeedSlotBackground(g2d);
-        drawDraggedPlant(g);
+        drawDraggedPlant(g2d);
     }
 
     private void drawSeedSlotBackground(Graphics2D g2d) {
@@ -159,11 +167,11 @@ public class GameView extends BackgroundPanel {
         }
     }
 
-    private void drawDraggedPlant(Graphics g) {
+    private void drawDraggedPlant(Graphics g2d) {
         if (listener != null && listener.isDragging() && listener.getDraggedImage() != null) {
             Point draggedPos = listener.getDraggedPosition();
             Point dragOffset = listener.getDragOffset();
-            g.drawImage(listener.getDraggedImage(),
+            g2d.drawImage(listener.getDraggedImage(),
                     draggedPos.x - dragOffset.x,
                     draggedPos.y - dragOffset.y, null);
         }
@@ -218,5 +226,9 @@ public class GameView extends BackgroundPanel {
 
     public ArrayList<JLabel> getPlantLabels() {
         return plantLabels;
+    }
+
+    public JLabel getShovelLabel() {
+        return shovelLabel;
     }
 }

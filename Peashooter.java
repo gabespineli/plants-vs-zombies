@@ -23,7 +23,7 @@ import java.util.ArrayList;
         placementCooldown = 8;
         actionCooldown = 0;
         cooldown = 2;
-        plantType = "Peashooter";
+        plantType = "peashooter";
         projectileDamage = 20;
         directDamage = 2 * projectileDamage;
         RANGE = 9;

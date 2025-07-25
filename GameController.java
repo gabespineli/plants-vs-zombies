@@ -1,12 +1,17 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Timer;
 
 public class GameController implements ActionListener {
-    private final GameView view;
     private final PvZGUI gui;
-    private final Gameboard gameboard;
-    private final Player player;
+    // VIEW
+    private final GameView view;
     private GameViewListener gameViewListener;
+
+    // MODEL
+    private final Gameboard gameboard;
+    private Timer gameLoop;
+    private final Player player;
     private int currentTick = 0;
 
     public GameController(GameView view, PvZGUI gui) {
@@ -19,9 +24,13 @@ public class GameController implements ActionListener {
         updateSunPointsDisplay();
     }
 
+    private void startGameLoop() {
+        //gameLoop = new Timer(100, e -> updateGame());
+    }
+
     private void initializeListener() {
         gameViewListener = new GameViewListener(view, this);
-        view.setGamePanelListener(gameViewListener);
+        view.setGameViewListener(gameViewListener);
     }
 
     public void placePlantOnBoard(String plantType, int row, int col) {
@@ -33,7 +42,6 @@ public class GameController implements ActionListener {
 
     public void removePlantFromBoard(int row, int col) {
         view.removePlant(row, col);
-        updateSunPointsDisplay();
     }
 
     public void updateBoardDisplay() {
@@ -44,17 +52,10 @@ public class GameController implements ActionListener {
             for (int col = 0; col < plantBoard[row].length; col++) {
                 Plant plant = plantBoard[row][col];
                 if (plant != null) {
-                    String plantType = getPlantType(plant);
-                    view.placePlant(plantType, row, col);
+                    view.placePlant(plant.getPlantType(), row, col);
                 }
             }
         }
-    }
-
-    private String getPlantType(Plant plant) {
-        if (plant instanceof Sunflower) return "sunflower";
-        if (plant instanceof Peashooter) return "peashooter";
-        return "";
     }
 
     public int getCurrentTick() {

@@ -16,7 +16,7 @@ public class Sunflower extends Plant {
         placementCooldown = 8;
         actionCooldown = 24;
         cooldown = 24;
-        plantType = "Sunflower";
+        plantType = "sunflower";
     }
 
     /**
