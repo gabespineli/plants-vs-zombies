@@ -9,8 +9,8 @@ public class CherryBomb extends Plant {
         health = 30;
         cost = 150;
         placementCooldown = 50;
-        actionCooldown = 1000;
-        cooldown = 1000;
+        actionCooldown = 1200;
+        cooldown = 1200;
         plantType = "Cherry Bomb";
         damage = 700;
     }
