@@ -1,6 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Timer;
+import javax.swing.Timer;
 
 public class GameController implements ActionListener {
     private final PvZGUI gui;
@@ -22,10 +22,29 @@ public class GameController implements ActionListener {
 
         initializeListener();
         updateSunPointsDisplay();
+
+        startGameLoop();
+        gameLoop.start();
     }
 
     private void startGameLoop() {
-        //gameLoop = new Timer(100, e -> updateGame());
+        gameLoop = new Timer(100, this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        incrementTick();
+        //gameboard.updateGame(currentTick);
+        updateBoardDisplay();
+        updateSunPointsDisplay();
+    }
+
+    public int getCurrentTick() {
+        return currentTick;
+    }
+
+    public void incrementTick() {
+        currentTick+=1;
     }
 
     private void initializeListener() {
@@ -41,6 +60,7 @@ public class GameController implements ActionListener {
     }
 
     public void removePlantFromBoard(int row, int col) {
+        gameboard.removePlant(row, col);
         view.removePlant(row, col);
     }
 
@@ -58,27 +78,12 @@ public class GameController implements ActionListener {
         }
     }
 
-    public int getCurrentTick() {
-        return currentTick;
-    }
-
-    public void incrementTick() {
-        currentTick++;
-    }
-
     public Player getPlayer() {
         return player;
     }
 
     public Gameboard getGameboard() {
         return gameboard;
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String command = e.getActionCommand();
-        // Handle other UI actions here if needed
-        System.out.println("Action performed: " + command);
     }
 
     private void updateSunPointsDisplay() {

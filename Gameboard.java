@@ -148,6 +148,7 @@ public class Gameboard {
             if (plant == plantBoard[row][col]){
                 alivePlants.remove(i);
                 plantBoard[row][col] = null;
+                System.out.println(plant.getPlantType() + " removed at (" + row + "," + col + ")");
             }
         }
     }
