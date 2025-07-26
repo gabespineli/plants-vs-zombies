@@ -53,6 +53,18 @@ public class GameViewListener implements MouseListener, MouseMotionListener {
         gameView.repaint();
     }
 
+    @Override public void mouseClicked(MouseEvent e) {
+        for (Sun sun : controller.getActiveSuns()) {
+            int x = GameView.GRID_START_X + (int)(sun.getColumnPos() * GameView.CELL_WIDTH);
+            int y = GameView.GRID_START_Y + (int)(sun.getRowPos() * GameView.CELL_HEIGHT);
+            Rectangle bounds = new Rectangle(x, y, 70, 70);
+            if (bounds.contains(e.getPoint()) && sun.isActive()) {
+                controller.handleSunClick(sun);
+                break;
+            }
+        }
+    }
+
     private boolean isPlantLabel(Component component) {
         ArrayList<JLabel> plantLabels = gameView.getPlantLabels();
         return component instanceof JLabel && plantLabels.contains(component);
@@ -143,7 +155,6 @@ public class GameViewListener implements MouseListener, MouseMotionListener {
     }
 
     // Unused mouse events
-    @Override public void mouseClicked(MouseEvent e) {}
     @Override public void mouseEntered(MouseEvent e) {}
     @Override public void mouseExited(MouseEvent e) {}
     @Override public void mouseMoved(MouseEvent e) {}

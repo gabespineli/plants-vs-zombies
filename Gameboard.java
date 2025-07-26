@@ -178,33 +178,11 @@ public class Gameboard {
 
     /**
      * Collects all sun objects at the specified position and adds their value to the player.
-     * @param row the row position to collect from
-     * @param column the column position to collect from
      * @param player the player collecting the sun
      */
-    public void collectSun(int row, int column, Player player) {
-        if (!isValidPosition(row, column)) {
-            System.out.println("Invalid collection position.");
-            return;
-        }
-
-        ArrayList<Sun> sunsToCollect = new ArrayList<>();
-        for (Sun sun: activeSuns) {
-            if (sun.getRowPos() == row && sun.getColumnPos() == column) {
-                sunsToCollect.add(sun);
-            }
-        }
-
-        if (!sunsToCollect.isEmpty()) {
-            int totalSunCollected = 0;
-            for (Sun sun : sunsToCollect) {
-                sun.collected();
-                totalSunCollected += sun.getValue();
-            }
-            activeSuns.removeIf(s -> !s.isActive());
-            System.out.println("Sun collected at (" + row + "," + column + ")!");
-            player.addSun(totalSunCollected);
-        }
+    public void collectSun(Sun sun, Player player) {
+        player.addSun(sun.getValue());
+        sun.collected();
     }
 
     /**
@@ -256,21 +234,5 @@ public class Gameboard {
             aliveZombies.add(z);
             System.out.println("A flag zombie appeared at (" + z.getRowPos() + "," + z.getColumnPos() + ").");
         }
-    }
-
-    public ArrayList<Zombie> getZombies() {
-        return aliveZombies;
-    }
-
-    public ArrayList<Plant> getPlants() {
-        return alivePlants;
-    }
-
-    public ArrayList<Pea> getPeas() {
-        return activePeas;
-    }
-
-    public ArrayList<Sun> getSuns() {
-        return activeSuns;
     }
 }

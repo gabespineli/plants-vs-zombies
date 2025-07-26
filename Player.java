@@ -8,7 +8,7 @@ public class Player {
      * Constructs a new Player with 100 initial sun points.
      */
     public Player() {
-        this.sunPoints = 999;
+        this.sunPoints = 100;
     }
 
     /**

@@ -1,5 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.Timer;
 
 public class GameController implements ActionListener {
@@ -37,13 +38,17 @@ public class GameController implements ActionListener {
         }
         incrementTick();
         gameboard.updateGame(currentTick);
+
+        // UPDATE DISPLAYS
         updateZombiesDisplay();
+        updatePeaDisplay();
         updatePlantBoardDisplay();
         updateSunPointsDisplay();
+        updateSunDisplay();
     }
 
     private void incrementTick() {
-        currentTick+=1;
+        currentTick++;
     }
 
     // For Drag & Drop
@@ -52,7 +57,7 @@ public class GameController implements ActionListener {
         view.setGameViewListener(gameViewListener);
     }
 
-
+    // GameViewListener Methods
     public void placePlantOnBoard(String plantType, int row, int col) {
         if (gameboard.addPlant(plantType, row, col, player, currentTick)) {
             view.placePlant(plantType, row, col);
@@ -65,7 +70,7 @@ public class GameController implements ActionListener {
         view.removePlant(row, col);
     }
 
-    //UPDATE DISPLAYS
+    // GVL METHODS
     public void updatePlantBoardDisplay() {
         Plant[][] plantBoard = gameboard.getPlantBoard();
         view.clearBoard();
@@ -80,11 +85,29 @@ public class GameController implements ActionListener {
         }
     }
 
+    public void handleSunClick(Sun sun) {
+        gameboard.collectSun(sun, player);
+    }
+
+    // DISPLAYS
     private void updateSunPointsDisplay() {
         view.updateSunPoints(player.getSunPoints());
     }
 
+    private void updateSunDisplay() {
+        view.updateSuns(gameboard.getActiveSuns());
+    }
+
     private void updateZombiesDisplay() {
-        view.updateZombies(gameboard.getZombies());
+        view.updateZombies(gameboard.getAliveZombies());
+    }
+
+    private void updatePeaDisplay() {
+        view.updatePeas(gameboard.getActivePeas());
+    }
+
+    // GETTERS
+    public ArrayList<Sun> getActiveSuns() {
+        return gameboard.getActiveSuns();
     }
 }

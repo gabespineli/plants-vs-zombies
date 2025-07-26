@@ -105,7 +105,7 @@ public class Game {
                     try {
                         row = Integer.parseInt(parts[i+1]);
                         col = Integer.parseInt(parts[i+2]);
-                        board.collectSun(row, col, player);
+                        //board.collectSun(player, Sun sun);
                     } catch (NumberFormatException e) {
                         System.out.println("Invalid coordinates. Use numbers for row and column.");
                     }
