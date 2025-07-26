@@ -58,7 +58,7 @@ public class Game {
             if (reader.ready()) {
                 int key = reader.read();
                 
-                if (key == 13) // Detects if key is \n
+                if (key == 10) // Detects if key is \n
                 {
                     paused = true;
                     System.out.println("\n[PAUSED] Enter command (or just press Enter to resume)");
