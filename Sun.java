@@ -5,7 +5,8 @@
  */
  public class Sun {
     private double columnPos;
-    private int rowPos;
+    private double rowPos;
+    private int finalRowPos;
     private int value;
     private boolean isActive;
     private int lifespan;
@@ -16,7 +17,7 @@
      */
     public Sun(){
         isActive = true;
-        lifespan = 10;
+        lifespan = 100;
         value = 50;
     }
 
@@ -27,7 +28,8 @@
      */
     public Sun(int rowPos, int columnPos) {
         this();
-        this.rowPos = rowPos;
+        finalRowPos = rowPos;
+        this.rowPos = 0;
         this.columnPos = columnPos;
     }
 
@@ -54,7 +56,7 @@
      * Gets the row position of the sun.
      * @return the row position
      */
-    public int getRowPos(){ return rowPos; }
+    public double getRowPos(){ return rowPos; }
 
     /**
      * Gets the value/worth of the sun.
@@ -80,10 +82,17 @@
      */
     public void updateSun(){
         if (lifespan > 0){
+            fall();
             lifespan--;
         }
         else {
             isActive = false;
+        }
+    }
+
+    public void fall(){
+        if (rowPos != finalRowPos){
+            rowPos += 1/(4 / 0.1);
         }
     }
 }

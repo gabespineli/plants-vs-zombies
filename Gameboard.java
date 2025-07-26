@@ -213,6 +213,7 @@ public class Gameboard {
      */
     public void generateZombie(int currentTick) {
         Random random = new Random();
+        int nArmorRNG = -1;
         int generationInterval = 0;
 
         if (currentTick <= 299) { return; }
@@ -228,12 +229,32 @@ public class Gameboard {
         }
 
         if (currentTick - lastZombieGeneratedTick >= generationInterval) {
+            Zombie z = null;
+            if (currentTick >= 1400){
+                nArmorRNG = random.nextInt(100);
+            }
+            if (nArmorRNG >= 0 && nArmorRNG <= 34){
+                z = new Zombie("cone");
+            }
+            else if (nArmorRNG >= 35 && nArmorRNG <= 54){
+                z = new Zombie("bucket");
+            }
+            else{
+                z = new Zombie();
+            }
             lastZombieGeneratedTick = currentTick;
-            Zombie z = new Zombie();
             z.setRowPos(random.nextInt(5));
             z.setColumnPos(8);
             aliveZombies.add(z);
             System.out.println("A zombie appeared at (" + z.getRowPos() + "," + z.getColumnPos() + ").");
+        }
+
+        if (currentTick == 1700) {
+            Zombie z = new Zombie("flag");
+            z.setRowPos(random.nextInt(5));
+            z.setColumnPos(8);
+            aliveZombies.add(z);
+            System.out.println("A flag zombie appeared at (" + z.getRowPos() + "," + z.getColumnPos() + ").");
         }
     }
 

@@ -22,13 +22,20 @@ public class Zombie extends Entity {
         armor = null;
     }
 
-    public Zombie(Armor armor) {
+    public Zombie(String type) {
         super();
         health = 70;
         speed = 4;
         attackCooldown = 1;
         damage = 10;
-        this.armor = armor;
+        Armor equip = switch(type.toLowerCase()) {
+            case "flag" -> new Flag();
+            case "cone" -> new Cone();
+            case "bucket" -> new Bucket();
+            default -> null;
+        };
+        this.armor = equip;
+        equip.setZombie(this);
     }
 
     public void setDamage(int d) {
