@@ -84,11 +84,11 @@ public class ConsoleDriverPVZ {
     public void displayShop(Player p, int currentTick) {
         int sun = p.getSunPoints();
         Sunflower sf = new Sunflower();
-        int sunflowerCooldown = sf.getPlacementCooldown() - (currentTick - Sunflower.getLastPlacedSunflower());
+        double sunflowerCooldown = sf.getPlacementCooldown() - (currentTick - Sunflower.getLastPlacedSunflower());
         Peashooter ps = new Peashooter();
-        int peashooterCooldown = ps.getPlacementCooldown() - (currentTick - Peashooter.getLastPlacedPeashooter());
+        double peashooterCooldown = ps.getPlacementCooldown() - (currentTick - Peashooter.getLastPlacedPeashooter());
         CherryBomb cb = new CherryBomb();
-        int cherryBombCooldown = cb.getPlacementCooldown() - (currentTick - CherryBomb.getLastPlacedCherry());
+        double cherryBombCooldown = cb.getPlacementCooldown() - (currentTick - CherryBomb.getLastPlacedCherry());
 
 
         System.out.println("\nSun: " + p.getSunPoints());

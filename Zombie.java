@@ -17,7 +17,7 @@ public class Zombie extends Entity {
         health = 70;
         speed = 4;
         actionCooldown = 0;
-        cooldown = 100;
+        cooldown = 1;
         damage = 10;
         armor = null;
     }
@@ -26,7 +26,8 @@ public class Zombie extends Entity {
         super();
         health = 70;
         speed = 4;
-        actionCooldown = 100;
+        actionCooldown = 1;
+        cooldown = 1;
         damage = 10;
         createArmor(type);
         armor.setZombie(this);
@@ -62,16 +63,16 @@ public class Zombie extends Entity {
      * @param p the plant to attack
      */
     private void attack(Plant p) {
-        if (actionCooldown == 0){
+        reduceActionCooldown();
+        if (actionCooldown <= 0){
             p.takeDamage(damage);
             actionCooldown = cooldown;
-        }
-
-        if (p.isAlive()) {
-            System.out.println("Zombie at (" + rowPos + "," + columnPos + ") attacked " + p.getPlantType() + " at (" + p.getRowPos() + "," + p.getColumnPos() + ") (Plant HP: " + p.getHealth() + ")");
-        }
-        else {
-            System.out.println("Zombie at (" + rowPos + "," + columnPos + ") has killed " + p.getPlantType() + " at (" + p.getRowPos() + "," + p.getColumnPos() + ")");
+            if (p.isAlive()) {
+                System.out.println("Zombie at (" + rowPos + "," + columnPos + ") attacked " + p.getPlantType() + " at (" + p.getRowPos() + "," + p.getColumnPos() + ") (Plant HP: " + p.getHealth() + ")");
+            }
+            else {
+                System.out.println("Zombie at (" + rowPos + "," + columnPos + ") has killed " + p.getPlantType() + " at (" + p.getRowPos() + "," + p.getColumnPos() + ")");
+            }
         }
     }
 
@@ -81,7 +82,7 @@ public class Zombie extends Entity {
      */
     private void move() {
         System.out.print("Zombie previously in (" + getRowPos() + "," + getColumnPos() + "), ");
-        columnPos -= 1/(speed / 0.1);
+        columnPos -= 1/(speed / 0.03);
         System.out.println("now moved to (" + getRowPos() + "," + getColumnPos() + ")");
     }
 

@@ -13,7 +13,7 @@ public class Sunflower extends Plant {
         super();
         health = 30;
         cost = 50;
-        placementCooldown = 80;
+        placementCooldown = 250;
         actionCooldown = 24;
         cooldown = 24;
         plantType = "Sunflower";
@@ -42,7 +42,7 @@ public class Sunflower extends Plant {
     public Sun updateSunflower(){
         reduceActionCooldown();
         Sun sun;
-        if (actionCooldown == 0) {
+        if (actionCooldown <= 0) {
             sun = new Sun(rowPos, columnPos+0.5, 25);
             actionCooldown = cooldown;
             System.out.println("Sunflower at (" + rowPos + "," + columnPos + ") produced " + sun.getValue() + " sun!");

@@ -28,7 +28,7 @@ public class GameController implements ActionListener {
     }
 
     private void startGameLoop() {
-        gameLoop = new Timer(100, this);
+        gameLoop = new Timer(30, this);
     }
 
     @Override

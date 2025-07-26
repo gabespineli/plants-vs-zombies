@@ -9,7 +9,7 @@
     private int finalRowPos;
     private int value;
     private boolean isActive;
-    private int lifespan;
+    private double lifespan;
 
     /**
      * Constructs a new Sun with default values.
@@ -17,7 +17,7 @@
      */
     public Sun(){
         isActive = true;
-        lifespan = 100;
+        lifespan = 10;
         value = 50;
     }
 
@@ -83,7 +83,7 @@
     public void updateSun(){
         if (lifespan > 0){
             fall();
-            lifespan--;
+            lifespan -= 0.03;
         }
         else {
             isActive = false;
@@ -91,7 +91,7 @@
     }
 
     public void fall(){
-        if (rowPos != finalRowPos){
+        if (rowPos < finalRowPos){
             rowPos += 1/(4 / 0.1);
         }
     }

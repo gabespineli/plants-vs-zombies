@@ -168,7 +168,7 @@ public class Gameboard {
      */
     public void generateSun(int currentTick) {
         Random random = new Random();
-        if (currentTick % 100 == 0) {
+        if (currentTick % 267 == 0) {
             Sun sun = new Sun(random.nextInt(5), random.nextInt(9));
             activeSuns.add(sun);
             System.out.println("The sky dropped a sun at (" + sun.getRowPos() + ", " + sun.getColumnPos() + ")");
@@ -195,21 +195,21 @@ public class Gameboard {
         int nArmorRNG = -1;
         int generationInterval = 0;
 
-        if (currentTick <= 299) { return; }
+        if (currentTick <= 999) { return; }
 
-        if (currentTick <= 800) {
+        if (currentTick <= 2667) {
+            generationInterval = 333;
+        } else if (currentTick <= 4667) {
+            generationInterval = 167;
+        } else if (currentTick <= 5667) {
             generationInterval = 100;
-        } else if (currentTick <= 1400) {
-            generationInterval = 50;
-        } else if (currentTick <= 1700) {
-            generationInterval = 30;
-        } else if (currentTick <= 1800) {
-            generationInterval = random.nextInt(20) + 1; // generate from 1-2 ticks
+        } else if (currentTick <= 6000) {
+            generationInterval = random.nextInt(67) + 1; // generate from 1-2 ticks
         }
 
         if (currentTick - lastZombieGeneratedTick >= generationInterval) {
             Zombie z = null;
-            if (currentTick >= 900){
+            if (currentTick >= 3667){
                 nArmorRNG = random.nextInt(100);
             }
             if (nArmorRNG >= 0 && nArmorRNG <= 20){

@@ -7,8 +7,8 @@ public class Entity {
     protected int rowPos;
     protected double columnPos;
     protected boolean isAlive;
-    protected int actionCooldown;
-    protected int cooldown;
+    protected double actionCooldown;
+    protected double cooldown;
 
 
     /**
@@ -63,5 +63,10 @@ public class Entity {
         if (health <= 0) {
             isAlive = false;
         }
+    }
+
+    public void reduceActionCooldown(){
+        if (actionCooldown > 0)
+            actionCooldown -= 0.03;
     }
 }

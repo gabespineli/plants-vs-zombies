@@ -4,7 +4,7 @@
  */
  public class Plant extends Entity {
     protected int cost;
-    protected int placementCooldown;
+    protected double placementCooldown;
     protected String plantType;
     private static int plantCount = 0;
 
@@ -39,20 +39,11 @@
      * Gets the placement cooldown for this plant type.
      * @return the placement cooldown in ticks
      */
-    public int getPlacementCooldown() { return placementCooldown; }
+    public double getPlacementCooldown() { return placementCooldown; }
 
     /**
      * Gets the type of the plant. (Either peashooter or sunflower)
      * @return the plant type as a string
      */
     public String getPlantType() { return plantType; }
-
-    /**
-     * Reduces the action cooldown by 1 if it's greater than 0.
-     * Should be called each game tick to manage cooldowns.
-     */
-    public void reduceActionCooldown(){
-        if (actionCooldown > 0)
-            actionCooldown -= 1;
-    }
 }

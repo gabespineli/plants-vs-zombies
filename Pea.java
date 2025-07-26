@@ -55,7 +55,7 @@ import java.util.ArrayList;
      * Increases the column position by the speed amount.
      */
     private void move() {
-        columnPos += 1/(speed / 0.1);
+        columnPos += 1/(speed / 0.03);
     }
 
     /**
