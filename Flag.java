@@ -4,6 +4,7 @@ public class Flag extends Armor {
         armorSpeed = -1;
         armorDamage = 0;
         isActive = true;
+        armorType = "Flag";
     }
 
     @Override

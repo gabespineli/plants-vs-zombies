@@ -219,24 +219,24 @@ public class Gameboard {
         if (currentTick <= 299) { return; }
 
         if (currentTick <= 800) {
-            generationInterval = 1000;
+            generationInterval = 100;
         } else if (currentTick <= 1400) {
-            generationInterval = 500;
+            generationInterval = 50;
         } else if (currentTick <= 1700) {
-            generationInterval = 300;
+            generationInterval = 30;
         } else if (currentTick <= 1800) {
-            generationInterval = random.nextInt(200) + 100; // generate from 1-2 ticks
+            generationInterval = random.nextInt(20) + 1; // generate from 1-2 ticks
         }
 
         if (currentTick - lastZombieGeneratedTick >= generationInterval) {
             Zombie z = null;
-            if (currentTick >= 1400){
+            if (currentTick >= 900){
                 nArmorRNG = random.nextInt(100);
             }
-            if (nArmorRNG >= 0 && nArmorRNG <= 34){
+            if (nArmorRNG >= 0 && nArmorRNG <= 20){
                 z = new Zombie("cone");
             }
-            else if (nArmorRNG >= 35 && nArmorRNG <= 54){
+            else if (nArmorRNG >= 21 && nArmorRNG <= 29){
                 z = new Zombie("bucket");
             }
             else{

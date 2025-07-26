@@ -4,5 +4,6 @@ public class Bucket extends Armor{
         armorSpeed = 3;
         armorDamage = -5;
         isActive = true;
+        armorType = "Bucket";
     }
 }

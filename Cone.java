@@ -4,5 +4,6 @@ public class Cone extends Armor {
         armorSpeed = 2;
         armorDamage = -2;
         isActive = true;
+        armorType = "Cone";
     }
 }

@@ -66,7 +66,7 @@ import java.util.ArrayList;
      */
     private void checkCollision(ArrayList<Zombie> aliveZombies) {
         for (Zombie z : aliveZombies){
-            if (z.getRowPos() == rowPos && z.getColumnPos() == columnPos){
+            if (z.getRowPos() == rowPos && z.getColumnPos()+0.2 >= columnPos && z.getColumnPos()-0.2 <= columnPos){
                 z.takeDamage(damage);
                 if (z.isAlive()){
                     System.out.println("Zombie at (" + z.getRowPos() + "," + z.getColumnPos() + ") has been shot! (HP: " + z.getHealth() + ")");

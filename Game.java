@@ -41,7 +41,7 @@ public class Game {
             if (!paused && now - lastTick >= TICK_INTERVAL) {
                 currentTick++;
                 System.out.println("\n=======================================");
-                System.out.printf("Time: %02d:%02d | Sun: %d\n", currentTick/60, currentTick%60, player.getSunPoints());
+                System.out.printf("Time: %d | Sun: %d\n", currentTick, player.getSunPoints());
 
                 board.updateGame(currentTick);
                 ui.displayBoard(board);

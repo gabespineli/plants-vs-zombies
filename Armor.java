@@ -4,10 +4,15 @@ public abstract class Armor {
     protected int armorDamage;
     protected boolean isActive;
     protected Zombie zombie;
+    protected String armorType;
 
     public void setZombie(Zombie zombie) {
         this.zombie = zombie;
         applyArmor();
+    }
+
+    public String getArmorType() {
+        return armorType;
     }
 
     public void takeDamage(int d){
@@ -15,6 +20,7 @@ public abstract class Armor {
             armorHP -= d;
 
         if (armorHP <= 0) {
+            System.out.println("Zombie at (" + zombie.getRowPos() + "," + zombie.getColumnPos() + ")'s armor broke!");
             isActive = false;
             removeArmor();
         }

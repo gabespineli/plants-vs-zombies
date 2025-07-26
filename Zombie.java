@@ -28,14 +28,8 @@ public class Zombie extends Entity {
         speed = 4;
         attackCooldown = 1;
         damage = 10;
-        Armor equip = switch(type.toLowerCase()) {
-            case "flag" -> new Flag();
-            case "cone" -> new Cone();
-            case "bucket" -> new Bucket();
-            default -> null;
-        };
-        this.armor = equip;
-        equip.setZombie(this);
+        createArmor(type);
+        armor.setZombie(this);
     }
 
     public void setDamage(int d) {
@@ -95,7 +89,7 @@ public class Zombie extends Entity {
      */
     public void updateZombie(ArrayList<Plant> alivePlants){
         for (Plant p : alivePlants){
-            if (p.getRowPos() == rowPos && p.getColumnPos()-0.3 >= columnPos && p.getColumnPos()+0.3 <= columnPos){
+            if (p.getRowPos() == rowPos && p.getColumnPos()+0.3 >= columnPos && p.getColumnPos()-0.3 <= columnPos){
                 attack(p);
                 return;
             }
@@ -105,18 +99,29 @@ public class Zombie extends Entity {
 
     @Override
     public void takeDamage(int d){
-        if (armor.isActive()){
-            armor.takeDamage(d);
-            if (!armor.isActive()) {
-                armor = null;
+        if (armor != null){
+            if (armor.isActive()){
+                armor.takeDamage(d);
+                if (!armor.isActive()) {
+                    armor = null;
+                }
             }
         }
 
-        if (isAlive)
+
+        else if (isAlive)
             health -= d;
 
         if (health <= 0) {
             isAlive = false;
+        }
+    }
+
+    public void createArmor(String type) {
+        switch (type.toLowerCase()) {
+            case "flag" -> armor = new Flag();
+            case "cone" -> armor = new Cone();
+            case "bucket" -> armor = new Bucket();
         }
     }
 }

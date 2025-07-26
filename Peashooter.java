@@ -63,11 +63,12 @@ import java.util.ArrayList;
         if (actionCooldown <= 0) {
             for (Zombie z : aliveZombies) {
                 if (z.getRowPos() == rowPos && z.getColumnPos() < RANGE) {
-                    if (z.getColumnPos() - columnPos >= 4) {
+                    if (z.getColumnPos() - columnPos >= 2) {
                         pea = new Pea(columnPos, rowPos, projectileDamage);
                     } else {
                         pea = new Pea(columnPos, rowPos, directDamage);
                     }
+                    System.out.println("Peashooter shot");
                     actionCooldown = cooldown;
                     return pea;
                 }
