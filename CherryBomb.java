@@ -28,7 +28,7 @@ public class CherryBomb extends Plant {
 
         if (actionCooldown == 0) {
             for (Zombie z : aliveZombies) {
-                if (z.getRowPos() >= rowPos-1 && z.getRowPos() <= rowPos+1 && z.getColumnPos() >= columnPos-1 && z.getColumnPos() <= columnPos+1) {
+                if (z.getRowPos() >= rowPos-1 && z.getRowPos() <= rowPos+1 && z.getColumnPos() >= columnPos-1.5 && z.getColumnPos() <= columnPos+1.5) {
                     z.takeDamage(damage);
                 }
             }

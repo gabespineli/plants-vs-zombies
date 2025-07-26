@@ -5,8 +5,6 @@
  public class Plant extends Entity {
     protected int cost;
     protected int placementCooldown;
-    protected int actionCooldown;
-    protected int cooldown;
     protected String plantType;
     private static int plantCount = 0;
 
