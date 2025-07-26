@@ -54,12 +54,19 @@ public class Player {
                 System.out.println("Peashooter still in cooldown for placement. Wait for " + remaining + " turns.");
                 return false;
             }
+        } else if (p instanceof CherryBomb) {
+            if (currentTick - CherryBomb.getLastPlacedCherry() < p.getPlacementCooldown()) {
+                int remaining = p.getPlacementCooldown() - (currentTick - CherryBomb.getLastPlacedCherry());
+                System.out.println("Cherry still in cooldown for placement. Wait for " + remaining + " turns.");
+                return false;
+            }
         }
 
         if (sunPoints >= p.getCost()) {
             sunPoints -= p.getCost();
             if (p instanceof Sunflower) { Sunflower.setLastPlacedSunflower(currentTick); }
             else if (p instanceof Peashooter) { Peashooter.setLastPlacedPeashooter(currentTick); }
+            else if (p instanceof CherryBomb) { CherryBomb.setLastPlacedCherry(currentTick); }
             System.out.println("Bought " + p.getPlantType() + " for " + p.getCost() + " sun.");
             return true;
         } else {

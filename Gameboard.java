@@ -89,6 +89,7 @@ public class Gameboard {
         }
         activePeas.removeIf(pea -> pea.getColumnPos() > 8 || !pea.isActive());
         activeSuns.removeIf(sun -> !sun.isActive());
+        aliveZombies.removeIf(zombie-> !zombie.isAlive());
 
 
         // ZOMBIE GENERATION

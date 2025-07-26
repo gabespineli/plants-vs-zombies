@@ -23,7 +23,7 @@ import java.util.ArrayList;
         rowPos = row;
         isActive = true;
         this.damage = damage;
-        speed = 2.5;
+        speed = 0.5;
     }
 
     /**
@@ -72,7 +72,6 @@ import java.util.ArrayList;
                     System.out.println("Zombie at (" + z.getRowPos() + "," + z.getColumnPos() + ") has been shot! (HP: " + z.getHealth() + ")");
                 } else {
                     System.out.println("Zombie at (" + z.getRowPos() + "," + z.getColumnPos() + ") has been killed!");
-                    aliveZombies.remove(z);
                 }
                 isActive = false;
                 break;

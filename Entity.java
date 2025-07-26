@@ -7,6 +7,8 @@ public class Entity {
     protected int rowPos;
     protected double columnPos;
     protected boolean isAlive;
+    protected int actionCooldown;
+    protected int cooldown;
 
 
     /**

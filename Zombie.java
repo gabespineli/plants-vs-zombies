@@ -6,7 +6,6 @@ import java.util.ArrayList;
  */
 public class Zombie extends Entity {
     private int speed;
-    private int attackCooldown;
     private int damage;
     private Armor armor;
     /**
@@ -17,7 +16,8 @@ public class Zombie extends Entity {
         super();
         health = 70;
         speed = 4;
-        attackCooldown = 1;
+        actionCooldown = 0;
+        cooldown = 100;
         damage = 10;
         armor = null;
     }
@@ -26,7 +26,7 @@ public class Zombie extends Entity {
         super();
         health = 70;
         speed = 4;
-        attackCooldown = 1;
+        actionCooldown = 100;
         damage = 10;
         createArmor(type);
         armor.setZombie(this);
@@ -62,7 +62,11 @@ public class Zombie extends Entity {
      * @param p the plant to attack
      */
     private void attack(Plant p) {
-        p.takeDamage(damage);
+        if (actionCooldown == 0){
+            p.takeDamage(damage);
+            actionCooldown = cooldown;
+        }
+
         if (p.isAlive()) {
             System.out.println("Zombie at (" + rowPos + "," + columnPos + ") attacked " + p.getPlantType() + " at (" + p.getRowPos() + "," + p.getColumnPos() + ") (Plant HP: " + p.getHealth() + ")");
         }
