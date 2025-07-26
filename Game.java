@@ -30,7 +30,7 @@ public class Game {
         Scanner scanner = new Scanner(System.in);
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         ConsoleDriverPVZ ui = new ConsoleDriverPVZ();
-        final int TICK_INTERVAL = 1000;
+        final int TICK_INTERVAL = 100;
 
         long lastTick = System.currentTimeMillis();
         boolean paused = false;
@@ -131,13 +131,13 @@ public class Game {
      */
     private boolean checkWinLose() {
         for (Zombie z : board.getAliveZombies()) {
-            if (z.getColumnPos() < 0) {
+            if (z.getColumnPos() <= 0) {
                 System.out.println("You lost! A zombie reached your home.");
                 return true;
             }
         }
 
-        if (currentTick > 180 && board.getAliveZombies().isEmpty()) {
+        if (currentTick > 1800 && board.getAliveZombies().isEmpty()) {
             System.out.println("You win! All zombies eliminated.");
             return true;
         }
