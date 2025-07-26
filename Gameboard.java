@@ -219,13 +219,13 @@ public class Gameboard {
         if (currentTick <= 299) { return; }
 
         if (currentTick <= 800) {
-            generationInterval = 100;
+            generationInterval = 1000;
         } else if (currentTick <= 1400) {
-            generationInterval = 50;
+            generationInterval = 500;
         } else if (currentTick <= 1700) {
-            generationInterval = 30;
+            generationInterval = 300;
         } else if (currentTick <= 1800) {
-            generationInterval = random.nextInt(20) + 1; // generate from 1-2 ticks
+            generationInterval = random.nextInt(200) + 100; // generate from 1-2 ticks
         }
 
         if (currentTick - lastZombieGeneratedTick >= generationInterval) {
