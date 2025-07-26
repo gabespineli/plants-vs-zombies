@@ -35,7 +35,7 @@ public class GameController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         incrementTick();
         //gameboard.updateGame(currentTick);
-        updateBoardDisplay();
+        updatePlantBoardDisplay();
         updateSunPointsDisplay();
     }
 
@@ -64,7 +64,7 @@ public class GameController implements ActionListener {
         view.removePlant(row, col);
     }
 
-    public void updateBoardDisplay() {
+    public void updatePlantBoardDisplay() {
         Plant[][] plantBoard = gameboard.getPlantBoard();
         view.clearBoard();
 

@@ -27,7 +27,6 @@ public class GameViewListener implements MouseListener, MouseMotionListener {
     @Override
     public void mousePressed(MouseEvent e) {
         Component clickedComponent = SwingUtilities.getDeepestComponentAt(gameView, e.getX(), e.getY());
-        System.out.println( "Clicked component: " + clickedComponent.getName() + " (" + clickedComponent.getClass().getSimpleName() + ")");
 
         if (isPlantLabel(clickedComponent)) {
             startDragging((JLabel) clickedComponent, e.getPoint());
@@ -117,7 +116,7 @@ public class GameViewListener implements MouseListener, MouseMotionListener {
                 controller.placePlantOnBoard(plantType, gridPosition.y, gridPosition.x);
             }
         }
-        controller.updateBoardDisplay();
+        controller.updatePlantBoardDisplay();
     }
 
     private void resetDragState() {
@@ -129,10 +128,6 @@ public class GameViewListener implements MouseListener, MouseMotionListener {
 
     public boolean isDragging() {
         return dragging;
-    }
-
-    public boolean isDraggingShovel() {
-        return draggingShovel;
     }
 
     public BufferedImage getDraggedImage() {

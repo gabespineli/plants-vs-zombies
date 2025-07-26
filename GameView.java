@@ -158,8 +158,30 @@ public class GameView extends BackgroundPanel {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         drawSeedSlotBackground(g2d);
+        drawZombiePaths(g2d);
         drawDraggedPlant(g2d);
     }
+
+    private void drawZombiePaths(Graphics2D g2d) {
+        g2d.setColor(new Color(255, 0, 0, 50)); // semi-transparent red
+
+        for (int row = 0; row < GRID_ROWS; row++) {
+            int y = GRID_START_Y + row * CELL_HEIGHT;
+            int x = GRID_START_X;
+
+            g2d.fillRect(x, y, CELL_WIDTH * GRID_COLS, CELL_HEIGHT);
+        }
+
+        // Optional: add borders to better visualize lanes
+        g2d.setColor(Color.RED);
+        for (int row = 0; row < GRID_ROWS; row++) {
+            int y = GRID_START_Y + row * CELL_HEIGHT;
+            int x = GRID_START_X;
+
+            g2d.drawRect(x, y, CELL_WIDTH * GRID_COLS, CELL_HEIGHT);
+        }
+    }
+
 
     private void drawSeedSlotBackground(Graphics2D g2d) {
         if (seedSlotImage != null) {
