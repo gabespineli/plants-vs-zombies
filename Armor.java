@@ -22,12 +22,12 @@ public abstract class Armor {
 
     protected void applyArmor() {
         zombie.setDamage(zombie.getDamage()+armorDamage);
-        zombie.setMsPerTile(zombie.getMsPerTile()+armorSpeed);
+        zombie.setspeed(zombie.getspeed()+armorSpeed);
     }
 
     protected void removeArmor() {
         zombie.setDamage(zombie.getDamage()-armorDamage);
-        zombie.setMsPerTile(zombie.getMsPerTile()-armorSpeed);
+        zombie.setspeed(zombie.getspeed()-armorSpeed);
     }
 
     public boolean isActive() {

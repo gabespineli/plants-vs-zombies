@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * Extends Entity and provides zombie-specific behavior including movement, attack patterns, and interaction with plants.
  */
 public class Zombie extends Entity {
-    private int msPerTile;
+    private int speed;
     private int attackCooldown;
     private int damage;
     private Armor armor;
@@ -16,7 +16,7 @@ public class Zombie extends Entity {
     public Zombie() {
         super();
         health = 70;
-        msPerTile = 4000;
+        speed = 4;
         attackCooldown = 1;
         damage = 10;
         armor = null;
@@ -25,7 +25,7 @@ public class Zombie extends Entity {
     public Zombie(Armor armor) {
         super();
         health = 70;
-        msPerTile = 4000;
+        speed = 4;
         attackCooldown = 1;
         damage = 10;
         this.armor = armor;
@@ -39,12 +39,12 @@ public class Zombie extends Entity {
         return damage;
     }
 
-    public void setMsPerTile(int ms) {
-        msPerTile = ms;
+    public void setspeed(int speed) {
+        this.speed = speed;
     }
 
-    public int getMsPerTile() {
-        return msPerTile;
+    public int getspeed() {
+        return speed;
     }
 
     /**
@@ -68,7 +68,7 @@ public class Zombie extends Entity {
      */
     private void move() {
         System.out.print("Zombie previously in (" + getRowPos() + "," + getColumnPos() + "), ");
-        columnPos -= 100/msPerTile;
+        columnPos -= 1/(speed / 0.1);
         System.out.println("now moved to (" + getRowPos() + "," + getColumnPos() + ")");
     }
 

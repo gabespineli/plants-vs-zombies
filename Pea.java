@@ -5,11 +5,11 @@ import java.util.ArrayList;
  * Handles movement of pea, collision detection, and damage dealing to zombies.
  */
  public class Pea {
-    protected double columnPos;
-    protected int rowPos;
-    protected boolean isActive;
-    protected int damage;
-    protected double msPerTile;
+    private double columnPos;
+    private int rowPos;
+    private boolean isActive;
+    private int damage;
+    private double speed;
 
     /**
      * Constructs a new pea with specified position and damage based on the Peashooter.
@@ -23,7 +23,7 @@ import java.util.ArrayList;
         rowPos = row;
         isActive = true;
         this.damage = damage;
-        msPerTile = 250;
+        speed = 2.5;
     }
 
     /**
@@ -54,8 +54,8 @@ import java.util.ArrayList;
      * Moves the pea forward depending on its speed value.
      * Increases the column position by the speed amount.
      */
-    protected void move() {
-        columnPos += msPerTile;
+    private void move() {
+        columnPos += 1/(speed / 0.1);
     }
 
     /**
@@ -64,7 +64,7 @@ import java.util.ArrayList;
      * Prints a message depending on the life status of a zombie after taking damage.
      * @param aliveZombies the list of alive zombies to check for collisions
      */
-    protected void checkCollision(ArrayList<Zombie> aliveZombies) {
+    private void checkCollision(ArrayList<Zombie> aliveZombies) {
         for (Zombie z : aliveZombies){
             if (z.getRowPos() == rowPos && z.getColumnPos() == columnPos){
                 z.takeDamage(damage);
