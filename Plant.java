@@ -55,6 +55,6 @@
      */
     public void reduceActionCooldown(){
         if (actionCooldown > 0)
-            actionCooldown -= 100;
+            actionCooldown -= 1;
     }
 }

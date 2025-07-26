@@ -217,16 +217,16 @@ public class Gameboard {
         Random random = new Random();
         int generationInterval = 0;
 
-        if (currentTick <= 29) { return; }
+        if (currentTick <= 299) { return; }
 
-        if (currentTick <= 80) {
-            generationInterval = 10;
-        } else if (currentTick <= 140) {
-            generationInterval = 5;
-        } else if (currentTick <= 170) {
-            generationInterval = 3;
-        } else if (currentTick <= 180) {
-            generationInterval = random.nextInt(2) + 1; // generate from 1-2 ticks
+        if (currentTick <= 800) {
+            generationInterval = 100;
+        } else if (currentTick <= 1400) {
+            generationInterval = 50;
+        } else if (currentTick <= 1700) {
+            generationInterval = 30;
+        } else if (currentTick <= 1800) {
+            generationInterval = random.nextInt(20) + 1; // generate from 1-2 ticks
         }
 
         if (currentTick - lastZombieGeneratedTick >= generationInterval) {

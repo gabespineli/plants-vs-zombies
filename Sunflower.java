@@ -13,9 +13,9 @@ public class Sunflower extends Plant {
         super();
         health = 30;
         cost = 50;
-        placementCooldown = 8000;
-        actionCooldown = 24250;
-        cooldown = 24250;
+        placementCooldown = 80;
+        actionCooldown = 24;
+        cooldown = 24;
         plantType = "Sunflower";
     }
 

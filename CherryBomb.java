@@ -8,9 +8,9 @@ public class CherryBomb extends Plant {
         super();
         health = 30;
         cost = 150;
-        placementCooldown = 50;
-        actionCooldown = 1200;
-        cooldown = 1200;
+        placementCooldown = 500;
+        actionCooldown = 12;
+        cooldown = 12;
         plantType = "Cherry Bomb";
         damage = 700;
     }
