@@ -21,7 +21,6 @@ public class GameController implements ActionListener {
         this.player = new Player();
 
         initializeListener();
-        updateSunPointsDisplay();
 
         startGameLoop();
         gameLoop.start();
@@ -33,24 +32,26 @@ public class GameController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (currentTick % 10 == 0 && currentTick != 0) {
+            System.out.println( "Game loop tick: " + currentTick/10);
+        }
         incrementTick();
-        //gameboard.updateGame(currentTick);
+        gameboard.updateGame(currentTick);
+        updateZombiesDisplay();
         updatePlantBoardDisplay();
         updateSunPointsDisplay();
     }
 
-    public int getCurrentTick() {
-        return currentTick;
-    }
-
-    public void incrementTick() {
+    private void incrementTick() {
         currentTick+=1;
     }
 
+    // For Drag & Drop
     private void initializeListener() {
         gameViewListener = new GameViewListener(view, this);
         view.setGameViewListener(gameViewListener);
     }
+
 
     public void placePlantOnBoard(String plantType, int row, int col) {
         if (gameboard.addPlant(plantType, row, col, player, currentTick)) {
@@ -64,6 +65,7 @@ public class GameController implements ActionListener {
         view.removePlant(row, col);
     }
 
+    //UPDATE DISPLAYS
     public void updatePlantBoardDisplay() {
         Plant[][] plantBoard = gameboard.getPlantBoard();
         view.clearBoard();
@@ -78,15 +80,11 @@ public class GameController implements ActionListener {
         }
     }
 
-    public Player getPlayer() {
-        return player;
-    }
-
-    public Gameboard getGameboard() {
-        return gameboard;
-    }
-
     private void updateSunPointsDisplay() {
         view.updateSunPoints(player.getSunPoints());
+    }
+
+    private void updateZombiesDisplay() {
+        view.updateZombies(gameboard.getZombies());
     }
 }

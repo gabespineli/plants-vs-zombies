@@ -92,9 +92,7 @@ public class Gameboard {
 
 
         // ZOMBIE GENERATION
-        if (currentTick <= 180) {
-            generateZombie(currentTick);
-        }
+        generateZombie(currentTick);
     }
 
     /**
@@ -169,7 +167,7 @@ public class Gameboard {
      */
     public void generateSun(int currentTick) {
         Random random = new Random();
-        if (currentTick % 10 == 0) {
+        if (currentTick % 100 == 0) {
             Sun sun = new Sun(random.nextInt(5), random.nextInt(9));
             activeSuns.add(sun);
             System.out.println("The sky dropped a sun at (" + sun.getRowPos() + ", " + sun.getColumnPos() + ")");
@@ -237,5 +235,21 @@ public class Gameboard {
             aliveZombies.add(z);
             System.out.println("A zombie appeared at (" + z.getRowPos() + "," + z.getColumnPos() + ").");
         }
+    }
+
+    public ArrayList<Zombie> getZombies() {
+        return aliveZombies;
+    }
+
+    public ArrayList<Plant> getPlants() {
+        return alivePlants;
+    }
+
+    public ArrayList<Pea> getPeas() {
+        return activePeas;
+    }
+
+    public ArrayList<Sun> getSuns() {
+        return activeSuns;
     }
 }

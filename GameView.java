@@ -30,8 +30,10 @@ public class GameView extends BackgroundPanel {
     private ArrayList<JLabel> plantLabels;
     private JLabel shovelLabel;
 
-    private GameViewListener listener;
+    private ArrayList<Zombie> zombies = new ArrayList<>();
     private final Map<Point, JLabel> plantsOnBoard = new HashMap<>();
+
+    private GameViewListener listener;
 
     public GameView() {
         super(BACKGROUND_PATH, PANEL_SIZE);
@@ -139,6 +141,10 @@ public class GameView extends BackgroundPanel {
         sunPointsLabel.setText(String.valueOf(points));
     }
 
+    public void updateZombies(ArrayList<Zombie> zombies) {
+        this.zombies = zombies;
+    }
+
     public Point snapToGrid(int x, int y) {
         int col = (x - GRID_START_X) / CELL_WIDTH;
         int row = (y - GRID_START_Y) / CELL_HEIGHT;
@@ -158,30 +164,24 @@ public class GameView extends BackgroundPanel {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         drawSeedSlotBackground(g2d);
-        drawZombiePaths(g2d);
+        drawZombies(g2d);
         drawDraggedPlant(g2d);
     }
 
-    private void drawZombiePaths(Graphics2D g2d) {
-        g2d.setColor(new Color(255, 0, 0, 50)); // semi-transparent red
+    private void drawZombies(Graphics2D g2d) {
+        for (Zombie zombie : zombies) {
+            int x = (int)(GRID_START_X + zombie.getColumnPos() * CELL_WIDTH + 10);
+            int y = GRID_START_Y + zombie.getRowPos() * CELL_HEIGHT;
 
-        for (int row = 0; row < GRID_ROWS; row++) {
-            int y = GRID_START_Y + row * CELL_HEIGHT;
-            int x = GRID_START_X;
-
-            g2d.fillRect(x, y, CELL_WIDTH * GRID_COLS, CELL_HEIGHT);
-        }
-
-        // Optional: add borders to better visualize lanes
-        g2d.setColor(Color.RED);
-        for (int row = 0; row < GRID_ROWS; row++) {
-            int y = GRID_START_Y + row * CELL_HEIGHT;
-            int x = GRID_START_X;
-
-            g2d.drawRect(x, y, CELL_WIDTH * GRID_COLS, CELL_HEIGHT);
+            try {
+                ImageIcon icon = new ImageIcon(ImageIO.read(new File("assets/zombies/zombie.png")));
+                Image scaled = icon.getImage().getScaledInstance(60, 70, Image.SCALE_SMOOTH);
+                g2d.drawImage(scaled, x, y, null);
+            } catch (Exception e) {
+                System.err.println("Could not draw zombie: " + e.getMessage());
+            }
         }
     }
-
 
     private void drawSeedSlotBackground(Graphics2D g2d) {
         if (seedSlotImage != null) {

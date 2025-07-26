@@ -47,6 +47,14 @@ public class Zombie extends Entity {
         return speed;
     }
 
+    public double getColumnPos() {
+        return columnPos;
+    }
+
+    public int getRowPos() {
+        return rowPos;
+    }
+
     /**
      * Attacks the specified plant, dealing damage to it.
      * Prints appropriate messages based on whether the plant survives or dies.
