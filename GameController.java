@@ -33,8 +33,8 @@ public class GameController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (currentTick % 10 == 0 && currentTick != 0) {
-            System.out.println( "Game loop tick: " + currentTick/10);
+        if (currentTick % 30 == 0 && currentTick != 0) {
+            System.out.println( "Game loop tick: " + currentTick/30);
         }
         incrementTick();
         gameboard.updateGame(currentTick);

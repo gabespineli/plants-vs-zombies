@@ -81,9 +81,7 @@ public class Zombie extends Entity {
      * Prints the zombie's previous and new positions.
      */
     private void move() {
-        System.out.print("Zombie previously in (" + getRowPos() + "," + getColumnPos() + "), ");
         columnPos -= 1/(speed / 0.03);
-        System.out.println("now moved to (" + getRowPos() + "," + getColumnPos() + ")");
     }
 
     /**

@@ -28,10 +28,20 @@ public class GameViewListener implements MouseListener, MouseMotionListener {
     public void mousePressed(MouseEvent e) {
         Component clickedComponent = SwingUtilities.getDeepestComponentAt(gameView, e.getX(), e.getY());
 
-        if (isPlantLabel(clickedComponent)) {
+        if (isSeedPacket(clickedComponent)) {
             startDragging((JLabel) clickedComponent, e.getPoint());
         } else if (isShovelLabel(clickedComponent)) {
             startShovelDragging((JLabel) clickedComponent, e.getPoint());
+        }
+
+        for (Sun sun : controller.getActiveSuns()) {
+            int x = GameView.GRID_START_X + (int)(sun.getColumnPos() * GameView.CELL_WIDTH);
+            int y = GameView.GRID_START_Y + (int)(sun.getRowPos() * GameView.CELL_HEIGHT);
+            Rectangle bounds = new Rectangle(x, y, 70, 70);
+            if (bounds.contains(e.getPoint()) && sun.isActive()) {
+                controller.handleSunClick(sun);
+                break;
+            }
         }
         gameView.repaint();
     }
@@ -53,20 +63,8 @@ public class GameViewListener implements MouseListener, MouseMotionListener {
         gameView.repaint();
     }
 
-    @Override public void mouseClicked(MouseEvent e) {
-        for (Sun sun : controller.getActiveSuns()) {
-            int x = GameView.GRID_START_X + (int)(sun.getColumnPos() * GameView.CELL_WIDTH);
-            int y = GameView.GRID_START_Y + (int)(sun.getRowPos() * GameView.CELL_HEIGHT);
-            Rectangle bounds = new Rectangle(x, y, 70, 70);
-            if (bounds.contains(e.getPoint()) && sun.isActive()) {
-                controller.handleSunClick(sun);
-                break;
-            }
-        }
-    }
-
-    private boolean isPlantLabel(Component component) {
-        ArrayList<JLabel> plantLabels = gameView.getPlantLabels();
+    private boolean isSeedPacket(Component component) {
+        ArrayList<JLabel> plantLabels = gameView.getSeedPackets();
         return component instanceof JLabel && plantLabels.contains(component);
     }
 
@@ -117,19 +115,23 @@ public class GameViewListener implements MouseListener, MouseMotionListener {
 
     private void handleDrop(Point dropPoint) {
         Point gridPosition = gameView.snapToGrid(dropPoint.x, dropPoint.y);
-
         if (gridPosition == null || controller == null) return;
 
+        int row = gridPosition.y;
+        int col = gridPosition.x;
+
         if (draggingShovel) {
-            controller.removePlantFromBoard(gridPosition.y, gridPosition.x);
+            controller.removePlantFromBoard(row, col); // Use 2D array access
         } else {
             String plantType = selectedLabel.getName();
             if (plantType != null) {
-                controller.placePlantOnBoard(plantType, gridPosition.y, gridPosition.x);
+                controller.placePlantOnBoard(plantType, row, col);
             }
         }
+
         controller.updatePlantBoardDisplay();
     }
+
 
     private void resetDragState() {
         dragging = false;
@@ -155,6 +157,7 @@ public class GameViewListener implements MouseListener, MouseMotionListener {
     }
 
     // Unused mouse events
+    @Override public void mouseClicked(MouseEvent e) {}
     @Override public void mouseEntered(MouseEvent e) {}
     @Override public void mouseExited(MouseEvent e) {}
     @Override public void mouseMoved(MouseEvent e) {}

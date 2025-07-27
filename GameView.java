@@ -3,13 +3,12 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.*;
-import javax.swing.border.LineBorder; // DEBUGGER FOR SIZES
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class GameView extends BackgroundPanel {
+    private GameViewListener listener;
+
     private static final String BACKGROUND_PATH = "assets/background/GamePanel.png";
     private static final String CONTAINER_IMAGE_PATH = "assets/ui/SeedSlot.png";
     private static final Dimension PANEL_SIZE = new Dimension(680, 500);
@@ -22,20 +21,18 @@ public class GameView extends BackgroundPanel {
     public static final int GRID_COLS = 9;
     public static final int GRID_ROWS = 5;
 
-    private static final String[] PLANT_TYPES = {"sunflower", "peashooter"};
+    private static final String[] PLANT_TYPES = {"sunflower", "peashooter"}; // add cherrybomb
 
     private JPanel seedSlot;
     private BufferedImage seedSlotImage;
     private JLabel sunPointsLabel;
-    private ArrayList<JLabel> plantLabels;
+    private ArrayList<JLabel> seedPackets;
     private JLabel shovelLabel;
 
     private ArrayList<Zombie> zombies = new ArrayList<>();
     private ArrayList<Pea> peas = new ArrayList<>();
     private ArrayList<Sun> suns = new ArrayList<>();
-    private final Map<Point, JLabel> plantsOnBoard = new HashMap<>();
-
-    private GameViewListener listener;
+    private final String[][] plantGrid = new String[5][9];
 
     public GameView() {
         super(BACKGROUND_PATH, PANEL_SIZE);
@@ -65,7 +62,7 @@ public class GameView extends BackgroundPanel {
 
     private void createComponents() {
         createSeedSlotContainer();
-        createPlantLabels();
+        createSeedPackets();
         createShovelLabel();
         createSunPointsDisplay();
 
@@ -80,19 +77,19 @@ public class GameView extends BackgroundPanel {
         seedSlot.setBounds(77, 5, CONTAINER_SIZE.width - 80, CONTAINER_SIZE.height - 15);
     }
 
-    private void createPlantLabels() {
-        plantLabels = new ArrayList<>();
+    private void createSeedPackets() {
+        seedPackets = new ArrayList<>();
 
         for (String plantType : PLANT_TYPES) {
-            JLabel label = createPlantLabel(plantType);
+            JLabel label = createSeedPacket(plantType);
             if (label != null) {
                 label.setName(plantType.toLowerCase());
-                plantLabels.add(label);
+                seedPackets.add(label);
             }
         }
     }
 
-    private JLabel createPlantLabel(String plantType) {
+    private JLabel createSeedPacket(String plantType) {
         JLabel label = new JLabel();
         try {
             ImageIcon icon = new ImageIcon(ImageIO.read(new File("assets/packets/" + plantType + ".png")));
@@ -114,8 +111,6 @@ public class GameView extends BackgroundPanel {
             Image scaled = icon.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
             shovelLabel.setIcon(new ImageIcon(scaled));
             shovelLabel.setBounds(400, 0, 70, 70);
-            shovelLabel.setOpaque(true);
-            shovelLabel.setPreferredSize(new Dimension(70, 70));
         } catch (IOException e) {
             System.err.println("Failed to load shovel image: " + e.getMessage());
         }
@@ -130,7 +125,7 @@ public class GameView extends BackgroundPanel {
     }
 
     private void layoutComponents() {
-        for (JLabel label : plantLabels) {
+        for (JLabel label : seedPackets) {
             seedSlot.add(label);
         }
 
@@ -176,18 +171,25 @@ public class GameView extends BackgroundPanel {
         drawSeedSlotBackground(g2d);
         drawZombies(g2d);
         drawPeas(g2d);
+        drawPlantedPlants(g2d);
         drawSuns(g2d);
         drawDraggedPlant(g2d);
+    }
+
+    private void drawSeedSlotBackground(Graphics2D g2d) {
+        if (seedSlotImage != null) {
+            g2d.drawImage(seedSlotImage, 10, 0, CONTAINER_SIZE.width, CONTAINER_SIZE.height, null);
+        }
     }
 
     private void drawZombies(Graphics2D g2d) {
         for (Zombie zombie : zombies) {
             int x = (int)(GRID_START_X + zombie.getColumnPos() * CELL_WIDTH + 10);
-            int y = GRID_START_Y + zombie.getRowPos() * CELL_HEIGHT;
+            int y = GRID_START_Y + zombie.getRowPos() * CELL_HEIGHT - 10;
 
             try {
                 ImageIcon icon = new ImageIcon(ImageIO.read(new File("assets/zombies/zombie.png")));
-                Image scaled = icon.getImage().getScaledInstance(60, 70, Image.SCALE_SMOOTH);
+                Image scaled = icon.getImage().getScaledInstance(65, 90, Image.SCALE_SMOOTH);
                 g2d.drawImage(scaled, x, y, null);
             } catch (Exception e) {
                 System.err.println("Could not draw zombie: " + e.getMessage());
@@ -198,7 +200,7 @@ public class GameView extends BackgroundPanel {
     private void drawPeas(Graphics2D g2d) {
         for (Pea pea : peas) {
             int x = (int)(GRID_START_X + pea.getColumnPos() * CELL_WIDTH + 15);
-            int y = GRID_START_Y + pea.getRowPos() * CELL_HEIGHT + 6;
+            int y = GRID_START_Y + pea.getRowPos() * CELL_HEIGHT + 10;
 
             try {
                 ImageIcon icon = new ImageIcon(ImageIO.read(new File("assets/ui/pea.png")));
@@ -207,6 +209,40 @@ public class GameView extends BackgroundPanel {
             } catch (Exception e) {
                 System.err.println("Could not draw pea: " + e.getMessage());
             }
+        }
+    }
+
+    private void drawPlantedPlants(Graphics2D g2d) {
+        for (int row = 0; row < plantGrid.length; row++) {
+            for (int col = 0; col < plantGrid[0].length; col++) {
+                String plantType = plantGrid[row][col];
+                if (plantType != null) {
+                    int x = GRID_START_X + col * CELL_WIDTH;
+                    int y = GRID_START_Y + row * CELL_HEIGHT + 15;
+
+                    try {
+                        ImageIcon icon = new ImageIcon(ImageIO.read(new File("assets/plants/" + plantType + ".png")));
+                        Image scaled = icon.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+                        g2d.drawImage(scaled, x, y, null);
+                    } catch (Exception e) {
+                        System.err.println("Could not draw sun: " + e.getMessage());
+                    }
+                }
+            }
+        }
+    }
+
+    private void drawDraggedPlant(Graphics g2d) {
+        if (listener != null && listener.isDragging() && listener.getDraggedImage() != null) {
+            Point draggedPos = listener.getDraggedPosition();
+            Point dragOffset = listener.getDragOffset();
+            Image original = listener.getDraggedImage();
+            Image scaled = original.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+
+            g2d.drawImage(scaled,
+                    draggedPos.x - dragOffset.x,
+                    draggedPos.y - dragOffset.y,
+                    null);
         }
     }
 
@@ -225,70 +261,26 @@ public class GameView extends BackgroundPanel {
         }
     }
 
-    private void drawSeedSlotBackground(Graphics2D g2d) {
-        if (seedSlotImage != null) {
-            g2d.drawImage(seedSlotImage, 10, 0, CONTAINER_SIZE.width, CONTAINER_SIZE.height, null);
-        }
-    }
-
-    private void drawDraggedPlant(Graphics g2d) {
-        if (listener != null && listener.isDragging() && listener.getDraggedImage() != null) {
-            Point draggedPos = listener.getDraggedPosition();
-            Point dragOffset = listener.getDragOffset();
-            g2d.drawImage(listener.getDraggedImage(),
-                    draggedPos.x - dragOffset.x,
-                    draggedPos.y - dragOffset.y, null);
-        }
-    }
-
     public void placePlant(String plantType, int row, int col) {
-        JLabel plantLabel = createBoardPlantLabel(plantType, row, col);
-        if (plantLabel != null) {
-            plantsOnBoard.put(new Point(col, row), plantLabel);
-            add(plantLabel);
-            revalidate();
-            repaint();
-        }
-    }
-
-    private JLabel createBoardPlantLabel(String plantType, int row, int col) {
-        try {
-            ImageIcon image = new ImageIcon("assets/plants/" + plantType + ".png");
-            Image scaledImage = image.getImage().getScaledInstance(
-                    CELL_WIDTH - 10, CELL_HEIGHT - 10, Image.SCALE_SMOOTH);
-
-            JLabel plantLabel = new JLabel(new ImageIcon(scaledImage));
-            int x = GRID_START_X + (col * CELL_WIDTH);
-            int y = GRID_START_Y + (row * CELL_HEIGHT);
-            plantLabel.setBounds(x, y, CELL_WIDTH, CELL_HEIGHT);
-
-            return plantLabel;
-        } catch (Exception e) {
-            System.err.println("Failed to create board plant label for " + plantType + ": " + e.getMessage());
-            return null;
-        }
-    }
-
-    public void removePlant(int row, int col) {
-        Point position = new Point(col, row);
-        JLabel existingPlant = plantsOnBoard.remove(position);
-        if (existingPlant != null) {
-            remove(existingPlant);
-            revalidate();
-            repaint();
-        }
-    }
-
-    public void clearBoard() {
-        for (JLabel plant : plantsOnBoard.values()) {
-            remove(plant);
-        }
-        plantsOnBoard.clear();
-        revalidate();
+        plantGrid[row][col] = plantType;
         repaint();
     }
 
-    public ArrayList<JLabel> getPlantLabels() {
-        return plantLabels;
+    public void removePlant(int row, int col) {
+        plantGrid[row][col] = null;
+        repaint();
+    }
+
+    public void clearBoard() {
+        for (int row = 0; row < plantGrid.length; row++) {
+            for (int col = 0; col < plantGrid[row].length; col++) {
+                plantGrid[row][col] = null;
+            }
+        }
+        repaint();
+    }
+
+    public ArrayList<JLabel> getSeedPackets() {
+        return seedPackets;
     }
 }
