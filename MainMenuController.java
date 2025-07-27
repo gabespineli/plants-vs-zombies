@@ -2,11 +2,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainMenuController implements ActionListener {
-    private final MainMenu view;
+    private final MainMenuView view;
     private final PvZGUI gui;
 
 
-    public MainMenuController(MainMenu view, PvZGUI gui) {
+    public MainMenuController(MainMenuView view, PvZGUI gui) {
         this.view = view;
         this.gui = gui;
         view.setActionListener(this);

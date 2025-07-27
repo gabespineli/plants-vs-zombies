@@ -6,12 +6,12 @@ public class StartingScreenController implements ActionListener {
     private static final int BUTTON_ENABLE_DELAY = 5000; // 5 seconds
     private static final int PROGRESS_UPDATE_DELAY = 50; // 50 milliseconds
 
-    private final StartingScreen view;
+    private final StartingScreenView view;
     private final PvZGUI gui;
     private final Timer enableButtonTimer;
     private final Thread progressThread;
 
-    public StartingScreenController(StartingScreen view, PvZGUI gui) {
+    public StartingScreenController(StartingScreenView view, PvZGUI gui) {
         this.view = view;
         this.gui = gui;
         this.enableButtonTimer = createButtonTimer();

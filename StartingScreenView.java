@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class StartingScreen extends BackgroundPanel {
+public class StartingScreenView extends BackgroundPanel {
     private static final int PROGRESS_BAR_WIDTH = 150;
     private static final int PROGRESS_BAR_HEIGHT = 20;
     private static final int BUTTON_WIDTH = 150;
@@ -13,7 +13,7 @@ public class StartingScreen extends BackgroundPanel {
     private JButton continueButton;
     private JProgressBar progressBar;
 
-    public StartingScreen() {
+    public StartingScreenView() {
         super(BACKGROUND_PATH, PANEL_SIZE);
         initializeComponents();
     }
