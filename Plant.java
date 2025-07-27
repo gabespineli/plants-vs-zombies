@@ -4,7 +4,6 @@
  */
  public class Plant extends Entity {
     protected int cost;
-    protected double placementCooldown;
     protected String plantType;
     private static int plantCount = 0;
 
@@ -34,12 +33,6 @@
      * @return the cost of the plant
      */
     public int getCost() { return cost; }
-
-    /**
-     * Gets the placement cooldown for this plant type.
-     * @return the placement cooldown in ticks
-     */
-    public double getPlacementCooldown() { return placementCooldown; }
 
     /**
      * Gets the type of the plant. (Either peashooter or sunflower)

@@ -82,13 +82,13 @@ public class ConsoleDriverPVZ {
     }
 
     public void displayShop(Player p, int currentTick) {
-        int sun = p.getSunPoints();
+        /*int sun = p.getSunPoints();
         Sunflower sf = new Sunflower();
-        double sunflowerCooldown = sf.getPlacementCooldown() - (currentTick - Sunflower.getLastPlacedSunflower());
+        //int sunflowerCooldown = Sunflower.isReady();
         Peashooter ps = new Peashooter();
-        double peashooterCooldown = ps.getPlacementCooldown() - (currentTick - Peashooter.getLastPlacedPeashooter());
+        //int peashooterCooldown = Peashooter.isReady();
         CherryBomb cb = new CherryBomb();
-        double cherryBombCooldown = cb.getPlacementCooldown() - (currentTick - CherryBomb.getLastPlacedCherry());
+        //int cherryBombCooldown = CherryBomb.isReady();
 
 
         System.out.println("\nSun: " + p.getSunPoints());
@@ -103,7 +103,7 @@ public class ConsoleDriverPVZ {
 
         if (sun < cb.getCost()) System.out.println("Cherry Bomb - 150 [Not enough sun]");
         else if (cherryBombCooldown > 0) System.out.println("Cherry Bomb - 150 [Plant in cooldown. Wait for " + cherryBombCooldown + " turns.]");
-        else System.out.println("Cherry Bomb - 150 [Available]");
+        else System.out.println("Cherry Bomb - 150 [Available]");*/
     }
 
     public static void main(String[] args) throws IOException {
