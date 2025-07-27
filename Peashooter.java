@@ -6,10 +6,12 @@ import java.util.ArrayList;
  * Has different damage values for close-range and long-range attacks.
  */
  public class Peashooter extends Plant {
+    private static final int placementCooldown = 250;
+    private static int placementTimer;
     private int projectileDamage;
     private int directDamage;
     private final int RANGE;
-    private static int lastPlacedPeashooter = -9999;
+
 
     /**
      * Constructs a new Peashooter with default stats.
@@ -20,7 +22,6 @@ import java.util.ArrayList;
         super();
         health = 30;
         cost = 100;
-        placementCooldown = 250;
         actionCooldown = 0;
         cooldown = 1.5;
         plantType = "Peashooter";
@@ -29,23 +30,18 @@ import java.util.ArrayList;
         RANGE = 9;
     }
 
-    /**
-     * Gets the tick when the last Peashooter was placed.
-     * Used for placement cooldown management.
-     * @return the tick value when the last Peashooter was placed
-     */
-    public static int getLastPlacedPeashooter() {
-        return lastPlacedPeashooter;
+    public static void reduceCD() {
+        if (placementTimer > 0){
+            placementTimer--;
+        }
     }
 
-    /**
-     * Sets the tick when a Peashooter was placed.
-     * Used for tracking placement cooldowns.
-     *
-     * @param tick the current tick of the game and value to set
-     */
-    public static void setLastPlacedPeashooter(int tick) {
-        lastPlacedPeashooter = tick;
+    public static int isReady() {
+        return placementTimer;
+    }
+
+    public static void setPlacementCooldown() {
+        placementTimer = placementCooldown;
     }
 
     /**
