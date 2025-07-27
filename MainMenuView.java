@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class MainMenu extends BackgroundPanel {
+public class MainMenuView extends BackgroundPanel {
     private static final String BACKGROUND_PATH = "assets/background/MainMenu.png";
     private static final Dimension PANEL_SIZE = new Dimension(680, 500);
 
@@ -9,7 +9,7 @@ public class MainMenu extends BackgroundPanel {
     private ImageButton saveButton;
     private ImageButton exitButton;
 
-    public MainMenu() {
+    public MainMenuView() {
         super(BACKGROUND_PATH, PANEL_SIZE);
         initializeComponents();
     }

@@ -5,10 +5,10 @@ public class PvZGUI extends JFrame {
     private CardLayout cardLayout;
     private JPanel mainContainer;
 
-    private StartingScreen startingScreen;
+    private StartingScreenView startingScreenView;
     private StartingScreenController startingScreenController;
 
-    private MainMenu mainMenu;
+    private MainMenuView mainMenuView;
     private MainMenuController mainMenuController;
 
     private GameView gameView;
@@ -32,18 +32,18 @@ public class PvZGUI extends JFrame {
         cardLayout = new CardLayout();
         mainContainer = new JPanel(cardLayout);
 
-        startingScreen = new StartingScreen();
-        startingScreenController = new StartingScreenController(startingScreen, this);
+        startingScreenView = new StartingScreenView();
+        startingScreenController = new StartingScreenController(startingScreenView, this);
 
-        mainMenu = new MainMenu();
-        mainMenuController = new MainMenuController(mainMenu, this);
+        mainMenuView = new MainMenuView();
+        mainMenuController = new MainMenuController(mainMenuView, this);
 
         gameView = new GameView();
         gameController = new GameController(gameView, this);
         gameViewListener = new GameViewListener(gameView, gameController);
 
-        mainContainer.add(startingScreen, "start");
-        mainContainer.add(mainMenu, "menu");
+        mainContainer.add(startingScreenView, "start");
+        mainContainer.add(mainMenuView, "menu");
         mainContainer.add(gameView, "game");
 
         add(mainContainer);
