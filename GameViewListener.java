@@ -63,15 +63,6 @@ public class GameViewListener implements MouseListener, MouseMotionListener {
         gameView.repaint();
     }
 
-    private boolean isSeedPacket(Component component) {
-        ArrayList<JLabel> plantLabels = gameView.getSeedPackets();
-        return component instanceof JLabel && plantLabels.contains(component);
-    }
-
-    private boolean isShovelLabel(Component component) {
-        return component instanceof JLabel && "shovel".equals(component.getName());
-    }
-
     private void startDragging(JLabel label, Point clickPoint) {
         selectedLabel = label;
         dragging = true;
@@ -114,7 +105,7 @@ public class GameViewListener implements MouseListener, MouseMotionListener {
     }
 
     private void handleDrop(Point dropPoint) {
-        Point gridPosition = gameView.snapToGrid(dropPoint.x, dropPoint.y);
+        Point gridPosition = snapToGrid(dropPoint.x, dropPoint.y);
         if (gridPosition == null || controller == null) return;
 
         int row = gridPosition.y;
@@ -132,6 +123,11 @@ public class GameViewListener implements MouseListener, MouseMotionListener {
         controller.updatePlantBoardDisplay();
     }
 
+    public Point snapToGrid(int x, int y) {
+        int col = (x - GameView.GRID_START_X) / GameView.CELL_WIDTH;
+        int row = (y - GameView.GRID_START_Y) / GameView.CELL_HEIGHT;
+        return new Point(col, row);
+    }
 
     private void resetDragState() {
         dragging = false;
@@ -142,6 +138,15 @@ public class GameViewListener implements MouseListener, MouseMotionListener {
 
     public boolean isDragging() {
         return dragging;
+    }
+
+    private boolean isSeedPacket(Component component) {
+        ArrayList<JLabel> plantLabels = gameView.getSeedPackets();
+        return component instanceof JLabel && plantLabels.contains(component);
+    }
+
+    private boolean isShovelLabel(Component component) {
+        return component instanceof JLabel && "shovel".equals(component.getName());
     }
 
     public BufferedImage getDraggedImage() {

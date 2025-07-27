@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 public class StartingScreenView extends BackgroundPanel {
     private static final int PROGRESS_BAR_WIDTH = 150;
     private static final int PROGRESS_BAR_HEIGHT = 20;
-    private static final int BUTTON_WIDTH = 150;
+    private static final int BUTTON_WIDTH = 300;
     private static final int BUTTON_HEIGHT = 40;
     private static final String BACKGROUND_PATH = "assets/background/StartingScreen.png";
     private static final Dimension PANEL_SIZE = new Dimension(680, 500);
@@ -28,23 +28,26 @@ public class StartingScreenView extends BackgroundPanel {
         progressBar = new JProgressBar();
         progressBar.setValue(0);
         progressBar.setStringPainted(true);
+        progressBar.setBackground(Color.WHITE);
+        progressBar.setPreferredSize(new Dimension(PROGRESS_BAR_WIDTH, PROGRESS_BAR_HEIGHT));
+
+        int xProgressBar = (getPreferredSize().width - PROGRESS_BAR_WIDTH) / 2;
+        progressBar.setBounds(xProgressBar, 350, PROGRESS_BAR_WIDTH, PROGRESS_BAR_HEIGHT);
     }
 
     private void initializeContinueButton() {
-        continueButton = new JButton("Loading...");
+        continueButton = new JButton();
         continueButton.setEnabled(false);
-        continueButton.setFont(new Font("Arial", Font.BOLD, 16));
-        continueButton.setFocusPainted(false);
+        continueButton.setOpaque(true);
+        continueButton.setForeground(new Color(126, 69, 21));
+        continueButton.setBackground(new Color(126, 69, 21));
+
+        int xButton = (getPreferredSize().width - BUTTON_WIDTH) / 2;
+        continueButton.setBounds(xButton, 425, BUTTON_WIDTH, BUTTON_HEIGHT);
     }
 
     private void layoutComponents() {
         setLayout(null);
-        int xProgressBar = (getPreferredSize().width - PROGRESS_BAR_WIDTH) / 2;
-        int xButton = (getPreferredSize().width - BUTTON_WIDTH) / 2;
-
-        progressBar.setBounds(xProgressBar, 350, PROGRESS_BAR_WIDTH, PROGRESS_BAR_HEIGHT);
-        continueButton.setBounds(xButton, 400, BUTTON_WIDTH, BUTTON_HEIGHT);
-
         add(progressBar);
         add(continueButton);
     }
@@ -54,9 +57,11 @@ public class StartingScreenView extends BackgroundPanel {
         continueButton.setActionCommand(actionCommand);
     }
 
-    public void updateButton(boolean enabled, String text) {
+    public void updateButton(boolean enabled, boolean transparent) {
         continueButton.setEnabled(enabled);
-        continueButton.setText(text);
+        continueButton.setOpaque(transparent);
+        continueButton.setContentAreaFilled(transparent);
+        continueButton.setBorderPainted(transparent);
     }
 
     public void updateProgress(int value) {

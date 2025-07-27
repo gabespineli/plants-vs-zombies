@@ -23,12 +23,11 @@ public class GameController implements ActionListener {
 
         initializeListener();
 
-        startGameLoop();
-        gameLoop.start();
     }
 
-    private void startGameLoop() {
+    public void startGameLoop() {
         gameLoop = new Timer(30, this);
+        gameLoop.start();
     }
 
     @Override
