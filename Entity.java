@@ -24,8 +24,6 @@ public class Entity {
      */
     public int getHealth(){ return health; }
 
-    public void setHealth(int hp) { health = hp; }
-
     /**
      * Gets the current row position of the entity.
      * @return the row position

@@ -51,8 +51,6 @@ public class Gameboard {
      */
     public ArrayList<Sun> getActiveSuns() { return activeSuns; }
 
-    public LevelManager getLevel() { return level; }
-
     /**
      * Updates the game state for one tick. Processes plant actions, zombie movement, projectile updates, and object cleanup.
      * @param currentTick the current game tick
@@ -265,7 +263,7 @@ public class Gameboard {
         }
     }
 
-    public void reduceCDs() {
+    private void reduceCDs() {
         Sunflower.reduceCD();
         CherryBomb.reduceCD();
         Peashooter.reduceCD();
