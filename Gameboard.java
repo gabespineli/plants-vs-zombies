@@ -74,7 +74,15 @@ public class Gameboard {
             }
 
             else if (plant instanceof CherryBomb cb) {
-                cb.updateCheery(aliveZombies);
+                cb.updateCherry(aliveZombies);
+            }
+
+            else if (plant instanceof Snowpea sp) {
+                sp.updateSnowpea(aliveZombies);
+            }
+
+            else if (plant instanceof PotatoMine pm) {
+                pm.updatePotato(aliveZombies);
             }
         }
         for (Zombie zombie : aliveZombies) { zombie.updateZombie(alivePlants); }
@@ -127,6 +135,9 @@ public class Gameboard {
             case "sunflower" -> new Sunflower();
             case "peashooter" -> new Peashooter();
             case "cherrybomb" -> new CherryBomb();
+            case "snowpea" -> new Snowpea();
+            case "wallnut" -> new Wallnut();
+            case "potatomine" -> new PotatoMine();
             default -> null;
 
         };
@@ -258,6 +269,9 @@ public class Gameboard {
         Sunflower.reduceCD();
         CherryBomb.reduceCD();
         Peashooter.reduceCD();
+        Snowpea.reduceCD();
+        Wallnut.reduceCD();
+        PotatoMine.reduceCD();
     }
 
     public int checkWinLose(int currentTick) {

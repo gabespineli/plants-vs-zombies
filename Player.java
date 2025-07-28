@@ -60,6 +60,24 @@ public class Player {
                 System.out.println("Cherry still in cooldown for placement. Wait for " + remaining + " turns.");
                 return false;
             }
+        } else if (p instanceof Snowpea) {
+            if (Snowpea.isReady() != 0) {
+                double remaining = Snowpea.isReady();
+                System.out.println("Snowpea still in cooldown for placement. Wait for " + remaining + " turns.");
+                return false;
+            }
+        } else if (p instanceof Wallnut) {
+            if (Wallnut.isReady() != 0) {
+                double remaining = Wallnut.isReady();
+                System.out.println("Wallnut still in cooldown for placement. Wait for " + remaining + " turns.");
+                return false;
+            }
+        } else if (p instanceof PotatoMine) {
+            if (PotatoMine.isReady() != 0) {
+                double remaining = PotatoMine.isReady();
+                System.out.println("Potato Mine still in cooldown for placement. Wait for " + remaining + " turns.");
+                return false;
+            }
         }
 
         if (sunPoints >= p.getCost()) {
@@ -67,6 +85,9 @@ public class Player {
             if (p instanceof Sunflower) { Sunflower.setPlacementCooldown(); }
             else if (p instanceof Peashooter) { Peashooter.setPlacementCooldown(); }
             else if (p instanceof CherryBomb) { CherryBomb.setPlacementCooldown(); }
+            else if (p instanceof Snowpea) { Snowpea.setPlacementCooldown(); }
+            else if (p instanceof Wallnut) { Wallnut.setPlacementCooldown(); }
+            else if (p instanceof PotatoMine) { PotatoMine.setPlacementCooldown(); }
             System.out.println("Bought " + p.getPlantType() + " for " + p.getCost() + " sun.");
             return true;
         } else {

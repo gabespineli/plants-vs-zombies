@@ -8,9 +8,9 @@ import java.util.ArrayList;
  public class Peashooter extends Plant {
     private static final int placementCooldown = 250;
     private static int placementTimer;
-    private int projectileDamage;
-    private int directDamage;
-    private final int RANGE;
+    protected int projectileDamage;
+    protected int directDamage;
+    protected final int RANGE;
 
 
     /**

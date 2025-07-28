@@ -1,18 +1,18 @@
 import java.util.ArrayList;
 
-public class CherryBomb extends Plant {
-    private static final int placementCooldown = 1667;
+public class PotatoMine extends Plant {
+    private static final int placementCooldown = 250;
     private static int placementTimer;
     private int damage;
 
-    public CherryBomb() {
+    public PotatoMine() {
         super();
-        health = 30;
-        cost = 150;
-        actionCooldown = 1.2;
-        cooldown = 1.2;
-        plantType = "Cherry Bomb";
-        damage = 700;
+        health = 300;
+        cost = 25;
+        actionCooldown = 15;
+        cooldown = 15;
+        plantType = "Potato Mine";
+        damage = 1800;
     }
 
     public static void reduceCD() {
@@ -29,11 +29,11 @@ public class CherryBomb extends Plant {
         placementTimer = placementCooldown;
     }
 
-    public void updateCherry(ArrayList<Zombie> aliveZombies) {
+    public void updatePotato(ArrayList<Zombie> aliveZombies) {
         reduceActionCooldown();
         if (actionCooldown == 0) {
             for (Zombie z : aliveZombies) {
-                if (z.getRowPos() >= rowPos-1 && z.getRowPos() <= rowPos+1 && z.getColumnPos() >= columnPos-1.5 && z.getColumnPos() <= columnPos+1.5) {
+                if (z.getRowPos() == rowPos && z.getColumnPos() >= columnPos-0.5 && z.getColumnPos() <= columnPos+0.5) {
                     z.takeDamage(damage);
                 }
             }
