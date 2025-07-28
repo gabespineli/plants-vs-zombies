@@ -94,6 +94,9 @@ public class Gameboard {
 
         // ZOMBIE GENERATION
         generateZombie(currentTick);
+
+        // REDUCE PLANT COOLDOWN
+        reduceCDs();
     }
 
     /**
@@ -235,5 +238,11 @@ public class Gameboard {
             aliveZombies.add(z);
             System.out.println("A flag zombie appeared at (" + z.getRowPos() + "," + z.getColumnPos() + ").");
         }
+    }
+
+    public void reduceCDs() {
+        Sunflower.reduceCD();
+        CherryBomb.reduceCD();
+        Peashooter.reduceCD();
     }
 }

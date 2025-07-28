@@ -21,13 +21,14 @@ public class GameView extends BackgroundPanel {
     public static final int GRID_COLS = 9;
     public static final int GRID_ROWS = 5;
 
-    private static final String[] PLANT_TYPES = {"sunflower", "peashooter"}; // add cherrybomb
+    private static final String[] PLANT_TYPES = {"sunflower", "peashooter", "cherrybomb"}; // add cherrybomb
 
     private JPanel seedSlot;
     private BufferedImage seedSlotImage;
     private JLabel sunPointsLabel;
     private ArrayList<JLabel> seedPackets;
     private JLabel shovelLabel;
+    private JLabel menuLabel;
 
     private ArrayList<Zombie> zombies = new ArrayList<>();
     private ArrayList<Pea> peas = new ArrayList<>();
@@ -64,6 +65,7 @@ public class GameView extends BackgroundPanel {
         createSeedSlotContainer();
         createSeedPackets();
         createShovelLabel();
+        createMenuLabel();
         createSunPointsDisplay();
 
         // DEBUGGING
@@ -116,12 +118,25 @@ public class GameView extends BackgroundPanel {
         }
     }
 
+    private void createMenuLabel() {
+        menuLabel = new JLabel();
+        menuLabel.setName("menu");
+        try {
+            ImageIcon icon = new ImageIcon(ImageIO.read(new File("assets/button/menu.png")));
+            Image scaled = icon.getImage().getScaledInstance(80, 25, Image.SCALE_SMOOTH);
+            menuLabel.setIcon(new ImageIcon(scaled));
+            menuLabel.setBounds(580, 0, 80, 25);
+        } catch (IOException e) {
+            System.err.println("Failed to load menu image: " + e.getMessage());
+        }
+    }
+
     private void createSunPointsDisplay() {
         sunPointsLabel = new JLabel("0");
         sunPointsLabel.setFont(new Font("DialogInput", Font.BOLD, 18));
         sunPointsLabel.setForeground(Color.BLACK);
         sunPointsLabel.setBounds(20, 52, 47, 30);
-        sunPointsLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+        sunPointsLabel.setHorizontalAlignment(SwingConstants.CENTER);
     }
 
     private void layoutComponents() {
@@ -132,36 +147,7 @@ public class GameView extends BackgroundPanel {
         add(seedSlot);
         add(shovelLabel);
         add(sunPointsLabel);
-    }
-
-    public void updateSunPoints(int points) {
-        sunPointsLabel.setText(String.valueOf(points));
-    }
-
-    public void updateZombies(ArrayList<Zombie> zombies) {
-        this.zombies = zombies;
-    }
-
-    public void updatePeas(ArrayList<Pea> peas) {
-        this.peas = peas;
-    }
-
-    public void updateSuns(ArrayList<Sun> suns) {
-        this.suns = suns;
-    }
-
-    public Point snapToGrid(int x, int y) {
-        int col = (x - GRID_START_X) / CELL_WIDTH;
-        int row = (y - GRID_START_Y) / CELL_HEIGHT;
-
-        if (isValidGridPosition(row, col)) {
-            return new Point(col, row);
-        }
-        return null;
-    }
-
-    private boolean isValidGridPosition(int row, int col) {
-        return row >= 0 && row < GRID_ROWS && col >= 0 && col < GRID_COLS;
+        add(menuLabel);
     }
 
     @Override
@@ -282,5 +268,21 @@ public class GameView extends BackgroundPanel {
 
     public ArrayList<JLabel> getSeedPackets() {
         return seedPackets;
+    }
+
+    public void updateSunPoints(int points) {
+        sunPointsLabel.setText(String.valueOf(points));
+    }
+
+    public void updateZombies(ArrayList<Zombie> zombies) {
+        this.zombies = zombies;
+    }
+
+    public void updatePeas(ArrayList<Pea> peas) {
+        this.peas = peas;
+    }
+
+    public void updateSuns(ArrayList<Sun> suns) {
+        this.suns = suns;
     }
 }

@@ -3,7 +3,8 @@
  * Extends the Plant class and provides sun generation capabilities.
  */
 public class Sunflower extends Plant {
-    private static int lastPlacedSunflower = -9999;
+    private static final int placementCooldown = 250;
+    private static int placementTimer;
 
     /**
      * Constructs a new Sunflower with default stats.
@@ -13,25 +14,24 @@ public class Sunflower extends Plant {
         super();
         health = 30;
         cost = 50;
-        placementCooldown = 250;
         actionCooldown = 24;
         cooldown = 24;
         plantType = "Sunflower";
     }
 
-    /**
-     * Gets the tick when the last Sunflower was placed.
-     * Used for placement cooldown management.
-     * @return the tick value when the last Sunflower was placed
-     */
-    public static int getLastPlacedSunflower() { return lastPlacedSunflower; }
+    public static void reduceCD() {
+        if (placementTimer > 0){
+            placementTimer--;
+        }
+    }
 
-    /**
-     * Sets the tick when a Sunflower was placed.
-     * Used for tracking placement cooldowns.
-     * @param tick the tick value to set
-     */
-    public static void setLastPlacedSunflower(int tick) { lastPlacedSunflower = tick; }
+    public static int isReady() {
+        return placementTimer;
+    }
+
+    public static void setPlacementCooldown() {
+        placementTimer = placementCooldown;
+    }
 
     /**
      * Updates the Sunflower's state and potentially produces sun.

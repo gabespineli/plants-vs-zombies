@@ -43,20 +43,20 @@ public class Player {
         }
 
         if (p instanceof Sunflower) {
-            if (currentTick - Sunflower.getLastPlacedSunflower() < p.getPlacementCooldown()) {
-                double remaining = p.getPlacementCooldown() - (currentTick - Sunflower.getLastPlacedSunflower());
+            if (Sunflower.isReady() != 0) {
+                double remaining = Sunflower.isReady();
                 System.out.println("Sunflower still in cooldown for placement. Wait for " + remaining + " turns.");
                 return false;
             }
         } else if (p instanceof Peashooter) {
-            if (currentTick - Peashooter.getLastPlacedPeashooter() < p.getPlacementCooldown()) {
-                double remaining = p.getPlacementCooldown() - (currentTick - Peashooter.getLastPlacedPeashooter());
+            if (Peashooter.isReady() != 0) {
+                double remaining = Peashooter.isReady();
                 System.out.println("Peashooter still in cooldown for placement. Wait for " + remaining + " turns.");
                 return false;
             }
         } else if (p instanceof CherryBomb) {
-            if (currentTick - CherryBomb.getLastPlacedCherry() < p.getPlacementCooldown()) {
-                double remaining = p.getPlacementCooldown() - (currentTick - CherryBomb.getLastPlacedCherry());
+            if (CherryBomb.isReady() != 0) {
+                double remaining = CherryBomb.isReady();
                 System.out.println("Cherry still in cooldown for placement. Wait for " + remaining + " turns.");
                 return false;
             }
@@ -64,9 +64,9 @@ public class Player {
 
         if (sunPoints >= p.getCost()) {
             sunPoints -= p.getCost();
-            if (p instanceof Sunflower) { Sunflower.setLastPlacedSunflower(currentTick); }
-            else if (p instanceof Peashooter) { Peashooter.setLastPlacedPeashooter(currentTick); }
-            else if (p instanceof CherryBomb) { CherryBomb.setLastPlacedCherry(currentTick); }
+            if (p instanceof Sunflower) { Sunflower.setPlacementCooldown(); }
+            else if (p instanceof Peashooter) { Peashooter.setPlacementCooldown(); }
+            else if (p instanceof CherryBomb) { CherryBomb.setPlacementCooldown(); }
             System.out.println("Bought " + p.getPlantType() + " for " + p.getCost() + " sun.");
             return true;
         } else {
