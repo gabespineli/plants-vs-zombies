@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eba511f6-a85a-41c3-bf74-14e9dc6e3eaa" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/GameView.java" afterDir="false" />
-    </list>
+    <list default="true" id="40d48333-4dc5-4ae3-8429-3aa617a830df" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,6 +13,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -26,91 +24,72 @@
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
     &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;gabespineli&quot;
+    &quot;assignee&quot;: &quot;Gabiesaur&quot;
   }
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/gabespineli/plants-vs-zombies.git&quot;,
-    &quot;accountId&quot;: &quot;48846465-0cf8-4cb4-930a-94b39cf57d2a&quot;
+    &quot;accountId&quot;: &quot;8113789a-777f-4d77-be78-ce0178349159&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 5
+  &quot;associatedIndex&quot;: 0
 }</component>
-  <component name="ProjectId" id="2ypIbyPMymYQ1QrHzVI7oPKatYa" />
+  <component name="ProjectId" id="3088TKkMH03958c262Q2a8xJKEW" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.ConsoleDriverPVZ.executor&quot;: &quot;Run&quot;,
-    &quot;Application.DriverPVZ.executor&quot;: &quot;Run&quot;,
-    &quot;Application.GUIDriverPVZ.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/GabEspineli/Documents/GitHub/plants-vs-zombies/assets/plants&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.ConsoleDriverPVZ.executor": "Debug",
+    "Application.GUIDriverPVZ.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/Users/GAB/Documents/GitHub/MCO2/plants-vs-zombies"
   }
-}</component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/assets/plants" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/assets/ui" />
-      <recent name="$PROJECT_DIR$/assets/zombie" />
-      <recent name="$PROJECT_DIR$/assets/plants" />
-    </key>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.26094.121" />
-        <option value="bundled-js-predefined-d6986cc7102b-b26f3e71634d-JavaScript-IU-251.26094.121" />
-      </set>
-    </attachedChunks>
-  </component>
+}]]></component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="eba511f6-a85a-41c3-bf74-14e9dc6e3eaa" name="Changes" comment="" />
-      <created>1750525162947</created>
+      <changelist id="40d48333-4dc5-4ae3-8429-3aa617a830df" name="Changes" comment="" />
+      <created>1752997845789</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1750525162947</updated>
-      <workItem from="1750525164317" duration="476000" />
-      <workItem from="1750596586782" duration="774000" />
-      <workItem from="1750599063649" duration="1024000" />
-      <workItem from="1750691604912" duration="542000" />
-      <workItem from="1753436275210" duration="21021000" />
-      <workItem from="1753490983076" duration="30129000" />
-      <workItem from="1753610826169" duration="14753000" />
-      <workItem from="1753668649357" duration="19967000" />
-      <workItem from="1753719860964" duration="328000" />
+      <updated>1752997845789</updated>
     </task>
     <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-field">
-          <url>file://$PROJECT_DIR$/GameView.java</url>
-          <line>41</line>
-          <properties field="zombies" class="GameView" />
-          <option name="timeStamp" value="2" />
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Pea.java</url>
+          <line>73</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/CherryBomb.java</url>
+          <line>36</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/GameController.java</url>
+          <line>62</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/GameController.java</url>
+          <line>72</line>
+          <option name="timeStamp" value="38" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="scanner" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

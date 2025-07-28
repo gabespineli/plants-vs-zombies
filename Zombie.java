@@ -8,6 +8,8 @@ public class Zombie extends Entity {
     private int speed;
     private int damage;
     private Armor armor;
+    protected boolean isFrozen;
+    protected double frozenTime;
     /**
      * Constructs a new Zombie with default stats.
      * Sets health to 70, walk interval to 4, and damage to 10.
@@ -89,6 +91,14 @@ public class Zombie extends Entity {
      * @param alivePlants the list of alive plants to check for attacks
      */
     public void updateZombie(ArrayList<Plant> alivePlants){
+        if (isFrozen){
+            frozenTime -= 0.03;
+            if (frozenTime <= 0){
+                speed /= 2;
+                cooldown /= 2;
+            }
+        }
+
         for (Plant p : alivePlants){
             if (p.getRowPos() == rowPos && p.getColumnPos()+0.3 >= columnPos && p.getColumnPos()-0.3 <= columnPos){
                 attack(p);
@@ -144,5 +154,14 @@ public class Zombie extends Entity {
 
     public boolean hasArmor() {
         return armor != null;
+    }
+
+    public void freeze() {
+        if (!isFrozen){
+            speed *= 2;
+            cooldown *= 2;
+            isFrozen = true;
+        }
+        frozenTime = 5;
     }
 }
