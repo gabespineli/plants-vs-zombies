@@ -11,6 +11,7 @@ public class Gameboard {
     private ArrayList<Pea> activePeas;
     private ArrayList<Sun> activeSuns;
     private int lastZombieGeneratedTick;
+    private LevelManager level;
 
     /**
      * Constructs a new Gameboard with empty 5x9 grid and initialized collections.
@@ -22,6 +23,8 @@ public class Gameboard {
         activePeas = new ArrayList<>();
         activeSuns = new ArrayList<>();
         lastZombieGeneratedTick = 0;
+
+        level = LevelManager.loadFile("Saves.txt");
     }
 
     /**
@@ -47,6 +50,8 @@ public class Gameboard {
      * @return the list of active suns
      */
     public ArrayList<Sun> getActiveSuns() { return activeSuns; }
+
+    public LevelManager getLevel() { return level; }
 
     /**
      * Updates the game state for one tick. Processes plant actions, zombie movement, projectile updates, and object cleanup.
@@ -201,13 +206,22 @@ public class Gameboard {
         if (currentTick <= 999) { return; }
 
         if (currentTick <= 2667) {
-            generationInterval = 333;
+            generationInterval = 333 - level.getLevel() * 10;
+        } else if (currentTick <= 3000) {
+            generationInterval = 167 - level.getLevel() * 10;
+        } else if (currentTick <= 3333) {
+            if (level.getLevel() >= 3) {
+                generationInterval = 50;
+            }
+            else {
+                generationInterval = 167 - level.getLevel() * 10;
+            }
         } else if (currentTick <= 4667) {
-            generationInterval = 167;
+            generationInterval = 167 - level.getLevel() * 10;
         } else if (currentTick <= 5667) {
-            generationInterval = 100;
+            generationInterval = 100 - level.getLevel() * 10;
         } else if (currentTick <= 6000) {
-            generationInterval = random.nextInt(67) + 1; // generate from 1-2 ticks
+            generationInterval = 63 - level.getLevel() * 10;
         }
 
         if (currentTick - lastZombieGeneratedTick >= generationInterval) {
@@ -215,10 +229,10 @@ public class Gameboard {
             if (currentTick >= 3667){
                 nArmorRNG = random.nextInt(100);
             }
-            if (nArmorRNG >= 0 && nArmorRNG <= 20){
+            if (nArmorRNG >= 0 && nArmorRNG <= 19 + level.getLevel()){
                 z = new Zombie("cone");
             }
-            else if (nArmorRNG >= 21 && nArmorRNG <= 29){
+            else if (nArmorRNG >= 20 + level.getLevel() && nArmorRNG <= 28 + level.getLevel()){
                 z = new Zombie("bucket");
             }
             else{
@@ -231,7 +245,7 @@ public class Gameboard {
             System.out.println("A zombie appeared at (" + z.getRowPos() + "," + z.getColumnPos() + ").");
         }
 
-        if (currentTick == 1700) {
+        if (currentTick == 5700 || currentTick == 3000 && level.getLevel() >= 3) {
             Zombie z = new Zombie("flag");
             z.setRowPos(random.nextInt(5));
             z.setColumnPos(8);
@@ -244,5 +258,39 @@ public class Gameboard {
         Sunflower.reduceCD();
         CherryBomb.reduceCD();
         Peashooter.reduceCD();
+    }
+
+    public int checkWinLose(int currentTick) {
+        for (Zombie z : aliveZombies) {
+            if (z.getColumnPos() < 0) {
+                return 2;
+            }
+        }
+        if (currentTick > 6000 && aliveZombies.isEmpty()) {
+            return 1;
+        }
+        return 0;
+    }
+
+    public void resetBoard() {
+        for (Zombie z : aliveZombies) {
+            z = null;
+        }
+        aliveZombies.clear();
+
+        for (Plant p : alivePlants) {
+            p = null;
+        }
+        alivePlants.clear();
+
+        for (Sun s : activeSuns) {
+            s = null;
+        }
+        activeSuns.clear();
+
+        for (Pea p : activePeas) {
+            p = null;
+        }
+        activePeas = null;
     }
 }

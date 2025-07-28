@@ -58,6 +58,29 @@ public class GameController implements ActionListener {
             updatePlantBoardDisplay();
             updateSunPointsDisplay();
             updateSunDisplay();
+            // CHECK WIN/LOSE CONDITION
+            if (gameboard.checkWinLose(currentTick) != 0){
+                if (gameboard.checkWinLose(currentTick) == 1){
+                    gameLoop.stop();
+                    gameboard.resetBoard();
+                    currentTick = 0;
+                    // reset level
+                    view.resetView();
+                    gameLoop.restart();
+                    preGame = true;
+                    // Add level
+                }
+                else {
+                    gameLoop.stop();
+                    gameboard.resetBoard();
+                    currentTick = 0;
+                    // reset level
+                    view.resetView();
+                    gameLoop.restart();
+                    preGame = true;
+                }
+
+            }
         }
 
         // MENU INTERFACE
