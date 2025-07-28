@@ -236,7 +236,7 @@ public class Gameboard {
                 z = new Zombie("bucket");
             }
             else{
-                z = new Zombie();
+                z = new Zombie("cone");
             }
             lastZombieGeneratedTick = currentTick;
             z.setRowPos(random.nextInt(5));
@@ -273,24 +273,14 @@ public class Gameboard {
     }
 
     public void resetBoard() {
-        for (Zombie z : aliveZombies) {
-            z = null;
+        for (int i = alivePlants.size() - 1; i >= 0; i--) {
+            Plant plant = alivePlants.get(i);
+                plantBoard[plant.getRowPos()][(int) plant.getColumnPos()] = null;
+                alivePlants.remove(i);
         }
         aliveZombies.clear();
-
-        for (Plant p : alivePlants) {
-            p = null;
-        }
         alivePlants.clear();
-
-        for (Sun s : activeSuns) {
-            s = null;
-        }
         activeSuns.clear();
-
-        for (Pea p : activePeas) {
-            p = null;
-        }
-        activePeas = null;
+        activePeas.clear();
     }
 }

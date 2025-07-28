@@ -98,6 +98,7 @@ public class GameController implements ActionListener {
                     gameLoop.restart();
                     preGame = true;
                     view.setSettingsVisible(false);
+                    gameboard.resetBoard();
                 }
                 case "main" -> {
                     currentTick = 0;

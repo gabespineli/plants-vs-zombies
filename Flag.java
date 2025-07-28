@@ -6,9 +6,4 @@ public class Flag extends Armor {
         isActive = true;
         armorType = "Flag";
     }
-
-    @Override
-    public void takeDamage(int d){
-        zombie.setHealth(zombie.getHealth() - d);
-    }
 }

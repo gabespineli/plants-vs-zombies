@@ -25,7 +25,8 @@ public class Zombie extends Entity {
     public Zombie(String type) {
         this();
         armor = createArmor(type);
-        armor.setZombie(this);
+        damage += armor.getArmorDamage();
+        speed += armor.getArmorSpeed();
     }
 
     public void setDamage(int d) {
@@ -101,8 +102,12 @@ public class Zombie extends Entity {
     public void takeDamage(int d){
         if (armor != null){
             if (armor.isActive()){
+                if (armor.getArmorType() == "flag"){
+                    health -= d;
+                }
                 armor.takeDamage(d);
                 if (!armor.isActive()) {
+                    removeArmor();
                     armor = null;
                 }
             }
@@ -130,5 +135,14 @@ public class Zombie extends Entity {
             }
         }
         return null;
+    }
+
+    protected void removeArmor() {
+        damage -= armor.getArmorDamage();
+        speed -= armor.getArmorSpeed();
+    }
+
+    public boolean hasArmor() {
+        return armor != null;
     }
 }
