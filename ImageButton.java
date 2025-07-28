@@ -16,15 +16,20 @@ public class ImageButton extends JButton {
 
         setOpaque(false);
         setVisible(true);
-        setContentAreaFilled(true);
+        setContentAreaFilled(false);  // important for transparent buttons
         setBorderPainted(false);
         setFocusPainted(false);
         setActionCommand(actionCommand);
 
         try {
-            buttonImage = ImageIO.read(new File(imagePath));
+            File file = new File(imagePath);
+            if (!file.exists()) {
+                System.err.println("Image file does not exist: " + imagePath);
+            } else {
+                buttonImage = ImageIO.read(file);
+            }
         } catch (IOException e) {
-            System.err.println("Failed to load button image: " + e.getMessage());
+            System.err.println("Failed to load button image: " + imagePath + " - " + e.getMessage());
         }
 
         setPreferredSize(new Dimension(width, height));
@@ -32,10 +37,11 @@ public class ImageButton extends JButton {
 
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
         if (buttonImage != null) {
-            Graphics2D g2d = (Graphics2D) g;
+            Graphics2D g2d = (Graphics2D) g.create();
             g2d.drawImage(buttonImage, 0, 0, width, height, null);
+            g2d.dispose();
         }
+        super.paintComponent(g);
     }
 }

@@ -1,8 +1,10 @@
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -17,7 +19,7 @@ public class GameView extends BackgroundPanel {
     public static final int GRID_START_X = 70;
     public static final int GRID_START_Y = 70;
     public static final int CELL_WIDTH = 65;
-    public static final int CELL_HEIGHT = 79;
+    public static final int CELL_HEIGHT = 80;
     public static final int GRID_COLS = 9;
     public static final int GRID_ROWS = 5;
 
@@ -28,15 +30,29 @@ public class GameView extends BackgroundPanel {
     private JLabel sunPointsLabel;
     private ArrayList<JLabel> seedPackets;
     private JLabel shovelLabel;
-    private JLabel menuLabel;
+    private ImageButton menuButton;
+    private JLabel settingsLabel;
+    private ImageButton restartLevelButton;
+    private ImageButton mainMenuButton;
+    private JButton backSettingsButton;
+    private JLabel level;
+    private JLabel levelNumber;
 
-    private ArrayList<Zombie> zombies = new ArrayList<>();
-    private ArrayList<Pea> peas = new ArrayList<>();
-    private ArrayList<Sun> suns = new ArrayList<>();
-    private final String[][] plantGrid = new String[5][9];
+    private int readySetPlantPhase;
+    private ArrayList<Zombie> zombies;
+    private ArrayList<Pea> peas;
+    private ArrayList<Sun> suns;
+    private final String[][] plantGrid;
 
     public GameView() {
         super(BACKGROUND_PATH, PANEL_SIZE);
+
+        readySetPlantPhase = 0;
+        zombies = new ArrayList<>();
+        peas = new ArrayList<>();
+        suns = new ArrayList<>();
+        plantGrid = new String[GRID_ROWS][GRID_COLS];
+
         initializePanel();
     }
 
@@ -63,13 +79,18 @@ public class GameView extends BackgroundPanel {
 
     private void createComponents() {
         createSeedSlotContainer();
+        createSunPointsDisplay();
         createSeedPackets();
         createShovelLabel();
-        createMenuLabel();
-        createSunPointsDisplay();
+        createMenuButton();
+        createSettingsLabel();
+        createRestartLevelButton();
+        createMainMenuButton();
+        createBackSettingsButton();
+        createLevelLabel();
 
         // DEBUGGING
-        // ITEM.setBorder(new LineBorder(Color.RED, 2));
+        // backSettingsButton.setBorder(new LineBorder(Color.RED, 2));
 
     }
 
@@ -118,21 +139,74 @@ public class GameView extends BackgroundPanel {
         }
     }
 
-    private void createMenuLabel() {
-        menuLabel = new JLabel();
-        menuLabel.setName("menu");
+    private void createMenuButton() {
+        menuButton = new ImageButton("assets/button/menu.png", "menu", 80, 25);
+        menuButton.setBounds(580, 0, menuButton.getPreferredSize().width, menuButton.getPreferredSize().height);
+    }
+
+    private void createSettingsLabel() {
+        settingsLabel = new JLabel();
+        settingsLabel.setName("settings");
+        int x = 670;
+        int y = 503;
         try {
-            ImageIcon icon = new ImageIcon(ImageIO.read(new File("assets/button/menu.png")));
-            Image scaled = icon.getImage().getScaledInstance(80, 25, Image.SCALE_SMOOTH);
-            menuLabel.setIcon(new ImageIcon(scaled));
-            menuLabel.setBounds(580, 0, 80, 25);
+            ImageIcon icon = new ImageIcon(ImageIO.read(new File("assets/ui/settings.png")));
+            Image scaled = icon.getImage().getScaledInstance(x, y, Image.SCALE_SMOOTH);
+            settingsLabel.setIcon(new ImageIcon(scaled));
+            settingsLabel.setBounds(0, 0, x, y);
         } catch (IOException e) {
-            System.err.println("Failed to load menu image: " + e.getMessage());
+            System.err.println("Failed to load settings image: " + e.getMessage());
+        }
+        settingsLabel.setVisible(false);
+    }
+
+    private void createRestartLevelButton() {
+        restartLevelButton = new ImageButton("assets/button/restartlevel.png", "restart", 230, 60);
+        restartLevelButton.setBounds(220, 180, restartLevelButton.getPreferredSize().width, restartLevelButton.getPreferredSize().height);
+    }
+
+    private void createMainMenuButton() {
+        mainMenuButton = new ImageButton("assets/button/mainmenu.png", "main", 180, 40);
+        mainMenuButton.setBounds(250, 250, mainMenuButton.getPreferredSize().width, mainMenuButton.getPreferredSize().height);
+    }
+
+    private void createBackSettingsButton() {
+        backSettingsButton = new JButton();
+        backSettingsButton.setActionCommand("back");
+        backSettingsButton.setBounds(235, 360, 260, 65);
+        backSettingsButton.setOpaque(false);
+        backSettingsButton.setBorderPainted(false);
+        backSettingsButton.setContentAreaFilled(false);
+        backSettingsButton.setVisible(false);
+    }
+
+    private void createLevelLabel() {
+        level = new JLabel();
+        level.setName("level");
+        try {
+            ImageIcon icon = new ImageIcon(ImageIO.read(new File("assets/ui/level.png")));
+            Image scaled = icon.getImage().getScaledInstance(60, 20, Image.SCALE_SMOOTH);
+            level.setIcon(new ImageIcon(scaled));
+            level.setBounds(560, 480, 60, 20);
+        } catch (IOException e) {
+            System.err.println("Failed to load level image: " + e.getMessage());
+        }
+
+        levelNumber = new JLabel("HELLO");
+        levelNumber.setName("number");
+
+        try {
+            ImageIcon icon = new ImageIcon(ImageIO.read(new File("assets/ui/" + 1 + ".png")));
+            Image scaled = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            levelNumber.setIcon(new ImageIcon(scaled));
+            levelNumber.setBounds(620, 480, 20, 20);
+        } catch (IOException e) {
+            System.err.println("Failed to load level number image: " + e.getMessage());
         }
     }
 
     private void createSunPointsDisplay() {
-        sunPointsLabel = new JLabel("0");
+        sunPointsLabel = new JLabel("50");
         sunPointsLabel.setFont(new Font("DialogInput", Font.BOLD, 18));
         sunPointsLabel.setForeground(Color.BLACK);
         sunPointsLabel.setBounds(20, 52, 47, 30);
@@ -147,7 +221,19 @@ public class GameView extends BackgroundPanel {
         add(seedSlot);
         add(shovelLabel);
         add(sunPointsLabel);
-        add(menuLabel);
+        add(menuButton);
+        add(settingsLabel);
+        add(restartLevelButton);
+        add(mainMenuButton);
+        add(backSettingsButton);
+        add(level);
+        add(levelNumber);
+
+        setComponentZOrder(restartLevelButton, 0);
+        setComponentZOrder(mainMenuButton, 0);
+        setComponentZOrder(backSettingsButton, 0);
+
+        setSettingsVisible(false);
     }
 
     @Override
@@ -160,6 +246,10 @@ public class GameView extends BackgroundPanel {
         drawPlantedPlants(g2d);
         drawSuns(g2d);
         drawDraggedPlant(g2d);
+
+        if (readySetPlantPhase > 0 && readySetPlantPhase <= 3) {
+            drawReadySetPlant(g2d, readySetPlantPhase);
+        }
     }
 
     private void drawSeedSlotBackground(Graphics2D g2d) {
@@ -247,6 +337,40 @@ public class GameView extends BackgroundPanel {
         }
     }
 
+    private void drawReadySetPlant(Graphics2D g2d, int phase) {
+        try {
+            BufferedImage img = ImageIO.read(new File("assets/ui/ready" + phase + ".png"));
+
+            double scale = 0.4 + ((phase - 1) * 0.3);
+            int width = (int)(img.getWidth() * scale);
+            int height = (int)(img.getHeight() * scale);
+            int x = (getWidth() - width) / 2;
+            int y = (getHeight() - height) / 2;
+
+            g2d.drawImage(img, x, y, width, height, null);
+        } catch (IOException e) {
+            System.err.println("Error loading ready-set-plant image: " + e.getMessage());
+        }
+    }
+
+    public void setReadySetPlantPhase(int phase) {
+        this.readySetPlantPhase = phase;
+        repaint();
+    }
+
+    public void clearReadySetPlant() {
+        this.readySetPlantPhase = 0;
+        repaint();
+    }
+
+    public void setSettingsVisible(boolean visible) {
+        settingsLabel.setVisible(visible);
+        restartLevelButton.setVisible(visible);
+        mainMenuButton.setVisible(visible);
+        backSettingsButton.setVisible(visible);
+        repaint();
+    }
+
     public void placePlant(String plantType, int row, int col) {
         plantGrid[row][col] = plantType;
         repaint();
@@ -284,5 +408,25 @@ public class GameView extends BackgroundPanel {
 
     public void updateSuns(ArrayList<Sun> suns) {
         this.suns = suns;
+    }
+
+    public void resetView() {
+        clearBoard();
+
+        updateSunPoints(50);
+
+        zombies.clear();
+        peas.clear();
+        suns.clear();
+
+        readySetPlantPhase = 0;
+        repaint();
+    }
+
+    public void setActionListener(ActionListener listener) {
+        menuButton.addActionListener(listener);
+        restartLevelButton.addActionListener(listener);
+        mainMenuButton.addActionListener(listener);
+        backSettingsButton.addActionListener(listener);
     }
 }

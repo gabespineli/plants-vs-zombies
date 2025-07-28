@@ -46,12 +46,12 @@ public class MainMenuView extends BackgroundPanel {
 
     private void initializeSaveButton() {
         saveButton = new ImageButton("assets/button/Save.png", "save", 250, 90);
-        saveButton.setBounds(350, 165, adventureButton.getPreferredSize().width, adventureButton.getPreferredSize().height);
+        saveButton.setBounds(350, 165, saveButton.getPreferredSize().width, saveButton.getPreferredSize().height);
     }
 
     private void initializeExitButton() {
         exitButton = new ImageButton("assets/button/Exit.png", "exit", 240, 90);
-        exitButton.setBounds(350, 235, adventureButton.getPreferredSize().width, adventureButton.getPreferredSize().height);
+        exitButton.setBounds(350, 235, exitButton.getPreferredSize().width, exitButton.getPreferredSize().height);
     }
 
     private void initializeNameLabel() {
