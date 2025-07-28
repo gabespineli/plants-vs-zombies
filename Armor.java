@@ -11,6 +11,10 @@ public abstract class Armor {
         applyArmor();
     }
 
+    public boolean hasArmor() {
+        return isActive;
+    }
+
     public String getArmorType() {
         return armorType;
     }
