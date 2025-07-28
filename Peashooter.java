@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Has different damage values for close-range and long-range attacks.
  */
  public class Peashooter extends Plant {
-    private static final int placementCooldown = 250;
+    private static final int PLACEMENT_COOLDOWN = 250;
     private static int placementTimer;
     protected int projectileDamage;
     protected int directDamage;
@@ -40,8 +40,8 @@ import java.util.ArrayList;
         return placementTimer;
     }
 
-    public static void setPlacementCooldown() {
-        placementTimer = placementCooldown;
+    public static void setPlacementTimer() {
+        placementTimer = PLACEMENT_COOLDOWN;
     }
 
     /**

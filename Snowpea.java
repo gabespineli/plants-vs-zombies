@@ -1,12 +1,11 @@
 import java.util.ArrayList;
 
 public class Snowpea extends Peashooter {
-    private static final int placementCooldown = 250;
+    private static final int PLACEMENT_COOLDOWN = 250;
     private static int placementTimer;
 
     public Snowpea() {
         super();
-
     }
 
     public static void reduceCD() {
@@ -19,8 +18,8 @@ public class Snowpea extends Peashooter {
         return placementTimer;
     }
 
-    public static void setPlacementCooldown() {
-        placementTimer = placementCooldown;
+    public static void setPlacementTimer() {
+        placementTimer = PLACEMENT_COOLDOWN;
     }
 
     public Frost updateSnowpea(ArrayList<Zombie> aliveZombies) {

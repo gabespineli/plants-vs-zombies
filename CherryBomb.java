@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class CherryBomb extends Plant {
-    private static final int placementCooldown = 1667;
+    private static final int PLACEMENT_COOLDOWN = 1667;
     private static int placementTimer;
     private int damage;
 
@@ -25,8 +25,8 @@ public class CherryBomb extends Plant {
         return placementTimer;
     }
 
-    public static void setPlacementCooldown() {
-        placementTimer = placementCooldown;
+    public static void setPlacementTimer() {
+        placementTimer = PLACEMENT_COOLDOWN;
     }
 
     public void updateCherry(ArrayList<Zombie> aliveZombies) {

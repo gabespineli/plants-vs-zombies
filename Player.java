@@ -82,12 +82,12 @@ public class Player {
 
         if (sunPoints >= p.getCost()) {
             sunPoints -= p.getCost();
-            if (p instanceof Sunflower) { Sunflower.setPlacementCooldown(); }
-            else if (p instanceof Peashooter) { Peashooter.setPlacementCooldown(); }
-            else if (p instanceof CherryBomb) { CherryBomb.setPlacementCooldown(); }
-            else if (p instanceof Snowpea) { Snowpea.setPlacementCooldown(); }
-            else if (p instanceof Wallnut) { Wallnut.setPlacementCooldown(); }
-            else if (p instanceof PotatoMine) { PotatoMine.setPlacementCooldown(); }
+            if (p instanceof Sunflower) { Sunflower.setPlacementTimer(); }
+            else if (p instanceof Peashooter) { Peashooter.setPlacementTimer(); }
+            else if (p instanceof CherryBomb) { CherryBomb.setPlacementTimer(); }
+            else if (p instanceof Snowpea) { Snowpea.setPlacementTimer(); }
+            else if (p instanceof Wallnut) { Wallnut.setPlacementTimer(); }
+            else if (p instanceof PotatoMine) { PotatoMine.setPlacementTimer(); }
             System.out.println("Bought " + p.getPlantType() + " for " + p.getCost() + " sun.");
             return true;
         } else {

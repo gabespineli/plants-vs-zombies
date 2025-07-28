@@ -5,11 +5,11 @@ import java.util.ArrayList;
  * Extends Entity and provides zombie-specific behavior including movement, attack patterns, and interaction with plants.
  */
 public class Zombie extends Entity {
-    private int speed;
+    private double speed;
     private int damage;
     private Armor armor;
-    protected boolean isFrozen;
-    protected double frozenTime;
+    private boolean isFrozen;
+    private double frozenTime;
     /**
      * Constructs a new Zombie with default stats.
      * Sets health to 70, walk interval to 4, and damage to 10.
@@ -29,22 +29,6 @@ public class Zombie extends Entity {
         armor = createArmor(type);
         damage += armor.getArmorDamage();
         speed += armor.getArmorSpeed();
-    }
-
-    public void setDamage(int d) {
-        damage = d;
-    }
-
-    public int getDamage() {
-        return damage;
-    }
-
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
-
-    public int getSpeed() {
-        return speed;
     }
 
     public double getColumnPos() {
@@ -132,7 +116,7 @@ public class Zombie extends Entity {
         }
     }
 
-    public Armor createArmor(String type) {
+    private Armor createArmor(String type) {
         switch (type.toLowerCase()) {
             case "flag" -> {
                 return new Flag();
@@ -147,7 +131,7 @@ public class Zombie extends Entity {
         return null;
     }
 
-    protected void removeArmor() {
+    private void removeArmor() {
         damage -= armor.getArmorDamage();
         speed -= armor.getArmorSpeed();
     }

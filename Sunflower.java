@@ -3,7 +3,7 @@
  * Extends the Plant class and provides sun generation capabilities.
  */
 public class Sunflower extends Plant {
-    private static final int placementCooldown = 250;
+    private static final int PLACEMENT_COOLDOWN = 250;
     private static int placementTimer;
 
     /**
@@ -29,8 +29,8 @@ public class Sunflower extends Plant {
         return placementTimer;
     }
 
-    public static void setPlacementCooldown() {
-        placementTimer = placementCooldown;
+    public static void setPlacementTimer() {
+        placementTimer = PLACEMENT_COOLDOWN;
     }
 
     /**
