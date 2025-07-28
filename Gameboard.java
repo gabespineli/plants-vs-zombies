@@ -236,7 +236,7 @@ public class Gameboard {
                 z = new Zombie("bucket");
             }
             else{
-                z = new Zombie("cone");
+                z = new Zombie();
             }
             lastZombieGeneratedTick = currentTick;
             z.setRowPos(random.nextInt(5));

@@ -31,7 +31,7 @@ public class GameController implements ActionListener {
     }
 
     public void startGameLoop() {
-        gameLoop = new Timer(30, this);
+        gameLoop = new Timer(10, this);
         gameLoop.start();
     }
 
@@ -42,11 +42,11 @@ public class GameController implements ActionListener {
         if (preGame) {
             int phase = currentTick / 30 + 1;
             if (phase <= 3) {
-                view.setReadySetPlantPhase(phase);
+                view.displayReadySetPlantPhase(phase);
             } else {
                 preGame = false;
                 currentTick = 0;
-                view.clearReadySetPlant();
+                view.displayReadySetPlantPhase(currentTick);
             }
         } else {
             if (currentTick % 30 == 0 && currentTick != 0) System.out.println( "Game loop tick: " + currentTick/30);
@@ -58,25 +58,23 @@ public class GameController implements ActionListener {
             updatePlantBoardDisplay();
             updateSunPointsDisplay();
             updateSunDisplay();
+
             // CHECK WIN/LOSE CONDITION
             if (gameboard.checkWinLose(currentTick) != 0){
                 if (gameboard.checkWinLose(currentTick) == 1){
                     gameLoop.stop();
                     gameboard.resetBoard();
                     currentTick = 0;
-                    // reset level
                     view.resetView();
-                    gameLoop.restart();
                     preGame = true;
-                    // Add level
+                    // Next level
                 }
                 else {
                     gameLoop.stop();
                     gameboard.resetBoard();
                     currentTick = 0;
-                    // reset level
                     view.resetView();
-                    gameLoop.restart();
+                    // show try again
                     preGame = true;
                 }
 
@@ -93,7 +91,6 @@ public class GameController implements ActionListener {
                 }
                 case "restart" -> {
                     currentTick = 0;
-                    // reset level
                     view.resetView();
                     gameLoop.restart();
                     preGame = true;
@@ -102,7 +99,6 @@ public class GameController implements ActionListener {
                 }
                 case "main" -> {
                     currentTick = 0;
-                    //reset level
                     view.resetView();
                     preGame = true;
                     view.setSettingsVisible(false);
@@ -131,7 +127,7 @@ public class GameController implements ActionListener {
     // GameViewListener Methods
     public void placePlantOnBoard(String plantType, int row, int col) {
         if (gameboard.addPlant(plantType, row, col, player, currentTick)) {
-            view.placePlant(plantType, row, col);
+            view.displayPlant(plantType, row, col);
             updateSunPointsDisplay();
         }
     }
@@ -150,7 +146,7 @@ public class GameController implements ActionListener {
             for (int col = 0; col < plantBoard[row].length; col++) {
                 Plant plant = plantBoard[row][col];
                 if (plant != null) {
-                    view.placePlant(plant.getPlantType(), row, col);
+                    view.displayPlant(plant.getPlantType(), row, col);
                 }
             }
         }
@@ -162,19 +158,19 @@ public class GameController implements ActionListener {
 
     // DISPLAYS
     private void updateSunPointsDisplay() {
-        view.updateSunPoints(player.getSunPoints());
+        view.displaySunPoints(player.getSunPoints());
     }
 
     private void updateSunDisplay() {
-        view.updateSuns(gameboard.getActiveSuns());
+        view.displaySuns(gameboard.getActiveSuns());
     }
 
     private void updateZombiesDisplay() {
-        view.updateZombies(gameboard.getAliveZombies());
+        view.displayZombies(gameboard.getAliveZombies());
     }
 
     private void updatePeaDisplay() {
-        view.updatePeas(gameboard.getActivePeas());
+        view.displayPeas(gameboard.getActivePeas());
     }
 
     // GETTERS

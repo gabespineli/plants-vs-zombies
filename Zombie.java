@@ -37,11 +37,11 @@ public class Zombie extends Entity {
         return damage;
     }
 
-    public void setspeed(int speed) {
+    public void setSpeed(int speed) {
         this.speed = speed;
     }
 
-    public int getspeed() {
+    public int getSpeed() {
         return speed;
     }
 

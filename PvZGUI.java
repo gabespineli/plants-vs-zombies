@@ -53,7 +53,7 @@ public class PvZGUI extends JFrame {
 
     private void setupLayout() {
         pack();
-        showScreen("start");
+        showScreen("menu");
     }
 
     public void showScreen(String screenName) {

@@ -4,7 +4,6 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -20,10 +19,11 @@ public class GameView extends BackgroundPanel {
     public static final int GRID_START_Y = 70;
     public static final int CELL_WIDTH = 65;
     public static final int CELL_HEIGHT = 80;
+
+    // should come from model
     public static final int GRID_COLS = 9;
     public static final int GRID_ROWS = 5;
-
-    private static final String[] PLANT_TYPES = {"sunflower", "peashooter", "cherrybomb"}; // add cherrybomb
+    private static final String[] PLANT_TYPES = {"sunflower", "peashooter", "cherrybomb"};
 
     private JPanel seedSlot;
     private BufferedImage seedSlotImage;
@@ -38,20 +38,20 @@ public class GameView extends BackgroundPanel {
     private JLabel level;
     private JLabel levelNumber;
 
-    private int readySetPlantPhase;
-    private ArrayList<Zombie> zombies;
-    private ArrayList<Pea> peas;
-    private ArrayList<Sun> suns;
-    private final String[][] plantGrid;
+    private int displayReadySetPlantPhase;
+    private ArrayList<Zombie> displayZombies;
+    private ArrayList<Pea> displayPeas;
+    private ArrayList<Sun> displaySuns;
+    private final String[][] displayPlantGrid;
 
     public GameView() {
         super(BACKGROUND_PATH, PANEL_SIZE);
 
-        readySetPlantPhase = 0;
-        zombies = new ArrayList<>();
-        peas = new ArrayList<>();
-        suns = new ArrayList<>();
-        plantGrid = new String[GRID_ROWS][GRID_COLS];
+        displayReadySetPlantPhase = 0;
+        displayZombies = new ArrayList<>();
+        displayPeas = new ArrayList<>();
+        displaySuns = new ArrayList<>();
+        displayPlantGrid = new String[GRID_ROWS][GRID_COLS];
 
         initializePanel();
     }
@@ -247,8 +247,8 @@ public class GameView extends BackgroundPanel {
         drawSuns(g2d);
         drawDraggedPlant(g2d);
 
-        if (readySetPlantPhase > 0 && readySetPlantPhase <= 3) {
-            drawReadySetPlant(g2d, readySetPlantPhase);
+        if (displayReadySetPlantPhase > 0 && displayReadySetPlantPhase <= 3) {
+            drawReadySetPlant(g2d, displayReadySetPlantPhase);
         }
     }
 
@@ -259,8 +259,8 @@ public class GameView extends BackgroundPanel {
     }
 
     private void drawZombies(Graphics2D g2d) {
-        for (Zombie zombie : zombies) {
-            int x = (int)(GRID_START_X + zombie.getColumnPos() * CELL_WIDTH + 10);
+        for (Zombie zombie : displayZombies) {
+            int x = (int)(GRID_START_X + zombie.getColumnPos() * CELL_WIDTH - 15);
             int y = GRID_START_Y + zombie.getRowPos() * CELL_HEIGHT - 10;
 
             try {
@@ -271,8 +271,8 @@ public class GameView extends BackgroundPanel {
                 if (zombie.hasArmor()){
                     String armor = zombie.getArmor().getArmorType();
                     icon = new ImageIcon(ImageIO.read(new File("assets/zombies/" + armor + ".png")));
-                    scaled = icon.getImage().getScaledInstance(20, 23, Image.SCALE_SMOOTH);
-                    g2d.drawImage(scaled, x, y + 10, null);
+                    scaled = icon.getImage().getScaledInstance(40, 42, Image.SCALE_SMOOTH);
+                    g2d.drawImage(scaled, x + 5, y - 25, null);
                 }
 
             } catch (Exception e) {
@@ -281,10 +281,8 @@ public class GameView extends BackgroundPanel {
         }
     }
 
-
-
     private void drawPeas(Graphics2D g2d) {
-        for (Pea pea : peas) {
+        for (Pea pea : displayPeas) {
             int x = (int)(GRID_START_X + pea.getColumnPos() * CELL_WIDTH + 15);
             int y = GRID_START_Y + pea.getRowPos() * CELL_HEIGHT + 10;
 
@@ -299,9 +297,9 @@ public class GameView extends BackgroundPanel {
     }
 
     private void drawPlantedPlants(Graphics2D g2d) {
-        for (int row = 0; row < plantGrid.length; row++) {
-            for (int col = 0; col < plantGrid[0].length; col++) {
-                String plantType = plantGrid[row][col];
+        for (int row = 0; row < displayPlantGrid.length; row++) {
+            for (int col = 0; col < displayPlantGrid[0].length; col++) {
+                String plantType = displayPlantGrid[row][col];
                 if (plantType != null) {
                     int x = GRID_START_X + col * CELL_WIDTH;
                     int y = GRID_START_Y + row * CELL_HEIGHT + 15;
@@ -333,7 +331,7 @@ public class GameView extends BackgroundPanel {
     }
 
     private void drawSuns(Graphics2D g2d) {
-        for (Sun sun : suns) {
+        for (Sun sun : displaySuns) {
             int x = (int)(GRID_START_X + sun.getColumnPos() * CELL_WIDTH);
             int y = (int)(GRID_START_Y + sun.getRowPos() * CELL_HEIGHT);
 
@@ -363,13 +361,8 @@ public class GameView extends BackgroundPanel {
         }
     }
 
-    public void setReadySetPlantPhase(int phase) {
-        this.readySetPlantPhase = phase;
-        repaint();
-    }
-
-    public void clearReadySetPlant() {
-        this.readySetPlantPhase = 0;
+    public void displayReadySetPlantPhase(int phase) {
+        this.displayReadySetPlantPhase = phase;
         repaint();
     }
 
@@ -381,20 +374,20 @@ public class GameView extends BackgroundPanel {
         repaint();
     }
 
-    public void placePlant(String plantType, int row, int col) {
-        plantGrid[row][col] = plantType;
+    public void displayPlant(String plantType, int row, int col) {
+        displayPlantGrid[row][col] = plantType;
         repaint();
     }
 
     public void removePlant(int row, int col) {
-        plantGrid[row][col] = null;
+        displayPlantGrid[row][col] = null;
         repaint();
     }
 
     public void clearBoard() {
-        for (int row = 0; row < plantGrid.length; row++) {
-            for (int col = 0; col < plantGrid[row].length; col++) {
-                plantGrid[row][col] = null;
+        for (int row = 0; row < displayPlantGrid.length; row++) {
+            for (int col = 0; col < displayPlantGrid[row].length; col++) {
+                displayPlantGrid[row][col] = null;
             }
         }
         repaint();
@@ -404,32 +397,32 @@ public class GameView extends BackgroundPanel {
         return seedPackets;
     }
 
-    public void updateSunPoints(int points) {
+    public void displaySunPoints(int points) {
         sunPointsLabel.setText(String.valueOf(points));
     }
 
-    public void updateZombies(ArrayList<Zombie> zombies) {
-        this.zombies = zombies;
+    public void displayZombies(ArrayList<Zombie> zombies) {
+        this.displayZombies = zombies;
     }
 
-    public void updatePeas(ArrayList<Pea> peas) {
-        this.peas = peas;
+    public void displayPeas(ArrayList<Pea> peas) {
+        this.displayPeas = peas;
     }
 
-    public void updateSuns(ArrayList<Sun> suns) {
-        this.suns = suns;
+    public void displaySuns(ArrayList<Sun> suns) {
+        this.displaySuns = suns;
     }
 
     public void resetView() {
         clearBoard();
 
-        updateSunPoints(50);
+        displaySunPoints(50);
 
-        zombies.clear();
-        peas.clear();
-        suns.clear();
+        displayZombies.clear();
+        displayPeas.clear();
+        displaySuns.clear();
 
-        readySetPlantPhase = 0;
+        displayReadySetPlantPhase = 0;
         repaint();
     }
 

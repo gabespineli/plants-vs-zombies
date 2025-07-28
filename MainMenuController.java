@@ -8,12 +8,17 @@ public class MainMenuController implements ActionListener, DocumentListener {
     private final PvZGUI gui;
 
     private GameController gameController;
+    private LevelManager levelManager;
 
 
     public MainMenuController(MainMenuView view, PvZGUI gui) {
         this.view = view;
         this.gui = gui;
+
+        levelManager = LevelManager.loadFile("assets/progress.txt");
+
         view.setActionListener(this);
+        view.setDocumentListener(this);
     }
 
     public void playGame(GameController gameController) {
@@ -29,7 +34,10 @@ public class MainMenuController implements ActionListener, DocumentListener {
                         gui.showScreen("game");
                         gameController.startGameLoop();
                     }
-            //case "save" -> gui.showScreen("save"); BONUS FEATURE!
+            case "save" -> {
+                view.showNameInput();
+                //levelManager.saveFile("assets/progress.txt");
+            }
             case "exit" -> System.exit(0);
             default -> System.err.println("Invalid command: " + command);
         }
@@ -48,6 +56,6 @@ public class MainMenuController implements ActionListener, DocumentListener {
 
     @Override
     public void changedUpdate(DocumentEvent e) {
-
+        
     }
 }

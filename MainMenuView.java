@@ -1,5 +1,6 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -13,7 +14,8 @@ public class MainMenuView extends BackgroundPanel {
     private ImageButton saveButton;
     private ImageButton exitButton;
     private JLabel nameLabel;
-    private JLabel nameDisplay;
+    private JLabel welcomeDisplay;
+    private JTextArea nameDisplay;
     private JLabel levelDisplay;
 
     public MainMenuView() {
@@ -32,9 +34,11 @@ public class MainMenuView extends BackgroundPanel {
         add(saveButton);
         add(exitButton);
         add(nameLabel);
+        add(welcomeDisplay);
         add(nameDisplay);
         add(levelDisplay);
 
+        setComponentZOrder(welcomeDisplay, 0);
         setComponentZOrder(nameDisplay, 0);
         setComponentZOrder(levelDisplay, 0);
     }
@@ -55,7 +59,7 @@ public class MainMenuView extends BackgroundPanel {
     }
 
     private void initializeNameLabel() {
-        nameLabel = new JLabel("Welcome,");
+        nameLabel = new JLabel();
         nameLabel.setFont(new Font("DialogInput", Font.BOLD, 18));
         nameLabel.setForeground(Color.BLACK);
         nameLabel.setName("name");
@@ -70,14 +74,20 @@ public class MainMenuView extends BackgroundPanel {
     }
 
     private void createTextDisplays() {
-        String name = "PLAYER";
+        String name = "New Player";
         int level = 1;
-        nameDisplay = new JLabel(name);
+        welcomeDisplay = new JLabel("Welcome!");
+        welcomeDisplay.setFont(new Font("DialogInput", Font.BOLD, 16));
+        welcomeDisplay.setForeground(Color.WHITE);
+        welcomeDisplay.setOpaque(false);
+        welcomeDisplay.setBounds(45, 130, 210, 20);
+
+        nameDisplay = new JTextArea(name);
         nameDisplay.setFont(new Font("DialogInput", Font.BOLD, 18));
-        nameDisplay.setHorizontalAlignment(SwingConstants.CENTER);
         nameDisplay.setForeground(Color.GREEN);
         nameDisplay.setOpaque(false);
-        nameDisplay.setBounds(35, 160, 220, 20);
+        nameDisplay.setEditable(false);
+        nameDisplay.setBounds(45, 160, 210, 20);
 
         levelDisplay = new JLabel("LEVEL " + level);
         levelDisplay.setFont(new Font("DialogInput", Font.PLAIN, 15));
@@ -93,7 +103,24 @@ public class MainMenuView extends BackgroundPanel {
         exitButton.addActionListener(listener);
     }
 
-    public void setName(String name) {
-        nameDisplay.setText(name);
+    public void showNameInput() {
+        welcomeDisplay.setText("Input your name here:");
+        nameDisplay.setEditable(true);
+        nameDisplay.setBackground(Color.WHITE);
+        nameDisplay.setForeground(Color.GREEN);
+        nameDisplay.setBorder(BorderFactory.createLineBorder(Color.GREEN, 1));
+        nameDisplay.setOpaque(true);
+        nameDisplay.setBounds(45, 160, 210, 20);
+        nameDisplay.revalidate();
+        nameDisplay.repaint();
     }
+
+    public void setDocumentListener(DocumentListener listener) {
+        nameDisplay.getDocument().addDocumentListener(listener);
+    }
+
+    public String getName() {
+        return nameDisplay.getText();
+    }
+
 }
