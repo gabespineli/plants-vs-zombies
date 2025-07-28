@@ -23,13 +23,8 @@ public class Zombie extends Entity {
     }
 
     public Zombie(String type) {
-        super();
-        health = 70;
-        speed = 4;
-        actionCooldown = 1;
-        cooldown = 1;
-        damage = 10;
-        createArmor(type);
+        this();
+        armor = createArmor(type);
         armor.setZombie(this);
     }
 
@@ -56,6 +51,8 @@ public class Zombie extends Entity {
     public int getRowPos() {
         return rowPos;
     }
+
+    public Armor getArmor() { return armor; }
 
     /**
      * Attacks the specified plant, dealing damage to it.
@@ -120,11 +117,18 @@ public class Zombie extends Entity {
         }
     }
 
-    public void createArmor(String type) {
+    public Armor createArmor(String type) {
         switch (type.toLowerCase()) {
-            case "flag" -> armor = new Flag();
-            case "cone" -> armor = new Cone();
-            case "bucket" -> armor = new Bucket();
+            case "flag" -> {
+                return new Flag();
+            }
+            case "cone" -> {
+                return new Cone();
+            }
+            case "bucket" -> {
+                return new Bucket();
+            }
         }
+        return null;
     }
 }

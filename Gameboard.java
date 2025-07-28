@@ -211,7 +211,7 @@ public class Gameboard {
         }
 
         if (currentTick - lastZombieGeneratedTick >= generationInterval) {
-            Zombie z = null;
+            Zombie z;
             if (currentTick >= 3667){
                 nArmorRNG = random.nextInt(100);
             }

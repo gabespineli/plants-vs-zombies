@@ -267,11 +267,18 @@ public class GameView extends BackgroundPanel {
                 ImageIcon icon = new ImageIcon(ImageIO.read(new File("assets/zombies/zombie.png")));
                 Image scaled = icon.getImage().getScaledInstance(65, 90, Image.SCALE_SMOOTH);
                 g2d.drawImage(scaled, x, y, null);
+
+                String armor = zombie.getArmor().getArmorType();
+                icon = new ImageIcon(ImageIO.read(new File("assets/zombies/" + armor + ".png")));
+                scaled = icon.getImage().getScaledInstance(20, 23, Image.SCALE_SMOOTH);
+                g2d.drawImage(scaled, x, y + 10, null);
             } catch (Exception e) {
                 System.err.println("Could not draw zombie: " + e.getMessage());
             }
         }
     }
+
+
 
     private void drawPeas(Graphics2D g2d) {
         for (Pea pea : peas) {
