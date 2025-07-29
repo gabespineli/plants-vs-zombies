@@ -217,7 +217,7 @@ public class Gameboard {
         if (currentTick <= 999) { return; }
 
         if (currentTick <= 2667) {
-            generationInterval = 333 - currentLevel * 10;
+            generationInterval = 343 - currentLevel *10;
         } else if (currentTick <= 3000) {
             generationInterval = 167 - currentLevel * 10;
         } else if (currentTick <= 3333) {
@@ -232,7 +232,9 @@ public class Gameboard {
         } else if (currentTick <= 5667) {
             generationInterval = 100 - currentLevel * 10;
         } else if (currentTick <= 6000) {
-            generationInterval = 63 - currentLevel * 10;
+            generationInterval = random.nextInt(100-66) + 67 - currentLevel * 10;
+        } else if(currentTick > 6000) {
+            generationInterval = 0;
         }
 
         if (currentTick - lastZombieGeneratedTick >= generationInterval) {
@@ -251,7 +253,7 @@ public class Gameboard {
 
             lastZombieGeneratedTick = currentTick;
             z.setRowPos(random.nextInt(5));
-            z.setColumnPos(8);
+            z.setColumnPos(10);
             aliveZombies.add(z);
             System.out.println("A zombie appeared at (" + z.getRowPos() + "," + z.getColumnPos() + ").");
         }
@@ -259,7 +261,7 @@ public class Gameboard {
         if (currentTick == 5700 || currentTick == 3000 && currentLevel >= 3) {
             Zombie z = new Zombie("flag");
             z.setRowPos(random.nextInt(5));
-            z.setColumnPos(8);
+            z.setColumnPos(10);
             aliveZombies.add(z);
             System.out.println("A flag zombie appeared at (" + z.getRowPos() + "," + z.getColumnPos() + ").");
         }

@@ -84,7 +84,7 @@ public class Zombie extends Entity {
         }
 
         for (Plant p : alivePlants){
-            if (p.getRowPos() == rowPos && p.getColumnPos()+0.3 >= columnPos && p.getColumnPos()-0.3 <= columnPos){
+            if (p.getRowPos() == rowPos && p.getColumnPos()+0.5 >= columnPos && p.getColumnPos()-0.5 <= columnPos){
                 attack(p);
                 return;
             }
