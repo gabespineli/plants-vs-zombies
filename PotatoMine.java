@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class PotatoMine extends Plant {
-    private static final int PLACEMENT_COOLDOWN = 250;
-    private static int placementTimer;
+    private static final double PLACEMENT_COOLDOWN = 7.5;
+    private static double placementTimer;
     private int damage;
 
     public PotatoMine() {
@@ -17,11 +17,11 @@ public class PotatoMine extends Plant {
 
     public static void reduceCD() {
         if (placementTimer > 0){
-            placementTimer--;
+            placementTimer -= 0.03;
         }
     }
 
-    public static int isReady() {
+    public static double checkPlacementCD() {
         return placementTimer;
     }
 

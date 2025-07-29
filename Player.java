@@ -47,39 +47,39 @@ public class Player {
         }
 
         if (p instanceof Sunflower) {
-            if (Sunflower.isReady() != 0) {
-                double remaining = Sunflower.isReady();
-                System.out.println("Sunflower still in cooldown for placement. Wait for " + remaining + " turns.");
+            if (Sunflower.checkPlacementCD() > 0) {
+                double remaining = Sunflower.checkPlacementCD();
+                System.out.println("Sunflower still in cooldown for placement. Wait for " + remaining + " seconds.");
                 return false;
             }
         } else if (p instanceof Peashooter) {
-            if (Peashooter.isReady() != 0) {
-                double remaining = Peashooter.isReady();
-                System.out.println("Peashooter still in cooldown for placement. Wait for " + remaining + " turns.");
+            if (Peashooter.checkPlacementCD() >= 0) {
+                double remaining = Peashooter.checkPlacementCD();
+                System.out.println("Peashooter still in cooldown for placement. Wait for " + remaining + " seconds.");
                 return false;
             }
         } else if (p instanceof CherryBomb) {
-            if (CherryBomb.isReady() != 0) {
-                double remaining = CherryBomb.isReady();
-                System.out.println("Cherry still in cooldown for placement. Wait for " + remaining + " turns.");
+            if (CherryBomb.checkPlacementCD() >= 0) {
+                double remaining = CherryBomb.checkPlacementCD();
+                System.out.println("Cherry still in cooldown for placement. Wait for " + remaining + " seconds.");
                 return false;
             }
         } else if (p instanceof Snowpea) {
-            if (Snowpea.isReady() != 0) {
-                double remaining = Snowpea.isReady();
-                System.out.println("Snowpea still in cooldown for placement. Wait for " + remaining + " turns.");
+            if (Snowpea.checkPlacementCD() >= 0) {
+                double remaining = Snowpea.checkPlacementCD();
+                System.out.println("Snowpea still in cooldown for placement. Wait for " + remaining + " seconds.");
                 return false;
             }
         } else if (p instanceof Wallnut) {
-            if (Wallnut.isReady() != 0) {
-                double remaining = Wallnut.isReady();
-                System.out.println("Wallnut still in cooldown for placement. Wait for " + remaining + " turns.");
+            if (Wallnut.checkPlacementCD() >= 0) {
+                double remaining = Wallnut.checkPlacementCD();
+                System.out.println("Wallnut still in cooldown for placement. Wait for " + remaining + " seconds.");
                 return false;
             }
         } else if (p instanceof PotatoMine) {
-            if (PotatoMine.isReady() != 0) {
-                double remaining = PotatoMine.isReady();
-                System.out.println("Potato Mine still in cooldown for placement. Wait for " + remaining + " turns.");
+            if (PotatoMine.checkPlacementCD() >= 0) {
+                double remaining = PotatoMine.checkPlacementCD();
+                System.out.println("Potato Mine still in cooldown for placement. Wait for " + remaining + " seconds.");
                 return false;
             }
         }

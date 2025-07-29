@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class Snowpea extends Peashooter {
-    private static final int PLACEMENT_COOLDOWN = 250;
-    private static int placementTimer;
+    private static final double PLACEMENT_COOLDOWN = 7.5;
+    private static double placementTimer;
 
     public Snowpea() {
         super();
@@ -15,7 +15,7 @@ public class Snowpea extends Peashooter {
         }
     }
 
-    public static int isReady() {
+    public static double checkPlacementCD() {
         return placementTimer;
     }
 

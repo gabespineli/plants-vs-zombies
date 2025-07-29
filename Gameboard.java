@@ -51,12 +51,13 @@ public class Gameboard {
      */
     public ArrayList<Sun> getActiveSuns() { return activeSuns; }
 
+
+    public int getCurrentLevel() { return currentLevel; }
+
     /**
      * Updates the game state for one tick. Processes plant actions, zombie movement, projectile updates, and object cleanup.
      * @param currentTick the current game tick
      */
-    public int getCurrentLevel() { return currentLevel; }
-
     public void updateGame(int currentTick) {
         // ACTION PHASE
         for (Plant plant : alivePlants) {

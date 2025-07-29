@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class Wallnut extends Plant {
-    private static final int PLACEMENT_COOLDOWN = 250;
-    private static int placementTimer;
+    private static final double PLACEMENT_COOLDOWN = 250;
+    private static double placementTimer;
 
     public Wallnut(){
         super();
@@ -17,7 +17,7 @@ public class Wallnut extends Plant {
         }
     }
 
-    public static int isReady() {
+    public static double checkPlacementCD() {
         return placementTimer;
     }
 
