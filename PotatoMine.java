@@ -11,7 +11,7 @@ public class PotatoMine extends Plant {
         cost = 25;
         actionCooldown = 15;
         cooldown = 15;
-        plantType = "Potato Mine";
+        plantType = "PotatoMine";
         damage = 1800;
     }
 

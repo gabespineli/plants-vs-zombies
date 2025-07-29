@@ -309,7 +309,7 @@ public class GameView extends BackgroundPanel {
                         Image scaled = icon.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
                         g2d.drawImage(scaled, x, y, null);
                     } catch (Exception e) {
-                        System.err.println("Could not draw sun: " + e.getMessage());
+                        System.err.println("Could not draw plant: " + e.getMessage());
                     }
                 }
             }

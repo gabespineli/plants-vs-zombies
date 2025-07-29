@@ -8,7 +8,7 @@ public class Wallnut extends Plant {
         super();
         health = 2666;
         cost = 50;
-        plantType = "Wall-nut";
+        plantType = "Wallnut";
     }
 
     public static void reduceCD() {

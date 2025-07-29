@@ -74,22 +74,22 @@ public class MainMenuView extends BackgroundPanel {
     }
 
     private void createTextDisplays() {
-        String name = "New Player";
-        int level = 1;
         welcomeDisplay = new JLabel("Welcome!");
         welcomeDisplay.setFont(new Font("DialogInput", Font.BOLD, 16));
         welcomeDisplay.setForeground(Color.WHITE);
         welcomeDisplay.setOpaque(false);
         welcomeDisplay.setBounds(45, 130, 210, 20);
 
-        nameDisplay = new JTextArea(name);
-        nameDisplay.setFont(new Font("DialogInput", Font.BOLD, 18));
+        nameDisplay = new JTextArea("New Player");
+        nameDisplay.setFont(new Font("DialogInput", Font.BOLD, 15));
         nameDisplay.setForeground(Color.GREEN);
         nameDisplay.setOpaque(false);
         nameDisplay.setEditable(false);
-        nameDisplay.setBounds(45, 160, 210, 20);
+        nameDisplay.setBounds(40, 160, 210, 23);
+        nameDisplay.setLineWrap(false);
+        nameDisplay.setWrapStyleWord(false);
 
-        levelDisplay = new JLabel("LEVEL " + level);
+        levelDisplay = new JLabel("LEVEL 1");
         levelDisplay.setFont(new Font("DialogInput", Font.PLAIN, 15));
         levelDisplay.setHorizontalAlignment(SwingConstants.CENTER);
         levelDisplay.setForeground(Color.WHITE);
@@ -103,24 +103,76 @@ public class MainMenuView extends BackgroundPanel {
         exitButton.addActionListener(listener);
     }
 
-    public void showNameInput() {
-        welcomeDisplay.setText("Input your name here:");
-        nameDisplay.setEditable(true);
-        nameDisplay.setBackground(Color.WHITE);
+    public void setDocumentListener(DocumentListener listener) {
+        nameDisplay.getDocument().addDocumentListener(listener);
+    }
+
+    public void updatePlayerDisplay(String name, int level) {
+        nameDisplay.setText(name);
+        nameDisplay.setEditable(false);
+        nameDisplay.setOpaque(false);
+        nameDisplay.setBorder(null);
+        nameDisplay.setBackground(null);
         nameDisplay.setForeground(Color.GREEN);
-        nameDisplay.setBorder(BorderFactory.createLineBorder(Color.GREEN, 1));
-        nameDisplay.setOpaque(true);
-        nameDisplay.setBounds(45, 160, 210, 20);
+
+        levelDisplay.setText("LEVEL " + level);
+        welcomeDisplay.setText("Welcome!");
+
         nameDisplay.revalidate();
         nameDisplay.repaint();
     }
 
-    public void setDocumentListener(DocumentListener listener) {
-        nameDisplay.getDocument().addDocumentListener(listener);
+    public void showNameInput() {
+        welcomeDisplay.setText("Enter your name:");
+        nameDisplay.setEditable(true);
+        nameDisplay.setBackground(Color.WHITE);
+        nameDisplay.setForeground(Color.BLACK);
+        nameDisplay.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
+        nameDisplay.setOpaque(true);
+
+        nameDisplay.selectAll();
+        nameDisplay.requestFocus();
+
+        nameDisplay.revalidate();
+        nameDisplay.repaint();
+    }
+
+    public void hideNameInput() {
+        nameDisplay.setEditable(false);
+        nameDisplay.setOpaque(false);
+        nameDisplay.setBorder(null);
+        nameDisplay.setBackground(null);
+        nameDisplay.setForeground(Color.GREEN);
+        welcomeDisplay.setText("Welcome!");
+
+        nameDisplay.revalidate();
+        nameDisplay.repaint();
     }
 
     public String getName() {
         return nameDisplay.getText();
     }
 
+    public void setName(String name) {
+        nameDisplay.setText(name);
+    }
+
+    public void updateLevel(int level) {
+        levelDisplay.setText("LEVEL " + level);
+        levelDisplay.revalidate();
+        levelDisplay.repaint();
+    }
+
+    public void showSaveError(String message) {
+        String originalText = welcomeDisplay.getText();
+        welcomeDisplay.setText(message);
+        welcomeDisplay.setForeground(Color.RED);
+
+        Timer timer = new Timer(2000, e -> {
+            welcomeDisplay.setText("Enter your name:");
+            welcomeDisplay.setForeground(Color.WHITE);
+        });
+        timer.setRepeats(false);
+        timer.start();
+    }
 }

@@ -21,12 +21,18 @@ public class LevelManager {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public void saveFile(String fn) {
         try {
             FileOutputStream fout = new FileOutputStream(fn);
             PrintWriter writer = new PrintWriter(fout);
             writer.println(name);
-            writer.println(level);
+            writer.print(level);
+            writer.close();
+            fout.close();
         }
         catch (IOException io){
         }

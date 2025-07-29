@@ -6,6 +6,7 @@ public class Snowpea extends Peashooter {
 
     public Snowpea() {
         super();
+        plantType = "Snowpea";
     }
 
     public static void reduceCD() {
