@@ -96,7 +96,7 @@ public class Zombie extends Entity {
     public void takeDamage(int d){
         if (armor != null){
             if (armor.isActive()){
-                if (armor.getArmorType() == "flag"){
+                if (armor.getArmorType() == "flag" || d >= 500){
                     health -= d;
                 }
                 armor.takeDamage(d);

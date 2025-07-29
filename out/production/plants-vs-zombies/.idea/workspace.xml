@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40d48333-4dc5-4ae3-8429-3aa617a830df" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/GameView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gameboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gameboard.java" afterDir="false" />
-    </list>
+    <list default="true" id="40d48333-4dc5-4ae3-8429-3aa617a830df" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -79,13 +76,23 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/GameController.java</url>
-          <line>63</line>
+          <line>80</line>
           <option name="timeStamp" value="37" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/GameController.java</url>
-          <line>71</line>
+          <line>84</line>
           <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Gameboard.java</url>
+          <line>224</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Gameboard.java</url>
+          <line>227</line>
+          <option name="timeStamp" value="41" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

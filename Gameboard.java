@@ -234,7 +234,7 @@ public class Gameboard {
         } else if (currentTick <= 6000) {
             generationInterval = random.nextInt(100-66) + 67 - currentLevel * 10;
         } else if(currentTick > 6000) {
-            generationInterval = 0;
+            return;
         }
 
         if (currentTick - lastZombieGeneratedTick >= generationInterval) {
