@@ -10,29 +10,46 @@ public class GameController implements ActionListener {
     private GameViewListener gameViewListener;
 
     // MODEL
-    private final Gameboard gameboard;
-    private final Player player;
+    private Gameboard gameboard;
+    private Player player;
 
     private Timer gameLoop;
     private boolean preGame;
+    private boolean isPaused;
     private int currentTick;
 
-    public GameController(GameView view, PvZGUI gui) {
+    public GameController(GameView view, LevelManager levelManager, PvZGUI gui) {
         this.view = view;
         this.gui = gui;
-        this.gameboard = new Gameboard();
+
+        this.gameboard = new Gameboard(levelManager.getLevel());
         this.player = new Player();
 
+        gameLoop = new Timer(30, this);
         preGame = true;
+        isPaused = false;
         currentTick = 0;
 
+        updateLevelDisplay();
         initializeListener();
-
     }
 
     public void startGameLoop() {
-        gameLoop = new Timer(10, this);
         gameLoop.start();
+    }
+
+    public void resumeGameLoop() {
+        if (!isPaused) {
+            gameLoop.start();
+            isPaused = false;
+        }
+    }
+
+    public void stopGameLoop() {
+        if (gameLoop != null && gameLoop.isRunning()) {
+            gameLoop.stop();
+            isPaused = true;
+        }
     }
 
     @Override
@@ -62,20 +79,12 @@ public class GameController implements ActionListener {
             // CHECK WIN/LOSE CONDITION
             if (gameboard.checkWinLose(currentTick) != 0){
                 if (gameboard.checkWinLose(currentTick) == 1){
-                    gameLoop.stop();
-                    gameboard.resetBoard();
-                    currentTick = 0;
-                    view.resetView();
-                    preGame = true;
-                    // Next level
+                    stopGameLoop();
+                    view.setWinVisible(true);
                 }
                 else {
-                    gameLoop.stop();
-                    gameboard.resetBoard();
-                    currentTick = 0;
-                    view.resetView();
-                    // show try again
-                    preGame = true;
+                    stopGameLoop();
+                    view.setLoseVisible(true);
                 }
 
             }
@@ -83,35 +92,47 @@ public class GameController implements ActionListener {
 
         // MENU INTERFACE
         String command = e.getActionCommand();
-        if (command != null) {
-            switch (e.getActionCommand()) {
-                case "menu" -> {
-                    gameLoop.stop();
-                    view.setSettingsVisible(true);
-                }
-                case "restart" -> {
-                    currentTick = 0;
-                    view.resetView();
-                    gameLoop.restart();
-                    preGame = true;
-                    view.setSettingsVisible(false);
-                    gameboard.resetBoard();
-                }
-                case "main" -> {
-                    currentTick = 0;
-                    view.resetView();
-                    preGame = true;
-                    view.setSettingsVisible(false);
-                    gui.showScreen("menu");
-                }
-                case "back" -> {
-                    gameLoop.start();
-                    view.setSettingsVisible(false);
-                }
+        if (command == null) return;
+        switch (e.getActionCommand()) {
+            case "menu" -> {
+                stopGameLoop();
+                view.setSettingsVisible(true);
+            }
+            case "back" -> {
+                resumeGameLoop();
+                view.setSettingsVisible(false);
+            }
+
+            case "restart" -> {
+                this.gameboard = new Gameboard(gameboard.getCurrentLevel());
+                resetGame();
+                gameLoop.restart();
+                view.setLoseVisible(false);
+            }
+            case "main" -> {
+                gui.showScreen("menu");
+                view.setSettingsVisible(false);
+            }
+            case "next" -> {
+                gui.getMainMenuController().getLevelManager().setLevel(gameboard.getCurrentLevel() + 1);
+                this.gameboard = new Gameboard(gameboard.getCurrentLevel());
+                System.out.println("Level completed! Advanced to level " + gameboard.getCurrentLevel());
+                resetGame();
+                gameLoop.restart();
+                view.setWinVisible(false);
             }
         }
-
     }
+
+    private void resetGame() {
+        currentTick = 0;
+        preGame = true;
+        view.resetView();
+        gameboard.resetBoard();
+        player.resetSunPoints();
+        view.setSettingsVisible(false);
+    }
+
 
     private void incrementTick() {
         currentTick++;
@@ -157,6 +178,10 @@ public class GameController implements ActionListener {
     }
 
     // DISPLAYS
+    private void updateLevelDisplay() {
+        view.displayLevel(gameboard.getCurrentLevel());
+    }
+
     private void updateSunPointsDisplay() {
         view.displaySunPoints(player.getSunPoints());
     }

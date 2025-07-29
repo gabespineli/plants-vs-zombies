@@ -11,12 +11,13 @@ public class Gameboard {
     private ArrayList<Pea> activePeas;
     private ArrayList<Sun> activeSuns;
     private int lastZombieGeneratedTick;
-    private LevelManager level;
+    private int currentLevel;
 
     /**
      * Constructs a new Gameboard with empty 5x9 grid and initialized collections.
      */
-    public Gameboard(){
+    public Gameboard(int currentLevel){
+        this.currentLevel = currentLevel;
         plantBoard = new Plant[5][9];
         aliveZombies = new ArrayList<>();
         alivePlants = new ArrayList<>();
@@ -24,7 +25,6 @@ public class Gameboard {
         activeSuns = new ArrayList<>();
         lastZombieGeneratedTick = 0;
 
-        level = LevelManager.loadFile("Saves.txt");
     }
 
     /**
@@ -55,6 +55,8 @@ public class Gameboard {
      * Updates the game state for one tick. Processes plant actions, zombie movement, projectile updates, and object cleanup.
      * @param currentTick the current game tick
      */
+    public int getCurrentLevel() { return currentLevel; }
+
     public void updateGame(int currentTick) {
         // ACTION PHASE
         for (Plant plant : alivePlants) {
@@ -215,22 +217,22 @@ public class Gameboard {
         if (currentTick <= 999) { return; }
 
         if (currentTick <= 2667) {
-            generationInterval = 333 - level.getLevel() * 10;
+            generationInterval = 333 - currentLevel * 10;
         } else if (currentTick <= 3000) {
-            generationInterval = 167 - level.getLevel() * 10;
+            generationInterval = 167 - currentLevel * 10;
         } else if (currentTick <= 3333) {
-            if (level.getLevel() >= 3) {
+            if (currentLevel >= 3) {
                 generationInterval = 50;
             }
             else {
-                generationInterval = 167 - level.getLevel() * 10;
+                generationInterval = 167 - currentLevel * 10;
             }
         } else if (currentTick <= 4667) {
-            generationInterval = 167 - level.getLevel() * 10;
+            generationInterval = 167 - currentLevel * 10;
         } else if (currentTick <= 5667) {
-            generationInterval = 100 - level.getLevel() * 10;
+            generationInterval = 100 - currentLevel * 10;
         } else if (currentTick <= 6000) {
-            generationInterval = 63 - level.getLevel() * 10;
+            generationInterval = 63 - currentLevel * 10;
         }
 
         if (currentTick - lastZombieGeneratedTick >= generationInterval) {
@@ -238,15 +240,15 @@ public class Gameboard {
             if (currentTick >= 3667){
                 nArmorRNG = random.nextInt(100);
             }
-            if (nArmorRNG >= 0 && nArmorRNG <= 19 + level.getLevel()){
+
+            if (nArmorRNG >= 0 && nArmorRNG <= 19 + currentLevel){
                 z = new Zombie("cone");
-            }
-            else if (nArmorRNG >= 20 + level.getLevel() && nArmorRNG <= 28 + level.getLevel()){
+            } else if (nArmorRNG >= 20 + currentLevel && nArmorRNG <= 28 + currentLevel){
                 z = new Zombie("bucket");
-            }
-            else{
+            } else {
                 z = new Zombie();
             }
+
             lastZombieGeneratedTick = currentTick;
             z.setRowPos(random.nextInt(5));
             z.setColumnPos(8);
@@ -254,7 +256,7 @@ public class Gameboard {
             System.out.println("A zombie appeared at (" + z.getRowPos() + "," + z.getColumnPos() + ").");
         }
 
-        if (currentTick == 5700 || currentTick == 3000 && level.getLevel() >= 3) {
+        if (currentTick == 5700 || currentTick == 3000 && currentLevel >= 3) {
             Zombie z = new Zombie("flag");
             z.setRowPos(random.nextInt(5));
             z.setColumnPos(8);

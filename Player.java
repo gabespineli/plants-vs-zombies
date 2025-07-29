@@ -30,6 +30,10 @@ public class Player {
         }
     }
 
+    public void resetSunPoints() {
+        sunPoints = 50;
+    }
+
     /**
      * Attempts to purchase the specified plant for the player. Checks plant count limits, placement cooldowns, and sufficient sun points.
      * @param p the plant to purchase

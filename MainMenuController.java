@@ -19,7 +19,6 @@ public class MainMenuController implements ActionListener, DocumentListener {
         levelManager = LevelManager.loadFile("assets/progress.txt");
         saving = false;
 
-        // Initialize the view with loaded player data
         view.updatePlayerDisplay(levelManager.getName(), levelManager.getLevel());
 
         view.setActionListener(this);
@@ -40,11 +39,9 @@ public class MainMenuController implements ActionListener, DocumentListener {
             }
             case "save" -> {
                 if (!saving) {
-                    // Enter save mode - show name input
                     view.showNameInput();
                     saving = true;
                 } else {
-                    // Complete save - save data and exit save mode
                     String newName = view.getName().trim();
                     if (!newName.isEmpty() && !newName.equals("New Player")) {
                         levelManager.setName(newName);
@@ -55,8 +52,6 @@ public class MainMenuController implements ActionListener, DocumentListener {
                         saving = false;
                     } else {
                         System.out.println("Please enter a valid name (not 'New Player') to save progress.");
-                        // Keep in saving mode - don't reset saving to false
-                        return;
                     }
                 }
             }

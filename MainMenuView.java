@@ -107,6 +107,7 @@ public class MainMenuView extends BackgroundPanel {
         nameDisplay.getDocument().addDocumentListener(listener);
     }
 
+
     public void updatePlayerDisplay(String name, int level) {
         nameDisplay.setText(name);
         nameDisplay.setEditable(false);

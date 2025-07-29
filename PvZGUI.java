@@ -39,7 +39,7 @@ public class PvZGUI extends JFrame {
         mainMenuController = new MainMenuController(mainMenuView,this);
 
         gameView = new GameView();
-        gameController = new GameController(gameView, this);
+        gameController = new GameController(gameView, mainMenuController.getLevelManager(), this);
         gameViewListener = new GameViewListener(gameView, gameController);
 
         mainMenuController.playGame(gameController);
@@ -58,5 +58,9 @@ public class PvZGUI extends JFrame {
 
     public void showScreen(String screenName) {
         cardLayout.show(mainContainer, screenName);
+    }
+
+    public MainMenuController getMainMenuController() {
+        return mainMenuController;
     }
 }

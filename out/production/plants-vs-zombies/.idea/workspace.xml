@@ -5,9 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eba511f6-a85a-41c3-bf74-14e9dc6e3eaa" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/LevelManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/LevelManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/ui/losingnote.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/GameView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gameboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gameboard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MainMenuView.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainMenuView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PvZGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/PvZGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/ui/note.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/ui/winningnote.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/GameController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/GameView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/GameView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/Gameboard.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/Gameboard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/MainMenuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/MainMenuController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/plants-vs-zombies/PvZGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/plants-vs-zombies/PvZGUI.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +108,7 @@
       <workItem from="1753610826169" duration="14753000" />
       <workItem from="1753668649357" duration="19967000" />
       <workItem from="1753719860964" duration="9348000" />
-      <workItem from="1753752915490" duration="1519000" />
+      <workItem from="1753752915490" duration="17188000" />
     </task>
     <servers />
   </component>

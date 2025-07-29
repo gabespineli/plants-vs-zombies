@@ -37,7 +37,11 @@ public class GameView extends BackgroundPanel {
     private JButton backSettingsButton;
     private JLabel level;
     private JLabel levelNumber;
+    private JLabel winningNote;
+    private JLabel losingNote;
+    private ImageButton nextLevelButton;
 
+    private int displayLevel;
     private int displayReadySetPlantPhase;
     private ArrayList<Zombie> displayZombies;
     private ArrayList<Pea> displayPeas;
@@ -47,6 +51,7 @@ public class GameView extends BackgroundPanel {
     public GameView() {
         super(BACKGROUND_PATH, PANEL_SIZE);
 
+        displayLevel = 1;
         displayReadySetPlantPhase = 0;
         displayZombies = new ArrayList<>();
         displayPeas = new ArrayList<>();
@@ -88,6 +93,9 @@ public class GameView extends BackgroundPanel {
         createMainMenuButton();
         createBackSettingsButton();
         createLevelLabel();
+        createWinningNoteLabel();
+        createLosingNoteLabel();
+        createNextLevelButton();
 
         // DEBUGGING
         // backSettingsButton.setBorder(new LineBorder(Color.RED, 2));
@@ -157,7 +165,7 @@ public class GameView extends BackgroundPanel {
         } catch (IOException e) {
             System.err.println("Failed to load settings image: " + e.getMessage());
         }
-        settingsLabel.setVisible(false);
+        //settingsLabel.setVisible(false);
     }
 
     private void createRestartLevelButton() {
@@ -177,10 +185,9 @@ public class GameView extends BackgroundPanel {
         backSettingsButton.setOpaque(false);
         backSettingsButton.setBorderPainted(false);
         backSettingsButton.setContentAreaFilled(false);
-        backSettingsButton.setVisible(false);
     }
 
-    private void createLevelLabel() {
+    public void createLevelLabel() {
         level = new JLabel();
         level.setName("level");
         try {
@@ -192,11 +199,11 @@ public class GameView extends BackgroundPanel {
             System.err.println("Failed to load level image: " + e.getMessage());
         }
 
-        levelNumber = new JLabel("HELLO");
+        levelNumber = new JLabel();
         levelNumber.setName("number");
 
         try {
-            ImageIcon icon = new ImageIcon(ImageIO.read(new File("assets/ui/" + 1 + ".png")));
+            ImageIcon icon = new ImageIcon(ImageIO.read(new File("assets/ui/level" + displayLevel + ".png")));
             Image scaled = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
             levelNumber.setIcon(new ImageIcon(scaled));
             levelNumber.setBounds(620, 480, 20, 20);
@@ -211,6 +218,37 @@ public class GameView extends BackgroundPanel {
         sunPointsLabel.setForeground(Color.BLACK);
         sunPointsLabel.setBounds(20, 52, 47, 30);
         sunPointsLabel.setHorizontalAlignment(SwingConstants.CENTER);
+    }
+
+    private void createWinningNoteLabel() {
+        winningNote = new JLabel();
+        winningNote.setName("winning");
+        try {
+            ImageIcon icon = new ImageIcon(ImageIO.read(new File("assets/ui/winningnote.png")));
+            Image scaled = icon.getImage().getScaledInstance(408, 296, Image.SCALE_SMOOTH);
+            winningNote.setIcon(new ImageIcon(scaled));
+            winningNote.setBounds(150, 90, 408, 296);
+        } catch (IOException e) {
+            System.err.println("Failed to load winning note image: " + e.getMessage());
+        }
+    }
+
+    private void createLosingNoteLabel() {
+        losingNote = new JLabel();
+        losingNote.setName("losing");
+        try {
+            ImageIcon icon = new ImageIcon(ImageIO.read(new File("assets/ui/losingnote.png")));
+            Image scaled = icon.getImage().getScaledInstance(380, 236, Image.SCALE_SMOOTH);
+            losingNote.setIcon(new ImageIcon(scaled));
+            losingNote.setBounds(150, 100, 380, 236);
+        } catch (IOException e) {
+            System.err.println("Failed to load winning note image: " + e.getMessage());
+        }
+    }
+
+    private void createNextLevelButton() {
+        nextLevelButton = new ImageButton("assets/button/nextlevel.png", "next", 180, 45);
+        nextLevelButton.setBounds(270, 400, nextLevelButton.getPreferredSize().width, nextLevelButton.getPreferredSize().height);
     }
 
     private void layoutComponents() {
@@ -228,12 +266,17 @@ public class GameView extends BackgroundPanel {
         add(backSettingsButton);
         add(level);
         add(levelNumber);
+        add(winningNote);
+        add(losingNote);
+        add(nextLevelButton);
 
         setComponentZOrder(restartLevelButton, 0);
         setComponentZOrder(mainMenuButton, 0);
         setComponentZOrder(backSettingsButton, 0);
 
         setSettingsVisible(false);
+        setLoseVisible(false);
+        setWinVisible(false);
     }
 
     @Override
@@ -241,9 +284,9 @@ public class GameView extends BackgroundPanel {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         drawSeedSlotBackground(g2d);
-        drawZombies(g2d);
         drawPeas(g2d);
         drawPlantedPlants(g2d);
+        drawZombies(g2d);
         drawSuns(g2d);
         drawDraggedPlant(g2d);
 
@@ -260,7 +303,7 @@ public class GameView extends BackgroundPanel {
 
     private void drawZombies(Graphics2D g2d) {
         for (Zombie zombie : displayZombies) {
-            int x = (int)(GRID_START_X + zombie.getColumnPos() * CELL_WIDTH - 15);
+            int x = (int)(GRID_START_X + zombie.getColumnPos() * CELL_WIDTH - 30);
             int y = GRID_START_Y + zombie.getRowPos() * CELL_HEIGHT - 10;
 
             try {
@@ -361,16 +404,27 @@ public class GameView extends BackgroundPanel {
         }
     }
 
-    public void displayReadySetPlantPhase(int phase) {
-        this.displayReadySetPlantPhase = phase;
+    public void setSettingsVisible(boolean visible) {
+        settingsLabel.setVisible(visible);
+        mainMenuButton.setVisible(visible);
+        backSettingsButton.setVisible(visible);
+
+        restartLevelButton.setVisible(visible);
+        restartLevelButton.setBounds(220, 180, restartLevelButton.getPreferredSize().width, restartLevelButton.getPreferredSize().height);
         repaint();
     }
 
-    public void setSettingsVisible(boolean visible) {
-        settingsLabel.setVisible(visible);
-        restartLevelButton.setVisible(visible);
-        mainMenuButton.setVisible(visible);
-        backSettingsButton.setVisible(visible);
+    public void setLoseVisible(boolean show) {
+        losingNote.setVisible(show);
+
+        restartLevelButton.setVisible(show);
+        restartLevelButton.setBounds(220, 350, restartLevelButton.getPreferredSize().width, restartLevelButton.getPreferredSize().height);
+        repaint();
+    }
+
+    public void setWinVisible(boolean show) {
+        winningNote.setVisible(show);
+        nextLevelButton.setVisible(show);
         repaint();
     }
 
@@ -397,6 +451,16 @@ public class GameView extends BackgroundPanel {
         return seedPackets;
     }
 
+    // DISPLAY DATA METHODS
+    public void displayReadySetPlantPhase(int phase) {
+        this.displayReadySetPlantPhase = phase;
+        repaint();
+    }
+
+    public void displayLevel(int level) {
+        this.displayLevel = level;
+    }
+
     public void displaySunPoints(int points) {
         sunPointsLabel.setText(String.valueOf(points));
     }
@@ -421,8 +485,6 @@ public class GameView extends BackgroundPanel {
         displayZombies.clear();
         displayPeas.clear();
         displaySuns.clear();
-
-        displayReadySetPlantPhase = 0;
         repaint();
     }
 
