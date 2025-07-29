@@ -6,12 +6,13 @@ public class Snowpea extends Peashooter {
 
     public Snowpea() {
         super();
+        cost = 175;
         plantType = "Snowpea";
     }
 
     public static void reduceCD() {
         if (placementTimer > 0){
-            placementTimer--;
+            placementTimer -= 0.03;
         }
     }
 

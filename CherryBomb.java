@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class CherryBomb extends Plant {
-    private static final double PLACEMENT_COOLDOWN = 1667;
+    private static final double PLACEMENT_COOLDOWN = 50;
     private static double placementTimer;
     private int damage;
 
@@ -17,7 +17,7 @@ public class CherryBomb extends Plant {
 
     public static void reduceCD() {
         if (placementTimer > 0){
-            placementTimer--;
+            placementTimer -= 0.03;
         }
     }
 

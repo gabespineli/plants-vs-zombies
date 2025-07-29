@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Wallnut extends Plant {
-    private static final double PLACEMENT_COOLDOWN = 250;
+    private static final double PLACEMENT_COOLDOWN = 30;
     private static double placementTimer;
 
     public Wallnut(){
@@ -13,7 +13,7 @@ public class Wallnut extends Plant {
 
     public static void reduceCD() {
         if (placementTimer > 0){
-            placementTimer--;
+            placementTimer -= 0.03;
         }
     }
 

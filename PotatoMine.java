@@ -1,18 +1,18 @@
 import java.util.ArrayList;
 
 public class PotatoMine extends Plant {
-    private static final double PLACEMENT_COOLDOWN = 7.5;
+    private static final double PLACEMENT_COOLDOWN = 30;
     private static double placementTimer;
     private int damage;
 
     public PotatoMine() {
         super();
-        health = 300;
+        health = 30;
         cost = 25;
         actionCooldown = 15;
         cooldown = 15;
         plantType = "PotatoMine";
-        damage = 1800;
+        damage = 700;
     }
 
     public static void reduceCD() {
