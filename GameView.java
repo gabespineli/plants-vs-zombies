@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class GameView extends BackgroundPanel {
     private GameViewListener listener;
@@ -23,7 +24,6 @@ public class GameView extends BackgroundPanel {
     // should come from model
     public static final int GRID_COLS = 9;
     public static final int GRID_ROWS = 5;
-    private static final String[] PLANT_TYPES = {"sunflower", "peashooter", "cherrybomb"};
 
     private JPanel seedSlot;
     private BufferedImage seedSlotImage;
@@ -48,6 +48,8 @@ public class GameView extends BackgroundPanel {
     private ArrayList<Sun> displaySuns;
     private final String[][] displayPlantGrid;
 
+    private ArrayList<String> plantTypes;
+    private ArrayList<BufferedImage> plantImages;
     private BufferedImage zombieImage;
     private BufferedImage bucketImage;
     private BufferedImage coneImage;
@@ -65,6 +67,10 @@ public class GameView extends BackgroundPanel {
         displayPeas = new ArrayList<>();
         displaySuns = new ArrayList<>();
         displayPlantGrid = new String[GRID_ROWS][GRID_COLS];
+        plantImages = new ArrayList<>();
+
+        // dapat sa model to
+        plantTypes = new ArrayList<>(Arrays.asList("sunflower", "peashooter", "cherrybomb"));
 
         initializePanel();
     }
@@ -85,10 +91,13 @@ public class GameView extends BackgroundPanel {
     private void loadImages() {
         try {
             seedSlotImage = ImageIO.read(new File(CONTAINER_IMAGE_PATH));
+            for (String plantType : plantTypes) {
+                plantImages.add(loadAndScale("assets/plants/" + plantType + ".png", 60, 60));
+            }
             zombieImage = loadAndScale("assets/zombies/zombie.png", 65, 90);
-            bucketImage = loadAndScale("assets/zombies/bucket.png", 40, 42);
-            coneImage = loadAndScale("assets/zombies/cone.png", 40, 42);
-            flagImage = loadAndScale("assets/zombies/flag.png", 65, 110);
+            bucketImage = loadAndScale("assets/zombies/bucket.png", 42, 44);
+            coneImage = loadAndScale("assets/zombies/cone.png", 42, 44);
+            flagImage = loadAndScale("assets/zombies/flag.png", 80, 110);
             peaImage = loadAndScale("assets/ui/pea.png", 20, 20);
             sunImage = loadAndScale("assets/ui/sun.png", 70, 70);
         } catch (IOException e) {
@@ -143,7 +152,7 @@ public class GameView extends BackgroundPanel {
     private void createSeedPackets() {
         seedPackets = new ArrayList<>();
 
-        for (String plantType : PLANT_TYPES) {
+        for (String plantType : plantTypes) {
             JLabel label = createSeedPacket(plantType);
             if (label != null) {
                 label.setName(plantType.toLowerCase());
@@ -333,30 +342,11 @@ public class GameView extends BackgroundPanel {
         }
     }
 
-    private void drawZombies(Graphics2D g2d) {
-        for (Zombie zombie : displayZombies) {
-            int x = (int) (GRID_START_X + zombie.getColumnPos() * CELL_WIDTH - 30);
-            int y = GRID_START_Y + zombie.getRowPos() * CELL_HEIGHT - 10;
-
-            if (zombie.hasArmor()) {
-                String armor = zombie.getArmor().getArmorType();
-                switch (armor) {
-                    case "Cone" -> {
-                        g2d.drawImage(zombieImage, x, y, null);
-                        g2d.drawImage(coneImage, x + 5, y - 25, null);
-                    }
-                    case "Bucket" -> {
-                        g2d.drawImage(zombieImage, x, y, null);
-                        g2d.drawImage(bucketImage, x + 5, y - 25, null);
-                    }
-                    case "Flag" -> {
-                        g2d.drawImage(flagImage, x, y, null);
-                    }
-                    default -> throw new IllegalStateException("Unexpected value: " + armor);
-                }
-            } else {
-                g2d.drawImage(zombieImage, x, y, null);
-            }
+    private void drawSuns(Graphics2D g2d) {
+        for (Sun sun : displaySuns) {
+            int x = (int)(GRID_START_X + sun.getColumnPos() * CELL_WIDTH);
+            int y = (int)(GRID_START_Y + sun.getRowPos() * CELL_HEIGHT);
+            g2d.drawImage(sunImage, x, y, null);
         }
     }
 
@@ -368,20 +358,46 @@ public class GameView extends BackgroundPanel {
         }
     }
 
+    private void drawZombies(Graphics2D g2d) {
+        for (Zombie zombie : displayZombies) {
+            int x = (int) (GRID_START_X + zombie.getColumnPos() * CELL_WIDTH - 30);
+            int y = GRID_START_Y + zombie.getRowPos() * CELL_HEIGHT - 10;
+
+            if (zombie.hasArmor()) {
+                String armor = zombie.getArmor().getArmorType();
+                switch (armor) {
+                    case "Cone" -> {
+                        g2d.drawImage(zombieImage, x, y, null);
+                        g2d.drawImage(coneImage, x, y - 20, null);
+                    }
+                    case "Bucket" -> {
+                        g2d.drawImage(zombieImage, x, y, null);
+                        g2d.drawImage(bucketImage, x, y - 20, null);
+                    }
+                    case "Flag" -> {
+                        g2d.drawImage(flagImage, x, y - 25, null);
+                    }
+                    default -> throw new IllegalStateException("Unexpected value: " + armor);
+                }
+            } else {
+                g2d.drawImage(zombieImage, x, y, null);
+            }
+        }
+    }
+
     private void drawPlantedPlants(Graphics2D g2d) {
         for (int row = 0; row < displayPlantGrid.length; row++) {
             for (int col = 0; col < displayPlantGrid[0].length; col++) {
                 String plantType = displayPlantGrid[row][col];
                 if (plantType != null) {
-                    int x = GRID_START_X + col * CELL_WIDTH;
-                    int y = GRID_START_Y + row * CELL_HEIGHT + 15;
-                    //g2d.drawImage(scaled, x, y, null);
-                    try {
-                        ImageIcon icon = new ImageIcon(ImageIO.read(new File("assets/plants/" + plantType + ".png")));
-                        Image scaled = icon.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
-                        g2d.drawImage(scaled, x, y, null);
-                    } catch (Exception e) {
-                        System.err.println("Could not draw plant: " + e.getMessage());
+                    int index = plantTypes.indexOf(plantType.toLowerCase());
+                    if (index != -1) {
+                        BufferedImage image = plantImages.get(index);
+                        int x = GRID_START_X + col * CELL_WIDTH;
+                        int y = GRID_START_Y + row * CELL_HEIGHT + 15;
+                        g2d.drawImage(image, x, y, null);
+                    } else {
+                        System.err.println("Unknown plant type: " + plantType);
                     }
                 }
             }
@@ -399,14 +415,6 @@ public class GameView extends BackgroundPanel {
                     draggedPos.x - dragOffset.x,
                     draggedPos.y - dragOffset.y,
                     null);
-        }
-    }
-
-    private void drawSuns(Graphics2D g2d) {
-        for (Sun sun : displaySuns) {
-            int x = (int)(GRID_START_X + sun.getColumnPos() * CELL_WIDTH);
-            int y = (int)(GRID_START_Y + sun.getRowPos() * CELL_HEIGHT);
-            g2d.drawImage(sunImage, x, y, null);
         }
     }
 
