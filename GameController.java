@@ -25,12 +25,11 @@ public class GameController implements ActionListener {
         this.gameboard = new Gameboard(levelManager.getLevel());
         this.player = new Player();
 
-        gameLoop = new Timer(5, this);
+        gameLoop = new Timer(10, this);
         preGame = true;
         isPaused = false;
         currentTick = 0;
 
-        updateLevelDisplay();
         initializeListener();
     }
 
@@ -39,7 +38,7 @@ public class GameController implements ActionListener {
     }
 
     public void resumeGameLoop() {
-        if (!isPaused) {
+        if (isPaused) {
             gameLoop.start();
             isPaused = false;
         }
@@ -114,9 +113,11 @@ public class GameController implements ActionListener {
                 view.setSettingsVisible(false);
             }
             case "next" -> {
-                gui.getMainMenuController().getLevelManager().setLevel(gameboard.getCurrentLevel() + 1);
-                this.gameboard = new Gameboard(gameboard.getCurrentLevel());
-                System.out.println("Level completed! Advanced to level " + gameboard.getCurrentLevel());
+                int nextLevel = gameboard.getCurrentLevel() + 1;
+                gui.getMainMenuController().getLevelManager().setLevel(nextLevel);
+                this.gameboard = new Gameboard(nextLevel);
+                System.out.println("Level completed! Advanced to level " + nextLevel);
+                updateLevelDisplay();
                 resetGame();
                 gameLoop.restart();
                 view.setWinVisible(false);

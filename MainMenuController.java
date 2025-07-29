@@ -84,11 +84,8 @@ public class MainMenuController implements ActionListener, DocumentListener {
         }
     }
 
-    public void updatePlayerLevel(int newLevel) {
-        levelManager.setLevel(newLevel);
-        if (!saving) {
-            view.updatePlayerDisplay(levelManager.getName(), levelManager.getLevel());
-        }
+    public void updateProgress() {
+        view.updatePlayerDisplay(levelManager.getName(), levelManager.getLevel());
     }
 
     public LevelManager getLevelManager() {
