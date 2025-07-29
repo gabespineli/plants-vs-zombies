@@ -53,31 +53,31 @@ public class Player {
                 return false;
             }
         } else if (p instanceof Peashooter) {
-            if (Peashooter.checkPlacementCD() >= 0) {
+            if (Peashooter.checkPlacementCD() > 0) {
                 double remaining = Peashooter.checkPlacementCD();
                 System.out.println("Peashooter still in cooldown for placement. Wait for " + remaining + " seconds.");
                 return false;
             }
         } else if (p instanceof CherryBomb) {
-            if (CherryBomb.checkPlacementCD() >= 0) {
+            if (CherryBomb.checkPlacementCD() > 0) {
                 double remaining = CherryBomb.checkPlacementCD();
                 System.out.println("Cherry still in cooldown for placement. Wait for " + remaining + " seconds.");
                 return false;
             }
         } else if (p instanceof Snowpea) {
-            if (Snowpea.checkPlacementCD() >= 0) {
+            if (Snowpea.checkPlacementCD() > 0) {
                 double remaining = Snowpea.checkPlacementCD();
                 System.out.println("Snowpea still in cooldown for placement. Wait for " + remaining + " seconds.");
                 return false;
             }
         } else if (p instanceof Wallnut) {
-            if (Wallnut.checkPlacementCD() >= 0) {
+            if (Wallnut.checkPlacementCD() > 0) {
                 double remaining = Wallnut.checkPlacementCD();
                 System.out.println("Wallnut still in cooldown for placement. Wait for " + remaining + " seconds.");
                 return false;
             }
         } else if (p instanceof PotatoMine) {
-            if (PotatoMine.checkPlacementCD() >= 0) {
+            if (PotatoMine.checkPlacementCD() > 0) {
                 double remaining = PotatoMine.checkPlacementCD();
                 System.out.println("Potato Mine still in cooldown for placement. Wait for " + remaining + " seconds.");
                 return false;
