@@ -53,11 +53,12 @@ public class PvZGUI extends JFrame {
 
     private void setupLayout() {
         pack();
-        showScreen("menu");
+        showScreen("start");
     }
 
     public void showScreen(String screenName) {
         cardLayout.show(mainContainer, screenName);
+        mainMenuController.updateProgress();
     }
 
     public MainMenuController getMainMenuController() {

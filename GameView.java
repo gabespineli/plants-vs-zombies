@@ -491,6 +491,16 @@ public class GameView extends BackgroundPanel {
 
     public void displayLevel(int level) {
         this.displayLevel = level;
+
+        try {
+            ImageIcon icon = new ImageIcon(ImageIO.read(new File("assets/ui/level" + level + ".png")));
+            Image scaled = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            levelNumber.setIcon(new ImageIcon(scaled));
+        } catch (IOException e) {
+            System.err.println("Failed to load level number image: " + e.getMessage());
+        }
+
+        repaint();
     }
 
     public void displaySunPoints(int points) {
@@ -525,5 +535,6 @@ public class GameView extends BackgroundPanel {
         restartLevelButton.addActionListener(listener);
         mainMenuButton.addActionListener(listener);
         backSettingsButton.addActionListener(listener);
+        nextLevelButton.addActionListener(listener);
     }
 }
