@@ -48,6 +48,14 @@ public class GameView extends BackgroundPanel {
     private ArrayList<Sun> displaySuns;
     private final String[][] displayPlantGrid;
 
+    private BufferedImage zombieImage;
+    private BufferedImage bucketImage;
+    private BufferedImage coneImage;
+    private BufferedImage flagImage;
+    private BufferedImage peaImage;
+    private BufferedImage sunImage;
+
+
     public GameView() {
         super(BACKGROUND_PATH, PANEL_SIZE);
 
@@ -77,10 +85,34 @@ public class GameView extends BackgroundPanel {
     private void loadImages() {
         try {
             seedSlotImage = ImageIO.read(new File(CONTAINER_IMAGE_PATH));
+            zombieImage = loadAndScale("assets/zombies/zombie.png", 65, 90);
+            bucketImage = loadAndScale("assets/zombies/bucket.png", 40, 42);
+            coneImage = loadAndScale("assets/zombies/cone.png", 40, 42);
+            flagImage = loadAndScale("assets/zombies/flag.png", 65, 110);
+            peaImage = loadAndScale("assets/ui/pea.png", 20, 20);
+            sunImage = loadAndScale("assets/ui/sun.png", 70, 70);
         } catch (IOException e) {
             System.err.println("Failed to load container background: " + e.getMessage());
         }
     }
+
+    public BufferedImage loadAndScale(String path, int width, int height) {
+        try {
+            Image img = ImageIO.read(new File(path))
+                    .getScaledInstance(width, height, Image.SCALE_SMOOTH);
+
+            BufferedImage scaled = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+            Graphics2D g2d = scaled.createGraphics();
+            g2d.drawImage(img, 0, 0, null);
+            g2d.dispose();
+
+            return scaled;
+        } catch (IOException e) {
+            System.err.println("Failed to load or scale image: " + e.getMessage());
+            return null;
+        }
+    }
+
 
     private void createComponents() {
         createSeedSlotContainer();
@@ -303,23 +335,27 @@ public class GameView extends BackgroundPanel {
 
     private void drawZombies(Graphics2D g2d) {
         for (Zombie zombie : displayZombies) {
-            int x = (int)(GRID_START_X + zombie.getColumnPos() * CELL_WIDTH - 30);
+            int x = (int) (GRID_START_X + zombie.getColumnPos() * CELL_WIDTH - 30);
             int y = GRID_START_Y + zombie.getRowPos() * CELL_HEIGHT - 10;
 
-            try {
-                ImageIcon icon = new ImageIcon(ImageIO.read(new File("assets/zombies/zombie.png")));
-                Image scaled = icon.getImage().getScaledInstance(65, 90, Image.SCALE_SMOOTH);
-                g2d.drawImage(scaled, x, y, null);
-
-                if (zombie.hasArmor()){
-                    String armor = zombie.getArmor().getArmorType();
-                    icon = new ImageIcon(ImageIO.read(new File("assets/zombies/" + armor + ".png")));
-                    scaled = icon.getImage().getScaledInstance(40, 42, Image.SCALE_SMOOTH);
-                    g2d.drawImage(scaled, x + 5, y - 25, null);
+            if (zombie.hasArmor()) {
+                String armor = zombie.getArmor().getArmorType();
+                switch (armor) {
+                    case "Cone" -> {
+                        g2d.drawImage(zombieImage, x, y, null);
+                        g2d.drawImage(coneImage, x + 5, y - 25, null);
+                    }
+                    case "Bucket" -> {
+                        g2d.drawImage(zombieImage, x, y, null);
+                        g2d.drawImage(bucketImage, x + 5, y - 25, null);
+                    }
+                    case "Flag" -> {
+                        g2d.drawImage(flagImage, x, y, null);
+                    }
+                    default -> throw new IllegalStateException("Unexpected value: " + armor);
                 }
-
-            } catch (Exception e) {
-                System.err.println("Could not draw zombie: " + e.getMessage());
+            } else {
+                g2d.drawImage(zombieImage, x, y, null);
             }
         }
     }
@@ -328,14 +364,7 @@ public class GameView extends BackgroundPanel {
         for (Pea pea : displayPeas) {
             int x = (int)(GRID_START_X + pea.getColumnPos() * CELL_WIDTH + 15);
             int y = GRID_START_Y + pea.getRowPos() * CELL_HEIGHT + 10;
-
-            try {
-                ImageIcon icon = new ImageIcon(ImageIO.read(new File("assets/ui/pea.png")));
-                Image scaled = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-                g2d.drawImage(scaled, x, y, null);
-            } catch (Exception e) {
-                System.err.println("Could not draw pea: " + e.getMessage());
-            }
+            g2d.drawImage(peaImage, x, y, null);
         }
     }
 
@@ -346,7 +375,7 @@ public class GameView extends BackgroundPanel {
                 if (plantType != null) {
                     int x = GRID_START_X + col * CELL_WIDTH;
                     int y = GRID_START_Y + row * CELL_HEIGHT + 15;
-
+                    //g2d.drawImage(scaled, x, y, null);
                     try {
                         ImageIcon icon = new ImageIcon(ImageIO.read(new File("assets/plants/" + plantType + ".png")));
                         Image scaled = icon.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
@@ -377,14 +406,7 @@ public class GameView extends BackgroundPanel {
         for (Sun sun : displaySuns) {
             int x = (int)(GRID_START_X + sun.getColumnPos() * CELL_WIDTH);
             int y = (int)(GRID_START_Y + sun.getRowPos() * CELL_HEIGHT);
-
-            try {
-                ImageIcon icon = new ImageIcon(ImageIO.read(new File("assets/ui/sun.png")));
-                Image scaled = icon.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
-                g2d.drawImage(scaled, x, y, null);
-            } catch (Exception e) {
-                System.err.println("Could not draw sun: " + e.getMessage());
-            }
+            g2d.drawImage(sunImage, x, y, null);
         }
     }
 
@@ -410,7 +432,8 @@ public class GameView extends BackgroundPanel {
         backSettingsButton.setVisible(visible);
 
         restartLevelButton.setVisible(visible);
-        restartLevelButton.setBounds(220, 180, restartLevelButton.getPreferredSize().width, restartLevelButton.getPreferredSize().height);
+        restartLevelButton.setBounds(220, 180, restartLevelButton.getPreferredSize().width,
+                restartLevelButton.getPreferredSize().height);
         repaint();
     }
 
@@ -418,7 +441,8 @@ public class GameView extends BackgroundPanel {
         losingNote.setVisible(show);
 
         restartLevelButton.setVisible(show);
-        restartLevelButton.setBounds(220, 350, restartLevelButton.getPreferredSize().width, restartLevelButton.getPreferredSize().height);
+        restartLevelButton.setBounds(220, 350, restartLevelButton.getPreferredSize().width,
+                restartLevelButton.getPreferredSize().height);
         repaint();
     }
 

@@ -25,7 +25,7 @@ public class GameController implements ActionListener {
         this.gameboard = new Gameboard(levelManager.getLevel());
         this.player = new Player();
 
-        gameLoop = new Timer(10, this);
+        gameLoop = new Timer(5, this);
         preGame = true;
         isPaused = false;
         currentTick = 0;
