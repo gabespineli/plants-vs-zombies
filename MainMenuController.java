@@ -4,8 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainMenuController implements ActionListener, DocumentListener {
-    private final MainMenuView view;
-    private final PvZGUI gui;
+    private final MainMenuView VIEW;
+    private final PvZGUI GUI;
 
     private GameController gameController;
     private LevelManager levelManager;
@@ -13,16 +13,16 @@ public class MainMenuController implements ActionListener, DocumentListener {
     private boolean saving;
 
     public MainMenuController(MainMenuView view, PvZGUI gui) {
-        this.view = view;
-        this.gui = gui;
+        this.VIEW = view;
+        this.GUI = gui;
 
         levelManager = LevelManager.loadFile("assets/progress.txt");
         saving = false;
 
-        view.updatePlayerDisplay(levelManager.getName(), levelManager.getLevel());
+        VIEW.updatePlayerDisplay(levelManager.getName(), levelManager.getLevel());
 
-        view.setActionListener(this);
-        view.setDocumentListener(this);
+        VIEW.setActionListener(this);
+        VIEW.setDocumentListener(this);
     }
 
     public void playGame(GameController gameController) {
@@ -34,20 +34,20 @@ public class MainMenuController implements ActionListener, DocumentListener {
         String command = e.getActionCommand();
         switch (command) {
             case "adventure" -> {
-                gui.showScreen("game");
+                GUI.showScreen("game");
                 gameController.startGameLoop();
             }
             case "save" -> {
                 if (!saving) {
-                    view.showNameInput();
+                    VIEW.showNameInput();
                     saving = true;
                 } else {
-                    String newName = view.getName().trim();
+                    String newName = VIEW.getName().trim();
                     if (!newName.isEmpty() && !newName.equals("New Player")) {
                         levelManager.setName(newName);
                         levelManager.saveFile("assets/progress.txt");
-                        view.hideNameInput();
-                        view.updatePlayerDisplay(levelManager.getName(), levelManager.getLevel());
+                        VIEW.hideNameInput();
+                        VIEW.updatePlayerDisplay(levelManager.getName(), levelManager.getLevel());
                         System.out.println("Progress saved successfully for " + newName + " at level " + levelManager.getLevel());
                         saving = false;
                     } else {
@@ -77,7 +77,7 @@ public class MainMenuController implements ActionListener, DocumentListener {
 
     private void updateNameFromInput() {
         if (saving) {
-            String currentName = view.getName().trim();
+            String currentName = VIEW.getName().trim();
             if (!currentName.isEmpty() && !currentName.equals("New Player")) {
                 levelManager.setName(currentName);
             }
@@ -87,7 +87,7 @@ public class MainMenuController implements ActionListener, DocumentListener {
     public void updatePlayerLevel(int newLevel) {
         levelManager.setLevel(newLevel);
         if (!saving) {
-            view.updatePlayerDisplay(levelManager.getName(), levelManager.getLevel());
+            VIEW.updatePlayerDisplay(levelManager.getName(), levelManager.getLevel());
         }
     }
 

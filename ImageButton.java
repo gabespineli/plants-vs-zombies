@@ -7,12 +7,12 @@ import java.io.IOException;
 
 public class ImageButton extends JButton {
     private BufferedImage buttonImage;
-    private final int width;
-    private final int height;
+    private final int WIDTH;
+    private final int HEIGHT;
 
     public ImageButton(String imagePath, String actionCommand, int width, int height) {
-        this.width = width;
-        this.height = height;
+        this.WIDTH = width;
+        this.HEIGHT = height;
 
         setOpaque(false);
         setVisible(true);
@@ -39,7 +39,7 @@ public class ImageButton extends JButton {
     protected void paintComponent(Graphics g) {
         if (buttonImage != null) {
             Graphics2D g2d = (Graphics2D) g.create();
-            g2d.drawImage(buttonImage, 0, 0, width, height, null);
+            g2d.drawImage(buttonImage, 0, 0, WIDTH, HEIGHT, null);
             g2d.dispose();
         }
         super.paintComponent(g);

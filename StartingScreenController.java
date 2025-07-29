@@ -6,23 +6,23 @@ public class StartingScreenController implements ActionListener {
     private static final int BUTTON_ENABLE_DELAY = 3000;
     private static final int PROGRESS_UPDATE_DELAY = 30;
 
-    private final StartingScreenView view;
-    private final PvZGUI gui;
-    private final Timer enableButtonTimer;
-    private final Thread progressThread;
+    private final StartingScreenView VIEW;
+    private final PvZGUI GUI;
+    private final Timer ENABLE_BUTTON_TIMER;
+    private final Thread PROGRESS_THREAD;
 
     public StartingScreenController(StartingScreenView view, PvZGUI gui) {
-        this.view = view;
-        this.gui = gui;
-        this.enableButtonTimer = createButtonTimer();
-        this.progressThread = createProgressThread();
+        this.VIEW = view;
+        this.GUI = gui;
+        this.ENABLE_BUTTON_TIMER = createButtonTimer();
+        this.PROGRESS_THREAD = createProgressThread();
         initializeScreen();
     }
 
     private void initializeScreen() {
-        view.setupButton(this, "continue");
-        enableButtonTimer.start();
-        progressThread.start();
+        VIEW.setupButton(this, "continue");
+        ENABLE_BUTTON_TIMER.start();
+        PROGRESS_THREAD.start();
     }
 
     private Timer createButtonTimer() {
@@ -34,7 +34,7 @@ public class StartingScreenController implements ActionListener {
     private Thread createProgressThread() {
         return new Thread(() -> {
             for (int progress = 10; progress <= 100; progress++) {
-                view.updateProgress(progress);
+                VIEW.updateProgress(progress);
                 try {
                     Thread.sleep(PROGRESS_UPDATE_DELAY);
                 } catch (InterruptedException e) {
@@ -47,10 +47,10 @@ public class StartingScreenController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        view.updateButton(true, false);
+        VIEW.updateButton(true, false);
 
         if ("continue".equals(e.getActionCommand())) {
-            gui.showScreen("menu");
+            GUI.showScreen("menu");
         }
     }
 }

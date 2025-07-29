@@ -157,23 +157,4 @@ public class MainMenuView extends BackgroundPanel {
     public void setName(String name) {
         nameDisplay.setText(name);
     }
-
-    public void updateLevel(int level) {
-        levelDisplay.setText("LEVEL " + level);
-        levelDisplay.revalidate();
-        levelDisplay.repaint();
-    }
-
-    public void showSaveError(String message) {
-        String originalText = welcomeDisplay.getText();
-        welcomeDisplay.setText(message);
-        welcomeDisplay.setForeground(Color.RED);
-
-        Timer timer = new Timer(2000, e -> {
-            welcomeDisplay.setText("Enter your name:");
-            welcomeDisplay.setForeground(Color.WHITE);
-        });
-        timer.setRepeats(false);
-        timer.start();
-    }
 }

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 public class GameController implements ActionListener {
-    private final PvZGUI gui;
+    private final PvZGUI GUI;
     // VIEW
-    private final GameView view;
+    private final GameView VIEW;
     private GameViewListener gameViewListener;
 
     // MODEL
@@ -19,8 +19,8 @@ public class GameController implements ActionListener {
     private int currentTick;
 
     public GameController(GameView view, LevelManager levelManager, PvZGUI gui) {
-        this.view = view;
-        this.gui = gui;
+        this.VIEW = view;
+        this.GUI = gui;
 
         this.gameboard = new Gameboard(levelManager.getLevel());
         this.player = new Player();
@@ -59,11 +59,11 @@ public class GameController implements ActionListener {
         if (preGame) {
             int phase = currentTick / 30 + 1;
             if (phase <= 3) {
-                view.displayReadySetPlantPhase(phase);
+                VIEW.displayReadySetPlantPhase(phase);
             } else {
                 preGame = false;
                 currentTick = 0;
-                view.displayReadySetPlantPhase(currentTick);
+                VIEW.displayReadySetPlantPhase(currentTick);
             }
         } else {
             if (currentTick % 30 == 0 && currentTick != 0) System.out.println( "Game loop tick: " + currentTick/30);
@@ -80,11 +80,11 @@ public class GameController implements ActionListener {
             if (gameboard.checkWinLose(currentTick) != 0){
                 if (gameboard.checkWinLose(currentTick) == 1){
                     stopGameLoop();
-                    view.setWinVisible(true);
+                    VIEW.setWinVisible(true);
                 }
                 else {
                     stopGameLoop();
-                    view.setLoseVisible(true);
+                    VIEW.setLoseVisible(true);
                 }
 
             }
@@ -96,30 +96,30 @@ public class GameController implements ActionListener {
         switch (e.getActionCommand()) {
             case "menu" -> {
                 stopGameLoop();
-                view.setSettingsVisible(true);
+                VIEW.setSettingsVisible(true);
             }
             case "back" -> {
                 resumeGameLoop();
-                view.setSettingsVisible(false);
+                VIEW.setSettingsVisible(false);
             }
 
             case "restart" -> {
                 this.gameboard = new Gameboard(gameboard.getCurrentLevel());
                 resetGame();
                 gameLoop.restart();
-                view.setLoseVisible(false);
+                VIEW.setLoseVisible(false);
             }
             case "main" -> {
-                gui.showScreen("menu");
-                view.setSettingsVisible(false);
+                GUI.showScreen("menu");
+                VIEW.setSettingsVisible(false);
             }
             case "next" -> {
-                gui.getMainMenuController().getLevelManager().setLevel(gameboard.getCurrentLevel() + 1);
+                GUI.getMainMenuController().getLevelManager().setLevel(gameboard.getCurrentLevel() + 1);
                 this.gameboard = new Gameboard(gameboard.getCurrentLevel());
                 System.out.println("Level completed! Advanced to level " + gameboard.getCurrentLevel());
                 resetGame();
                 gameLoop.restart();
-                view.setWinVisible(false);
+                VIEW.setWinVisible(false);
             }
         }
     }
@@ -127,10 +127,10 @@ public class GameController implements ActionListener {
     private void resetGame() {
         currentTick = 0;
         preGame = true;
-        view.resetView();
+        VIEW.resetView();
         gameboard.resetBoard();
         player.resetSunPoints();
-        view.setSettingsVisible(false);
+        VIEW.setSettingsVisible(false);
     }
 
 
@@ -140,34 +140,34 @@ public class GameController implements ActionListener {
 
     // For Drag & Drop
     private void initializeListener() {
-        gameViewListener = new GameViewListener(view, this);
-        view.setGameViewListener(gameViewListener);
-        view.setActionListener(this);
+        gameViewListener = new GameViewListener(VIEW, this);
+        VIEW.setGameViewListener(gameViewListener);
+        VIEW.setActionListener(this);
     }
 
     // GameViewListener Methods
     public void placePlantOnBoard(String plantType, int row, int col) {
         if (gameboard.addPlant(plantType, row, col, player, currentTick)) {
-            view.displayPlant(plantType, row, col);
+            VIEW.displayPlant(plantType, row, col);
             updateSunPointsDisplay();
         }
     }
 
     public void removePlantFromBoard(int row, int col) {
         gameboard.removePlant(row, col);
-        view.removePlant(row, col);
+        VIEW.removePlant(row, col);
     }
 
     // GVL METHODS
     public void updatePlantBoardDisplay() {
         Plant[][] plantBoard = gameboard.getPlantBoard();
-        view.clearBoard();
+        VIEW.clearBoard();
 
         for (int row = 0; row < plantBoard.length; row++) {
             for (int col = 0; col < plantBoard[row].length; col++) {
                 Plant plant = plantBoard[row][col];
                 if (plant != null) {
-                    view.displayPlant(plant.getPlantType(), row, col);
+                    VIEW.displayPlant(plant.getPlantType(), row, col);
                 }
             }
         }
@@ -179,23 +179,23 @@ public class GameController implements ActionListener {
 
     // DISPLAYS
     private void updateLevelDisplay() {
-        view.displayLevel(gameboard.getCurrentLevel());
+        VIEW.displayLevel(gameboard.getCurrentLevel());
     }
 
     private void updateSunPointsDisplay() {
-        view.displaySunPoints(player.getSunPoints());
+        VIEW.displaySunPoints(player.getSunPoints());
     }
 
     private void updateSunDisplay() {
-        view.displaySuns(gameboard.getActiveSuns());
+        VIEW.displaySuns(gameboard.getActiveSuns());
     }
 
     private void updateZombiesDisplay() {
-        view.displayZombies(gameboard.getAliveZombies());
+        VIEW.displayZombies(gameboard.getAliveZombies());
     }
 
     private void updatePeaDisplay() {
-        view.displayPeas(gameboard.getActivePeas());
+        VIEW.displayPeas(gameboard.getActivePeas());
     }
 
     // GETTERS

@@ -7,10 +7,10 @@ import java.io.IOException;
 
 public class BackgroundPanel extends JPanel {
     private BufferedImage backgroundImage;
-    private final Dimension panelSize;
+    private final Dimension PANEL_SIZE;
     
     public BackgroundPanel(String backgroundPath, Dimension size) {
-        this.panelSize = size;
+        this.PANEL_SIZE = size;
         setLayout(null);
         setOpaque(false);
         loadBackgroundImage(backgroundPath);
@@ -43,6 +43,6 @@ public class BackgroundPanel extends JPanel {
     
     @Override
     public Dimension getPreferredSize() {
-        return panelSize;
+        return PANEL_SIZE;
     }
 }
