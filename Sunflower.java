@@ -7,8 +7,7 @@ public class Sunflower extends Plant {
     private static double placementTimer;
 
     /**
-     * Constructs a new Sunflower with default stats.
-     * Sets health to 200, cost to 50, and various cooldown values.
+     * Constructs a Sunflower with default stats and cost.
      */
     public Sunflower() {
         super();
@@ -19,25 +18,33 @@ public class Sunflower extends Plant {
         plantType = "Sunflower";
     }
 
+    /**
+     * Reduces the placement cooldown timer for Sunflower.
+     */
     public static void reduceCD() {
         if (placementTimer > 0){
             placementTimer -= 0.03;
         }
     }
 
+    /**
+     * Checks the current placement cooldown timer for Sunflower.
+     * @return the remaining cooldown time
+     */
     public static double checkPlacementCD() {
         return placementTimer;
     }
 
+    /**
+     * Sets the placement timer to the default cooldown value.
+     */
     public static void setPlacementTimer() {
         placementTimer = PLACEMENT_COOLDOWN;
     }
 
     /**
-     * Updates the Sunflower's state and potentially produces sun.
-     * If the action cooldown is equal to 0, creates a new Sun object worth 25 points.
-     * Prints a message when sun is produced.
-     * @return a new Sun object if cooldown allows, null otherwise
+     * Updates the Sunflower's state and produces sun if cooldown is finished.
+     * @return a new Sun object if produced, null otherwise
      */
     public Sun updateSunflower(){
         reduceActionCooldown();

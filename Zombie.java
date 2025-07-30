@@ -5,10 +5,15 @@ import java.util.ArrayList;
  * Extends Entity and provides zombie-specific behavior including movement, attack patterns, and interaction with plants.
  */
 public class Zombie extends Entity {
+    /** The movement speed of the zombie. */
     private double speed;
+    /** The damage dealt by the zombie to plants. */
     private int damage;
+    /** The armor equipped by the zombie, if any. */
     private Armor armor;
+    /** Whether the zombie is currently frozen. */
     private boolean isFrozen;
+    /** The remaining time the zombie stays frozen. */
     private double frozenTime;
     /**
      * Constructs a new Zombie with default stats.
@@ -24,6 +29,10 @@ public class Zombie extends Entity {
         armor = null;
     }
 
+    /**
+     * Constructs a new Zombie with a specific armor type.
+     * @param type the type of armor to equip ("flag", "cone", "bucket")
+     */
     public Zombie(String type) {
         this();
         armor = createArmor(type);
@@ -31,18 +40,34 @@ public class Zombie extends Entity {
         speed += armor.getArmorSpeed();
     }
 
+    /**
+     * Gets the current column position of the zombie.
+     * @return the column position
+     */
     public double getColumnPos() {
         return columnPos;
     }
 
+    /**
+     * Gets the current row position of the zombie.
+     * @return the row position
+     */
     public int getRowPos() {
         return rowPos;
     }
 
+    /**
+     * Returns whether the zombie is currently frozen.
+     * @return true if frozen, false otherwise
+     */
     public boolean isFrozen() {
         return isFrozen;
     }
 
+    /**
+     * Gets the armor equipped by the zombie.
+     * @return the Armor object, or null if none
+     */
     public Armor getArmor() { return armor; }
 
     /**
@@ -96,6 +121,11 @@ public class Zombie extends Entity {
         move();
     }
 
+    /**
+     * Reduces the zombie's health by the specified damage amount, considering armor if present.
+     * If health drops to zero or below, marks the zombie as dead.
+     * @param d the amount of damage to take
+     */
     @Override
     public void takeDamage(int d){
         if (armor != null){
@@ -120,6 +150,11 @@ public class Zombie extends Entity {
         }
     }
 
+    /**
+     * Creates an Armor object based on the specified type.
+     * @param type the type of armor ("flag", "cone", "bucket")
+     * @return the Armor object, or null if type is invalid
+     */
     private Armor createArmor(String type) {
         switch (type.toLowerCase()) {
             case "flag" -> {
@@ -135,15 +170,26 @@ public class Zombie extends Entity {
         return null;
     }
 
+    /**
+     * Removes the zombie's armor and updates its damage and speed accordingly.
+     */
     private void removeArmor() {
         damage -= armor.getArmorDamage();
         speed -= armor.getArmorSpeed();
     }
 
+    /**
+     * Checks if the zombie currently has armor equipped.
+     * @return true if armor is present, false otherwise
+     */
     public boolean hasArmor() {
         return armor != null;
     }
 
+    /**
+     * Freezes the zombie, doubling its speed and cooldown, and sets frozen time to 5 seconds.
+     * Prints a message indicating the zombie has been frozen.
+     */
     public void freeze() {
         if (!isFrozen){
             speed *= 2;
