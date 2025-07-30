@@ -58,11 +58,21 @@ public class Gameboard {
      */
     public ArrayList<Plant> getAlivePlants() { return alivePlants; }
 
-
+    /**
+     * Returns Level of the game.
+     * @return the Level of the game
+     */
     public int getCurrentLevel() { return currentLevel; }
 
+    /**
+     * Returns the list of plant types.
+     * @return an array list of string that contains plant types.
+     */
     public ArrayList<String> getAvailablePlantTypes() { return availablePlantTypes; }
 
+    /**
+     * Sets the available plant types depending on the level of the game.
+     */
     private void setAvailablePlantTypes() {
         availablePlantTypes = new ArrayList<>();
         if (currentLevel >= 1) {
@@ -208,6 +218,9 @@ public class Gameboard {
         return true;
     }
 
+    /**
+     * Removes a plant from the board and from the list.
+     */
     public void removePlant(int row, int col) {
         for (int i = alivePlants.size() - 1; i >= 0; i--) {
             Plant plant = alivePlants.get(i);
@@ -242,6 +255,10 @@ public class Gameboard {
         }
     }
 
+    /**
+     * Checks if there is a plant occupying a location in the grid.
+     * @return true or false whether it is occupied or not.
+     */
     public boolean isOccupied(int row, int column) { return plantBoard[row][column] != null; }
 
     /**
@@ -315,6 +332,9 @@ public class Gameboard {
         }
     }
 
+    /**
+     * Reduces the placement cooldown of all plants.
+     */
     private void reduceCDs() {
         Sunflower.reduceCD();
         CherryBomb.reduceCD();
@@ -324,6 +344,10 @@ public class Gameboard {
         PotatoMine.reduceCD();
     }
 
+    /**
+     * Checks if a winning or losing condition is met.
+     * @return an integer depending on the state. 2 for lose, 1 for win, 0 for not winning or losing.
+     */
     public int checkWinLose(int currentTick) {
         for (Zombie z : aliveZombies) {
             if (z.getColumnPos() < 0) {
@@ -336,6 +360,9 @@ public class Gameboard {
         return 0;
     }
 
+    /**
+     * Resets the board by removing all objects in the gameboard.
+     */
     public void resetBoard() {
         for (int i = alivePlants.size() - 1; i >= 0; i--) {
             Plant plant = alivePlants.get(i);

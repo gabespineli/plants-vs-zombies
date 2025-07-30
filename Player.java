@@ -30,6 +30,9 @@ public class Player {
         }
     }
 
+    /**
+     * Resets the sunpoints of the player to 50.
+     */
     public void resetSunPoints() {
         sunPoints = 50;
     }
@@ -52,10 +55,10 @@ public class Player {
                 System.out.println("Sunflower still in cooldown for placement. Wait for " + remaining + " seconds.");
                 return false;
             }
-        } else if (p instanceof Peashooter) {
-            if (Peashooter.checkPlacementCD() > 0) {
-                double remaining = Peashooter.checkPlacementCD();
-                System.out.println("Peashooter still in cooldown for placement. Wait for " + remaining + " seconds.");
+        } else if (p instanceof Snowpea) {
+            if (Snowpea.checkPlacementCD() > 0) {
+                double remaining = Snowpea.checkPlacementCD();
+                System.out.println("Snowpea still in cooldown for placement. Wait for " + remaining + " seconds.");
                 return false;
             }
         } else if (p instanceof CherryBomb) {
@@ -64,10 +67,10 @@ public class Player {
                 System.out.println("Cherry still in cooldown for placement. Wait for " + remaining + " seconds.");
                 return false;
             }
-        } else if (p instanceof Snowpea) {
-            if (Snowpea.checkPlacementCD() > 0) {
-                double remaining = Snowpea.checkPlacementCD();
-                System.out.println("Snowpea still in cooldown for placement. Wait for " + remaining + " seconds.");
+        } else if (p instanceof Peashooter) {
+            if (Peashooter.checkPlacementCD() > 0) {
+                double remaining = Peashooter.checkPlacementCD();
+                System.out.println("Peashooter still in cooldown for placement. Wait for " + remaining + " seconds.");
                 return false;
             }
         } else if (p instanceof Wallnut) {
@@ -87,9 +90,9 @@ public class Player {
         if (sunPoints >= p.getCost()) {
             sunPoints -= p.getCost();
             if (p instanceof Sunflower) { Sunflower.setPlacementTimer(); }
+            else if (p instanceof Snowpea) { Snowpea.setPlacementTimer(); }
             else if (p instanceof Peashooter) { Peashooter.setPlacementTimer(); }
             else if (p instanceof CherryBomb) { CherryBomb.setPlacementTimer(); }
-            else if (p instanceof Snowpea) { Snowpea.setPlacementTimer(); }
             else if (p instanceof Wallnut) { Wallnut.setPlacementTimer(); }
             else if (p instanceof PotatoMine) { PotatoMine.setPlacementTimer(); }
             System.out.println("Bought " + p.getPlantType() + " for " + p.getCost() + " sun.");

@@ -1,0 +1,222 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="PvZ UML" id="PvZ-UML">
+    <mxGraphModel dx="1000" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2000" pageHeight="2000">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <!-- Entity (Base Model) -->
+        <mxCell id="2" value="Entity&#xa;------------------&#xa;- health: int&#xa;- rowPos: int&#xa;- columnPos: double&#xa;- isAlive: boolean&#xa;- actionCooldown: double&#xa;- cooldown: double&#xa;------------------&#xa;+ Entity()&#xa;+ getHealth(): int&#xa;+ getRowPos(): int&#xa;+ setRowPos(int)&#xa;+ getColumnPos(): double&#xa;+ setColumnPos(double)&#xa;+ isAlive(): boolean&#xa;+ takeDamage(int)&#xa;+ reduceActionCooldown()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="220" height="260" as="geometry"/>
+        </mxCell>
+        <!-- Plant -->
+        <mxCell id="3" value="Plant&#xa;------------------&#xa;- cost: int&#xa;- plantType: String&#xa;- plantCount: int (static)&#xa;------------------&#xa;+ Plant()&#xa;+ getPlantCount(): int&#xa;+ incrementPlantCount()&#xa;+ getCost(): int&#xa;+ getPlantType(): String" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="40" width="220" height="180" as="geometry"/>
+        </mxCell>
+        <!-- Zombie -->
+        <mxCell id="4" value="Zombie&#xa;------------------&#xa;- speed: double&#xa;- damage: int&#xa;- armor: Armor&#xa;- isFrozen: boolean&#xa;- frozenTime: double&#xa;------------------&#xa;+ Zombie()&#xa;+ Zombie(String)&#xa;+ getColumnPos(): double&#xa;+ getRowPos(): int&#xa;+ isFrozen(): boolean&#xa;+ getArmor(): Armor&#xa;+ attack(Plant)&#xa;+ move()&#xa;+ updateZombie(ArrayList&lt;Plant&gt;)&#xa;+ takeDamage(int)&#xa;+ freeze()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="320" width="220" height="260" as="geometry"/>
+        </mxCell>
+        <!-- Pea -->
+        <mxCell id="5" value="Pea&#xa;------------------&#xa;+ Pea()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="240" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <!-- Sun -->
+        <mxCell id="6" value="Sun&#xa;------------------&#xa;+ Sun()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="320" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <!-- Player -->
+        <mxCell id="7" value="Player&#xa;------------------&#xa;+ Player()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="400" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <!-- Gameboard -->
+        <mxCell id="8" value="Gameboard&#xa;------------------&#xa;+ Gameboard()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="480" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <!-- Armor (abstract) -->
+        <mxCell id="9" value="&lt;&lt;abstract&gt;&gt;&#xa;Armor&#xa;------------------&#xa;- armorHP: int&#xa;- armorSpeed: int&#xa;- armorDamage: int&#xa;- isActive: boolean&#xa;- armorType: String&#xa;------------------&#xa;+ getArmorType(): String&#xa;+ getArmorDamage(): int&#xa;+ getArmorSpeed(): int&#xa;+ takeDamage(int)&#xa;+ isActive(): boolean" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;" vertex="1" parent="1">
+          <mxGeometry x="40" y="600" width="220" height="200" as="geometry"/>
+        </mxCell>
+        <!-- Bucket -->
+        <mxCell id="10" value="Bucket&#xa;------------------&#xa;+ Bucket()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="600" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <!-- Cone -->
+        <mxCell id="11" value="Cone&#xa;------------------&#xa;+ Cone()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="670" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <!-- Flag -->
+        <mxCell id="12" value="Flag&#xa;------------------&#xa;+ Flag()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="740" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <!-- ExplosivePlant -->
+        <mxCell id="13" value="ExplosivePlant&#xa;------------------&#xa;+ ExplosivePlant()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="40" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <!-- CherryBomb -->
+        <mxCell id="14" value="CherryBomb&#xa;------------------&#xa;+ CherryBomb()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="700" y="40" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <!-- PotatoMine -->
+        <mxCell id="15" value="PotatoMine&#xa;------------------&#xa;+ PotatoMine()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="700" y="110" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <!-- Peashooter -->
+        <mxCell id="16" value="Peashooter&#xa;------------------&#xa;+ Peashooter()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="110" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <!-- Snowpea -->
+        <mxCell id="17" value="Snowpea&#xa;------------------&#xa;+ Snowpea()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="700" y="180" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <!-- Sunflower -->
+        <mxCell id="18" value="Sunflower&#xa;------------------&#xa;+ Sunflower()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="180" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <!-- Wallnut -->
+        <mxCell id="19" value="Wallnut&#xa;------------------&#xa;+ Wallnut()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="700" y="250" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <!-- Frost -->
+        <mxCell id="20" value="Frost&#xa;------------------&#xa;+ Frost()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="250" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <!-- GameView -->
+        <mxCell id="21" value="GameView&#xa;------------------&#xa;+ GameView()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="900" y="40" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <!-- GameViewListener -->
+        <mxCell id="22" value="GameViewListener&#xa;------------------&#xa;+ GameViewListener()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="900" y="110" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <!-- GameController -->
+        <mxCell id="23" value="GameController&#xa;------------------&#xa;+ GameController()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="900" y="180" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <!-- PvZGUI -->
+        <mxCell id="24" value="PvZGUI&#xa;------------------&#xa;+ PvZGUI()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="900" y="250" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <!-- MainMenuView -->
+        <mxCell id="25" value="MainMenuView&#xa;------------------&#xa;+ MainMenuView()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="40" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <!-- MainMenuController -->
+        <mxCell id="26" value="MainMenuController&#xa;------------------&#xa;+ MainMenuController()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="110" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <!-- StartingScreenView -->
+        <mxCell id="27" value="StartingScreenView&#xa;------------------&#xa;+ StartingScreenView()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="180" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <!-- StartingScreenController -->
+        <mxCell id="28" value="StartingScreenController&#xa;------------------&#xa;+ StartingScreenController()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="250" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <!-- LevelManager -->
+        <mxCell id="29" value="LevelManager&#xa;------------------&#xa;+ LevelManager()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="40" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <!-- BackgroundPanel -->
+        <mxCell id="30" value="BackgroundPanel&#xa;------------------&#xa;+ BackgroundPanel()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="110" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <!-- ImageButton -->
+        <mxCell id="31" value="ImageButton&#xa;------------------&#xa;+ ImageButton()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="180" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <!-- GUIDriverPVZ -->
+        <mxCell id="32" value="GUIDriverPVZ&#xa;------------------&#xa;+ GUIDriverPVZ()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="250" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <!-- Relationships -->
+        <!-- Entity -> Plant, Zombie -->
+        <mxCell id="33" style="endArrow=block;endFill=1;" edge="1" parent="1" source="2" target="3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="34" style="endArrow=block;endFill=1;" edge="1" parent="1" source="2" target="4">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <!-- Plant -> Peashooter, Sunflower, Wallnut, ExplosivePlant -->
+        <mxCell id="35" style="endArrow=block;endFill=1;" edge="1" parent="1" source="3" target="16">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="36" style="endArrow=block;endFill=1;" edge="1" parent="1" source="3" target="18">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="37" style="endArrow=block;endFill=1;" edge="1" parent="1" source="3" target="19">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="38" style="endArrow=block;endFill=1;" edge="1" parent="1" source="3" target="13">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <!-- ExplosivePlant -> CherryBomb, PotatoMine -->
+        <mxCell id="39" style="endArrow=block;endFill=1;" edge="1" parent="1" source="13" target="14">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="40" style="endArrow=block;endFill=1;" edge="1" parent="1" source="13" target="15">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <!-- Peashooter -> Snowpea -->
+        <mxCell id="41" style="endArrow=block;endFill=1;" edge="1" parent="1" source="16" target="17">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <!-- Armor (abstract) -> Bucket, Cone, Flag -->
+        <mxCell id="42" style="endArrow=block;endFill=1;" edge="1" parent="1" source="9" target="10">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="43" style="endArrow=block;endFill=1;" edge="1" parent="1" source="9" target="11">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="44" style="endArrow=block;endFill=1;" edge="1" parent="1" source="9" target="12">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <!-- GameController associations -->
+        <mxCell id="45" style="endArrow=open;dashed=1;" edge="1" parent="1" source="23" target="21">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="46" style="endArrow=open;dashed=1;" edge="1" parent="1" source="23" target="8">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="47" style="endArrow=open;dashed=1;" edge="1" parent="1" source="23" target="7">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <!-- GameViewListener associations -->
+        <mxCell id="48" style="endArrow=open;dashed=1;" edge="1" parent="1" source="22" target="21">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="49" style="endArrow=open;dashed=1;" edge="1" parent="1" source="22" target="23">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <!-- PvZGUI associations -->
+        <mxCell id="50" style="endArrow=open;dashed=1;" edge="1" parent="1" source="24" target="23">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="51" style="endArrow=open;dashed=1;" edge="1" parent="1" source="24" target="26">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="52" style="endArrow=open;dashed=1;" edge="1" parent="1" source="24" target="28">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <!-- MainMenuController associations -->
+        <mxCell id="53" style="endArrow=open;dashed=1;" edge="1" parent="1" source="26" target="25">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="54" style="endArrow=open;dashed=1;" edge="1" parent="1" source="26" target="29">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <!-- StartingScreenController associations -->
+        <mxCell id="55" style="endArrow=open;dashed=1;" edge="1" parent="1" source="28" target="27">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <!-- GameView extends BackgroundPanel -->
+        <mxCell id="56" style="endArrow=block;endFill=1;" edge="1" parent="1" source="30" target="21">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <!-- MainMenuView extends BackgroundPanel -->
+        <mxCell id="57" style="endArrow=block;endFill=1;" edge="1" parent="1" source="30" target="25">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

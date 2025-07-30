@@ -30,16 +30,26 @@ import java.util.ArrayList;
         RANGE = 9;
     }
 
+    /**
+     * Reduces the placement cooldown timer for Peashooter.
+     */
     public static void reduceCD() {
         if (placementTimer > 0){
             placementTimer -= 0.03;
         }
     }
 
+    /**
+     * Checks the current placement cooldown timer for Peashooter.
+     * @return the remaining cooldown time
+     */
     public static double checkPlacementCD() {
         return placementTimer;
     }
 
+    /**
+     * Sets the placement timer to the default cooldown value.
+     */
     public static void setPlacementTimer() {
         placementTimer = PLACEMENT_COOLDOWN;
     }

@@ -90,6 +90,9 @@
         }
     }
 
+    /**
+     * Makes the Sun fall down in rows till it reaches it's final row position.
+     */
     public void fall(){
         if (rowPos < finalRowPos){
             rowPos += 1/(4 / 0.1);

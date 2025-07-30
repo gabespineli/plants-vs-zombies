@@ -109,6 +109,7 @@ public class Zombie extends Entity {
             if (frozenTime <= 0){
                 speed /= 2;
                 cooldown /= 2;
+                isFrozen = false;
             }
         }
 

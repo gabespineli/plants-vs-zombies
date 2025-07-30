@@ -23,7 +23,7 @@ public class Frost extends Pea {
     @Override
     protected void checkCollision(ArrayList<Zombie> aliveZombies) {
         for (Zombie z : aliveZombies){
-            if (z.getRowPos() == rowPos && z.getColumnPos()+0.2 >= columnPos && z.getColumnPos()-0.2 <= columnPos){
+            if (z.getRowPos() == rowPos && z.getColumnPos()+0.1 >= columnPos && z.getColumnPos()-0.5 <= columnPos){
                 z.takeDamage(damage);
                 z.freeze();
                 if (z.isAlive()){

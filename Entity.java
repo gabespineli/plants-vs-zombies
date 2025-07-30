@@ -2,7 +2,7 @@
  * Parent class for all Entity objects such as plants and zombies
  * Helps manage attributes like health, position, and life state.
  */
-public class Entity {
+public abstract class Entity {
     protected int health;
     protected int rowPos;
     protected double columnPos;
@@ -12,7 +12,7 @@ public class Entity {
 
 
     /**
-     * Constructs and entity and sets a boolean isAlive to be true
+     * Constructs an entity and sets a boolean isAlive to be true
      */
     public Entity() {
         isAlive = true;
@@ -36,10 +36,18 @@ public class Entity {
      */
     public void setRowPos(int rowPos) { this.rowPos = rowPos; }
 
+    /**
+     * Gets the current column position of the entity.
+     * @return the column position
+     */
     public double getColumnPos() {
         return columnPos;
     }
 
+    /**
+     * Sets the column position of the entity.
+     * @param column the new row position
+     */
     public void setColumnPos(double column) {
         this.columnPos = column;
     }
@@ -63,6 +71,9 @@ public class Entity {
         }
     }
 
+    /**
+     * reduces the action cooldown of entities like attack or producing suns
+     */
     public void reduceActionCooldown(){
         if (actionCooldown > 0)
             actionCooldown -= 0.03;
