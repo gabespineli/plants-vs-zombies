@@ -26,7 +26,7 @@ public class GameController implements ActionListener {
         this.player = new Player();
 
         VIEW.displaySeedPackets(gameboard.getAvailablePlantTypes());
-        this.gameLoop = new Timer(30, this);
+        this.gameLoop = new Timer(5, this);
         this.preGame = true;
         this.isPaused = false;
         this.currentTick = 0;

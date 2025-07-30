@@ -6,7 +6,6 @@ import java.io.IOException;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import javax.swing.border.LineBorder;
 
 public class GameView extends BackgroundPanel {
     private GameViewListener listener;
@@ -21,7 +20,6 @@ public class GameView extends BackgroundPanel {
     public static final int CELL_WIDTH = 65;
     public static final int CELL_HEIGHT = 80;
 
-    // should come from model
     public static final int GRID_COLS = 9;
     public static final int GRID_ROWS = 5;
 
@@ -458,11 +456,11 @@ public class GameView extends BackgroundPanel {
                 }
             } else if (plant instanceof PotatoMine pm) {
                 if (!pm.isAlive()) {
-                    g2d.drawImage(explosionImage, x-30, y-30, null);
+                    g2d.drawImage(explosionImage, x-50, y-50, null);
                 } else if (pm.isDetonated()) {
                     g2d.drawImage(potatoMineDetonatedImage, x+10, y+10, null);
                 } else {
-                    g2d.drawImage(potatoMineUndetonatedImage, x+20, y+20, null);
+                    g2d.drawImage(potatoMineUndetonatedImage, x+15, y+15, null);
                 }
             }
         }
