@@ -7,6 +7,13 @@ import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+/**
+ * GameView represents the main visual interface for a Plants vs Zombies game.
+ * This class extends BackgroundPanel and manages the rendering of all game elements including
+ * plants, zombies, projectiles, UI components, and game state displays.
+ * The view handles the display of the game grid, seed selection interface, sun points,
+ * game menus, and various visual effects.
+ */
 public class GameView extends BackgroundPanel {
     private GameViewListener listener;
 
@@ -72,6 +79,11 @@ public class GameView extends BackgroundPanel {
     private BufferedImage sunImage;
 
 
+    /**
+     * Constructs a new GameView with default settings.
+     * Initializes the game panel with the background image, sets up the game grid,
+     * and prepares all UI components and display lists.
+     */
     public GameView() {
         super(BACKGROUND_PATH, PANEL_SIZE);
 
@@ -87,12 +99,21 @@ public class GameView extends BackgroundPanel {
         initializePanel();
     }
 
+    /**
+     * Sets the GameViewListener for handling user interactions.
+     * Registers the listener for mouse events on this panel.
+     * @param listener the GameViewListener to handle user interactions
+     */
     public void setGameViewListener(GameViewListener listener) {
         this.listener = listener;
         addMouseListener(listener);
         addMouseMotionListener(listener);
     }
 
+    /**
+     * Initializes the panel by setting up layout, loading images, and creating components.
+     * This method orchestrates the setup of all visual elements.
+     */
     private void initializePanel() {
         setLayout(null);
         loadImages();
@@ -100,6 +121,11 @@ public class GameView extends BackgroundPanel {
         layoutComponents();
     }
 
+    /**
+     * Loads all image assets required for the game including plants, zombies,
+     * projectiles, UI elements, and special effects.
+     * @throws IOException if any image file cannot be loaded
+     */
     private void loadImages() {
         try {
             seedSlotImage = ImageIO.read(new File(CONTAINER_IMAGE_PATH));
@@ -132,6 +158,13 @@ public class GameView extends BackgroundPanel {
         }
     }
 
+    /**
+     * Loads an image from the specified path and scales it to the given dimensions.
+     * @param path the file path to the image
+     * @param width the desired width of the scaled image
+     * @param height the desired height of the scaled image
+     * @return a BufferedImage scaled to the specified dimensions, or null if loading fails
+     */
     public BufferedImage loadAndScale(String path, int width, int height) {
         try {
             Image img = ImageIO.read(new File(path))
@@ -149,6 +182,10 @@ public class GameView extends BackgroundPanel {
         }
     }
 
+    /**
+     * Creates all UI components including seed slots, buttons, labels, and other interface elements.
+     * This method initializes all visual components but does not add them to the panel.
+     */
     private void createComponents() {
         createSeedSlotContainer();
         createSunPointsDisplay();
@@ -168,12 +205,19 @@ public class GameView extends BackgroundPanel {
         //seedSlot.setBorder(new LineBorder(Color.RED, 2));
     }
 
+    /**
+     * Creates the container panel that holds the seed packet selection interface.
+     */
     private void createSeedSlotContainer() {
         seedSlot = new JPanel(new FlowLayout(FlowLayout.LEFT, 2, 5));
         seedSlot.setOpaque(false);
         seedSlot.setBounds(77, 5, CONTAINER_SIZE.width - 80, CONTAINER_SIZE.height - 15);
     }
 
+    /**
+     * Creates seed packet labels for all available plant types.
+     * Each seed packet is created as a JLabel with the corresponding plant image.
+     */
     private void createSeedPackets() {
         seedPackets = new ArrayList<>();
 
@@ -186,6 +230,11 @@ public class GameView extends BackgroundPanel {
         }
     }
 
+    /**
+     * Creates a single seed packet label for the specified plant type.
+     * @param plantType the type of plant to create a seed packet for
+     * @return a JLabel representing the seed packet, or null if the image cannot be loaded
+     */
     private JLabel createSeedPacket(String plantType) {
         JLabel label = new JLabel();
         try {
@@ -200,6 +249,9 @@ public class GameView extends BackgroundPanel {
         }
     }
 
+    /**
+     * Creates the shovel label used for removing plants from the game grid.
+     */
     private void createShovelLabel() {
         shovelLabel = new JLabel();
         shovelLabel.setName("shovel");
@@ -213,11 +265,17 @@ public class GameView extends BackgroundPanel {
         }
     }
 
+    /**
+     * Creates the menu button for accessing game settings.
+     */
     private void createMenuButton() {
         menuButton = new ImageButton("assets/button/menu.png", "menu", 80, 25);
         menuButton.setBounds(580, 0, menuButton.getPreferredSize().width, menuButton.getPreferredSize().height);
     }
 
+    /**
+     * Creates the settings overlay label that covers the entire screen when settings are shown.
+     */
     private void createSettingsLabel() {
         settingsLabel = new JLabel();
         settingsLabel.setName("settings");
@@ -233,16 +291,25 @@ public class GameView extends BackgroundPanel {
         }
     }
 
+    /**
+     * Creates the restart level button.
+     */
     private void createRestartLevelButton() {
         restartLevelButton = new ImageButton("assets/button/restartlevel.png", "restart", 230, 60);
         restartLevelButton.setBounds(220, 180, restartLevelButton.getPreferredSize().width, restartLevelButton.getPreferredSize().height);
     }
 
+    /**
+     * Creates the main menu button.
+     */
     private void createMainMenuButton() {
         mainMenuButton = new ImageButton("assets/button/mainmenu.png", "main", 180, 40);
         mainMenuButton.setBounds(250, 250, mainMenuButton.getPreferredSize().width, mainMenuButton.getPreferredSize().height);
     }
 
+    /**
+     * Creates the back button for returning from settings screen.
+     */
     private void createBackSettingsButton() {
         backSettingsButton = new JButton();
         backSettingsButton.setActionCommand("back");
@@ -252,6 +319,9 @@ public class GameView extends BackgroundPanel {
         backSettingsButton.setContentAreaFilled(false);
     }
 
+    /**
+     * Creates the level display labels showing the current level number.
+     */
     public void createLevelLabel() {
         level = new JLabel();
         level.setName("level");
@@ -277,6 +347,9 @@ public class GameView extends BackgroundPanel {
         }
     }
 
+    /**
+     * Creates the sun points display label showing the current sun currency.
+     */
     private void createSunPointsDisplay() {
         sunPointsLabel = new JLabel("50");
         sunPointsLabel.setFont(new Font("DialogInput", Font.BOLD, 18));
@@ -285,6 +358,9 @@ public class GameView extends BackgroundPanel {
         sunPointsLabel.setHorizontalAlignment(SwingConstants.CENTER);
     }
 
+    /**
+     * Creates the winning notification label displayed when the player wins a level.
+     */
     private void createWinningNoteLabel() {
         winningNote = new JLabel();
         winningNote.setName("winning");
@@ -298,6 +374,9 @@ public class GameView extends BackgroundPanel {
         }
     }
 
+    /**
+     * Creates the losing notification label displayed when the player loses a level.
+     */
     private void createLosingNoteLabel() {
         losingNote = new JLabel();
         losingNote.setName("losing");
@@ -311,11 +390,17 @@ public class GameView extends BackgroundPanel {
         }
     }
 
+    /**
+     * Creates the next level button displayed when the player wins a level.
+     */
     private void createNextLevelButton() {
         nextLevelButton = new ImageButton("assets/button/nextlevel.png", "next", 180, 45);
         nextLevelButton.setBounds(270, 400, nextLevelButton.getPreferredSize().width, nextLevelButton.getPreferredSize().height);
     }
 
+    /**
+     * Adds all created components to the panel and sets their initial visibility and z-order.
+     */
     private void layoutComponents() {
         for (JLabel label : seedPackets) {
             seedSlot.add(label);
@@ -344,6 +429,11 @@ public class GameView extends BackgroundPanel {
         setWinVisible(false);
     }
 
+    /**
+     * Custom paint method that renders all game elements including plants, zombies,
+     * projectiles, suns, and special effects onto the game panel.
+     * @param g the Graphics context to paint on
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -361,12 +451,20 @@ public class GameView extends BackgroundPanel {
         }
     }
 
+    /**
+     * Draws the seed slot container background image.
+     * @param g2d the Graphics2D context to draw on
+     */
     private void drawSeedSlotBackground(Graphics2D g2d) {
         if (seedSlotImage != null) {
             g2d.drawImage(seedSlotImage, 10, 0, CONTAINER_SIZE.width, CONTAINER_SIZE.height, null);
         }
     }
 
+    /**
+     * Draws all sun collectibles on the game field.
+     * @param g2d the Graphics2D context to draw on
+     */
     private void drawSuns(Graphics2D g2d) {
         for (Sun sun : displaySuns) {
             int x = (int)(GRID_START_X + sun.getColumnPos() * CELL_WIDTH);
@@ -375,6 +473,10 @@ public class GameView extends BackgroundPanel {
         }
     }
 
+    /**
+     * Draws all projectiles (peas and frost projectiles) on the game field.
+     * @param g2d the Graphics2D context to draw on
+     */
     private void drawPeas(Graphics2D g2d) {
         for (Pea pea : displayPeas) {
             int x = (int)(GRID_START_X + pea.getColumnPos() * CELL_WIDTH + 15);
@@ -387,6 +489,10 @@ public class GameView extends BackgroundPanel {
         }
     }
 
+    /**
+     * Draws all zombies on the game field, including their armor and frozen states.
+     * @param g2d the Graphics2D context to draw on
+     */
     private void drawZombies(Graphics2D g2d) {
         for (Zombie zombie : displayZombies) {
             int x = (int) (GRID_START_X + zombie.getColumnPos() * CELL_WIDTH - 30);
@@ -424,6 +530,10 @@ public class GameView extends BackgroundPanel {
         }
     }
 
+    /**
+     * Draws all non-explosive plants placed on the game grid.
+     * @param g2d the Graphics2D context to draw on
+     */
     private void drawPlantedPlants(Graphics2D g2d) {
         for (int row = 0; row < displayPlantGrid.length; row++) {
             for (int col = 0; col < displayPlantGrid[0].length; col++) {
@@ -443,6 +553,11 @@ public class GameView extends BackgroundPanel {
         }
     }
 
+    /**
+     * Draws explosive plants (Cherry Bombs and Potato Mines) with their various states
+     * including explosions and detonation status.
+     * @param g2d the Graphics2D context to draw on
+     */
     private void drawExplosivePlants(Graphics2D g2d) {
         if (displayPlants == null) return;
         for (Plant plant : displayPlants) {
@@ -466,6 +581,10 @@ public class GameView extends BackgroundPanel {
         }
     }
 
+    /**
+     * Draws the plant that is currently being dragged by the player.
+     * @param g2d the Graphics context to draw on
+     */
     private void drawDraggedPlant(Graphics g2d) {
         if (listener != null && listener.isDragging() && listener.getDraggedImage() != null) {
             Point draggedPos = listener.getDraggedPosition();
@@ -480,6 +599,11 @@ public class GameView extends BackgroundPanel {
         }
     }
 
+    /**
+     * Draws the "Ready, Set, Plant!" countdown animation at the start of each level.
+     * @param g2d the Graphics2D context to draw on
+     * @param phase the current phase of the countdown (1-3)
+     */
     private void drawReadySetPlant(Graphics2D g2d, int phase) {
         try {
             BufferedImage img = ImageIO.read(new File("assets/ui/ready" + phase + ".png"));
@@ -496,6 +620,10 @@ public class GameView extends BackgroundPanel {
         }
     }
 
+    /**
+     * Controls the visibility of the settings screen and related buttons.
+     * @param visible true to show the settings screen, false to hide it
+     */
     public void setSettingsVisible(boolean visible) {
         settingsLabel.setVisible(visible);
         mainMenuButton.setVisible(visible);
@@ -507,6 +635,10 @@ public class GameView extends BackgroundPanel {
         repaint();
     }
 
+    /**
+     * Controls the visibility of the game over (lose) screen.
+     * @param show true to show the lose screen, false to hide it
+     */
     public void setLoseVisible(boolean show) {
         losingNote.setVisible(show);
 
@@ -516,12 +648,19 @@ public class GameView extends BackgroundPanel {
         repaint();
     }
 
+    /**
+     * Controls the visibility of the level complete (win) screen.
+     * @param show true to show the win screen, false to hide it
+     */
     public void setWinVisible(boolean show) {
         winningNote.setVisible(show);
         nextLevelButton.setVisible(show);
         repaint();
     }
 
+    /**
+     * Clears all plants from the game board grid.
+     */
     public void clearBoard() {
         for (int row = 0; row < displayPlantGrid.length; row++) {
             for (int col = 0; col < displayPlantGrid[row].length; col++) {
@@ -531,16 +670,27 @@ public class GameView extends BackgroundPanel {
         repaint();
     }
 
+    /**
+     * Gets the list of seed packet labels for plant selection.
+     * @return ArrayList of JLabel objects representing seed packets
+     */
     public ArrayList<JLabel> getSeedPackets() {
         return seedPackets;
     }
 
     // DISPLAY DATA METHODS
+    /**
+     * Updates the display to show the current phase of the "Ready, Set, Plant!" countdown.
+     * @param phase the countdown phase to display (1-3)
+     */
     public void displayReadySetPlantPhase(int phase) {
         this.displayReadySetPlantPhase = phase;
         repaint();
     }
-
+    /**
+     * Updates the level display to show the specified level number.
+     * @param level the level number to display
+     */
     public void displayLevel(int level) {
         this.displayLevel = level;
 
@@ -555,15 +705,29 @@ public class GameView extends BackgroundPanel {
         repaint();
     }
 
+    /**
+     * Updates the sun points display with the current sun currency value.
+     * @param points the number of sun points to display
+     */
     public void displaySunPoints(int points) {
         sunPointsLabel.setText(String.valueOf(points));
     }
 
+    /**
+     * Removes a plant from the specified grid position.
+     * @param row the row index of the plant to remove
+     * @param col the column index of the plant to remove
+     */
     public void removePlant(int row, int col) {
         displayPlantGrid[row][col] = null;
         repaint();
     }
 
+    /**
+     * Updates the available seed packets with the specified plant types.
+     * Refreshes the seed selection interface with new plant options.
+     * @param types ArrayList of plant type names to create seed packets for
+     */
     public void displaySeedPackets(ArrayList<String> types) {
         this.plantTypes = types;
         plantImages.clear();
@@ -578,6 +742,11 @@ public class GameView extends BackgroundPanel {
         refreshSeedPackets();
     }
 
+
+    /**
+     * Refreshes the seed packet display by clearing and recreating all seed packet labels.
+     * This method is called when the available plant types change or need to be updated.
+     */
     private void refreshSeedPackets() {
         seedSlot.removeAll();
         seedPackets.clear();
@@ -589,31 +758,59 @@ public class GameView extends BackgroundPanel {
         seedSlot.repaint();
     }
 
+    /**
+     * Updates the display with the current list of plants in the game.
+     * This includes both regular plants and explosive plants (Cherry Bombs, Potato Mines).
+     *
+     * @param plants The list of Plant objects to display
+     */
     public void displayPlants(ArrayList<Plant> plants) {
         this.displayPlants = plants;
         repaint();
     }
 
+    /**
+     * Updates a specific grid cell with a plant of the given type.
+     * @param plantType The type of plant to display (e.g., "peashooter")
+     * @param row The row index of the grid cell (0-based)
+     * @param col The column index of the grid cell (0-based)
+     */
     public void displayPlantGrid(String plantType, int row, int col) {
         displayPlantGrid[row][col] = plantType;
         repaint();
     }
 
+    /**
+     * Updates the display with the current list of zombies in the game.
+     * @param zombies The list of Zombie objects to display
+     */
     public void displayZombies(ArrayList<Zombie> zombies) {
         this.displayZombies = zombies;
         repaint();
     }
 
+    /**
+     * Updates the display with the current list of peas/projectiles in the game.
+     * @param peas The list of Pea objects to display
+     */
     public void displayPeas(ArrayList<Pea> peas) {
         this.displayPeas = peas;
         repaint();
     }
 
+    /**
+     * Updates the display with the current list of sun collectibles in the game.
+     * @param suns The list of Sun objects to display
+     */
     public void displaySuns(ArrayList<Sun> suns) {
         this.displaySuns = suns;
         repaint();
     }
 
+    /**
+     * Resets the game view to its initial state.
+     * Clears the game board, resets sun points to 50, and clears all entities.
+     */
     public void resetView() {
         clearBoard();
 
@@ -625,6 +822,11 @@ public class GameView extends BackgroundPanel {
         repaint();
     }
 
+    /**
+     * Sets the ActionListener for all interactive components in the view.
+     * This includes menu buttons, restart buttons, and other UI controls.
+     * @param listener The ActionListener to handle button events
+     */
     public void setActionListener(ActionListener listener) {
         menuButton.addActionListener(listener);
         restartLevelButton.addActionListener(listener);
