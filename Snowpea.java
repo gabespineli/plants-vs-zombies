@@ -42,7 +42,7 @@ public class Snowpea extends Peashooter {
                 }
             }
         }
-        return null; // no pea created
+        return null;
     }
 
 

@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class CherryBomb extends Plant {
+public class CherryBomb extends ExplosivePlant {
     private static final double PLACEMENT_COOLDOWN = 50;
     private static double placementTimer;
     private int damage;
@@ -29,15 +29,19 @@ public class CherryBomb extends Plant {
         placementTimer = PLACEMENT_COOLDOWN;
     }
 
-    public void updateCherry(ArrayList<Zombie> aliveZombies) {
+    @Override
+    public void updateExplosive(ArrayList<Zombie> aliveZombies) {
         reduceActionCooldown();
-        if (actionCooldown <= 0) {
+        if (actionCooldown <= 0 && !exploded) {
             for (Zombie z : aliveZombies) {
                 if (z.getRowPos() >= rowPos-1 && z.getRowPos() <= rowPos+1 && z.getColumnPos() >= columnPos-1.5 && z.getColumnPos() <= columnPos+1.5) {
                     z.takeDamage(damage);
                 }
             }
             isAlive = false;
+            startExplosionTimer();
+        } else if (exploded) {
+            reduceExplosionTimer();
         }
     }
 }

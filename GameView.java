@@ -6,7 +6,7 @@ import java.io.IOException;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Arrays;
+import javax.swing.border.LineBorder;
 
 public class GameView extends BackgroundPanel {
     private GameViewListener listener;
@@ -14,7 +14,7 @@ public class GameView extends BackgroundPanel {
     private static final String BACKGROUND_PATH = "assets/background/GamePanel.png";
     private static final String CONTAINER_IMAGE_PATH = "assets/ui/SeedSlot.png";
     private static final Dimension PANEL_SIZE = new Dimension(680, 500);
-    private static final Dimension CONTAINER_SIZE = new Dimension(390, 80);
+    private static final Dimension CONTAINER_SIZE = new Dimension(400, 80);
 
     public static final int GRID_START_X = 70;
     public static final int GRID_START_Y = 70;
@@ -43,18 +43,34 @@ public class GameView extends BackgroundPanel {
 
     private int displayLevel;
     private int displayReadySetPlantPhase;
+    private ArrayList<Plant> displayPlants;
     private ArrayList<Zombie> displayZombies;
     private ArrayList<Pea> displayPeas;
     private ArrayList<Sun> displaySuns;
-    private final String[][] displayPlantGrid;
+    private String[][] displayPlantGrid;
 
     private ArrayList<String> plantTypes;
     private ArrayList<BufferedImage> plantImages;
+
+    // EXPLOSIVE PLANT IMAGES
+    private BufferedImage cherryBombImage;
+    private BufferedImage potatoMineDetonatedImage;
+    private BufferedImage potatoMineUndetonatedImage;
+    private BufferedImage explosionImage;
+
+    // ZOMBIE IMAGES
     private BufferedImage zombieImage;
-    private BufferedImage bucketImage;
-    private BufferedImage coneImage;
+    private BufferedImage frozenZombieImage;
     private BufferedImage flagImage;
+    private BufferedImage frozenFlagImage;
+    private BufferedImage bucketImage;
+    private BufferedImage frozenBucketImage;
+    private BufferedImage coneImage;
+    private BufferedImage frozenConeImage;
+    
+    // PROJECTILE IMAGES
     private BufferedImage peaImage;
+    private BufferedImage frostImage;
     private BufferedImage sunImage;
 
 
@@ -68,9 +84,7 @@ public class GameView extends BackgroundPanel {
         displaySuns = new ArrayList<>();
         displayPlantGrid = new String[GRID_ROWS][GRID_COLS];
         plantImages = new ArrayList<>();
-
-        // dapat sa model to
-        plantTypes = new ArrayList<>(Arrays.asList("sunflower", "peashooter", "cherrybomb"));
+        plantTypes = new ArrayList<>();
 
         initializePanel();
     }
@@ -91,14 +105,29 @@ public class GameView extends BackgroundPanel {
     private void loadImages() {
         try {
             seedSlotImage = ImageIO.read(new File(CONTAINER_IMAGE_PATH));
-            for (String plantType : plantTypes) {
-                plantImages.add(loadAndScale("assets/plants/" + plantType + ".png", 60, 60));
-            }
+            // EXPLOSIVE PLANTS
+            cherryBombImage = loadAndScale("assets/plants/cherrybomb.png", 60, 60);
+            potatoMineDetonatedImage = loadAndScale("assets/plants/potatomine.png", 50, 50);
+            potatoMineUndetonatedImage = loadAndScale("assets/plants/potatomineunder.png", 30, 30);
+            explosionImage = loadAndScale("assets/ui/explode.png", 130, 90);
+
+            // ZOMBIES
             zombieImage = loadAndScale("assets/zombies/zombie.png", 65, 90);
+            flagImage = loadAndScale("assets/zombies/flag.png", 80, 110);
+            // ZOMBIES FROZEN STATE
+            frozenZombieImage = loadAndScale("assets/zombies/frozenzombie.png", 65, 90);
+            frozenFlagImage = loadAndScale("assets/zombies/frozenflag.png", 80, 110);
+
+            // ARMORS
             bucketImage = loadAndScale("assets/zombies/bucket.png", 42, 44);
             coneImage = loadAndScale("assets/zombies/cone.png", 42, 44);
-            flagImage = loadAndScale("assets/zombies/flag.png", 80, 110);
+            // ARMORS FROZEN STATE
+            frozenBucketImage = loadAndScale("assets/zombies/frozenbucket.png", 42, 44);
+            frozenConeImage = loadAndScale("assets/zombies/frozencone.png", 42, 44);
+
+            // PROJECTILES
             peaImage = loadAndScale("assets/ui/pea.png", 20, 20);
+            frostImage = loadAndScale("assets/ui/frost.png", 20, 20);
             sunImage = loadAndScale("assets/ui/sun.png", 70, 70);
         } catch (IOException e) {
             System.err.println("Failed to load container background: " + e.getMessage());
@@ -122,7 +151,6 @@ public class GameView extends BackgroundPanel {
         }
     }
 
-
     private void createComponents() {
         createSeedSlotContainer();
         createSunPointsDisplay();
@@ -139,8 +167,7 @@ public class GameView extends BackgroundPanel {
         createNextLevelButton();
 
         // DEBUGGING
-        // backSettingsButton.setBorder(new LineBorder(Color.RED, 2));
-
+        //seedSlot.setBorder(new LineBorder(Color.RED, 2));
     }
 
     private void createSeedSlotContainer() {
@@ -206,7 +233,6 @@ public class GameView extends BackgroundPanel {
         } catch (IOException e) {
             System.err.println("Failed to load settings image: " + e.getMessage());
         }
-        //settingsLabel.setVisible(false);
     }
 
     private void createRestartLevelButton() {
@@ -327,6 +353,7 @@ public class GameView extends BackgroundPanel {
         drawSeedSlotBackground(g2d);
         drawPeas(g2d);
         drawPlantedPlants(g2d);
+        drawExplosivePlants(g2d);
         drawZombies(g2d);
         drawSuns(g2d);
         drawDraggedPlant(g2d);
@@ -354,7 +381,11 @@ public class GameView extends BackgroundPanel {
         for (Pea pea : displayPeas) {
             int x = (int)(GRID_START_X + pea.getColumnPos() * CELL_WIDTH + 15);
             int y = GRID_START_Y + pea.getRowPos() * CELL_HEIGHT + 10;
-            g2d.drawImage(peaImage, x, y, null);
+            if (pea instanceof Frost) {
+                g2d.drawImage(frostImage, x, y+5, null);
+            } else {
+                g2d.drawImage(peaImage, x, y, null);
+            }
         }
     }
 
@@ -362,25 +393,35 @@ public class GameView extends BackgroundPanel {
         for (Zombie zombie : displayZombies) {
             int x = (int) (GRID_START_X + zombie.getColumnPos() * CELL_WIDTH - 30);
             int y = GRID_START_Y + zombie.getRowPos() * CELL_HEIGHT - 10;
+            BufferedImage baseZombieImage = zombieImage;
+            BufferedImage baseConeImage = coneImage;
+            BufferedImage baseBucketImage = bucketImage;
+            BufferedImage baseFlagImage = flagImage;
 
+            if (zombie.isFrozen()) {
+                baseZombieImage = frozenZombieImage;
+                baseConeImage = frozenConeImage;
+                baseBucketImage = frozenBucketImage;
+                baseFlagImage = frozenFlagImage;
+            }
             if (zombie.hasArmor()) {
                 String armor = zombie.getArmor().getArmorType();
                 switch (armor) {
                     case "Cone" -> {
-                        g2d.drawImage(zombieImage, x, y, null);
-                        g2d.drawImage(coneImage, x, y - 20, null);
+                        g2d.drawImage(baseZombieImage, x, y, null);
+                        g2d.drawImage(baseConeImage, x, y - 20, null);
                     }
                     case "Bucket" -> {
-                        g2d.drawImage(zombieImage, x, y, null);
-                        g2d.drawImage(bucketImage, x, y - 20, null);
+                        g2d.drawImage(baseZombieImage, x, y, null);
+                        g2d.drawImage(baseBucketImage, x, y - 20, null);
                     }
                     case "Flag" -> {
-                        g2d.drawImage(flagImage, x, y - 25, null);
+                        g2d.drawImage(baseFlagImage, x, y - 25, null);
                     }
                     default -> throw new IllegalStateException("Unexpected value: " + armor);
                 }
             } else {
-                g2d.drawImage(zombieImage, x, y, null);
+                g2d.drawImage(baseZombieImage, x, y, null);
             }
         }
     }
@@ -389,7 +430,7 @@ public class GameView extends BackgroundPanel {
         for (int row = 0; row < displayPlantGrid.length; row++) {
             for (int col = 0; col < displayPlantGrid[0].length; col++) {
                 String plantType = displayPlantGrid[row][col];
-                if (plantType != null) {
+                if (plantType != null && !plantType.equalsIgnoreCase("cherrybomb") && !plantType.equalsIgnoreCase("potatomine")) {
                     int index = plantTypes.indexOf(plantType.toLowerCase());
                     if (index != -1) {
                         BufferedImage image = plantImages.get(index);
@@ -399,6 +440,29 @@ public class GameView extends BackgroundPanel {
                     } else {
                         System.err.println("Unknown plant type: " + plantType);
                     }
+                }
+            }
+        }
+    }
+
+    private void drawExplosivePlants(Graphics2D g2d) {
+        if (displayPlants == null) return;
+        for (Plant plant : displayPlants) {
+            int x = GRID_START_X + (int)plant.getColumnPos() * CELL_WIDTH;
+            int y = GRID_START_Y + plant.getRowPos() * CELL_HEIGHT + 15;
+            if (plant instanceof CherryBomb cb) {
+                if (!cb.isAlive()) {
+                    g2d.drawImage(explosionImage, x-10, y-10, null);
+                } else {
+                    g2d.drawImage(cherryBombImage, x, y, null);
+                }
+            } else if (plant instanceof PotatoMine pm) {
+                if (!pm.isAlive()) {
+                    g2d.drawImage(explosionImage, x-30, y-30, null);
+                } else if (pm.isDetonated()) {
+                    g2d.drawImage(potatoMineDetonatedImage, x+10, y+10, null);
+                } else {
+                    g2d.drawImage(potatoMineUndetonatedImage, x+20, y+20, null);
                 }
             }
         }
@@ -460,16 +524,6 @@ public class GameView extends BackgroundPanel {
         repaint();
     }
 
-    public void displayPlant(String plantType, int row, int col) {
-        displayPlantGrid[row][col] = plantType;
-        repaint();
-    }
-
-    public void removePlant(int row, int col) {
-        displayPlantGrid[row][col] = null;
-        repaint();
-    }
-
     public void clearBoard() {
         for (int row = 0; row < displayPlantGrid.length; row++) {
             for (int col = 0; col < displayPlantGrid[row].length; col++) {
@@ -507,16 +561,59 @@ public class GameView extends BackgroundPanel {
         sunPointsLabel.setText(String.valueOf(points));
     }
 
+    public void removePlant(int row, int col) {
+        displayPlantGrid[row][col] = null;
+        repaint();
+    }
+
+    public void displaySeedPackets(ArrayList<String> types) {
+        this.plantTypes = types;
+        plantImages.clear();
+        for (String plantType : plantTypes) {
+            BufferedImage img = loadAndScale("assets/plants/" + plantType + ".png", 60, 60);
+            if (img != null) {
+                plantImages.add(img);
+            } else {
+                System.err.println("Failed to load image for plant type: " + plantType);
+            }
+        }
+        refreshSeedPackets();
+    }
+
+    private void refreshSeedPackets() {
+        seedSlot.removeAll();
+        seedPackets.clear();
+        createSeedPackets();
+        for (JLabel label : seedPackets) {
+            seedSlot.add(label);
+        }
+        seedSlot.revalidate();
+        seedSlot.repaint();
+    }
+
+    public void displayPlants(ArrayList<Plant> plants) {
+        this.displayPlants = plants;
+        repaint();
+    }
+
+    public void displayPlantGrid(String plantType, int row, int col) {
+        displayPlantGrid[row][col] = plantType;
+        repaint();
+    }
+
     public void displayZombies(ArrayList<Zombie> zombies) {
         this.displayZombies = zombies;
+        repaint();
     }
 
     public void displayPeas(ArrayList<Pea> peas) {
         this.displayPeas = peas;
+        repaint();
     }
 
     public void displaySuns(ArrayList<Sun> suns) {
         this.displaySuns = suns;
+        repaint();
     }
 
     public void resetView() {

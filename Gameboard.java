@@ -6,6 +6,7 @@ import java.util.Random;
  */
 public class Gameboard {
     private Plant[][] plantBoard;
+    private ArrayList<String> availablePlantTypes;
     private ArrayList<Zombie> aliveZombies;
     private ArrayList<Plant> alivePlants;
     private ArrayList<Pea> activePeas;
@@ -19,6 +20,7 @@ public class Gameboard {
     public Gameboard(int currentLevel){
         this.currentLevel = currentLevel;
         plantBoard = new Plant[5][9];
+        setAvailablePlantTypes();
         aliveZombies = new ArrayList<>();
         alivePlants = new ArrayList<>();
         activePeas = new ArrayList<>();
@@ -50,9 +52,33 @@ public class Gameboard {
      * @return the list of active suns
      */
     public ArrayList<Sun> getActiveSuns() { return activeSuns; }
+    /**
+     * Returns the list of alive plants.
+     * @return the list of alive plants
+     */
+    public ArrayList<Plant> getAlivePlants() { return alivePlants; }
 
 
     public int getCurrentLevel() { return currentLevel; }
+
+    public ArrayList<String> getAvailablePlantTypes() { return availablePlantTypes; }
+
+    private void setAvailablePlantTypes() {
+        availablePlantTypes = new ArrayList<>();
+        if (currentLevel >= 1) {
+            availablePlantTypes.add("sunflower");
+            availablePlantTypes.add("peashooter");
+            availablePlantTypes.add("cherrybomb");
+        }
+        if (currentLevel >= 2) {
+            availablePlantTypes.add("wallnut");
+        }
+        if (currentLevel >= 3) {
+            availablePlantTypes.add("snowpea");
+            availablePlantTypes.add("potatomine");
+        }
+        System.out.println("Available plant types for level " + currentLevel + ": " + availablePlantTypes);
+    }
 
     /**
      * Updates the game state for one tick. Processes plant actions, zombie movement, projectile updates, and object cleanup.
@@ -68,22 +94,20 @@ public class Gameboard {
                 }
             }
             else if (plant instanceof Peashooter ps) {
-                Pea newPea = ps.updatePeashooter(aliveZombies);
-                if (newPea != null) {
-                    activePeas.add(newPea);
+                if (ps instanceof Snowpea sp) {
+                    Frost frost = sp.updateSnowpea(aliveZombies);
+                    if (frost != null) {
+                        activePeas.add(frost);
+                    }
+                } else {
+                    Pea newPea = ps.updatePeashooter(aliveZombies);
+                    if (newPea != null) {
+                        activePeas.add(newPea);
+                    }
                 }
             }
-
-            else if (plant instanceof CherryBomb cb) {
-                cb.updateCherry(aliveZombies);
-            }
-
-            else if (plant instanceof Snowpea sp) {
-                sp.updateSnowpea(aliveZombies);
-            }
-
-            else if (plant instanceof PotatoMine pm) {
-                pm.updatePotato(aliveZombies);
+            else if (plant instanceof ExplosivePlant ep) {
+                ep.updateExplosive(aliveZombies);
             }
         }
         for (Zombie zombie : aliveZombies) { zombie.updateZombie(alivePlants); }
@@ -95,12 +119,35 @@ public class Gameboard {
         // REMOVAL PHASE
         for (int i = alivePlants.size() - 1; i >= 0; i--) {
             Plant plant = alivePlants.get(i);
-            if (!plant.isAlive()) {
-                // Clear from the board grid
-                plantBoard[plant.getRowPos()][(int) plant.getColumnPos()] = null;
-                alivePlants.remove(i);
+            if (plant instanceof ExplosivePlant ep) {
+                if (ep instanceof PotatoMine pm) {
+                    // Remove PotatoMine immediately if not detonated (eaten before explosion)
+                    if (!pm.isAlive() && !pm.isDetonated()) {
+                        plantBoard[plant.getRowPos()][(int) plant.getColumnPos()] = null;
+                        alivePlants.remove(i);
+                        continue;
+                    }
+                    if (!pm.isAlive() && pm.exploded && pm.explosionFinished()) {
+                        plantBoard[plant.getRowPos()][(int) plant.getColumnPos()] = null;
+                        alivePlants.remove(i);
+                        continue;
+                    }
+                } 
+                else if (ep instanceof CherryBomb cb) {
+                    if (!cb.isAlive() && cb.exploded && cb.explosionFinished()) {
+                        plantBoard[plant.getRowPos()][(int) plant.getColumnPos()] = null;
+                        alivePlants.remove(i);
+                        continue;
+                    }
+                }
+            } else {
+                if (!plant.isAlive()) {
+                    plantBoard[plant.getRowPos()][(int) plant.getColumnPos()] = null;
+                    alivePlants.remove(i);
+                }
             }
         }
+
         activePeas.removeIf(pea -> pea.getColumnPos() > 8 || !pea.isActive());
         activeSuns.removeIf(sun -> !sun.isActive());
         aliveZombies.removeIf(zombie-> !zombie.isAlive());

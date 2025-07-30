@@ -1,8 +1,9 @@
 import java.util.ArrayList;
 
-public class PotatoMine extends Plant {
+public class PotatoMine extends ExplosivePlant {
     private static final double PLACEMENT_COOLDOWN = 30;
     private static double placementTimer;
+    private double explosionTimer = 2;
     private int damage;
 
     public PotatoMine() {
@@ -29,15 +30,28 @@ public class PotatoMine extends Plant {
         placementTimer = PLACEMENT_COOLDOWN;
     }
 
-    public void updatePotato(ArrayList<Zombie> aliveZombies) {
+
+
+    public boolean isDetonated() {
+        return actionCooldown <= 0;
+    }
+
+    @Override
+    public void updateExplosive(ArrayList<Zombie> aliveZombies) {
         reduceActionCooldown();
-        if (actionCooldown == 0) {
+        if (!isAlive && !isDetonated()) {
+            return;
+        }
+        if (isDetonated() && !exploded && isAlive) {
             for (Zombie z : aliveZombies) {
                 if (z.getRowPos() == rowPos && z.getColumnPos() >= columnPos-0.5 && z.getColumnPos() <= columnPos+0.5) {
                     z.takeDamage(damage);
+                    isAlive = false;
+                    startExplosionTimer();
                 }
             }
-            isAlive = false;
+        } else if (exploded) {
+            reduceExplosionTimer();
         }
     }
 }

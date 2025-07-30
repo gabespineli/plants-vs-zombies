@@ -36,6 +36,7 @@ public class MainMenuController implements ActionListener, DocumentListener {
             case "adventure" -> {
                 GUI.showScreen("game");
                 gameController.startGameLoop();
+                gameController.updateLevelDisplay();
             }
             case "save" -> {
                 if (!saving) {

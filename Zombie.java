@@ -39,6 +39,10 @@ public class Zombie extends Entity {
         return rowPos;
     }
 
+    public boolean isFrozen() {
+        return isFrozen;
+    }
+
     public Armor getArmor() { return armor; }
 
     /**
@@ -145,6 +149,7 @@ public class Zombie extends Entity {
             speed *= 2;
             cooldown *= 2;
             isFrozen = true;
+            System.out.println("Zombie at (" + rowPos + "," + columnPos + ") has been frozen!");
         }
         frozenTime = 5;
     }
