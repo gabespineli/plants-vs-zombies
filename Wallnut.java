@@ -11,7 +11,7 @@ public class Wallnut extends Plant {
      */
     public Wallnut(){
         super();
-        health = 2666;
+        health = 400;
         cost = 50;
         plantType = "Wallnut";
     }
